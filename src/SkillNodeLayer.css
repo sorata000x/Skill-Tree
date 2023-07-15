@@ -1,18 +1,7 @@
 .skill_node_layer {
   display: flex;
   flex-direction: row;
-  height: 100px;
   justify-content: center;
-}
-
-.add_btn_mid {
-  width: 100px;
-}
-
-.add_btn_left {
-  flex-grow: 1;
-}
-
-.add_btn_right {
-  flex-grow: 1;
+  height: 100%;
+  width: 100%;
 }

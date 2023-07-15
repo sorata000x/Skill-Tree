@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import SkillNodeLayer from './SkillNodeLayer'
 import {
   useSensors,
@@ -11,67 +11,27 @@ import {
   DragOverEvent,
   DragOverlay,
   closestCenter,
-  closestCorners
+  closestCorners,
+  defaultDropAnimation,
+  defaultDropAnimationSideEffects,
 } from '@dnd-kit/core';
 import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import './SkillTree.css';
 import { useStateValue } from './StateProvider';
 import { v4 as uuid } from 'uuid';
+import SkillNodeButton from './SkillNodeButton';
+import {CSS} from '@dnd-kit/utilities';
 
 function SkillTree() {
-  const INFINITY = 99999;
-  const [{skills, buttons, user}, dispatch] = useStateValue();
-
-  const addSkill = (parentId) => {
-    console.log('add skill')
-    dispatch({
-      type: "ADD_SKILL",
-      parent: parentId,
-      skill: {
-        id: uuid(),
-        title: 'Node',
-        level: 0,
-        children: [],
-      }
-    })
-  }
-
-  /**
-   * Calculates the distance between a point and the bottom of an element above it.
-   * @param {*} el element reference 
-   * @param {*} px point x coordinate
-   * @param {*} py point y coordinate
-   * @returns distance between element and point; INFINITY if element bottom is below the point.
-   */
-  const getParentDist = (el, px, py) => {
-    const rect = el.current.getBoundingClientRect();
-    let bx = rect.left + window.pageXOffset + rect.width / 2
-    let by = rect.top + window.pageYOffset + rect.height / 2
-    let dx = px - bx;
-    let dy = py - by;
-    return dy >= 0 ? Math.sqrt(dx * dx, dy * dy) : INFINITY;
-  }
-
-  const handleClick = (event) => {
-    // Add to root if there is no more skill
-    if (!skills) {
-      addSkill();
-      return;
-    }
-    let [target, minDist] = [null, INFINITY];
-    skills.forEach(skill => {
-      let dist = getParentDist(buttons[skill.id], event.clientX, event.clientY);
-      if (dist !== null && dist < minDist) {
-        target = skill;
-        minDist = dist;
-      }
-    });
-    addSkill(target);
-  }
+  const [{skills}, dispatch] = useStateValue();
+  const [rootSkills, setRootSkills] = useState();
 
   /* Dnd-kit Sortable */
 
-  const [activeSkillId, setActiveSkillId] = useState(null);
+  const [activeSkillID, setActiveSkillID] = useState();
+  const [activeSkillTitle, setActiveSkillTitle] = useState('');
+  const [activeSkill, setActiveSkill] = useState({});
+  const [overSkillID, setOverSkillID] = useState();
   
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -80,23 +40,86 @@ function SkillTree() {
     })
   )
 
-  const handleDragStart = (active) => {
-    setActiveSkillId(active.id);
+  const handleDragStart = ({active, over}) => {
+    setActiveSkillID(active.id);
+    setActiveSkill(getSkillByID(active.id));
+    
     console.log('drag start')
   }
 
-  const handleDragOver = (active, over) => {
+  const handleDragOver = ({active, over}) => {
     // Find the containers
-    console.log('drag over')
+    console.log('dragover')
+    setOverSkillID(over.id);
   }
 
-  const handleDragEnd = () => {
-    setActiveSkillId(null);
+  const handleDragEnd = ({active, over}) => {
+    
     console.log('drag end')
+    console.log(`active.id: ${active.id} over.id: ${over.id}`)
+    dispatch({
+      type: "MOVE_SKILLS",
+      active: active.id,
+      over: over.id,
+    })
+    setActiveSkillID(null);
+    setActiveSkill(null);
   }
+
+  const defaultKeyframeResolver = ({
+    transform: {initial, final},
+  }) => [
+    {
+      transform: CSS.Transform.toString(initial),
+    },
+    {
+      transform: CSS.Transform.toString(final),
+    },
+  ];
+
+  const dropAnimation = {
+    duration: 200,
+    easing: 'ease',
+    keyframes: defaultKeyframeResolver,
+    sideEffects: defaultDropAnimationSideEffects({
+      styles: {
+        active: {
+          opacity: '0',
+        },
+      },
+    }),
+    
+  }
+
+  const getSkillByID = (id) => {
+    let target = {};
+    skills.forEach(skill => {
+      if (skill.id === id)
+        target = skill;
+    })
+    return target;
+  }
+
+  useEffect(() => {
+    console.log(`activeSkillTitle: ${activeSkillTitle}`)
+  }, [activeSkillTitle])
+
+  const handleTransition = () => {
+    console.log('85')
+    if(!activeSkillID || !overSkillID) {
+      return;
+    }
+    console.log(`switch ${activeSkillID} with ${overSkillID}`)
+    dispatch({
+      type: "MOVE_SKILLS",
+      active: activeSkillID,
+      over: overSkillID,
+    })
+  }
+
 
   return (
-    <div className='skill_tree_container' onClick={handleClick}>
+    <div className='skill_tree_container'>
       <DndContext
         sensors={sensors}
         collisionDetection={closestCorners}
@@ -104,7 +127,17 @@ function SkillTree() {
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
         >
-        <SkillNodeLayer id={"container"} nodes={skills} />
+        <SkillNodeLayer id='root' handleTransition={handleTransition} />
+        <div className="skill_node_layer">
+            <DragOverlay dropAnimation={dropAnimation}>
+              {activeSkillID ? 
+                <div className='skill_node_container' >
+                  <SkillNodeButton id={activeSkillID} title={activeSkill.title} />
+                  <SkillNodeLayer id={activeSkillID} handleTransition={handleTransition} />
+                </div>
+                : null}
+            </DragOverlay>
+        </div>
       </DndContext>
     </div>
   )

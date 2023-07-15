@@ -1,5 +1,14 @@
 .skill_tree_container {
   width: 100%;
   height: 100%;
-  background-color: red;
+}
+
+.test1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min-content;
+  height: 100%;
+  padding-top: 20px;
 }

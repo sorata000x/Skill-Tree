@@ -2,6 +2,7 @@ import { db, auth } from './firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { createRef } from 'react';
 import { v4 as uuid } from 'uuid'; 
+import { arrayMove } from '@dnd-kit/sortable';
 
 const INITIAL_SKILLS = [
   {
@@ -9,18 +10,21 @@ const INITIAL_SKILLS = [
     title: "Skill 1",
     level: "0",
     children: [],
+    parent: 'root',
   },
   {
     id: uuid(),
     title: "Skill 2",
     level: "10",
     children: [],
+    parent: 'root',
   },
   {
     id: uuid(),
     title: "Skill 3",
     level: "50",
     children: [],
+    parent: 'root',
   }
 ]
 
@@ -35,9 +39,10 @@ const userData = {
 
 // Might need to include userData for buttons as well
 export const initialState = {
-  skills: userData.skills ? userData.skills : INITIAL_SKILLS,
+  skills: INITIAL_SKILLS,
+  skillsLength: 0,
   user: null,
-  buttons: INITIAL_BUTTONS
+  buttons: INITIAL_BUTTONS,
 }
 
 const setUserData = async (skills) => {
@@ -50,16 +55,80 @@ const setUserData = async (skills) => {
   }
 }
 
+const addToParent = (skills, parentId, skill) => {
+  // Check for root skills
+  let newSkills = JSON.parse(JSON.stringify(skills));
+  for(const s of newSkills) {
+    if(s.id === parentId) {
+      s.children = [...s.children, skill];
+      return newSkills;
+    }
+  }
+  // Check for children (recursive)
+  for(const s of newSkills) {
+    if (s.children) {
+      newSkills = addToParent(s.children, parentId, skill)
+      if (newSkills) {
+        return newSkills;
+      }
+    }
+  }
+  // Not found
+  return null;
+}
+
 const reducer = (state, action) => {
   switch (action.type) {
-    case "ADD_SKILL":
-      setUserData([...state.skills, action.skill]);
+    case "ADD_SKILL": {
+      // Create button ref for new skill
       let newButtons = state.buttons;
       newButtons[action.skill.id] = createRef();
+      setUserData([...state.skills, action.skill]);
       return {
         ...state,
         skills: [...state.skills, action.skill],
+        skillsLength: state.skillsLength + 1,
+        buttons: newButtons,
+      };
+    }
+    case "REMOVE_SKILL": {
+      console.log(`remove skill id: ${action.id}`)
+      const index = state.skills.findIndex(
+        (skill) => skill.id === action.id
+      );
+      let newSkills = [...state.skills]
+      if(index >= 0) {
+        // remove skill
+        newSkills.splice(index, 1);
+      } else {
+        console.warn(`Cannot remove skill (id: ${action.id}).`)
       }
+      return {
+        ...state,
+        skills: newSkills,
+      }
+    }
+    case "MOVE_SKILLS": {
+      let oldIndex = 0;
+      let newIndex = 0;
+      let newParent = 'root';
+      state.skills.forEach((skill, index) => {
+        if (skill.id === action.active) {
+          oldIndex = index;
+        }
+        if (skill.id === action.over) {
+          newIndex = index;
+          newParent = skill.parent;
+        }
+      })
+      let newSkills = [...arrayMove(state.skills, oldIndex, newIndex)]
+      newSkills[newIndex].parent = newParent;
+
+      return {
+        ...state,
+        skills: [...newSkills],
+      }
+    }
     default:
       return state;
   }
