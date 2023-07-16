@@ -39,8 +39,6 @@ function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons})
     return () => clearInterval(interval);
   }, [])
 
-
-
   const addSkill = () => {
     const skillID = uuid()
     operateSkills({
@@ -58,7 +56,6 @@ function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons})
   const handleClick = (event) => {
     // Prevent event bubbling
     // Reference: https://www.freecodecamp.org/news/event-propagation-event-bubbling-event-catching-beginners-guide/#what-is-event-delegation
-    console.log(64)
     event.stopPropagation();
     addSkill();
     updateLink();
@@ -99,9 +96,9 @@ function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons})
   }
 
   return (
-    <div style={style} ref={setNodeRef} onClick={handleClick} {...attributes} {...listeners}>
+    <div style={style} ref={setNodeRef} onClick={handleClick} >
       <div className='skill_node_container' onClick={handleClick} >
-        <SkillNodeButton id={id} title={title} />
+        <SkillNodeButton id={id} title={title} listeners={listeners} buttonRef={buttons[id]} />
         <SkillNodeLayer id={id} skills={skills} operateSkills={operateSkills} buttons={buttons} />
       </div>
       {link}

@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import './SkillNodeButton.css';
 import { useStateValue } from './StateProvider';
 
-function SkillNodeButton({id, title, listeners}) {
-  const [{buttons}, dispatch] = useStateValue();
+function SkillNodeButton({id, title, listeners, buttonRef}) {
 
   return (
-    <button className='node_btn' ref={buttons[id]} >
+    <button className='node_btn' ref={buttonRef} {...listeners} >
       {title}
     </button>
   )
