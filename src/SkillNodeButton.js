@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './SkillNodeButton.css';
 import { useStateValue } from './StateProvider';
 
-function SkillNodeButton({id, title}) {
+function SkillNodeButton({id, title, listeners}) {
   const [{buttons}, dispatch] = useStateValue();
 
   return (

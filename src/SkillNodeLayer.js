@@ -6,17 +6,12 @@ import { useDroppable } from '@dnd-kit/core'
 import { useStateValue } from './StateProvider'
 import { v4 as uuid } from 'uuid';
 
-function SkillNodeLayer({ id, handleTransition }) {
-  const [{skills, skillsLength, buttons}, dispatch] = useStateValue();
+function SkillNodeLayer({ id, skills, operateSkills, buttons }) {
   const { setNodeRef } = useDroppable({id});
-  const [nodes, setNodes] = useState([]);
-
-  useEffect(() => {
-    setNodes(skills.filter(skill => skill.parent === id))
-  }, [skills])
 
   /**
    * Calculates the distance between a point and the bottom of a parent (a node above).
+   * (for adding skill node).
    * @param {*} el element reference 
    * @param {*} px point x coordinate
    * @param {*} py point y coordinate
@@ -40,11 +35,11 @@ function SkillNodeLayer({ id, handleTransition }) {
    */
   const addSkill = (parentID) => {
     const skillID = uuid()
-    dispatch({
+    operateSkills({
       type: "ADD_SKILL",
       skill: {
         id: skillID,
-        title: `${skillsLength}`,
+        title: `${skills.length}`,
         level: 0,
         children: [],
         parent: parentID,
@@ -55,6 +50,7 @@ function SkillNodeLayer({ id, handleTransition }) {
   const handleClick = (event) => {
     // Prevent event bubbling
     // Reference: https://www.freecodecamp.org/news/event-propagation-event-bubbling-event-catching-beginners-guide/#what-is-event-delegation
+    console.log(53)
     event.stopPropagation();  
     if (!skills.length) {
       addSkill(id)
@@ -72,10 +68,20 @@ function SkillNodeLayer({ id, handleTransition }) {
   }
 
   return (
-    <SortableContext id={id} items={nodes} strategy={horizontalListSortingStrategy}>
+    <SortableContext id={id} items={skills} strategy={horizontalListSortingStrategy}>
       <div ref={setNodeRef} className="skill_node_layer" onClick={handleClick}>
-      {nodes.map((skill) => (
-        <SkillNodeContainer key={skill.id} id={skill.id} title={skill.title} parent={id} handleTransition={handleTransition}/>
+      {skills.map((skill) => (
+        skill.parent === id ? 
+          <SkillNodeContainer 
+            key={skill.id} 
+            id={skill.id} 
+            title={skill.title} 
+            parent={id} 
+            skills={skills}
+            operateSkills={operateSkills}
+            buttons={buttons}
+          />
+          : null
       ))}
       </div>
     </SortableContext>

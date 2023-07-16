@@ -7,8 +7,7 @@ import SkillNodeLayer from './SkillNodeLayer';
 import {v4 as uuid} from 'uuid';
 import { useStateValue } from './StateProvider';
 
-function SkillNodeContainer({id, title, parent, handleTransition}) {
-  const [{skills, skillsLength, user, buttons}, dispatch] = useStateValue();
+function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons}) {
   const [link, setLink] =  useState(<div/>);
   const {
     attributes,
@@ -22,7 +21,7 @@ function SkillNodeContainer({id, title, parent, handleTransition}) {
     active,
   } = useSortable( {
     id: id,
-    transition: {duration: 200, easing: 'ease'}
+    transition: {duration: 300, easing: 'ease'}
   } );
   const [time, setTime] = useState(new Date());
 
@@ -40,29 +39,15 @@ function SkillNodeContainer({id, title, parent, handleTransition}) {
     return () => clearInterval(interval);
   }, [])
 
-  useEffect(() => {
-  }, [active, over])
 
-  const test = () => {
-    console.log('51')
-    if(!active || !over) {
-      return;
-    }
-    console.log('55')
-    dispatch({
-      type: 'MOVE_SKILLS',
-      active: active.id,
-      over: over.id,
-    })
-  }
 
   const addSkill = () => {
     const skillID = uuid()
-    dispatch({
+    operateSkills({
       type: "ADD_SKILL",
       skill: {
         id: skillID,
-        title: `${skillsLength}`,
+        title: `${skills.length}`,
         level: 0,
         children: [],
         parent: parent,
@@ -73,6 +58,7 @@ function SkillNodeContainer({id, title, parent, handleTransition}) {
   const handleClick = (event) => {
     // Prevent event bubbling
     // Reference: https://www.freecodecamp.org/news/event-propagation-event-bubbling-event-catching-beginners-guide/#what-is-event-delegation
+    console.log(64)
     event.stopPropagation();
     addSkill();
     updateLink();
@@ -112,15 +98,11 @@ function SkillNodeContainer({id, title, parent, handleTransition}) {
     setLink(newLink)
   }
 
-  const handleDragOver = ({active, over}) => {
-    console.log(`93::active.id: ${active.id}, over.id: ${over.id}`)
-  }
-
   return (
-    <div style={style} onTransitionEnd={handleTransition} ref={setNodeRef} {...attributes} {...listeners}>
-      <div className='skill_node_container' >
+    <div style={style} ref={setNodeRef} onClick={handleClick} {...attributes} {...listeners}>
+      <div className='skill_node_container' onClick={handleClick} >
         <SkillNodeButton id={id} title={title} />
-        <SkillNodeLayer id={id} handleTransition={handleTransition}/>
+        <SkillNodeLayer id={id} skills={skills} operateSkills={operateSkills} buttons={buttons} />
       </div>
       {link}
     </div>
