@@ -6,12 +6,30 @@ import { useDroppable } from '@dnd-kit/core'
 import { useStateValue } from './StateProvider'
 import { v4 as uuid } from 'uuid';
 
-function SkillNodeLayer({ id, skills, operateSkills, buttons }) {
+function SkillNodeLayer({ id, skills, operateSkills, buttons, isDragOverlay }) {
   const { setNodeRef } = useDroppable({id});
 
   /**
+   * Add skill to a parent
+   * @param {*} parentID 
+   */
+  const addSkill = (parentID) => {
+    const skillID = uuid()
+    operateSkills({
+      type: "ADD_SKILL",
+      skill: {
+        id: skillID,
+        title: `${skillID}`,
+        level: 0,
+        children: [],
+        parent: parentID,
+      }
+    })
+  }
+
+  /**
    * Calculates the distance between a point and the bottom of a parent (a node above).
-   * (for adding skill node).
+   * (to get nearest parent).
    * @param {*} el element reference 
    * @param {*} px point x coordinate
    * @param {*} py point y coordinate
@@ -29,41 +47,41 @@ function SkillNodeLayer({ id, skills, operateSkills, buttons }) {
     return dy >= 0 ? Math.sqrt(dx * dx, dy * dy) : Infinity;
   }
 
-  /**
-   * Add skill to a parent
-   * @param {*} parentID 
-   */
-  const addSkill = (parentID) => {
-    const skillID = uuid()
-    operateSkills({
-      type: "ADD_SKILL",
-      skill: {
-        id: skillID,
-        title: `${skills.length}`,
-        level: 0,
-        children: [],
-        parent: parentID,
+  const getNearestParent = (px, py) => {
+    const getParentDist = (parent, px, py) => {
+      if (!parent.current) {
+        return Infinity;
       }
-    })
-  }
-
-  const handleClick = (event) => {
-    // Prevent event bubbling
-    // Reference: https://www.freecodecamp.org/news/event-propagation-event-bubbling-event-catching-beginners-guide/#what-is-event-delegation
-    console.log(53)
-    event.stopPropagation();  
-    if (!skills.length) {
-      addSkill(id)
-      return;
+      const rect = parent.current.getBoundingClientRect();
+      let cx = rect.left + window.pageXOffset + rect.width / 2
+      let by = rect.top + window.pageYOffset + rect.height
+      let dx = px - cx;
+      let dy = py - by;
+      return dy >= 0 ? Math.sqrt(dx * dx, dy * dy) : Infinity;
     }
+
     let [target, minDist] = [null, Infinity];
+    
     skills.forEach(skill => {
-      let dist = getParentDist(buttons[skill.id], event.clientX, event.clientY);
+      let dist = getParentDist(buttons[skill.id], px, py);
       if (dist < minDist) {
         target = skill.id;
         minDist = dist;
       }
     });
+
+    return target
+  }
+
+  const handleClick = (event) => {
+    // Prevent event bubbling
+    // Reference: https://www.freecodecamp.org/news/event-propagation-event-bubbling-event-catching-beginners-guide/#what-is-event-delegation
+    event.stopPropagation();  
+    if (!skills.length) {
+      addSkill(id)
+      return;
+    }
+    let target = getNearestParent(event.clientX, event.clientY);
     addSkill(target ? target : id);
   }
 
@@ -80,6 +98,7 @@ function SkillNodeLayer({ id, skills, operateSkills, buttons }) {
             skills={skills}
             operateSkills={operateSkills}
             buttons={buttons}
+            isDragOverlay={isDragOverlay}
           />
           : null
       ))}

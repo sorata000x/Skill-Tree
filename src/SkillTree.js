@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react'
+import React, { useState, createRef, useEffect } from 'react'
 import SkillNodeLayer from './SkillNodeLayer'
 import {
   useSensors,
@@ -49,6 +49,10 @@ function SkillTree() {
   const [skills, setSkills] = useState([]);
   const [buttons, setButtons] = useState([]);
 
+  useEffect(() => {
+    buttons['drag-overlay'] = createRef();
+  }, [])
+
   const operateSkills = (action) => {
     switch (action.type) {
       case "ADD_SKILL": {
@@ -56,10 +60,43 @@ function SkillTree() {
         buttons[action.skill.id] = createRef();
         break;
       }
+      case "CHANGE_PARENT": {
+        console.log('switching parent')
+        let fromIndex = skills.findIndex(skill => ( skill.id === action.from ))
+        skills[fromIndex].parent = action.parent
+        break;
+      }
       default: {
         return;
       }
     }
+  }
+
+  const getNearestParent = (id) => {
+    const getParentDist = (parent, px, py) => {
+      if (!parent.current) {
+        return Infinity;
+      }
+      const rect = parent.current.getBoundingClientRect();
+      let cx = rect.left + window.pageXOffset + rect.width / 2
+      let cy = rect.top + window.pageYOffset + rect.height / 2
+      let dx = px - cx;
+      let dy = py - cy;
+      return dy >= 0 ? Math.sqrt(dx * dx, dy * dy) : Infinity;
+    }
+
+    const rect = buttons[id].current.getBoundingClientRect();
+    let [target, minDist] = [null, Infinity];
+    
+    skills.forEach(skill => {
+      let dist = getParentDist(buttons[skill.id], rect.left+rect.width/2, rect.top+rect.height/2);
+      if (dist < minDist && skill.id !== id) {
+        target = skill.id;
+        minDist = dist;
+      }
+    });
+
+    return target
   }
 
   /* Dnd-kit Sortable */
@@ -95,9 +132,12 @@ function SkillTree() {
   }
 
   const handleDragEnd = ({active, over}) => {
-    const activeIndex = skills.findIndex((skill) => (skill.id === active.id));
-    const overIndex = skills.findIndex((skill) => (skill.id === over.id));
-    setSkills(arrayMove(skills, activeIndex, overIndex));
+    const parent = getNearestParent(active.id);
+    operateSkills({
+      type: "CHANGE_PARENT", 
+      from: active.id, 
+      parent: parent ? parent : 'root',
+    })
     setActiveSkill(null);
   }
 
@@ -121,6 +161,7 @@ function SkillTree() {
                 skills={skills}
                 operateSkills={operateSkills}
                 buttons={buttons}
+                isDragOverlay={true}
               />
               : null}
           </DragOverlay>

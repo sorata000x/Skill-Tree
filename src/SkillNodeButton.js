@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, createRef } from 'react'
 import './SkillNodeButton.css';
 import { useStateValue } from './StateProvider';
 
-function SkillNodeButton({id, title, listeners, buttonRef}) {
+function SkillNodeButton({id, title, listeners, buttonRef, isDragOverlay}) {
 
   return (
-    <button className='node_btn' ref={buttonRef} {...listeners} >
+    <button className='node_btn' ref={!isDragOverlay ? buttonRef : createRef()} {...listeners} >
       {title}
     </button>
   )

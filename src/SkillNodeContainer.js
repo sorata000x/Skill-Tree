@@ -1,30 +1,24 @@
-import React, { useState, createRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import SkillNodeButton from './SkillNodeButton'
 import './SkillNodeContainer.css'
 import { useSortable } from '@dnd-kit/sortable';
-import {CSS, add} from '@dnd-kit/utilities';
+import {CSS} from '@dnd-kit/utilities';
 import SkillNodeLayer from './SkillNodeLayer';
 import {v4 as uuid} from 'uuid';
-import { useStateValue } from './StateProvider';
 
-function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons}) {
-  const [link, setLink] =  useState(<div/>);
+function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons, isDragOverlay}) {
+  const [link, setLink] = useState(<div/>);
+  const [time, setTime] = useState(new Date());
   const {
-    attributes,
     listeners,
     setNodeRef,
     transform,
     transition,
     isDragging,
-    node,
-    over,
-    active,
   } = useSortable( {
     id: id,
     transition: {duration: 300, easing: 'ease'}
   } );
-  const [time, setTime] = useState(new Date());
-
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -32,12 +26,15 @@ function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons})
   };
 
   useEffect(() => {
-    //window.addEventListener('transitionend', () => handleTransition())
-    return
+      for (const [key, value] of Object.entries(buttons)) {
+        console.log(`id: ${key}, current: ${value.current}`);
+      }
     updateLink();
-    const interval = setInterval(() => { setTime(new Date());}, 10); 
-    return () => clearInterval(interval);
-  }, [])
+    const interval = setInterval(() => setTime(new Date()), 10000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [time]);
 
   const addSkill = () => {
     const skillID = uuid()
@@ -45,7 +42,7 @@ function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons})
       type: "ADD_SKILL",
       skill: {
         id: skillID,
-        title: `${skills.length}`,
+        title: `${skillID}`,
         level: 0,
         children: [],
         parent: parent,
@@ -58,7 +55,6 @@ function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons})
     // Reference: https://www.freecodecamp.org/news/event-propagation-event-bubbling-event-catching-beginners-guide/#what-is-event-delegation
     event.stopPropagation();
     addSkill();
-    updateLink();
   }
 
   /**
@@ -80,10 +76,11 @@ function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons})
       return;
     const off_p = getOffset(buttons[parent]);
     const off_n = getOffset(buttons[id]);
+
     const length = Math.sqrt((off_p.left-off_n.left)*(off_p.left-off_n.left) +
                               (off_p.top-off_n.top)*(off_p.top-off_n.top))
     const angle = Math.atan2((off_p.top - off_n.top), (off_p.left - off_n.left)) * (180 / Math.PI);
-    
+
     //const off3 = getOffset(childDivRef);
     //const cx = off_n.left-off3.left+(off_n.width/2);
     const cx = off_n.left+(off_n.width/2);
@@ -98,8 +95,8 @@ function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons})
   return (
     <div style={style} ref={setNodeRef} onClick={handleClick} >
       <div className='skill_node_container' onClick={handleClick} >
-        <SkillNodeButton id={id} title={title} listeners={listeners} buttonRef={buttons[id]} />
-        <SkillNodeLayer id={id} skills={skills} operateSkills={operateSkills} buttons={buttons} />
+        <SkillNodeButton id={id} title={title} listeners={listeners} buttonRef={buttons[id]} isDragOverlay={isDragOverlay}/>
+        <SkillNodeLayer id={id} skills={skills} operateSkills={operateSkills} buttons={buttons} isDragOverlay={isDragOverlay} />
       </div>
       {link}
     </div>
