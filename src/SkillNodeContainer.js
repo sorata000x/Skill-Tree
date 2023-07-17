@@ -26,11 +26,8 @@ function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons, 
   };
 
   useEffect(() => {
-      for (const [key, value] of Object.entries(buttons)) {
-        console.log(`id: ${key}, current: ${value.current}`);
-      }
     updateLink();
-    const interval = setInterval(() => setTime(new Date()), 10000);
+    const interval = setInterval(() => setTime(new Date()), 100000);
     return () => {
       clearInterval(interval);
     };
@@ -74,6 +71,7 @@ function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons, 
   const updateLink = () => {
     if(parent === 'root')
       return;
+    //console.log(`parent: ${parent}, buttons[parent]: ${buttons[parent]}, id: ${id}, buttons[id]: ${buttons[id]}`)
     const off_p = getOffset(buttons[parent]);
     const off_n = getOffset(buttons[id]);
 
@@ -87,8 +85,17 @@ function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons, 
     const top = off_p.top + off_p.height/2 + 120
     const left = off_n.left + off_n.width/2
     
-    let newLink = <div className='link' style={{ width: length, left: left, top: top,
-                                                  transform: `rotate(${angle}deg)`, transformOrigin: 'top left' }}/>;
+    let newLink = 
+      <div 
+        className='link' 
+        style={{ 
+          width: length, 
+          left: left, 
+          top: top,
+          transform: `rotate(${angle}deg)`, 
+          transformOrigin: 'top left' 
+        }}
+      />;
     setLink(newLink)
   }
 

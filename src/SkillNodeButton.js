@@ -5,7 +5,7 @@ import { useStateValue } from './StateProvider';
 function SkillNodeButton({id, title, listeners, buttonRef, isDragOverlay}) {
 
   return (
-    <button className='node_btn' ref={!isDragOverlay ? buttonRef : createRef()} {...listeners} >
+    <button className='node_btn' ref={buttonRef} {...listeners} >
       {title}
     </button>
   )

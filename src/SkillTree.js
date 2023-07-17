@@ -102,6 +102,7 @@ function SkillTree() {
   /* Dnd-kit Sortable */
 
   const [activeSkill, setActiveSkill] = useState({});
+  const [dragOverlaySkills, setDragOverlaySkills] = useState([]);
 
   const getSkillByID = (id) => {
     let target = {};
@@ -125,6 +126,7 @@ function SkillTree() {
 
   const handleDragStart = ({active, over}) => {
     setActiveSkill(getSkillByID(active.id));
+    setDragOverlaySkills(copySkills(active.id));
   }
 
   const handleDragOver = ({active, over}) => {
@@ -141,6 +143,52 @@ function SkillTree() {
     setActiveSkill(null);
   }
 
+  /**
+   * Copy over skills (with different IDs) starting from the target id for DragOverlay.
+   */
+  const copySkills = (id) => {
+
+    let dSkills = [JSON.parse(JSON.stringify(getSkillByID(id)))];
+
+    for (const d of dSkills) {
+      for (const s of skills) {
+        if (s.parent === d.id) {
+          dSkills = [...dSkills, JSON.parse(JSON.stringify(s))];
+        }
+      }
+    }
+
+    const changeIDs = (targets) => {
+      for (const p of targets) {
+        let n = uuid();
+        for (const c of targets) {
+          if (p.id === c.parent) {
+            c.parent = n;
+          }
+        }
+        p.id = n;
+      }
+    }
+
+    dSkills[0].parent = 'root';
+    changeIDs(dSkills);
+
+    console.log(`dSkills: ${JSON.stringify(dSkills)}`)
+    return dSkills;
+  }
+
+  /**
+   * Create buttons from target skills
+   * @param {Array} targets an array of skills
+   */
+  const createButtons = (targets) => {
+    let cb = {};
+    for (const t of targets) {
+      cb[t.id] = createRef();
+    }
+    return cb;
+  }
+
   return (
     <div className='skill_tree_container'>
       <DndContext
@@ -154,13 +202,12 @@ function SkillTree() {
           <DragOverlay dropAnimation={dropAnimation} style={{height: '100%'}}>
             {activeSkill ? 
               <SkillNodeContainer 
-                key={activeSkill.id} 
-                id={activeSkill.id} 
-                title={activeSkill.title} 
-                parent={activeSkill.parent} 
-                skills={skills}
-                operateSkills={operateSkills}
-                buttons={buttons}
+                key={dragOverlaySkills[0] ? dragOverlaySkills[0].id : null} 
+                id={dragOverlaySkills[0] ? dragOverlaySkills[0].id : null} 
+                title={dragOverlaySkills[0] ? dragOverlaySkills[0].title : null} 
+                parent={dragOverlaySkills[0] ? dragOverlaySkills[0].parent : null} 
+                skills={dragOverlaySkills}
+                buttons={createButtons(dragOverlaySkills)}
                 isDragOverlay={true}
               />
               : null}
