@@ -49,6 +49,7 @@ function SkillTree() {
   const [skills, setSkills] = useState([]);
   const [buttons, setButtons] = useState({});
   const [links, setLinks] = useState({});
+  const [dragginSkillIDs, setDraggingSkillIDs] = useState([]);
 
   /**
    * Operation to modify the skills.
@@ -213,22 +214,34 @@ function SkillTree() {
       setDragOverlaySkills([]);
       setDragOverlayButtons({});
       setDragOverlayLinks({});
+      setDraggingSkillIDs([]);
     }
     const newDragOverlaySkills = copySkills(id)
     setDragOverlaySkills(newDragOverlaySkills);
     setDragOverlayButtons(createButtons(newDragOverlaySkills));
     setDragOverlayLinks(createLinks(newDragOverlaySkills));
+    let newDraggingSkillIDs = [id]
+    for (const d of newDraggingSkillIDs) {
+      for (const s of skills) {
+        if (s.parent === d) {
+          newDraggingSkillIDs = [...newDraggingSkillIDs, s.id];
+        }
+      }
+    }
+    console.log(`231:newDraggingSkillIDs:${newDraggingSkillIDs}`)
+    setDraggingSkillIDs(newDraggingSkillIDs)
   }
 
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
-    for(const skill of dragOverlaySkills) {
+    for(const skill of skills.concat(dragOverlaySkills)) {
+      console.log(`updating: ${skill.id}`)
       updateLink(skill);
     }
 
     // Update every () seconds
-    const interval = setInterval(() => setTime(new Date()), 10);
+    const interval = setInterval(() => setTime(new Date()), 1000);
     return () => {
       clearInterval(interval);
     };
@@ -275,8 +288,11 @@ function SkillTree() {
           top: top,
           transform: `rotate(${angle}deg)`, 
           transformOrigin: 'top left',
+          opacity: dragginSkillIDs.includes(skill.id) ? 0 : 1
         }}
       />;
+
+    console.log(`skill.id in dragginSkillIDs: ${skill.id in dragginSkillIDs}`)
     
     if (links[skill.id]) {
       links[skill.id] = newLink;

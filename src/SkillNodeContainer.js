@@ -19,6 +19,12 @@ function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons, 
     transition: {duration: 300, easing: 'ease'}
   } );
 
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0 : 1,
+  };
+
   const addSkill = () => {
     const skillID = uuid()
     operateSkills({
@@ -41,7 +47,7 @@ function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons, 
   }
 
   return (
-    <div ref={setNodeRef} onClick={handleClick} >
+    <div ref={setNodeRef} style={style} onClick={handleClick} >
       <div className='skill_node_container' onClick={handleClick} >
         <SkillNodeButton id={id} title={title} listeners={listeners} buttonRef={buttons[id]} isDragOverlay={isDragOverlay}/>
         <SkillNodeLayer id={id} skills={skills} operateSkills={operateSkills} buttons={buttons} isDragOverlay={isDragOverlay} />
