@@ -1,4 +1,4 @@
-import React, { useState, createRef, useEffect } from 'react'
+import React, { useState, createRef } from 'react'
 import SkillNodeLayer from './SkillNodeLayer'
 import {
   useSensors,
@@ -10,12 +10,11 @@ import {
   closestCorners,
   defaultDropAnimation,
 } from '@dnd-kit/core';
-import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
+import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import './SkillTree.css';
-import { useStateValue } from './StateProvider';
 import { v4 as uuid } from 'uuid';
-import SkillNodeButton from './SkillNodeButton';
 import SkillNodeContainer from './SkillNodeContainer';
+import SkillLinks from './SkillLinks';
 
 let INITIAL_SKILLS = [
   {
@@ -153,7 +152,6 @@ function SkillTree() {
 
   const [dragOverlaySkills, setDragOverlaySkills] = useState([]);
   const [dragOverlayButtons, setDragOverlayButtons] = useState({});
-  const [dragOverlayLinks, setDragOverlayLinks] = useState({});
  
   /**
    * Copy over skills (with different IDs) starting from the target id for DragOverlay.
@@ -189,7 +187,6 @@ function SkillTree() {
    * @param {Array} targets an array of skills
    */
   const createButtons = (targets) => {
-    console.log('create')
     let cb = {};
     for (const t of targets) {
       cb[t.id] = createRef();
@@ -197,29 +194,15 @@ function SkillTree() {
     return cb;
   }
 
-  /**
-   * Create links for target skills
-   * @param {Array} targets an array of skills
-   */
-  const createLinks = (targets) => {
-    let cl = {};
-    for (const t of targets) {
-      cl[t.id] = <div style={{width: '100px', height: '100px', backgroundColor: 'blue'}} />;
-    }
-    return cl;
-  }
-
   const setDragOverlay = (id) => {
     if (!id) {
       setDragOverlaySkills([]);
       setDragOverlayButtons({});
-      setDragOverlayLinks({});
       setDraggingSkillIDs([]);
     }
     const newDragOverlaySkills = copySkills(id)
     setDragOverlaySkills(newDragOverlaySkills);
     setDragOverlayButtons(createButtons(newDragOverlaySkills));
-    setDragOverlayLinks(createLinks(newDragOverlaySkills));
     let newDraggingSkillIDs = [id]
     for (const d of newDraggingSkillIDs) {
       for (const s of skills) {
@@ -228,77 +211,7 @@ function SkillTree() {
         }
       }
     }
-    console.log(`231:newDraggingSkillIDs:${newDraggingSkillIDs}`)
     setDraggingSkillIDs(newDraggingSkillIDs)
-  }
-
-  const [time, setTime] = useState(new Date());
-
-  useEffect(() => {
-    for(const skill of skills.concat(dragOverlaySkills)) {
-      console.log(`updating: ${skill.id}`)
-      updateLink(skill);
-    }
-
-    // Update every () seconds
-    const interval = setInterval(() => setTime(new Date()), 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [time]);
-
-  /**
-   * Update the positon of the links between the nodes
-   * @param {Object} skill target skills that is linked to its parent
-   * @returns 
-   */
-  const updateLink = (skill) => {
-    if(skill.parent === 'root')
-      return;
-
-    /**
-     * Get offsets of given element (for updateChildEdge).
-     * Reference: How to Draw a Line Between Two divs with JavaScript? | https://thewebdev.info/2021/09/12/how-to-draw-a-line-between-two-divs-with-javascript/
-     */
-    const getOffset = (el) => {
-      const rect = el.current.getBoundingClientRect();
-      return {
-        left: rect.left + window.pageXOffset,
-        top: rect.top + window.pageYOffset,
-        width: rect.width || el.offsetWidth,
-        height: rect.height || el.offsetHeight
-      };
-    }
-
-    const off_p = getOffset(buttons[skill.parent] ? buttons[skill.parent] : dragOverlayButtons[skill.parent]);
-    const off_n = getOffset(buttons[skill.id] ? buttons[skill.id] : dragOverlayButtons[skill.id]);
-
-    const length = Math.sqrt((off_p.left-off_n.left)*(off_p.left-off_n.left) +
-                              (off_p.top-off_n.top)*(off_p.top-off_n.top))
-    const angle = Math.atan2((off_p.top - off_n.top), (off_p.left - off_n.left)) * (180 / Math.PI);
-    const top = off_p.top + off_p.height/2 + 120
-    const left = off_n.left + off_n.width/2
-    
-    let newLink = 
-      <div 
-        className='link' 
-        style={{ 
-          width: length, 
-          left: left, 
-          top: top,
-          transform: `rotate(${angle}deg)`, 
-          transformOrigin: 'top left',
-          opacity: dragginSkillIDs.includes(skill.id) ? 0 : 1
-        }}
-      />;
-
-    console.log(`skill.id in dragginSkillIDs: ${skill.id in dragginSkillIDs}`)
-    
-    if (links[skill.id]) {
-      links[skill.id] = newLink;
-    } else {
-      dragOverlayLinks[skill.id] = newLink;
-    }
   }
 
   return (
@@ -325,9 +238,11 @@ function SkillTree() {
               : null}
           </DragOverlay>
       </DndContext>
-      {
-        Object.values(links).concat(Object.values(dragOverlayLinks))
-      }
+      <SkillLinks 
+        skills={[...skills, ...dragOverlaySkills]} 
+        buttons={{...buttons, ...dragOverlayButtons}}
+        excludes={dragginSkillIDs} 
+      />
     </div>
   )
 }
