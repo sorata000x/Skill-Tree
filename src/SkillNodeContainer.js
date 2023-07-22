@@ -7,7 +7,6 @@ import SkillNodeLayer from './SkillNodeLayer';
 import {v4 as uuid} from 'uuid';
 
 function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons, isDragOverlay}) {
-  const [link, setLink] = useState(<div/>);
   const [time, setTime] = useState(new Date());
   const {
     listeners,
@@ -19,19 +18,6 @@ function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons, 
     id: id,
     transition: {duration: 300, easing: 'ease'}
   } );
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    opacity: isDragging ? 0 : 1,
-  };
-
-  useEffect(() => {
-    updateLink();
-    const interval = setInterval(() => setTime(new Date()), 100000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [time]);
 
   const addSkill = () => {
     const skillID = uuid()
@@ -54,58 +40,14 @@ function SkillNodeContainer({id, title, parent, skills, operateSkills, buttons, 
     addSkill();
   }
 
-  /**
-   * Get offsets of given element (for updateChildEdge).
-   * Reference: How to Draw a Line Between Two divs with JavaScript? | https://thewebdev.info/2021/09/12/how-to-draw-a-line-between-two-divs-with-javascript/
-   */
-  const getOffset = (el) => {
-    const rect = el.current.getBoundingClientRect();
-    return {
-      left: rect.left + window.pageXOffset,
-      top: rect.top + window.pageYOffset,
-      width: rect.width || el.offsetWidth,
-      height: rect.height || el.offsetHeight
-    };
-  }
-
-  const updateLink = () => {
-    if(parent === 'root')
-      return;
-    //console.log(`parent: ${parent}, buttons[parent]: ${buttons[parent]}, id: ${id}, buttons[id]: ${buttons[id]}`)
-    const off_p = getOffset(buttons[parent]);
-    const off_n = getOffset(buttons[id]);
-
-    const length = Math.sqrt((off_p.left-off_n.left)*(off_p.left-off_n.left) +
-                              (off_p.top-off_n.top)*(off_p.top-off_n.top))
-    const angle = Math.atan2((off_p.top - off_n.top), (off_p.left - off_n.left)) * (180 / Math.PI);
-
-    //const off3 = getOffset(childDivRef);
-    //const cx = off_n.left-off3.left+(off_n.width/2);
-    const cx = off_n.left+(off_n.width/2);
-    const top = off_p.top + off_p.height/2 + 120
-    const left = off_n.left + off_n.width/2
-    
-    let newLink = 
-      <div 
-        className='link' 
-        style={{ 
-          width: length, 
-          left: left, 
-          top: top,
-          transform: `rotate(${angle}deg)`, 
-          transformOrigin: 'top left' 
-        }}
-      />;
-    setLink(newLink)
-  }
-
   return (
-    <div style={style} ref={setNodeRef} onClick={handleClick} >
+    <div ref={setNodeRef} onClick={handleClick} >
       <div className='skill_node_container' onClick={handleClick} >
         <SkillNodeButton id={id} title={title} listeners={listeners} buttonRef={buttons[id]} isDragOverlay={isDragOverlay}/>
         <SkillNodeLayer id={id} skills={skills} operateSkills={operateSkills} buttons={buttons} isDragOverlay={isDragOverlay} />
+        
       </div>
-      {link}
+
     </div>
   )
 }

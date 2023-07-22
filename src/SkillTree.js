@@ -47,21 +47,23 @@ INITIAL_SKILLS.forEach(skill => {
 
 function SkillTree() {
   const [skills, setSkills] = useState([]);
-  const [buttons, setButtons] = useState([]);
+  const [buttons, setButtons] = useState({});
+  const [links, setLinks] = useState({});
 
-  useEffect(() => {
-    buttons['drag-overlay'] = createRef();
-  }, [])
-
+  /**
+   * Operation to modify the skills.
+   * @param {Object} action 
+   * @returns 
+   */
   const operateSkills = (action) => {
     switch (action.type) {
       case "ADD_SKILL": {
         setSkills([...skills, action.skill]);
         buttons[action.skill.id] = createRef();
+        links[action.skill.id] = <div style={{height: 100, width: 100}} />;
         break;
       }
       case "CHANGE_PARENT": {
-        console.log('switching parent')
         let fromIndex = skills.findIndex(skill => ( skill.id === action.from ))
         skills[fromIndex].parent = action.parent
         break;
@@ -72,6 +74,11 @@ function SkillTree() {
     }
   }
 
+  /**
+   * Find the nearest (positioned) parent id of a skill.
+   * @param {String} id skill id
+   * @returns nearest parent id
+   */
   const getNearestParent = (id) => {
     const getParentDist = (parent, px, py) => {
       if (!parent.current) {
@@ -87,7 +94,7 @@ function SkillTree() {
 
     const rect = buttons[id].current.getBoundingClientRect();
     let [target, minDist] = [null, Infinity];
-    
+    // Calculate the distance of each parent skills and find the nearest one
     skills.forEach(skill => {
       let dist = getParentDist(buttons[skill.id], rect.left+rect.width/2, rect.top+rect.height/2);
       if (dist < minDist && skill.id !== id) {
@@ -102,16 +109,6 @@ function SkillTree() {
   /* Dnd-kit Sortable */
 
   const [activeSkill, setActiveSkill] = useState({});
-  const [dragOverlaySkills, setDragOverlaySkills] = useState([]);
-
-  const getSkillByID = (id) => {
-    let target = {};
-    skills.forEach(skill => {
-      if (skill.id === id)
-        target = skill;
-    })
-    return target;
-  }
   
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -124,9 +121,18 @@ function SkillTree() {
     ...defaultDropAnimation,
   }
 
+  const getSkillByID = (id) => {
+    let target = {};
+    skills.forEach(skill => {
+      if (skill.id === id)
+        target = skill;
+    })
+    return target;
+  }
+
   const handleDragStart = ({active, over}) => {
     setActiveSkill(getSkillByID(active.id));
-    setDragOverlaySkills(copySkills(active.id));
+    setDragOverlay(active.id);
   }
 
   const handleDragOver = ({active, over}) => {
@@ -141,52 +147,142 @@ function SkillTree() {
       parent: parent ? parent : 'root',
     })
     setActiveSkill(null);
+    setDragOverlay(null);
   }
 
+  const [dragOverlaySkills, setDragOverlaySkills] = useState([]);
+  const [dragOverlayButtons, setDragOverlayButtons] = useState({});
+  const [dragOverlayLinks, setDragOverlayLinks] = useState({});
+ 
   /**
    * Copy over skills (with different IDs) starting from the target id for DragOverlay.
+   * @param {String} id starting target skill id 
+   * @returns an array of copied skills
    */
   const copySkills = (id) => {
-
-    let dSkills = [JSON.parse(JSON.stringify(getSkillByID(id)))];
-
-    for (const d of dSkills) {
+    let newSkills = [JSON.parse(JSON.stringify(getSkillByID(id)))];
+    for (const d of newSkills) {
       for (const s of skills) {
         if (s.parent === d.id) {
-          dSkills = [...dSkills, JSON.parse(JSON.stringify(s))];
+          newSkills = [...newSkills, JSON.parse(JSON.stringify(s))];
         }
       }
     }
-
     const changeIDs = (targets) => {
       for (const p of targets) {
         let n = uuid();
         for (const c of targets) {
-          if (p.id === c.parent) {
+          if (p.id === c.parent)  // replace children's parent id
             c.parent = n;
-          }
         }
-        p.id = n;
+        p.id = n;                 // replace parent's id
       }
     }
-
-    dSkills[0].parent = 'root';
-    changeIDs(dSkills);
-
-    console.log(`dSkills: ${JSON.stringify(dSkills)}`)
-    return dSkills;
+    newSkills[0].parent = 'root';
+    changeIDs(newSkills);
+    return newSkills;
   }
 
   /**
-   * Create buttons from target skills
+   * Create buttons for target skills
    * @param {Array} targets an array of skills
    */
   const createButtons = (targets) => {
+    console.log('create')
     let cb = {};
     for (const t of targets) {
       cb[t.id] = createRef();
     }
     return cb;
+  }
+
+  /**
+   * Create links for target skills
+   * @param {Array} targets an array of skills
+   */
+  const createLinks = (targets) => {
+    let cl = {};
+    for (const t of targets) {
+      cl[t.id] = <div style={{width: '100px', height: '100px', backgroundColor: 'blue'}} />;
+    }
+    return cl;
+  }
+
+  const setDragOverlay = (id) => {
+    if (!id) {
+      setDragOverlaySkills([]);
+      setDragOverlayButtons({});
+      setDragOverlayLinks({});
+    }
+    const newDragOverlaySkills = copySkills(id)
+    setDragOverlaySkills(newDragOverlaySkills);
+    setDragOverlayButtons(createButtons(newDragOverlaySkills));
+    setDragOverlayLinks(createLinks(newDragOverlaySkills));
+  }
+
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    for(const skill of dragOverlaySkills) {
+      updateLink(skill);
+    }
+
+    // Update every () seconds
+    const interval = setInterval(() => setTime(new Date()), 10);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [time]);
+
+  /**
+   * Update the positon of the links between the nodes
+   * @param {Object} skill target skills that is linked to its parent
+   * @returns 
+   */
+  const updateLink = (skill) => {
+    if(skill.parent === 'root')
+      return;
+
+    /**
+     * Get offsets of given element (for updateChildEdge).
+     * Reference: How to Draw a Line Between Two divs with JavaScript? | https://thewebdev.info/2021/09/12/how-to-draw-a-line-between-two-divs-with-javascript/
+     */
+    const getOffset = (el) => {
+      const rect = el.current.getBoundingClientRect();
+      return {
+        left: rect.left + window.pageXOffset,
+        top: rect.top + window.pageYOffset,
+        width: rect.width || el.offsetWidth,
+        height: rect.height || el.offsetHeight
+      };
+    }
+
+    const off_p = getOffset(buttons[skill.parent] ? buttons[skill.parent] : dragOverlayButtons[skill.parent]);
+    const off_n = getOffset(buttons[skill.id] ? buttons[skill.id] : dragOverlayButtons[skill.id]);
+
+    const length = Math.sqrt((off_p.left-off_n.left)*(off_p.left-off_n.left) +
+                              (off_p.top-off_n.top)*(off_p.top-off_n.top))
+    const angle = Math.atan2((off_p.top - off_n.top), (off_p.left - off_n.left)) * (180 / Math.PI);
+    const top = off_p.top + off_p.height/2 + 120
+    const left = off_n.left + off_n.width/2
+    
+    let newLink = 
+      <div 
+        className='link' 
+        style={{ 
+          width: length, 
+          left: left, 
+          top: top,
+          transform: `rotate(${angle}deg)`, 
+          transformOrigin: 'top left',
+        }}
+      />;
+    
+    if (links[skill.id]) {
+      links[skill.id] = newLink;
+    } else {
+      dragOverlayLinks[skill.id] = newLink;
+    }
   }
 
   return (
@@ -199,7 +295,7 @@ function SkillTree() {
         onDragEnd={handleDragEnd}
         >
         <SkillNodeLayer id='root' skills={skills} operateSkills={operateSkills} buttons={buttons} />
-          <DragOverlay dropAnimation={dropAnimation} style={{height: '100%'}}>
+        <DragOverlay dropAnimation={dropAnimation} style={{height: '100%'}}>
             {activeSkill ? 
               <SkillNodeContainer 
                 key={dragOverlaySkills[0] ? dragOverlaySkills[0].id : null} 
@@ -207,12 +303,15 @@ function SkillTree() {
                 title={dragOverlaySkills[0] ? dragOverlaySkills[0].title : null} 
                 parent={dragOverlaySkills[0] ? dragOverlaySkills[0].parent : null} 
                 skills={dragOverlaySkills}
-                buttons={createButtons(dragOverlaySkills)}
+                buttons={dragOverlayButtons}
                 isDragOverlay={true}
               />
               : null}
           </DragOverlay>
       </DndContext>
+      {
+        Object.values(links).concat(Object.values(dragOverlayLinks))
+      }
     </div>
   )
 }
