@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react'
+import React, { useState, createRef, useEffect } from 'react'
 import SkillNodeLayer from './SkillNodeLayer'
 import {
   useSensors,
@@ -16,70 +16,32 @@ import { v4 as uuid } from 'uuid';
 import SkillNodeContainer from './SkillNodeContainer';
 import SkillLinks from './SkillLinks';
 
-let INITIAL_SKILLS = [
-  {
-    id: uuid(),
-    title: "Skill 1",
-    level: "0",
-    children: [],
-    parent: 'root',
-  },
-  {
-    id: uuid(),
-    title: "Skill 2",
-    level: "10",
-    children: [],
-    parent: 'root',
-  },
-  {
-    id: uuid(),
-    title: "Skill 3",
-    level: "50",
-    children: [],
-    parent: 'root',
-  }
-]
-let INITIAL_BUTTONS = {}
-INITIAL_SKILLS.forEach(skill => {
-  INITIAL_BUTTONS[skill.id] = createRef()  
-})
-
-function SkillTree() {
-  const [skills, setSkills] = useState([]);
-  const [buttons, setButtons] = useState({});
-  const [links, setLinks] = useState({});
+/**
+ * Tree of skill nodes and their links.
+ * @param {Array} skills array of all the skill objects
+ * @param {Object} buttons keys of skill ids corresponding to their button reference 
+ * @param {Function} operateSkills operation on skills (see App.js) 
+ * @param {Function} openEdit open skill editing panel
+ * @returns 
+ */
+function SkillTree({skills, buttons, operateSkills, openEdit}) {
+  
   const [dragginSkillIDs, setDraggingSkillIDs] = useState([]);
-
-  /**
-   * Operation to modify the skills.
-   * @param {Object} action 
-   * @returns 
-   */
-  const operateSkills = (action) => {
-    switch (action.type) {
-      case "ADD_SKILL": {
-        setSkills([...skills, action.skill]);
-        buttons[action.skill.id] = createRef();
-        links[action.skill.id] = <div style={{height: 100, width: 100}} />;
-        break;
-      }
-      case "CHANGE_PARENT": {
-        let fromIndex = skills.findIndex(skill => ( skill.id === action.from ))
-        skills[fromIndex].parent = action.parent
-        break;
-      }
-      default: {
-        return;
-      }
-    }
-  }
 
   /**
    * Find the nearest (positioned) parent id of a skill.
    * @param {String} id skill id
    * @returns nearest parent id
    */
-  const getNearestParent = (id) => {
+  const getNearestParent = (px, py, id=null) => {
+
+    /**
+     * Get the distance from a parent node to a given point
+     * @param {Object} parent a parent node 
+     * @param {Number} px x coordinate of a point
+     * @param {Number} py y coordinate of a point
+     * @returns 
+     */
     const getParentDist = (parent, px, py) => {
       if (!parent.current) {
         return Infinity;
@@ -92,11 +54,10 @@ function SkillTree() {
       return dy >= 0 ? Math.sqrt(dx * dx, dy * dy) : Infinity;
     }
 
-    const rect = buttons[id].current.getBoundingClientRect();
-    let [target, minDist] = [null, Infinity];
     // Calculate the distance of each parent skills and find the nearest one
+    let [target, minDist] = [null, Infinity];
     skills.forEach(skill => {
-      let dist = getParentDist(buttons[skill.id], rect.left+rect.width/2, rect.top+rect.height/2);
+      let dist = getParentDist(buttons[skill.id], px, py);
       if (dist < minDist && skill.id !== id) {
         target = skill.id;
         minDist = dist;
@@ -107,11 +68,14 @@ function SkillTree() {
   }
 
   /* Dnd-kit Sortable */
-
-  const [activeSkill, setActiveSkill] = useState({});
   
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    // Delay for onClick event of node button
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
@@ -131,22 +95,18 @@ function SkillTree() {
   }
 
   const handleDragStart = ({active, over}) => {
-    setActiveSkill(getSkillByID(active.id));
     setDragOverlay(active.id);
   }
 
   const handleDragOver = ({active, over}) => {
-    setActiveSkill(getSkillByID(active.id));
   }
 
   const handleDragEnd = ({active, over}) => {
-    const parent = getNearestParent(active.id);
     operateSkills({
-      type: "CHANGE_PARENT", 
-      from: active.id, 
-      parent: parent ? parent : 'root',
+      type: "DROP_SKILL",
+      active: active,
+      over: over,
     })
-    setActiveSkill(null);
     setDragOverlay(null);
   }
 
@@ -159,6 +119,7 @@ function SkillTree() {
    * @returns an array of copied skills
    */
   const copySkills = (id) => {
+    // Copy over sub array of skills from the given skill id
     let newSkills = [JSON.parse(JSON.stringify(getSkillByID(id)))];
     for (const d of newSkills) {
       for (const s of skills) {
@@ -167,6 +128,7 @@ function SkillTree() {
         }
       }
     }
+    // Change the IDs of the copied skills
     const changeIDs = (targets) => {
       for (const p of targets) {
         let n = uuid();
@@ -175,6 +137,7 @@ function SkillTree() {
             c.parent = n;
         }
         p.id = n;                 // replace parent's id
+        p.isDragOverlay = true;
       }
     }
     newSkills[0].parent = 'root';
@@ -214,35 +177,67 @@ function SkillTree() {
     setDraggingSkillIDs(newDraggingSkillIDs)
   }
 
+  /**
+   * Add skill to a parent
+   * @param {String} parentID 
+   */
+  const addSkill = (parentID) => {
+    const skillID = uuid()
+    operateSkills({
+      type: "ADD_SKILL",
+      skill: {
+        id: skillID,
+        parent: parentID,
+        children: [],
+        title: '',
+        level: 0,
+        maxLevel: 10,
+        description: '',
+      }
+    })
+  }
+
+  const handleDoubleClick = (event) => {
+    if (!skills.length) {
+      addSkill('root')
+      return;
+    }
+    let target = getNearestParent(event.clientX, event.clientY);
+    addSkill(target ? target : 'root');
+  }
+
   return (
-    <div className='skill_tree_container'>
+    <div 
+      className='skill_tree_container' 
+      onDoubleClick={handleDoubleClick}>
       <DndContext
         sensors={sensors}
         collisionDetection={closestCorners}
         onDragStart={handleDragStart}
         onDragOver={handleDragOver}
-        onDragEnd={handleDragEnd}
-        >
-        <SkillNodeLayer id='root' skills={skills} operateSkills={operateSkills} buttons={buttons} />
-        <DragOverlay dropAnimation={dropAnimation} style={{height: '100%'}}>
-            {activeSkill ? 
-              <SkillNodeContainer 
-                key={dragOverlaySkills[0] ? dragOverlaySkills[0].id : null} 
-                id={dragOverlaySkills[0] ? dragOverlaySkills[0].id : null} 
-                title={dragOverlaySkills[0] ? dragOverlaySkills[0].title : null} 
-                parent={dragOverlaySkills[0] ? dragOverlaySkills[0].parent : null} 
-                skills={dragOverlaySkills}
-                buttons={dragOverlayButtons}
-                isDragOverlay={true}
-              />
-              : null}
-          </DragOverlay>
+        onDragEnd={handleDragEnd}>
+        <SkillNodeLayer 
+          id='root' 
+          skills={skills} 
+          buttons={buttons} 
+          operateSkills={operateSkills} 
+          openEdit={openEdit} />
+        <DragOverlay 
+          dropAnimation={dropAnimation}>
+          {dragOverlaySkills.length ? 
+            <SkillNodeContainer 
+              key={dragOverlaySkills[0] ? dragOverlaySkills[0].id : null} 
+              skill={dragOverlaySkills[0]}
+              skills={dragOverlaySkills}
+              buttons={dragOverlayButtons}
+              isDragOverlay={true}/>
+            : null}
+        </DragOverlay>
       </DndContext>
       <SkillLinks 
         skills={[...skills, ...dragOverlaySkills]} 
         buttons={{...buttons, ...dragOverlayButtons}}
-        excludes={dragginSkillIDs} 
-      />
+        excludes={dragginSkillIDs}/>
     </div>
   )
 }

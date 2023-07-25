@@ -1,0 +1,80 @@
+.skill_node_button_container {
+  display: flex;
+  align-items: center;
+  width: 140px;
+  height: 80px;
+  pointer-events: auto;
+}
+
+.skill_node_button {
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  margin-left: 30px;
+  padding: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  z-index: 10;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.skill_node_button:hover {
+  border: 2px solid gray;
+}
+
+.skill_node_title {
+  position: absolute;
+  transform: translate(calc(38px - 50%), 30px);
+  color: black;
+  font-size: 12pt;
+  z-index: 10;
+}
+
+.skill_node_level_container {
+  display: flex;
+  align-items: flex-end;
+  width: 80px;
+  height: 80px;
+  margin: 0;
+}
+
+.skill_node_level {
+  background-color: grey;
+  opacity: 0.3;
+  width: 100px;
+  height: 30px;
+}
+
+.level_change_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: fit-content;
+}
+
+.level_change_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 20%;
+  height: 40px;
+  width: 30px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.level_change_divider {
+  background-color: lightgrey; 
+  width: 24px;
+  height: 1.8px;
+  margin-left: 3px;
+  z-index: 10;
+}

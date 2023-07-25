@@ -1,0 +1,75 @@
+.skill_edit_container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  background-color: white;
+  box-shadow: 0 0 10px 10px lightgray;
+  z-index: 100;
+}
+
+.close_icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.skill_edit_form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 10px;
+  margin: 5%;
+  width: 85%;
+  height: auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control {
+  width: 300px;
+  height: 20px;
+}
+
+.level_inputs_container {
+  display: flex;
+  gap: 3px;
+}
+
+.level_input {
+  width: 30px;
+}
+
+.description {
+  height: 100px;
+}
+
+.action {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  bottom: 0;
+}
+
+.abtn {
+  width: 70px;
+  margin-bottom: 10px;
+}
+
+.abtn_add {
+  background-color: gray;
+  color: white;
+  border: 2px solid gray;
+}
+
+.abtn_cancel {
+  background-color: white;
+  border: 2px solid gray;
+}

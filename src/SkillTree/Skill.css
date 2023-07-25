@@ -1,0 +1,14 @@
+.skill_tree_outer_container {
+  width: 100%;
+  height: 100%;
+}
+
+.user_btn {
+  position: absolute;
+  right: 0;
+  margin-left: 100px;
+}
+
+.active {
+  color: blue;
+}

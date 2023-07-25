@@ -1,5 +1,13 @@
-import React, {useState, useEffect, createRef} from 'react'
+import React, {useState, useEffect, createRef} from 'react';
+import './SkillLinks.css';
 
+/**
+ * Links between skill nodes.
+ * @param {Array} skills array of all the skill objects
+ * @param {Object} buttons keys of skill ids corresponding to their button reference 
+ * @param {Array} excludes skill ids to not render link
+ * @returns 
+ */
 function SkillLinks({skills, buttons, excludes}) {
 
   const [links, setLinks] = useState({});
@@ -7,7 +15,7 @@ function SkillLinks({skills, buttons, excludes}) {
   useEffect(() => {
     setLinks({});
     for (const skill in skills) {
-      links[skill.id] = <div style={{width: '100px', height: '100px', backgroundColor: 'blue'}} />;
+      links[skill.id] = <div />;
     }
   }, [skills])
 
@@ -18,7 +26,7 @@ function SkillLinks({skills, buttons, excludes}) {
     for(const skill of skills) {
       updateLink(skill);
     }
-    // Update every () seconds
+    // Update every 10 ms
     const interval = setInterval(() => setTime(new Date()), 10);
     return () => {
       clearInterval(interval);
@@ -31,7 +39,7 @@ function SkillLinks({skills, buttons, excludes}) {
    * @returns 
    */
   const updateLink = (skill) => {
-    if(skill.parent === 'root')
+    if(!buttons[skill.id] || !buttons[skill.parent])
       return;
 
     /**
@@ -54,7 +62,7 @@ function SkillLinks({skills, buttons, excludes}) {
     const length = Math.sqrt((off_p.left-off_n.left)*(off_p.left-off_n.left) +
                               (off_p.top-off_n.top)*(off_p.top-off_n.top))
     const angle = Math.atan2((off_p.top - off_n.top), (off_p.left - off_n.left)) * (180 / Math.PI);
-    const top = off_p.top + off_p.height/2 + 120
+    const top = off_p.top + off_p.height/2 + 100
     const left = off_n.left + off_n.width/2
     
     let newLink = 
@@ -66,7 +74,7 @@ function SkillLinks({skills, buttons, excludes}) {
           top: top,
           transform: `rotate(${angle}deg)`, 
           transformOrigin: 'top left',
-          opacity: excludes.includes(skill.id) ? 0 : 1
+          opacity: excludes.includes(skill.id) ? 0 : 1,
         }}
       />;
     
