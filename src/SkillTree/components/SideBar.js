@@ -2,15 +2,29 @@ import React from 'react'
 import { useStateValue } from '../../StateProvider';
 import { HiOutlinePlus } from 'react-icons/hi';
 import './SideBar.css'
+import { Link } from "react-router-dom";
+import { auth } from '../../firebase';
 
 function SideBar({setGroup}) {
   
-  const [{groups}, dispatch] = useStateValue();
+  const [{user, groups}, dispatch] = useStateValue();
 
   const addNewGroup = () => {
     dispatch({
       type: "ADD_NEW_GROUP",
     })
+  }
+
+  const handleAuthentication = () => {
+    if (user) {
+      auth.signOut();
+      dispatch({
+        type: "SIGN_OUT",
+      })
+      dispatch({
+        type: "CLEAR_SKILL",
+      })
+    }
   }
 
   return (
@@ -34,6 +48,18 @@ function SideBar({setGroup}) {
           </button>)
         }
       </div>
+      { user ?
+        <button 
+          className='user_btn' 
+          onClick={handleAuthentication}>
+          {user.email}
+        </button> :
+        <Link to={!user && '/login'}>
+          <button 
+            className='user_btn' >
+            Login
+          </button>
+        </Link> }
     </div>
   )
 }

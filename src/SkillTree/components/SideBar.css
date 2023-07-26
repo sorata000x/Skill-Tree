@@ -2,6 +2,8 @@
   background-color: rgb(230, 230, 230);
   width: 220px;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .action_buttons_container {
@@ -49,4 +51,11 @@
 
 .group_tab:hover {
   background-color: rgb(220, 220, 220);
+}
+
+.user_btn {
+  width: 174px;
+  height: 40px;
+  text-align: left;
+  margin: 5px;
 }

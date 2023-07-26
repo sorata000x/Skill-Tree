@@ -8,12 +8,6 @@
   height: 100%;
 }
 
-.user_btn {
-  position: absolute;
-  right: 0;
-  margin-left: 100px;
-}
-
 .active {
   color: blue;
 }

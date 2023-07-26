@@ -78,7 +78,6 @@ function Skill() {
   return (
     <div className='skill_container'>
       <SideBar setGroup={setGroup}/>
-      <UserButton />
       {group ? <div
         className='skill_tree_outer_container'
         onClick={handleClickOnSkillTree}>
