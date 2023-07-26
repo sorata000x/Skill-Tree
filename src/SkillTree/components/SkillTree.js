@@ -1,4 +1,4 @@
-import React, { useState, createRef, useEffect } from 'react'
+import React, { useState, createRef } from 'react'
 import SkillNodeLayer from './SkillNodeLayer'
 import {
   useSensors,
@@ -15,6 +15,7 @@ import './SkillTree.css';
 import { v4 as uuid } from 'uuid';
 import SkillNodeContainer from './SkillNodeContainer';
 import SkillLinks from './SkillLinks';
+import { useStateValue } from '../../StateProvider';
 
 /**
  * Tree of skill nodes and their links.
@@ -24,9 +25,10 @@ import SkillLinks from './SkillLinks';
  * @param {Function} openEdit open skill editing panel
  * @returns 
  */
-function SkillTree({skills, buttons, operateSkills, openEdit}) {
+function SkillTree({skills, buttons, group, openEdit}) {
   
   const [dragginSkillIDs, setDraggingSkillIDs] = useState([]);
+  const [{}, dispatch] = useStateValue();
 
   /**
    * Find the nearest (positioned) parent id of a skill.
@@ -102,7 +104,7 @@ function SkillTree({skills, buttons, operateSkills, openEdit}) {
   }
 
   const handleDragEnd = ({active, over}) => {
-    operateSkills({
+    dispatch({
       type: "DROP_SKILL",
       active: active,
       over: over,
@@ -182,18 +184,10 @@ function SkillTree({skills, buttons, operateSkills, openEdit}) {
    * @param {String} parentID 
    */
   const addSkill = (parentID) => {
-    const skillID = uuid()
-    operateSkills({
+    dispatch({
       type: "ADD_SKILL",
-      skill: {
-        id: skillID,
-        parent: parentID,
-        children: [],
-        title: '',
-        level: 0,
-        maxLevel: 10,
-        description: '',
-      }
+      parentID: parentID,
+      group: group,
     })
   }
 
@@ -219,8 +213,7 @@ function SkillTree({skills, buttons, operateSkills, openEdit}) {
         <SkillNodeLayer 
           id='root' 
           skills={skills} 
-          buttons={buttons} 
-          operateSkills={operateSkills} 
+          buttons={buttons}
           openEdit={openEdit} />
         <DragOverlay 
           dropAnimation={dropAnimation}>

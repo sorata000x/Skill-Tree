@@ -19,7 +19,7 @@ function Login() {
     // firebase login
     signInWithEmailAndPassword(auth, email, password)
     .then( auth => {
-
+      navigate('/')
     })
     .catch(error => alert(error.message))
   }

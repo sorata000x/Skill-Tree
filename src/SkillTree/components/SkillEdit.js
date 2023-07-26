@@ -1,6 +1,7 @@
 import React from 'react'
 import './SkillEdit.css';
 import CloseIcon from '@mui/icons-material/Close';
+import { useStateValue } from '../../StateProvider';
 
 /**
  * A panel to edit a skill.
@@ -9,7 +10,9 @@ import CloseIcon from '@mui/icons-material/Close';
  * @param {Function} close close this panel
  * @returns 
  */
-function SkillEdit({activeSkill, operateSkills, close}) {
+function SkillEdit({activeSkill, close}) {
+
+  const [{}, dispatch] = useStateValue();
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +42,7 @@ function SkillEdit({activeSkill, operateSkills, close}) {
       }
     }
 
-    operateSkills({
+    dispatch({
       type: 'SET_SKILL',
       id: activeSkill.id,
       skill: activeSkill,

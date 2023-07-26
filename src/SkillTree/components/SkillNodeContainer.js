@@ -15,7 +15,7 @@ import SkillNodeLayer from './SkillNodeLayer';
  * @param {boolean} isDragOverlay whether the layer is used by DragOverlay 
  * @returns 
  */
-function SkillNodeContainer({skill, skills, buttons, operateSkills, openEdit, isDragOverlay}) {
+function SkillNodeContainer({skill, skills, buttons, openEdit, isDragOverlay}) {
   
   /* For dnd-kit sortable
    * References: 
@@ -49,14 +49,12 @@ function SkillNodeContainer({skill, skills, buttons, operateSkills, openEdit, is
         <SkillNodeButton
           skill={skill} 
           buttonRef={buttons[skill.id]} 
-          operateSkills={operateSkills}
           openEdit={openEdit}
           listeners={listeners}/>
         <SkillNodeLayer 
           id={skill.id} 
           skills={skills} 
           buttons={buttons} 
-          operateSkills={operateSkills} 
           openEdit={openEdit}
           isDragOverlay={isDragOverlay}/>
       </div>

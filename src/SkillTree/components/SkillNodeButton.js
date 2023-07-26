@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './SkillNodeButton.css';
 import { HiOutlinePlus, HiOutlineMinus } from 'react-icons/hi';
+import { useStateValue } from '../../StateProvider';
 
 /**
  * A button of skill node.
@@ -11,9 +12,10 @@ import { HiOutlinePlus, HiOutlineMinus } from 'react-icons/hi';
  * @param {Object} listeners listeners for dnd-kit sortable dragging function 
  * @returns 
  */
-function SkillNodeButton({skill, buttonRef, operateSkills, openEdit, listeners}) {
+function SkillNodeButton({skill, buttonRef, openEdit, listeners}) {
 
   const [isMouseOver, setMouseOver] = useState(false);
+  const [{}, dispatch] = useStateValue();
 
   /**
    * Set the level of the skill for this button.
@@ -21,7 +23,7 @@ function SkillNodeButton({skill, buttonRef, operateSkills, openEdit, listeners})
    */
   const setLevel = (level) => {
     skill.level = level;
-    operateSkills({
+    dispatch({
       type: 'SET_SKILL',
       id: skill.id,
       skill: skill
@@ -79,7 +81,7 @@ function SkillNodeButton({skill, buttonRef, operateSkills, openEdit, listeners})
         {...listeners}>
         <div 
           className='skill_node_title'> 
-          {skill.id} 
+          {skill.title} 
         </div>
         <div 
           className='skill_node_level_container'>
