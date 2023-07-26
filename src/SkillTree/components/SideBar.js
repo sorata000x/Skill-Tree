@@ -5,7 +5,7 @@ import './SideBar.css'
 import { Link } from "react-router-dom";
 import { auth } from '../../firebase';
 
-function SideBar({setGroup}) {
+function SideBar() {
   
   const [{user, groups}, dispatch] = useStateValue();
 
@@ -41,11 +41,13 @@ function SideBar({setGroup}) {
       </div>
       <div className='group_tabs_container'>
         {groups?.map(name => 
-          <button 
-            className='group_tab'
-            onClick={(e)=>setGroup(name)}>
-            {name}
-          </button>)
+          <Link to={`/${name}`}>
+            <button 
+              className='group_tab'>
+              {name}
+            </button>
+          </Link>
+          )
         }
       </div>
       { user ?

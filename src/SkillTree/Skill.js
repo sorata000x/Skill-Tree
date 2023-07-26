@@ -1,10 +1,10 @@
 import './Skill.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SkillTree from './components/SkillTree';
 import SkillEdit from './components/SkillEdit';
 import { auth } from '../firebase';
 import { useStateValue } from '../StateProvider';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import IconButton from '@mui/material/IconButton';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SideBar from './components/SideBar';
@@ -12,7 +12,7 @@ import SideBar from './components/SideBar';
 function Skill() {
   const [activeSkill, setActiveSkill] = useState(null);
   const [{user, skills, buttons}, dispatch] = useStateValue();
-  const [group, setGroup] = useState('');
+  const group = useParams().pathParam;
 
   const getSkillByID = (id) => {
     let target = {};
@@ -76,23 +76,24 @@ function Skill() {
   }
 
   return (
-    <div className='skill_container'>
-      <SideBar setGroup={setGroup}/>
-      {group ? <div
-        className='skill_tree_outer_container'
-        onClick={handleClickOnSkillTree}>
-        <SkillTree 
-          skills={skills.filter(skill => skill.group === group)} 
-          buttons={buttons}
-          group={group}
-          openEdit={handleOpenEdit}/>
-      </div> : null }
-      { activeSkill ? 
-        <SkillEdit 
-          activeSkill={activeSkill} 
-          close={()=>setActiveSkill(null)}/> 
-        : null}
-    </div>
+    <>
+      <div className='skill_container'>
+        <SideBar />
+        {group ? <div
+          className='skill_tree_outer_container'
+          onClick={handleClickOnSkillTree}>
+          <SkillTree 
+            skills={skills.filter(skill => skill.group === group)} 
+            buttons={buttons}
+            openEdit={handleOpenEdit}/>
+        </div> : null }
+        { activeSkill ? 
+          <SkillEdit 
+            activeSkill={activeSkill} 
+            close={()=>setActiveSkill(null)}/> 
+          : null}
+      </div>
+    </>
   );
 }
 

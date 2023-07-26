@@ -16,6 +16,7 @@ import { v4 as uuid } from 'uuid';
 import SkillNodeContainer from './SkillNodeContainer';
 import SkillLinks from './SkillLinks';
 import { useStateValue } from '../../StateProvider';
+import { useParams } from "react-router-dom";
 
 /**
  * Tree of skill nodes and their links.
@@ -25,10 +26,11 @@ import { useStateValue } from '../../StateProvider';
  * @param {Function} openEdit open skill editing panel
  * @returns 
  */
-function SkillTree({skills, buttons, group, openEdit}) {
+function SkillTree({skills, buttons, openEdit}) {
   
   const [dragginSkillIDs, setDraggingSkillIDs] = useState([]);
   const [{}, dispatch] = useStateValue();
+  const group = useParams().pathParam;
 
   /**
    * Find the nearest (positioned) parent id of a skill.

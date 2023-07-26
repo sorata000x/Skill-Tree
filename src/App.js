@@ -61,6 +61,12 @@ function App() {
             }
           />
           <Route
+            path={`/:pathParam?`}
+            element={
+              <Skill />
+            }
+          />
+          <Route
             path="/login"
             element={
               <Login />
