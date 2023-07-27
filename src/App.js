@@ -10,6 +10,8 @@ function App() {
   const [{user}, dispatch] = useStateValue();
 
   useEffect(() => {
+    // Set app name
+    document.title = 'Skill Tree'
     // Set user
     auth.onAuthStateChanged(async authUser => {
       console.log('THE USER IS >>> ', authUser);

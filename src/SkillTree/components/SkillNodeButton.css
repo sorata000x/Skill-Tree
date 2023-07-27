@@ -8,7 +8,7 @@
 
 .skill_node_button {
   background-color: white;
-  border: 2px solid black;
+  border: 2px solid rgb(100, 100, 100);
   border-radius: 50%;
   width: 80px;
   height: 80px;
