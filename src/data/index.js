@@ -1,5 +1,5 @@
-import {createRef} from 'react';
-import { v4 as uuid} from "uuid";
+import { createRef } from "react";
+import { v4 as uuid } from "uuid";
 
 export const INITIAL_SKILL = [
   {
@@ -22,5 +22,5 @@ export const INITIAL_SKILL = [
     level: "50",
     children: [],
     ref: createRef(),
-  }
-]
+  },
+];
