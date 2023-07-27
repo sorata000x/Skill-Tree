@@ -13,6 +13,7 @@ function UserAuthDialog({open, close}) {
   const [type, setType] = useState('login');
 
   const signIn = (e) => {
+    console.log('Sign in')
     e.preventDefault();
     // firebase login
     // Reference: Get form data in React | https://stackoverflow.com/questions/23427384/get-form-data-in-react
@@ -24,6 +25,7 @@ function UserAuthDialog({open, close}) {
   }
 
   const register = (e) => {
+    console.log('register')
     e.preventDefault();
     // firebase register
     createUserWithEmailAndPassword(auth, e.target.email.value, e.target.password.value)
@@ -36,20 +38,30 @@ function UserAuthDialog({open, close}) {
       .catch((error) => alert(error.message));
   };
 
+  const changeType = (e) => {
+    e.preventDefault();
+    setType(type === 'login' ? 'sign-up' : 'login');
+  }
+
+  const handleSubmit = (e) => {
+    type === 'login' ? signIn() : register();
+  }
+
   return (
     <Dialog 
       open={open} 
       close={close} 
+      onClose={close}
       maxWidth='100vw'>
       <div className='dialog_container'>
         <DialogTitle> 
           { type === 'login' ? 
-          'Wecome Back' :
+          'Sign In' :
           'Create Your Account'}
         </DialogTitle>
         <form 
           className='dialog_form'
-          onSubmit={type === 'login' ? signIn : register}>  
+          onSubmit={handleSubmit}>  
           <div className='dialog_context'>
             <TextField
               name="email" 
@@ -80,12 +92,12 @@ function UserAuthDialog({open, close}) {
               { type === 'login' ? 
                 <button 
                   className='text_btn'
-                  onClick={()=>setType('sign-up')}> 
+                  onClick={changeType}> 
                   Sign Up
                 </button>:
                 <button 
                   className='text_btn'
-                  onClick={()=>setType('login')}> 
+                  onClick={changeType}> 
                   Login
                 </button>
               }

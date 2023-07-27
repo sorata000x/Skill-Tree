@@ -9,7 +9,6 @@ import './SkillLinks.css';
  * @returns 
  */
 function SkillLinks({skills, buttons, excludes}) {
-
   const [links, setLinks] = useState({});
 
   useEffect(() => {
@@ -27,7 +26,7 @@ function SkillLinks({skills, buttons, excludes}) {
       updateLink(skill);
     }
     // Update every 10 ms
-    const interval = setInterval(() => setTime(new Date()), 0);
+    const interval = setInterval(() => setTime(new Date()), 10);
     return () => {
       clearInterval(interval);
     };
