@@ -15,13 +15,20 @@
   margin-left: 30px;
   padding: 0;
   flex-shrink: 0;
-  overflow: hidden;
   z-index: 10;
+  overflow: hidden;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  scroll-margin: 100px 635px 300px 240px;
+  scroll-snap-margin: 100px 635px 300px 240px;
+  scroll-padding: 100px 635px 300px 240px;
+}
+
+.skill_node_button.active {
+  border: 2px solid blue;
 }
 
 .skill_node_button:hover {
@@ -29,7 +36,6 @@
 }
 
 .skill_node_title {
-  position: absolute;
   transform: translate(calc(38px - 50%), 30px);
   color: black;
   font-size: 12pt;
@@ -48,7 +54,6 @@
   background-color: grey;
   opacity: 0.3;
   width: 100px;
-  height: 30px;
 }
 
 .level_change_container {

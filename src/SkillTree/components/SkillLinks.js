@@ -1,5 +1,6 @@
 import React, {useState, useEffect, createRef} from 'react';
 import './SkillLinks.css';
+import { useStateValue } from '../../StateProvider';
 
 /**
  * Links between skill nodes.
@@ -8,8 +9,9 @@ import './SkillLinks.css';
  * @param {Array} excludes skill ids to not render link
  * @returns 
  */
-function SkillLinks({skills, buttons, excludes}) {
+function SkillLinks({skills, excludes}) {
   const [links, setLinks] = useState({});
+  const [{buttons}, dispatch] = useStateValue();
 
   useEffect(() => {
     setLinks({});
@@ -26,7 +28,7 @@ function SkillLinks({skills, buttons, excludes}) {
       updateLink(skill);
     }
     // Update every 10 ms
-    const interval = setInterval(() => setTime(new Date()), 10);
+    const interval = setInterval(() => setTime(new Date()), 0);
     return () => {
       clearInterval(interval);
     };

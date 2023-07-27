@@ -75,20 +75,6 @@
   overflow-y: scroll;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent; 
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgb(200, 200, 200); 
-  border-radius: 5px;
-}
-
 .group_tab {
   width: 174px;
   height: 32px;
@@ -103,7 +89,7 @@
   font-size: 9pt;
 }
 
-.group_tab:focus {
+.group_tab.active {
   background-color: rgb(220, 220, 220);
 }
 

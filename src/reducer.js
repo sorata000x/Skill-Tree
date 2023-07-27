@@ -19,19 +19,33 @@ const setUserData = async (data) => {
 
 const emptyState = {
   skills: [],
+  activeSkill: null,
   buttons: {},
   groups: [],
+  activeGroup: null,
   user: null,
 }
 
-export const initialState = {
-  skills: JSON.parse(localStorage.getItem("skills")) ? 
-          JSON.parse(localStorage.getItem("skills")) : [],
-  buttons: {},
-  groups: JSON.parse(localStorage.getItem("groups")) ? 
-          JSON.parse(localStorage.getItem("groups")) : [],
-  user: null,
-};
+const getInitialState = () => {
+  const skills = JSON.parse(localStorage.getItem("skills")) ? 
+                 JSON.parse(localStorage.getItem("skills")) : [];
+  const buttons = {};
+  for (const skill of skills) {
+    buttons[skill.id] = createRef();
+  }
+  const groups = JSON.parse(localStorage.getItem("groups")) ? 
+                 JSON.parse(localStorage.getItem("groups")) : [];
+  return {
+    skills: skills,
+    activeSkill: null,
+    buttons: buttons,
+    groups: groups,
+    activeGroup: null,
+    user: null,
+  }
+}
+
+export const initialState = getInitialState();
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -109,6 +123,12 @@ const reducer = (state, action) => {
         buttons: {},
       }
     }
+    case "SET_ACTIVE_SKILL": {
+      return {
+        ...state,
+        activeSkill: action.activeSkill
+      }
+    }
     // GROUP
     case "SET_GROUPS": {
       let newGroups = action.groups ? action.groups : [];
@@ -124,11 +144,17 @@ const reducer = (state, action) => {
     case "ADD_NEW_GROUP": {
       setUserData({
         ...state,
-        groups: [...state.groups, {name: action.name, id: action.id}]
+        groups: [...state.groups, action.group]
       })
       return {
         ...state,
-        groups: [...state.groups, {name: action.name, id: action.id}]
+        groups: [...state.groups, action.group]
+      }
+    }
+    case "SET_ACTIVE_GROUP": {
+      return {
+        ...state,
+        activeGroup: action.activeGroup
       }
     }
     // AUTHENTICATION

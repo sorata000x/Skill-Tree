@@ -12,10 +12,10 @@ import { useStateValue } from '../../StateProvider';
  * @param {Object} listeners listeners for dnd-kit sortable dragging function 
  * @returns 
  */
-function SkillNodeButton({skill, buttonRef, openEdit, listeners}) {
+function SkillNodeButton({skill, buttonRef, listeners, isDragOverlay}) {
 
   const [isMouseOver, setMouseOver] = useState(false);
-  const [{}, dispatch] = useStateValue();
+  const [{activeSkill}, dispatch] = useStateValue();
 
   /**
    * Set the level of the skill for this button.
@@ -32,11 +32,13 @@ function SkillNodeButton({skill, buttonRef, openEdit, listeners}) {
 
   const LevelChangeButtons = () => {
     const increaseLevel = (e) => {
-      if (skill.level <= skill.maxLevel) {
+      e.stopPropagation()
+      if (skill.level < skill.maxLevel) {
         setLevel(skill.level+1)
       }
     }
     const decreaseLevel = (e) => {
+      e.stopPropagation()
       if (skill.level > 0) {
         setLevel(skill.level-1);
       }
@@ -65,8 +67,14 @@ function SkillNodeButton({skill, buttonRef, openEdit, listeners}) {
   }
 
   const handleClick = (e) => {
+    if (isDragOverlay) {
+      return;
+    }
     e.stopPropagation();
-    openEdit(skill.id);
+    dispatch({
+      type: "SET_ACTIVE_SKILL",
+      activeSkill: skill,
+    })
   }
 
   return (
@@ -75,7 +83,7 @@ function SkillNodeButton({skill, buttonRef, openEdit, listeners}) {
       onMouseOver={(e)=>{setMouseOver(true)}} 
       onMouseLeave={(e)=>{setMouseOver(false);}}>
       <button 
-        className='skill_node_button' 
+        className={'skill_node_button' + (activeSkill?.id === skill.id ? ' active' : '')}
         ref={buttonRef} 
         onClick={handleClick} 
         {...listeners}>

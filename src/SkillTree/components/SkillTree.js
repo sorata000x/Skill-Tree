@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react'
+import React, { useState, useEffect , createRef } from 'react'
 import SkillNodeLayer from './SkillNodeLayer'
 import {
   useSensors,
@@ -16,7 +16,6 @@ import { v4 as uuid } from 'uuid';
 import SkillNodeContainer from './SkillNodeContainer';
 import SkillLinks from './SkillLinks';
 import { useStateValue } from '../../StateProvider';
-import { useParams } from "react-router-dom";
 
 /**
  * Tree of skill nodes and their links.
@@ -26,11 +25,10 @@ import { useParams } from "react-router-dom";
  * @param {Function} openEdit open skill editing panel
  * @returns 
  */
-function SkillTree({skills, buttons, openEdit}) {
-  
+function SkillTree({skills}) {
   const [dragginSkillIDs, setDraggingSkillIDs] = useState([]);
-  const [{groups}, dispatch] = useStateValue();
-  const group = useParams().pathParam;
+  const [{activeSkill, buttons, groups, activeGroup}, dispatch] = useStateValue();
+  const group = activeGroup?.id;
 
   /**
    * Find the nearest (positioned) parent id of a skill.
@@ -38,7 +36,6 @@ function SkillTree({skills, buttons, openEdit}) {
    * @returns nearest parent id
    */
   const getNearestParent = (px, py, id=null) => {
-
     /**
      * Get the distance from a parent node to a given point
      * @param {Object} parent a parent node 
@@ -57,7 +54,6 @@ function SkillTree({skills, buttons, openEdit}) {
       let dy = py - cy;
       return dy >= 0 ? Math.sqrt(dx * dx, dy * dy) : Infinity;
     }
-
     // Calculate the distance of each parent skills and find the nearest one
     let [target, minDist] = [null, Infinity];
     skills.forEach(skill => {
@@ -197,6 +193,10 @@ function SkillTree({skills, buttons, openEdit}) {
   }
 
   const handleDoubleClick = (event) => {
+    // Add new skill
+    if (!group) {
+      return;
+    }
     if (!skills.length) {
       addSkill('root')
       return;
@@ -205,28 +205,25 @@ function SkillTree({skills, buttons, openEdit}) {
     addSkill(target ? target : 'root');
   }
 
-  const Instruction = () => {
-    if (!groups.length) {
-      return (
-        <div className='instruction'> 
-          Create A Group To Start
-        </div>
-      )
-    } else if (!skills.length) {
-      return (
-        <div className='instruction'> 
-          Double Click To Create A Skill
-        </div>
-      )
+  useEffect(() => {
+    // Scroll active skill button to the center for better view
+    if (activeSkill) {
+      buttons[activeSkill.id].current?.scrollIntoView({ block: "start", behavior: 'smooth' });
     }
-    return;
-  }
+  }, [activeSkill])
 
   return (
     <div 
-      className='skill_tree_container' 
+      className={'skill_tree_container' + (activeSkill ? ' expand' : '')}
       onDoubleClick={handleDoubleClick}>
-      <Instruction/>
+      { (!groups.length || !skills.length) &&
+      <div 
+        className='instruction'> 
+        {!groups.length && 'Create A Group To Start'}
+        {group && !skills.length && 'Double Click To Create A Skill'}
+      </div>}
+      { skills.length ?
+      <>
       <DndContext
         sensors={sensors}
         collisionDetection={closestCorners}
@@ -235,9 +232,7 @@ function SkillTree({skills, buttons, openEdit}) {
         onDragEnd={handleDragEnd}>
         <SkillNodeLayer 
           id='root' 
-          skills={skills} 
-          buttons={buttons}
-          openEdit={openEdit} />
+          skills={skills}/>
         <DragOverlay 
           dropAnimation={dropAnimation}>
           {dragOverlaySkills.length ? 
@@ -245,7 +240,6 @@ function SkillTree({skills, buttons, openEdit}) {
               key={dragOverlaySkills[0] ? dragOverlaySkills[0].id : null} 
               skill={dragOverlaySkills[0]}
               skills={dragOverlaySkills}
-              buttons={dragOverlayButtons}
               isDragOverlay={true}/>
             : null}
         </DragOverlay>
@@ -254,6 +248,8 @@ function SkillTree({skills, buttons, openEdit}) {
         skills={[...skills, ...dragOverlaySkills]} 
         buttons={{...buttons, ...dragOverlayButtons}}
         excludes={dragginSkillIDs}/>
+      </> : null
+      }
     </div>
   )
 }

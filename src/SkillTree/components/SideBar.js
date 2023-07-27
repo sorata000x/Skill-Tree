@@ -10,17 +10,23 @@ import { FiSidebar } from 'react-icons/fi';
 function SideBar({openAuth}) {
   
   const [open, setOpen] = useState(true);
-  const [{user, groups}, dispatch] = useStateValue();
+  const [{user, groups, activeGroup}, dispatch] = useStateValue();
   const navigate = useNavigate();
 
   const addNewGroup = () => {
-    let newGroupID = uuid();
+    let newGroup = {
+      id: uuid(),
+      name: `Group ${groups.length+1}`
+    }
     dispatch({
       type: "ADD_NEW_GROUP",
-      id: newGroupID,
-      name: `Group ${groups.length+1}`,
+      group: newGroup,
     })
-    navigate(`/${newGroupID}`);
+    dispatch({
+      type: "SET_ACTIVE_GROUP",
+      activeGroup: newGroup,
+    })
+    navigate(`/${newGroup.id}`);
   }
 
   const handleAuthentication = () => {
@@ -34,7 +40,9 @@ function SideBar({openAuth}) {
 
   const NewGroupButton = () => {
     return (
-      <button className='new_group_button' onClick={addNewGroup}>
+      <button 
+        className='new_group_button' 
+        onClick={addNewGroup}>
         <HiOutlinePlus 
           className='new_group_add_icon' 
           size={10}/>
@@ -64,11 +72,20 @@ function SideBar({openAuth}) {
   }
 
   const GroupTabs = () => {
+    const setActiveGroup = (group) => {
+      dispatch({
+        type: "SET_ACTIVE_GROUP",
+        activeGroup: group,
+      })
+      navigate(`/${group.id}`);
+    }
+
     return (
       groups?.map(group => 
       <Link to={`/${group.id}`}>
         <button 
-          className='group_tab'>
+          className={'group_tab' + (activeGroup?.id === group.id ? ' active' : '')}
+          onClick={(e)=>setActiveGroup(group)}>
           {group.name}
         </button>
       </Link>

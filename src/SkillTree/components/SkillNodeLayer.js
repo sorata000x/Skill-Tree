@@ -14,7 +14,7 @@ import { useDroppable } from '@dnd-kit/core'
  * @param {boolean} isDragOverlay whether the layer is used by DragOverlay 
  * @returns 
  */
-function SkillNodeLayer({ id, skills, buttons, openEdit, isDragOverlay}) {
+function SkillNodeLayer({ id, skills, isDragOverlay}) {
   
   const { setNodeRef } = useDroppable({id});
 
@@ -32,8 +32,6 @@ function SkillNodeLayer({ id, skills, buttons, openEdit, isDragOverlay}) {
             key={skill.id} 
             skill={skill}
             skills={skills}
-            buttons={buttons}
-            openEdit={openEdit}
             isDragOverlay={isDragOverlay}/>
           : null
       ))}

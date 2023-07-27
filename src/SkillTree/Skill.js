@@ -8,46 +8,30 @@ import SideBar from './components/SideBar';
 import UserAuthDialog from './components/UserAuthDialog';
 
 function Skill() {
-  const [activeSkill, setActiveSkill] = useState(null);
-  const [{skills, buttons}] = useStateValue();
+  const [{skills, activeSkill}, dispatch] = useStateValue();
   const group = useParams().pathParam;
   const [authOpen, setAuthOpen] = useState(false);
 
-  const getSkillByID = (id) => {
-    let target = {};
-    skills.forEach(skill => {
-      if (skill.id === id)
-        target = skill;
+  const handleClick = (event) => {
+    dispatch({
+      type: "SET_ACTIVE_SKILL",
+      activeSkill: null,
     })
-    return target;
-  }
-
-  const handleOpenEdit = (id) => {
-    setActiveSkill(getSkillByID(id));
-  }
-
-  const handleClickOnSkillTree = (event) => {
-    if (activeSkill) {
-      setActiveSkill(null);
-    }
   }
 
   return (
     <>
-      <div className='skill_container'>
+      <div 
+        className='skill_container'
+        onClick={handleClick}>
         <SideBar openAuth={()=>setAuthOpen(true)}/>
           <div
-            className='skill_tree_outer_container'
-            onClick={handleClickOnSkillTree}>
+            className='skill_tree_outer_container'>
             <SkillTree 
-              skills={skills.filter(skill => skill.group === group)} 
-              buttons={buttons}
-              openEdit={handleOpenEdit}/>
+              skills={skills.filter(skill => skill.group === group)}/>
           </div>
           { activeSkill ? 
-            <SkillEdit 
-              activeSkill={activeSkill} 
-              close={()=>setActiveSkill(null)}/> 
+            <SkillEdit /> 
             : null}
       </div>
       <UserAuthDialog 

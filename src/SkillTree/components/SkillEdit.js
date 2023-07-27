@@ -10,13 +10,15 @@ import { useStateValue } from '../../StateProvider';
  * @param {Function} close close this panel
  * @returns 
  */
-function SkillEdit({activeSkill, close}) {
-
-  const [{}, dispatch] = useStateValue();
+function SkillEdit() {
+  const [{activeSkill}, dispatch] = useStateValue();
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    close();
+    dispatch({
+      type: "SET_ACTIVE_SKILL",
+      activeSkill: null,
+    })
   };
 
   const handleChange = (type, value) => {
@@ -49,9 +51,17 @@ function SkillEdit({activeSkill, close}) {
     })
   }
 
+  const close = () => {
+    dispatch({
+      type: "SET_ACTIVE_SKILL",
+      activeSkill: null,
+    })
+  }
+
   return (
     <div 
-      className='skill_edit_container'>
+      className='skill_edit_container'
+      onClick={(e)=>e.stopPropagation()}>
       <CloseIcon 
         className='close_icon' 
         onClick={close}/>

@@ -1,11 +1,11 @@
 .skill_edit_container {
+  background-color: white;
+  box-shadow: 0 0 10px 10px lightgray;
   position: absolute;
   top: 0;
   right: 0;
-  width: 40%;
+  width: 400px;
   height: 100%;
-  background-color: white;
-  box-shadow: 0 0 10px 10px lightgray;
   z-index: 100;
 }
 
