@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { useStateValue } from './StateProvider';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Skill from './SkillTree/Skill';
-import Login from './Login';
 import { db, auth } from './firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
@@ -64,12 +63,6 @@ function App() {
             path={`/:pathParam?`}
             element={
               <Skill />
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <Login />
             }
           />
         </Routes>

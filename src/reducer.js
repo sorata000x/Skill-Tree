@@ -17,10 +17,19 @@ const setUserData = async (data) => {
   }
 }
 
-export const initialState = {
-  skills: localStorage.getItem("skills") ? localStorage.getItem("skills") : [],
+const emptyState = {
+  skills: [],
   buttons: {},
-  groups: localStorage.getItem("groups") ? localStorage.getItem("groups") : [],
+  groups: [],
+  user: null,
+}
+
+export const initialState = {
+  skills: JSON.parse(localStorage.getItem("skills")) ? 
+          JSON.parse(localStorage.getItem("skills")) : [],
+  buttons: {},
+  groups: JSON.parse(localStorage.getItem("groups")) ? 
+          JSON.parse(localStorage.getItem("groups")) : [],
   user: null,
 };
 
@@ -115,22 +124,20 @@ const reducer = (state, action) => {
     case "ADD_NEW_GROUP": {
       setUserData({
         ...state,
-        groups: [...state.groups, `Group ${state.groups.length+1}`]
+        groups: [...state.groups, {name: action.name, id: action.id}]
       })
       return {
         ...state,
-        groups: [...state.groups, `Group ${state.groups.length+1}`]
+        groups: [...state.groups, {name: action.name, id: action.id}]
       }
     }
     // AUTHENTICATION
     case "SIGN_OUT": {
-      console.log('SIGN_OUT')
       return {
-        ...state,
+        ...emptyState,
       };
     }
     case "SET_USER": {
-      console.log('SET_USER')
       return {
         ...state,
         user: action.user

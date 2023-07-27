@@ -2,17 +2,23 @@ import React from 'react'
 import { useStateValue } from '../../StateProvider';
 import { HiOutlinePlus } from 'react-icons/hi';
 import './SideBar.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from '../../firebase';
+import { v4 as uuid } from 'uuid';
 
-function SideBar() {
+function SideBar({openAuth}) {
   
   const [{user, groups}, dispatch] = useStateValue();
+  const navigate = useNavigate();
 
   const addNewGroup = () => {
+    let newGroupID = uuid();
     dispatch({
       type: "ADD_NEW_GROUP",
+      id: newGroupID,
+      name: `Group ${groups.length+1}`,
     })
+    navigate(`/${newGroupID}`);
   }
 
   const handleAuthentication = () => {
@@ -20,9 +26,6 @@ function SideBar() {
       auth.signOut();
       dispatch({
         type: "SIGN_OUT",
-      })
-      dispatch({
-        type: "CLEAR_SKILL",
       })
     }
   }
@@ -40,15 +43,14 @@ function SideBar() {
         </button>
       </div>
       <div className='group_tabs_container'>
-        {groups?.map(name => 
-          <Link to={`/${name}`}>
+        {groups?.map(group => 
+          <Link to={`/${group.id}`}>
             <button 
               className='group_tab'>
-              {name}
+              {group.name}
             </button>
           </Link>
-          )
-        }
+        )}
       </div>
       { user ?
         <button 
@@ -56,12 +58,12 @@ function SideBar() {
           onClick={handleAuthentication}>
           {user.email}
         </button> :
-        <Link to={!user && '/login'}>
-          <button 
-            className='user_btn' >
-            Login
-          </button>
-        </Link> }
+        <button 
+          className='user_btn'
+          onClick={(e)=>openAuth()}>
+          Login
+        </button>
+      }
     </div>
   )
 }

@@ -27,7 +27,7 @@ function SkillLinks({skills, buttons, excludes}) {
       updateLink(skill);
     }
     // Update every 10 ms
-    const interval = setInterval(() => setTime(new Date()), 10);
+    const interval = setInterval(() => setTime(new Date()), 0);
     return () => {
       clearInterval(interval);
     };

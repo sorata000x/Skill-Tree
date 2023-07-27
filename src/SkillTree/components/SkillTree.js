@@ -29,7 +29,7 @@ import { useParams } from "react-router-dom";
 function SkillTree({skills, buttons, openEdit}) {
   
   const [dragginSkillIDs, setDraggingSkillIDs] = useState([]);
-  const [{}, dispatch] = useStateValue();
+  const [{groups}, dispatch] = useStateValue();
   const group = useParams().pathParam;
 
   /**
@@ -186,6 +186,9 @@ function SkillTree({skills, buttons, openEdit}) {
    * @param {String} parentID 
    */
   const addSkill = (parentID) => {
+    if (!group) {
+      return;
+    }
     dispatch({
       type: "ADD_SKILL",
       parentID: parentID,
@@ -202,10 +205,28 @@ function SkillTree({skills, buttons, openEdit}) {
     addSkill(target ? target : 'root');
   }
 
+  const Instruction = () => {
+    if (!groups.length) {
+      return (
+        <div className='instruction'> 
+          Create A Group To Start
+        </div>
+      )
+    } else if (!skills.length) {
+      return (
+        <div className='instruction'> 
+          Double Click To Create A Skill
+        </div>
+      )
+    }
+    return;
+  }
+
   return (
     <div 
       className='skill_tree_container' 
       onDoubleClick={handleDoubleClick}>
+      <Instruction/>
       <DndContext
         sensors={sensors}
         collisionDetection={closestCorners}

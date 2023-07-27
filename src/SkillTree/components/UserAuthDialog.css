@@ -1,0 +1,29 @@
+.dialog_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  background-color: white;
+  width: 500px;
+  height: 80vh;
+}
+
+.dialog_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.dialog_context {
+  width: 86%;
+}
+
+.text_btn {
+  border: none;
+  background-color: transparent;
+  color: rgb(47, 103, 245);
+  font-size: 12pt;
+  cursor: pointer;
+}

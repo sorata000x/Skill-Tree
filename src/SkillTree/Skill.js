@@ -1,18 +1,17 @@
 import './Skill.css';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import SkillTree from './components/SkillTree';
 import SkillEdit from './components/SkillEdit';
-import { auth } from '../firebase';
 import { useStateValue } from '../StateProvider';
-import { Link, useParams } from "react-router-dom";
-import IconButton from '@mui/material/IconButton';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useParams } from "react-router-dom";
 import SideBar from './components/SideBar';
+import UserAuthDialog from './components/UserAuthDialog';
 
 function Skill() {
   const [activeSkill, setActiveSkill] = useState(null);
-  const [{user, skills, buttons}, dispatch] = useStateValue();
+  const [{skills, buttons}] = useStateValue();
   const group = useParams().pathParam;
+  const [authOpen, setAuthOpen] = useState(false);
 
   const getSkillByID = (id) => {
     let target = {};
@@ -33,66 +32,27 @@ function Skill() {
     }
   }
 
-  const UserButton = () => {
-    const handleAuthentication = () => {
-      if (user) {
-        auth.signOut();
-        dispatch({
-          type: "SIGN_OUT",
-        })
-        dispatch({
-          type: "CLEAR_SKILL",
-        })
-      }
-    }
-    const Login = () => {
-      return (
-        <Link to={!user && '/login'}>
-          <IconButton 
-            size="large">
-            <AccountCircleIcon 
-              fontSize="large" />
-          </IconButton>
-        </Link>
-      )
-    }
-    const Info = () => {
-      return (
-        <IconButton 
-          size="large" 
-          onClick={handleAuthentication}>
-          <AccountCircleIcon 
-            className="active" 
-            fontSize="large" />
-        </IconButton>
-      )
-    }
-
-    return (
-      <div className='user_btn'>
-        {user ? <Info /> : <Login />}
-      </div>
-    )
-  }
-
   return (
     <>
       <div className='skill_container'>
-        <SideBar />
-        {group ? <div
-          className='skill_tree_outer_container'
-          onClick={handleClickOnSkillTree}>
-          <SkillTree 
-            skills={skills.filter(skill => skill.group === group)} 
-            buttons={buttons}
-            openEdit={handleOpenEdit}/>
-        </div> : null }
-        { activeSkill ? 
-          <SkillEdit 
-            activeSkill={activeSkill} 
-            close={()=>setActiveSkill(null)}/> 
-          : null}
+        <SideBar openAuth={()=>setAuthOpen(true)}/>
+          <div
+            className='skill_tree_outer_container'
+            onClick={handleClickOnSkillTree}>
+            <SkillTree 
+              skills={skills.filter(skill => skill.group === group)} 
+              buttons={buttons}
+              openEdit={handleOpenEdit}/>
+          </div>
+          { activeSkill ? 
+            <SkillEdit 
+              activeSkill={activeSkill} 
+              close={()=>setActiveSkill(null)}/> 
+            : null}
       </div>
+      <UserAuthDialog 
+        open={authOpen} 
+        close={()=>setAuthOpen(false)}/>
     </>
   );
 }
