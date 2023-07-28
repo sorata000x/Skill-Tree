@@ -2,6 +2,8 @@ import React from "react";
 import "./SkillEdit.css";
 import CloseIcon from "@mui/icons-material/Close";
 import { useStateValue } from "../../StateProvider";
+import { storage } from "../../firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 /**
  * A panel to edit a skill.
@@ -11,7 +13,7 @@ import { useStateValue } from "../../StateProvider";
  * @returns
  */
 function SkillEdit() {
-  const [{ activeSkill }, dispatch] = useStateValue();
+  const [{ activeSkill, user }, dispatch] = useStateValue();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +23,7 @@ function SkillEdit() {
     });
   };
 
-  const handleChange = (type, value) => {
+  const handleChange = async (type, value) => {
     switch (type) {
       case "title": {
         activeSkill.title = value;
@@ -36,7 +38,29 @@ function SkillEdit() {
         break;
       }
       case "image": {
-        activeSkill.image = value;
+        // value == file
+        if (user) {
+          // Reference: How to upload image and Preview it using ReactJS ? | https://www.geeksforgeeks.org/how-to-upload-image-and-preview-it-using-reactjs/
+          // Reference: Firebase Storage | https://modularfirebase.web.app/common-use-cases/storage/
+          const storageRef = ref(storage, `/images/${user.uid}/${value.name}`);
+          const uploadTask = uploadBytesResumable(storageRef, value);
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {},
+            (error) => {},
+            () => {
+              getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                activeSkill.image = url;
+                dispatch({
+                  type: "SET_SKILL",
+                  id: activeSkill.id,
+                  skill: activeSkill,
+                });
+              });
+            }
+          );
+        }
+        // No image uploading for guest
         break;
       }
       case "description": {
@@ -102,11 +126,17 @@ function SkillEdit() {
             />
           </div>
         </div>
-        <div className="form-group">
-          <label for="upload_image">Image</label>
-          <input id="upload_image" type='file' 
-          onChange={(e) => handleChange("image", URL.createObjectURL(e.target.files[0]))} />
-        </div>
+        {user && (
+          <div className="form-group">
+            <label for="upload_image">Image</label>
+            <input
+              id="upload_image"
+              type="file"
+              onChange={(e) => handleChange("image", e.target.files[0])}
+              accept="/image/*"
+            />
+          </div>
+        )}
         <div className="form-group">
           <label for="description">Description</label>
           <textarea

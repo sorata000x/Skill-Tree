@@ -17,7 +17,6 @@ function UserAuthDialog({ open, close }) {
 
   const signIn = (e) => {
     console.log("Sign in");
-    e.preventDefault();
     // firebase login
     // Reference: Get form data in React | https://stackoverflow.com/questions/23427384/get-form-data-in-react
     signInWithEmailAndPassword(
@@ -33,7 +32,6 @@ function UserAuthDialog({ open, close }) {
 
   const register = (e) => {
     console.log("register");
-    e.preventDefault();
     // firebase register
     createUserWithEmailAndPassword(
       auth,
@@ -55,7 +53,8 @@ function UserAuthDialog({ open, close }) {
   };
 
   const handleSubmit = (e) => {
-    type === "login" ? signIn() : register();
+    e.preventDefault();
+    type === "login" ? signIn(e) : register(e);
   };
 
   return (

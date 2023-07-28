@@ -38,11 +38,15 @@ function App() {
       if (userDoc.data()) {
         dispatch({
           type: "SET_SKILLS",
-          skills: JSON.parse(userDoc.data().skills),
+          skills: JSON.parse(
+            userDoc.data().skills ? userDoc.data().skills : "[]"
+          ),
         });
         dispatch({
           type: "SET_GROUPS",
-          groups: JSON.parse(userDoc.data().groups),
+          groups: JSON.parse(
+            userDoc.data().groups ? userDoc.data().groups : "[]"
+          ),
         });
       }
     };

@@ -2,11 +2,8 @@ import React, { createRef, useEffect, useState } from "react";
 import "./SkillNodeButton.css";
 import { HiOutlinePlus, HiOutlineMinus } from "react-icons/hi";
 import { useStateValue } from "../../StateProvider";
-import {
-  CircularProgressbar,
-  buildStyles
-} from "react-circular-progressbar";
-import 'react-circular-progressbar/dist/styles.css';
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 /**
  * A button of skill node.
@@ -83,9 +80,9 @@ function SkillNodeButton({ skill, buttonRef, listeners, isDragOverlay }) {
     });
   };
 
-  useEffect(() => { 
-    console.log(`image: ${JSON.stringify(skill.image)}`)
-  }, [skill.image])
+  useEffect(() => {
+    console.log(`image: ${JSON.stringify(skill.image)}`);
+  }, [skill.image]);
 
   return (
     <div
@@ -97,7 +94,6 @@ function SkillNodeButton({ skill, buttonRef, listeners, isDragOverlay }) {
         setMouseOver(false);
       }}
     >
-      
       <button
         className={
           "skill_node_button" + (activeSkill?.id === skill.id ? " active" : "")
@@ -107,21 +103,24 @@ function SkillNodeButton({ skill, buttonRef, listeners, isDragOverlay }) {
         {...listeners}
       >
         <div className="skill_node_title">{skill.title}</div>
-        { skill.image ? 
-          <img 
-          className="skill_image"
-          alt='skill_image' 
-          src={skill.image}/> : null}
+        {skill.image ? (
+          <img className="skill_image" alt="skill_image" src={skill.image} />
+        ) : null}
       </button>
-      <div 
+      <div
         className={
-          "skill_progress_container" + 
+          "skill_progress_container" +
           (activeSkill?.id === skill.id ? " active" : "")
-        }>
-        <CircularProgressbar 
-          value={skill.level/skill.maxLevel * 100}
-          strokeWidth={6}
-           />
+        }
+      >
+        {/* Example: Base react-circular-progressbar examples | https://codesandbox.io/s/vymm4oln6y?file=/index.js:6428-6517 */}
+        <CircularProgressbar
+          value={(skill.level / skill.maxLevel) * 100}
+          strokeWidth={50}
+          styles={buildStyles({
+            strokeLinecap: "butt",
+          })}
+        />
       </div>
       {isMouseOver ? <LevelChangeButtons /> : null}
     </div>

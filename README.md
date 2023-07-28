@@ -6,14 +6,16 @@ Basic Feature
 
 Advance Feature
 
-- Add picture to skill node
-
 UI
 
 - Refine skill edit bar
 - Sidebar toggle animation
 
 ## Done
+
+Advance Feature
+
+- Add picture to skill node
 
 Basic Feature
 
