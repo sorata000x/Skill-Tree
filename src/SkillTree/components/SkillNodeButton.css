@@ -1,8 +1,8 @@
 .skill_node_button_container {
   display: grid;
   align-items: center;
-  width: 150px;
-  height: 80px;
+  width: 140px;
+  height: 70px;
   pointer-events: auto;
 }
 
@@ -10,8 +10,8 @@
   background-color: white;
   border: none;
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   margin-left: 30px;
   padding: 0;
   flex-shrink: 0;
@@ -36,7 +36,7 @@
 }
 
 .skill_node_title {
-  transform: translate(calc(38px - 50%), 30px);
+  transform: translate(0, 25px);
   color: black;
   font-size: 12pt;
   z-index: 10;
@@ -89,15 +89,15 @@
 }
 
 .skill_image {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   grid-column: 1;
   grid-row: 1;
 }
 
 .skill_progress_container {
-  height: 90px;
-  width: 90px;
+  height: 80px;
+  width: 80px;
   margin-left: 20px;
   grid-column: 1;
   grid-row: 1;
