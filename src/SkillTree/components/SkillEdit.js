@@ -35,6 +35,10 @@ function SkillEdit() {
         activeSkill.maxLevel = value;
         break;
       }
+      case "image": {
+        activeSkill.image = value;
+        break;
+      }
       case "description": {
         activeSkill.description = value;
         break;
@@ -97,6 +101,11 @@ function SkillEdit() {
               onChange={(e) => handleChange("maxLevel", e.target.value)}
             />
           </div>
+        </div>
+        <div className="form-group">
+          <label for="upload_image">Image</label>
+          <input id="upload_image" type='file' 
+          onChange={(e) => handleChange("image", URL.createObjectURL(e.target.files[0]))} />
         </div>
         <div className="form-group">
           <label for="description">Description</label>

@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import "./SkillNodeButton.css";
 import { HiOutlinePlus, HiOutlineMinus } from "react-icons/hi";
 import { useStateValue } from "../../StateProvider";
+import {
+  CircularProgressbar,
+  buildStyles
+} from "react-circular-progressbar";
+import 'react-circular-progressbar/dist/styles.css';
 
 /**
  * A button of skill node.
@@ -78,6 +83,10 @@ function SkillNodeButton({ skill, buttonRef, listeners, isDragOverlay }) {
     });
   };
 
+  useEffect(() => { 
+    console.log(`image: ${JSON.stringify(skill.image)}`)
+  }, [skill.image])
+
   return (
     <div
       className="skill_node_button_container"
@@ -88,6 +97,7 @@ function SkillNodeButton({ skill, buttonRef, listeners, isDragOverlay }) {
         setMouseOver(false);
       }}
     >
+      
       <button
         className={
           "skill_node_button" + (activeSkill?.id === skill.id ? " active" : "")
@@ -97,13 +107,22 @@ function SkillNodeButton({ skill, buttonRef, listeners, isDragOverlay }) {
         {...listeners}
       >
         <div className="skill_node_title">{skill.title}</div>
-        <div className="skill_node_level_container">
-          <div
-            className="skill_node_level"
-            style={{ height: `${(skill.level / skill.maxLevel) * 80}px` }}
-          />
-        </div>
+        { skill.image ? 
+          <img 
+          className="skill_image"
+          alt='skill_image' 
+          src={skill.image}/> : null}
       </button>
+      <div 
+        className={
+          "skill_progress_container" + 
+          (activeSkill?.id === skill.id ? " active" : "")
+        }>
+        <CircularProgressbar 
+          value={skill.level/skill.maxLevel * 100}
+          strokeWidth={6}
+           />
+      </div>
       {isMouseOver ? <LevelChangeButtons /> : null}
     </div>
   );

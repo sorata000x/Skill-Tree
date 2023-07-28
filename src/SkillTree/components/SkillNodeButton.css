@@ -1,38 +1,38 @@
 .skill_node_button_container {
-  display: flex;
+  display: grid;
   align-items: center;
-  width: 140px;
+  width: 150px;
   height: 80px;
   pointer-events: auto;
 }
 
 .skill_node_button {
   background-color: white;
-  border: 2px solid rgb(100, 100, 100);
+  border: none;
   border-radius: 50%;
   width: 80px;
   height: 80px;
   margin-left: 30px;
   padding: 0;
   flex-shrink: 0;
-  z-index: 10;
+  z-index: 3;
   overflow: hidden;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  /* 
+   * For scroll to display active button
+   * Reference: StackOverflow: scrollIntoView Scrolls just too far | https://stackoverflow.com/questions/24665602/scrollintoview-scrolls-just-too-far
+   */
   scroll-margin: 100px 635px 300px 240px;
   scroll-snap-margin: 100px 635px 300px 240px;
   scroll-padding: 100px 635px 300px 240px;
-}
-
-.skill_node_button.active {
-  border: 2px solid blue;
-}
-
-.skill_node_button:hover {
-  border: 2px solid gray;
+  grid-column: 1;
+  grid-row: 1;
+  display: grid;
+  transform: translateX(1px);
 }
 
 .skill_node_title {
@@ -40,19 +40,22 @@
   color: black;
   font-size: 12pt;
   z-index: 10;
+  grid-column: 1;
+  grid-row: 1;
 }
 
 .skill_node_level_container {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   width: 80px;
   height: 80px;
   margin: 0;
+  transform: translate(-2px, -85px);
 }
 
 .skill_node_level {
-  background-color: grey;
-  opacity: 0.3;
+  background-color: rgb(110, 110, 110);
+  opacity: 0.5;
   width: 100px;
 }
 
@@ -61,6 +64,7 @@
   flex-direction: column;
   justify-content: center;
   height: fit-content;
+  grid-column: 2;
 }
 
 .level_change_button {
@@ -82,4 +86,27 @@
   height: 1.8px;
   margin-left: 3px;
   z-index: 10;
+}
+
+.skill_image {
+  width: 80px;
+  height: 80px;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.skill_progress_container {
+  height: 90px;
+  width: 90px;
+  margin-left: 20px;
+  grid-column: 1;
+  grid-row: 1;
+  transform: translateX(3px);
+  border-radius: 50%;
+  border: 3px solid transparent;
+  z-index: 2;
+}
+
+.skill_progress_container.active {
+  border: 3px solid rgb(125, 164, 255);
 }
