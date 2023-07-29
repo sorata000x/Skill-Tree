@@ -8,13 +8,19 @@
 
 ## To Do
 
+Bug Fix
+
+- Drag overlay display
+
 Basic Feature
 
 Advance Feature
 
+- Dark mode
+
 UI
 
-- Refine skill edit bar
+- Refine user auth dialog
 - Sidebar toggle animation
 
 ## Done
@@ -27,3 +33,7 @@ Basic Feature
 
 - Make skill tree scrollable so every nodes can be seen
 - Store active skill and group in state provider and highlights corresponding buttons
+
+UI
+
+- Refine skill edit bar

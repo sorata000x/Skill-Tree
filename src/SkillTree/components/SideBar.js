@@ -24,7 +24,7 @@ function SideBar({ openAuth }) {
     });
     dispatch({
       type: "SET_ACTIVE_GROUP",
-      activeGroup: newGroup,
+      id: newGroup.id,
     });
     navigate(`/${newGroup.id}`);
   };
