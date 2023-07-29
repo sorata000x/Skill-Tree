@@ -78,8 +78,21 @@
   margin-left: 20px;
 }
 
+input::file-selector-button {
+  height: 20px;
+  border: none;
+  background-color: gray;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+}
+
+input::file-selector-button:hover {
+  background-color: rgb(148, 148, 148);
+}
+
 .skill_edit_form > .form-group > .description {
-  height: 330px;
+  height: 270px;
 }
 
 .skill_edit_form > .action {
@@ -99,6 +112,11 @@
   background-color: gray;
   color: white;
   border: 1px solid gray;
+  cursor: pointer;
+}
+
+.skill_edit_form > .action > .abtn.abtn_add:hover { 
+  background-color: rgb(148, 148, 148);
 }
 
 .skill_edit_form > .action > .abtn.abtn_cancel {
@@ -106,4 +124,9 @@
   border-radius: 3px;
   background-color: white;
   border: 1px solid gray;
+  cursor: pointer;
+}
+
+.skill_edit_form > .action > .abtn.abtn_cancel:hover { 
+  background-color: rgb(245, 245, 245);
 }

@@ -15,6 +15,10 @@ textarea {
   resize: none;
 }
 
+/* 
+ * Hide number spin buttons 
+ * Reference: StackOverflow: Is it possible to always show up/down arrows for input "number"? | https://stackoverflow.com/questions/25194631/is-it-possible-to-always-show-up-down-arrows-for-input-number
+ */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   display: none;

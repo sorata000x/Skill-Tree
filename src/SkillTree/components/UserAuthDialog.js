@@ -11,9 +11,11 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 function UserAuthDialog({ open, close }) {
   const [type, setType] = useState("login");
+  const navigate = useNavigate();
 
   const signIn = (e) => {
     console.log("Sign in");
@@ -42,6 +44,7 @@ function UserAuthDialog({ open, close }) {
         // successfully created a new user with email and password
         if (auth) {
           close();
+          navigate('/');
         }
       })
       .catch((error) => alert(error.message));

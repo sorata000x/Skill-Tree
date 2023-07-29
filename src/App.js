@@ -1,13 +1,14 @@
 import "./App.css";
 import React, { useEffect } from "react";
 import { useStateValue } from "./StateProvider";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useParams } from "react-router-dom";
 import Skill from "./SkillTree/Skill";
 import { db, auth } from "./firebase";
 import { doc, getDoc } from "firebase/firestore";
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
+  const urlParam = useParams().pathParam;
 
   useEffect(() => {
     // Set app name
@@ -30,6 +31,11 @@ function App() {
         });
       }
     });
+    // Set active group
+    dispatch({
+      type: "SET_ACTIVE_GROUP",
+      id: urlParam,
+    })
   }, []);
 
   useEffect(() => {
@@ -48,6 +54,12 @@ function App() {
             userDoc.data().groups ? userDoc.data().groups : "[]"
           ),
         });
+        if (userDoc.data().groups && userDoc.data().groups.length) {
+          dispatch({
+            type: "SET_ACTIVE_GROUP",
+            activeGroup: userDoc.data().groups[0],
+          })
+        }
       }
     };
     if (user) {

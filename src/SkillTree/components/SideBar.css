@@ -89,10 +89,6 @@
   font-size: 9pt;
 }
 
-.group_tab.active {
-  background-color: rgb(220, 220, 220);
-}
-
 .group_tab:hover {
   background-color: rgb(220, 220, 220);
 }

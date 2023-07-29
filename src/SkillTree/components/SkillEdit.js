@@ -168,6 +168,7 @@ function SkillEdit() {
             <label for="upload_image">Image</label>
             <input
               id="upload_image"
+              className="upload_image"
               type="file"
               onChange={(e) => handleChange("image", e.target.files[0])}
               accept="/image/*"

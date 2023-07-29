@@ -3,6 +3,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { createRef } from "react";
 import { arrayMove } from "@dnd-kit/sortable";
 import { v4 as uuid } from "uuid";
+import { useParams } from "react-router-dom";
 
 const setUserData = async (data) => {
   if (!auth.currentUser) {
@@ -41,7 +42,7 @@ const getInitialState = () => {
     activeSkill: null,
     buttons: buttons,
     groups: groups,
-    activeGroup: null,
+    activeGroup: groups.length ? groups[0] : null,
     user: null,
   };
 };
@@ -180,9 +181,10 @@ const reducer = (state, action) => {
       };
     }
     case "SET_ACTIVE_GROUP": {
+      const index = state.groups.findIndex((group) => group.id === action.id);
       return {
         ...state,
-        activeGroup: action.activeGroup,
+        activeGroup: index >= 0 ? state.groups[index] : null,
       };
     }
     // AUTHENTICATION

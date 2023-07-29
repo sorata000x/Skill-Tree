@@ -86,10 +86,6 @@ function SkillNodeButton({ skill, buttonRef, listeners, isDragOverlay }) {
     });
   };
 
-  useEffect(() => {
-    console.log(`image: ${JSON.stringify(skill.image)}`);
-  }, [skill.image]);
-
   return (
     <div
       className="skill_node_button_container"
@@ -123,6 +119,7 @@ function SkillNodeButton({ skill, buttonRef, listeners, isDragOverlay }) {
         <CircularProgressbar
           value={(skill.level / skill.maxLevel) * 100}
           strokeWidth={50}
+          className="circular-progressbar"
           styles={buildStyles({
             strokeLinecap: "butt",
           })}
