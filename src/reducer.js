@@ -122,9 +122,7 @@ const reducer = (state, action) => {
       };
     }
     case "DELETE_SKILL": {
-      const index = state.skills.findIndex(
-        (skill) => skill.id === action.id
-      );
+      const index = state.skills.findIndex((skill) => skill.id === action.id);
       let newSkills = [...state.skills];
 
       if (index >= 0) {

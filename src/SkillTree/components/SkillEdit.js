@@ -1,9 +1,7 @@
 import React from "react";
 import "./SkillEdit.css";
-import CloseIcon from "@mui/icons-material/Close";
-import { CgClose } from 'react-icons/cg';
-import { FiMoreHorizontal } from 'react-icons/fi';
-import { FaRegTrashAlt } from 'react-icons/fa'
+import { CgClose } from "react-icons/cg";
+import { FaRegTrashAlt } from "react-icons/fa";
 import { useStateValue } from "../../StateProvider";
 import { storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -16,7 +14,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
  * @returns
  */
 function SkillEdit() {
-  const [{ skill, activeSkill, user }, dispatch] = useStateValue();
+  const [{ activeSkill, user }, dispatch] = useStateValue();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,7 +32,8 @@ function SkillEdit() {
       }
       case "level": {
         // Cap to max level
-        activeSkill.level = value <= activeSkill.maxLevel ? value : activeSkill.maxLevel;
+        activeSkill.level =
+          value <= activeSkill.maxLevel ? value : activeSkill.maxLevel;
         break;
       }
       case "maxLevel": {
@@ -99,10 +98,10 @@ function SkillEdit() {
       dispatch({
         type: "DELETE_SKILL",
         id: activeSkill.id,
-      })
+      });
     }
     close();
-  }
+  };
 
   return (
     <div className="skill_edit_container" onClick={(e) => e.stopPropagation()}>
@@ -127,7 +126,7 @@ function SkillEdit() {
             <label for="level">Level</label>
             <input
               id="level"
-              className="form-control level_input level"
+              className="form-control level"
               type="number"
               autoComplete="off"
               min={0}
@@ -140,15 +139,15 @@ function SkillEdit() {
           <div className="form-group">
             <label for="max-level"> Max Level </label>
             <input
-                id="max-level"
-                className="form-control level_input max_level"
-                type="number"
-                autoComplete="off"
-                min={0}
-                max={9999999}
-                value={activeSkill.maxLevel}
-                onChange={(e) => handleChange("maxLevel", e.target.value)}
-              />
+              id="max-level"
+              className="form-control max_level"
+              type="number"
+              autoComplete="off"
+              min={0}
+              max={9999999}
+              value={activeSkill.maxLevel}
+              onChange={(e) => handleChange("maxLevel", e.target.value)}
+            />
           </div>
           <div className="form-group increaseBy">
             <label for="increase-by"> Increase by </label>

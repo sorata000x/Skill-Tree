@@ -24,10 +24,10 @@
 }
 
 .skill_edit_container > .action_container > .action_btn:hover {
-  color: black
+  color: black;
 }
 
-.skill_edit_form {
+.skill_edit_container > .skill_edit_form {
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -43,64 +43,57 @@
   gap: 2px;
 }
 
-.form-level-group {
+.skill_edit_container > .skill_edit_form > .skill_edit_form > .form-group > .form-control {
+  width: 300px;
+  height: 24px;
+}
+
+.skill_edit_container > .skill_edit_form > .form-level-group {
   display: flex;
 }
 
-.level-divider {
+.skill_edit_form > .form-level-group > .form-group > .level {
+  width: 103px;
+}
+
+.skill_edit_form > .form-level-group > .level-divider {
   display: flex;
   justify-content: center;
   align-items: end;
-  width: 10px;
+  min-width: 10px;
   height: 40px;
   font-size: 12pt;
   line-height: 26px;
 }
 
-.form-control {
-  width: 300px;
-  height: 24px;
+.skill_edit_form > .form-level-group > .form-group > .max_level {
+  width: 103px;
 }
 
-.level_inputs_container {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  font-size: 10pt;
+.skill_edit_form > .form-level-group > .form-group > .increaseBy {
+  width: 105px;
 }
 
-.form-control.level_input.level {
-  width: 90px;
-}
-
-.form-control.level_input.max_level {
-  width: 90px;
-}
-
-.form-control.level_input.increaseBy {
-  width: 90px;
-}
-
-.form-group.increaseBy {
+.skill_edit_form > .form-level-group > .increaseBy {
   margin-left: 20px;
 }
 
-.description {
+.skill_edit_form > .form-group > .description {
   height: 330px;
 }
 
-.action {
+.skill_edit_form > .action {
   display: flex;
   gap: 10px;
   position: absolute;
   bottom: 20px;
 }
 
-.abtn {
+.skill_edit_form > .action > .abtn {
   width: 70px;
 }
 
-.abtn_add {
+.skill_edit_form > .action > .abtn.abtn_add {
   height: 26px;
   border-radius: 3px;
   background-color: gray;
@@ -108,7 +101,7 @@
   border: 1px solid gray;
 }
 
-.abtn_cancel {
+.skill_edit_form > .action > .abtn.abtn_cancel {
   height: 26px;
   border-radius: 3px;
   background-color: white;

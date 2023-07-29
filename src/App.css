@@ -2,7 +2,8 @@
   font-size: 9pt;
 }
 
-input, textarea {
+input,
+textarea {
   font-size: 10pt;
   border: 1px solid rgb(180, 180, 180);
   border-radius: 2px;
@@ -14,17 +15,19 @@ textarea {
   resize: none;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button {  
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   display: none;
 }
 
-input:active, textarea:active {
+input:active,
+textarea:active {
   border: 1.2px solid black;
   outline: none;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   border: 1.2px solid black;
   outline: none;
 }
