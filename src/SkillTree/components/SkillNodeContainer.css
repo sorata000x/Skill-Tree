@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   width: min-content;
-  height: 100%;
-  padding-top: 30px;
+  gap: 30px;
+  padding-top: 10px;
   padding-bottom: 30px;
 }

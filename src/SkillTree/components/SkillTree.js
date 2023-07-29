@@ -217,16 +217,15 @@ function SkillTree({ skills }) {
   }, [activeSkill]);
 
   return (
+    (!groups.length || !skills.length) ? 
+    <div className="instruction" onDoubleClick={handleDoubleClick}>
+      {!groups.length && "Create A Group To Start"}
+      {(group && !skills.length) && "Double Click To Create A Skill"}
+    </div> :
     <div
       className={"skill_tree_container" + (activeSkill ? " expand" : "")}
       onDoubleClick={handleDoubleClick}
     >
-      {(!groups.length || !skills.length) && (
-        <div className="instruction">
-          {!groups.length && "Create A Group To Start"}
-          {group && !skills.length && "Double Click To Create A Skill"}
-        </div>
-      )}
       {skills.length ? (
         <>
           <DndContext

@@ -28,7 +28,7 @@ function SkillLinks({ skills, excludes }) {
       updateLink(skill);
     }
     // Update every 10 ms
-    const interval = setInterval(() => setTime(new Date()), 10);
+    const interval = setInterval(() => setTime(new Date()), 0);
     return () => {
       clearInterval(interval);
     };
@@ -66,7 +66,7 @@ function SkillLinks({ skills, excludes }) {
     const angle =
       Math.atan2(off_p.top - off_n.top, off_p.left - off_n.left) *
       (180 / Math.PI);
-    const top = off_p.top + off_p.height / 2 + 100;
+    const top = off_p.top + off_p.height / 2 + 110;
     const left = off_n.left + off_n.width / 2;
 
     let newLink = (
