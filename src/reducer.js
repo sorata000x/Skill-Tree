@@ -120,6 +120,26 @@ const reducer = (state, action) => {
         skills: newSkills,
       };
     }
+    case "DELETE_SKILL": {
+      const index = state.skills.findIndex(
+        (skill) => skill.id === action.id
+      );
+      let newSkills = [...state.skills];
+
+      if (index >= 0) {
+        // remove skill from index
+        newSkills.splice(index, 1);
+      } else {
+        console.warn(
+          `Cant remove skill (id: ${action.id}) as it does not exist.`
+        );
+      }
+
+      return {
+        ...state,
+        skills: newSkills,
+      };
+    }
     case "CLEAR_SKILL": {
       setUserData({
         ...state,

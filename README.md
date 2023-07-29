@@ -1,5 +1,11 @@
 # Skill Tree
 
+## Doing
+
+- Refine skill edit bar
+  - Change x position
+  - Add delete button
+
 ## To Do
 
 Basic Feature

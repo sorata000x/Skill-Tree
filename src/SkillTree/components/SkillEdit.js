@@ -1,6 +1,9 @@
 import React from "react";
 import "./SkillEdit.css";
 import CloseIcon from "@mui/icons-material/Close";
+import { CgClose } from 'react-icons/cg';
+import { FiMoreHorizontal } from 'react-icons/fi';
+import { FaRegTrashAlt } from 'react-icons/fa'
 import { useStateValue } from "../../StateProvider";
 import { storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -13,7 +16,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
  * @returns
  */
 function SkillEdit() {
-  const [{ activeSkill, user }, dispatch] = useStateValue();
+  const [{ skill, activeSkill, user }, dispatch] = useStateValue();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -86,9 +89,22 @@ function SkillEdit() {
     });
   };
 
+  const deleteSkill = (e) => {
+    if (activeSkill) {
+      dispatch({
+        type: "DELETE_SKILL",
+        id: activeSkill.id,
+      })
+    }
+    close();
+  }
+
   return (
     <div className="skill_edit_container" onClick={(e) => e.stopPropagation()}>
-      <CloseIcon className="close_icon" onClick={close} />
+      <div className="action_container">
+        <CgClose className="action_btn" size={16} onClick={close} />
+        <FaRegTrashAlt className="action_btn" size={14} onClick={deleteSkill} />
+      </div>
       <form className="skill_edit_form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label for="title">Title</label>
