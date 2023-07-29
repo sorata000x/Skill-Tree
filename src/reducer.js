@@ -86,6 +86,7 @@ const reducer = (state, action) => {
         title: "",
         level: 0,
         maxLevel: 10,
+        increaseBy: 1,
         image: null,
         description: "",
         group: action.group,

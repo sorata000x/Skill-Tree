@@ -34,14 +34,20 @@ function SkillNodeButton({ skill, buttonRef, listeners, isDragOverlay }) {
   const LevelChangeButtons = () => {
     const increaseLevel = (e) => {
       e.stopPropagation();
-      if (skill.level < skill.maxLevel) {
-        setLevel(skill.level + 1);
+      let level = parseInt(skill.level) + parseInt(skill.increaseBy)
+      if (level <= skill.maxLevel) {
+        setLevel(level);
+      } else {
+        setLevel(skill.maxLevel);
       }
     };
     const decreaseLevel = (e) => {
       e.stopPropagation();
-      if (skill.level > 0) {
-        setLevel(skill.level - 1);
+      let level = parseInt(skill.level) - parseInt(skill.increaseBy);
+      if (level >= 0) {
+        setLevel(level);
+      } else {
+        setLevel(0);
       }
     };
     return (

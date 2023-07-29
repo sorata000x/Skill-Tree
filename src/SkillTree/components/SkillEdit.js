@@ -33,11 +33,16 @@ function SkillEdit() {
         break;
       }
       case "level": {
-        activeSkill.level = value;
+        // Cap to max level
+        activeSkill.level = value <= activeSkill.maxLevel ? value : activeSkill.maxLevel;
         break;
       }
       case "maxLevel": {
         activeSkill.maxLevel = value;
+        break;
+      }
+      case "increaseBy": {
+        activeSkill.increaseBy = value;
         break;
       }
       case "image": {
@@ -117,12 +122,12 @@ function SkillEdit() {
             onChange={(e) => handleChange("title", e.target.value)}
           />
         </div>
-        <div className="form-group">
-          <label for="level">Level</label>
-          <div className="level_inputs_container">
+        <div className="form-level-group">
+          <div className="form-group">
+            <label for="level">Level</label>
             <input
               id="level"
-              className="form-control level_input"
+              className="form-control level_input level"
               type="number"
               autoComplete="off"
               min={0}
@@ -130,15 +135,32 @@ function SkillEdit() {
               value={activeSkill.level}
               onChange={(e) => handleChange("level", e.target.value)}
             />
-            /
+          </div>
+          <div className="level-divider"> / </div>
+          <div className="form-group">
+            <label for="max-level"> Max Level </label>
             <input
-              id="level"
-              className="form-control level_input"
+                id="max-level"
+                className="form-control level_input max_level"
+                type="number"
+                autoComplete="off"
+                min={0}
+                max={9999999}
+                value={activeSkill.maxLevel}
+                onChange={(e) => handleChange("maxLevel", e.target.value)}
+              />
+          </div>
+          <div className="form-group increaseBy">
+            <label for="increase-by"> Increase by </label>
+            <input
+              id="increaseBy"
+              className="form-control level_input increaseBy"
               type="number"
               autoComplete="off"
               min={0}
-              value={activeSkill.maxLevel}
-              onChange={(e) => handleChange("maxLevel", e.target.value)}
+              max={9999999}
+              value={activeSkill.increaseBy}
+              onChange={(e) => handleChange("increaseBy", e.target.value)}
             />
           </div>
         </div>

@@ -43,9 +43,23 @@
   gap: 2px;
 }
 
+.form-level-group {
+  display: flex;
+}
+
+.level-divider {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  width: 10px;
+  height: 40px;
+  font-size: 12pt;
+  line-height: 26px;
+}
+
 .form-control {
   width: 300px;
-  height: 20px;
+  height: 24px;
 }
 
 .level_inputs_container {
@@ -55,33 +69,48 @@
   font-size: 10pt;
 }
 
-.level_input {
-  width: 30px;
+.form-control.level_input.level {
+  width: 90px;
+}
+
+.form-control.level_input.max_level {
+  width: 90px;
+}
+
+.form-control.level_input.increaseBy {
+  width: 90px;
+}
+
+.form-group.increaseBy {
+  margin-left: 20px;
 }
 
 .description {
-  height: 100px;
+  height: 330px;
 }
 
 .action {
   display: flex;
   gap: 10px;
   position: absolute;
-  bottom: 0;
+  bottom: 20px;
 }
 
 .abtn {
   width: 70px;
-  margin-bottom: 10px;
 }
 
 .abtn_add {
+  height: 26px;
+  border-radius: 3px;
   background-color: gray;
   color: white;
-  border: 2px solid gray;
+  border: 1px solid gray;
 }
 
 .abtn_cancel {
+  height: 26px;
+  border-radius: 3px;
   background-color: white;
-  border: 2px solid gray;
+  border: 1px solid gray;
 }
