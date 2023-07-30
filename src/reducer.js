@@ -103,16 +103,38 @@ const reducer = (state, action) => {
       };
     }
     case "DROP_SKILL": {
-      let activeIndex = state.skills.findIndex(
+      /**
+       * Whether node1 is descendent of node2
+       * @param {*} node1 
+       * @param {*} node2 
+       */
+      const isDescendent = (node1, node2) => {
+        let current = node1;
+        state.skills.forEach(_ => {
+          if (current.parent === 'root') {
+            return false;
+          }
+          if (node2.id === current.parent) {
+            return true;
+          }
+          for (const skill of state.skills) {
+            if (skill.id === current.parent) {
+              current = skill;
+            }
+          }
+        })
+        return false;
+      }
+      let active = state.skills.find(
         (skill) => skill.id === action.active.id
       );
-      let overIndex = state.skills.findIndex(
+      let over = state.skills.find(
         (skill) => skill.id === action.over.id
       );
-      if (state.skills[activeIndex].id !== state.skills[overIndex].parent) {
-        state.skills[activeIndex].parent = state.skills[overIndex].parent;
+      if (isDescendent(active, over)) {
+        active.parent = over.parent;
       }
-      let newSkills = arrayMove(state.skills, activeIndex, overIndex);
+      let newSkills = arrayMove(state.skills, active.id, over.id);
       setUserData({
         ...state,
         skills: newSkills,

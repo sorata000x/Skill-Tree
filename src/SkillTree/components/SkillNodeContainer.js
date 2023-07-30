@@ -4,7 +4,6 @@ import "./SkillNodeContainer.css";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import SkillNodeLayer from "./SkillNodeLayer";
-import { useStateValue } from "../../StateProvider";
 
 /**
  * A subtree of skill nodes consists of one root node and a node layer as children.
@@ -16,8 +15,7 @@ import { useStateValue } from "../../StateProvider";
  * @param {boolean} isDragOverlay whether the layer is used by DragOverlay
  * @returns
  */
-function SkillNodeContainer({ skill, skills, isDragOverlay }) {
-  const [{ buttons }, dispatch] = useStateValue();
+function SkillNodeContainer({ skill, skills, buttons, isDragOverlay }) {
 
   /* For dnd-kit sortable
    * References:
@@ -49,6 +47,7 @@ function SkillNodeContainer({ skill, skills, isDragOverlay }) {
         <SkillNodeLayer
           id={skill.id}
           skills={skills}
+          buttons={buttons}
           isDragOverlay={isDragOverlay}
         />
       </div>

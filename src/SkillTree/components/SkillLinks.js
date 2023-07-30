@@ -1,17 +1,15 @@
 import React, { useState, useEffect, createRef } from "react";
 import "./SkillLinks.css";
-import { useStateValue } from "../../StateProvider";
 
 /**
  * Links between skill nodes.
  * @param {Array} skills array of all the skill objects
  * @param {Object} buttons keys of skill ids corresponding to their button reference
- * @param {Array} excludes skill ids to not render link
+ * @param {Array} excludes skill ids to not render link (when they are being dragged)
  * @returns
  */
-function SkillLinks({ skills, excludes }) {
+function SkillLinks({ skills, buttons, excludes }) {
   const [links, setLinks] = useState({});
-  const [{ buttons }, dispatch] = useStateValue();
 
   useEffect(() => {
     setLinks({});
@@ -28,7 +26,7 @@ function SkillLinks({ skills, excludes }) {
       updateLink(skill);
     }
     // Update every 10 ms
-    const interval = setInterval(() => setTime(new Date()), 0);
+    const interval = setInterval(() => setTime(new Date()), 1);
     return () => {
       clearInterval(interval);
     };
@@ -40,7 +38,7 @@ function SkillLinks({ skills, excludes }) {
    * @returns
    */
   const updateLink = (skill) => {
-    if (!buttons[skill.id] || !buttons[skill.parent]) return;
+    if (!buttons[skill.id] || !buttons[skill.parent] || !buttons[skill.id].current || !buttons[skill.parent].current) return;
 
     /**
      * Get offsets of given element (for updateChildEdge).

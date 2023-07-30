@@ -96,6 +96,7 @@ function SkillNodeButton({ skill, buttonRef, listeners, isDragOverlay }) {
         setMouseOver(false);
       }}
     >
+      <div className="skill_node_title">{skill.title}</div>
       <button
         className={
           "skill_node_button" + (activeSkill?.id === skill.id ? " active" : "")
@@ -104,7 +105,6 @@ function SkillNodeButton({ skill, buttonRef, listeners, isDragOverlay }) {
         onClick={handleClick}
         {...listeners}
       >
-        <div className="skill_node_title">{skill.title}</div>
         {skill.image ? (
           <img className="skill_image" alt="skill_image" src={skill.image} />
         ) : null}

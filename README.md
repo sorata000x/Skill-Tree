@@ -1,5 +1,10 @@
 # Skill Tree
 
+To Myself:
+
+- Endure, and persevere.
+- Respect the craft, make something beautiful.
+
 ## Doing
 
 - Refine skill edit bar
@@ -10,6 +15,7 @@
 
 Bug Fix
 
+- Prevent a skill node drop to its decendent
 - Drag overlay display
 
 Basic Feature
@@ -20,8 +26,10 @@ Advance Feature
 
 UI
 
+- Refine level change buttons
 - Refine user auth dialog
 - Sidebar toggle animation
+- Fix skill link display when dropping nodes (it doesn't have the transition)
 
 ## Done
 
@@ -37,3 +45,7 @@ Basic Feature
 UI
 
 - Refine skill edit bar
+
+Bug Fix
+
+- Drag overlay display

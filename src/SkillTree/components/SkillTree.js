@@ -26,7 +26,6 @@ import { useStateValue } from "../../StateProvider";
  * @returns
  */
 function SkillTree({ skills }) {
-  const [dragginSkillIDs, setDraggingSkillIDs] = useState([]);
   const [{ activeSkill, buttons, groups, activeGroup }, dispatch] =
     useStateValue();
   const group = activeGroup?.id;
@@ -111,6 +110,7 @@ function SkillTree({ skills }) {
 
   const [dragOverlaySkills, setDragOverlaySkills] = useState([]);
   const [dragOverlayButtons, setDragOverlayButtons] = useState({});
+  const [draggingSkillIDs, setDraggingSkillIDs] = useState([]);
 
   /**
    * Copy over skills (with different IDs) starting from the target id for DragOverlay.
@@ -120,9 +120,9 @@ function SkillTree({ skills }) {
   const copySkills = (id) => {
     // Copy over sub array of skills from the given skill id
     let newSkills = [JSON.parse(JSON.stringify(getSkillByID(id)))];
-    for (const d of newSkills) {
+    for (let i=0; i<newSkills.length; i++) {
       for (const s of skills) {
-        if (s.parent === d.id) {
+        if (s.parent === newSkills[i].id) {
           newSkills = [...newSkills, JSON.parse(JSON.stringify(s))];
         }
       }
@@ -167,9 +167,9 @@ function SkillTree({ skills }) {
     setDragOverlaySkills(newDragOverlaySkills);
     setDragOverlayButtons(createButtons(newDragOverlaySkills));
     let newDraggingSkillIDs = [id];
-    for (const d of newDraggingSkillIDs) {
+    for (let i=0; i<newDraggingSkillIDs.length; i++) {
       for (const s of skills) {
-        if (s.parent === d) {
+        if (s.parent === newDraggingSkillIDs[i]) {
           newDraggingSkillIDs = [...newDraggingSkillIDs, s.id];
         }
       }
@@ -235,13 +235,18 @@ function SkillTree({ skills }) {
             onDragOver={handleDragOver}
             onDragEnd={handleDragEnd}
           >
-            <SkillNodeLayer id="root" skills={skills} />
+            <SkillNodeLayer 
+              id="root" 
+              skills={skills} 
+              buttons={buttons}
+              />
             <DragOverlay dropAnimation={dropAnimation}>
               {dragOverlaySkills.length ? (
                 <SkillNodeContainer
                   key={dragOverlaySkills[0] ? dragOverlaySkills[0].id : null}
                   skill={dragOverlaySkills[0]}
                   skills={dragOverlaySkills}
+                  buttons={dragOverlayButtons}
                   isDragOverlay={true}
                 />
               ) : null}
@@ -250,7 +255,7 @@ function SkillTree({ skills }) {
           <SkillLinks
             skills={[...skills, ...dragOverlaySkills]}
             buttons={{ ...buttons, ...dragOverlayButtons }}
-            excludes={dragginSkillIDs}
+            excludes={draggingSkillIDs}
           />
         </>
       ) : null}

@@ -36,12 +36,18 @@
 }
 
 .skill_node_title {
-  transform: translate(0, 25px);
   color: black;
   font-size: 12pt;
   z-index: 10;
   grid-column: 1;
   grid-row: 1;
+  width: 80px;
+  text-align: center;
+  margin-left: 26px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .skill_node_level_container {
