@@ -13,10 +13,11 @@ To Myself:
 
 Bug Fix
 
+- 
 
 Basic Feature
 
-- Change group name
+- 
 
 Advance Feature
 
@@ -37,6 +38,7 @@ Advance Feature
 
 Basic Feature
 
+- Editing group name
 - Make skill tree scrollable so every nodes can be seen
 - Store active skill and group in state provider and highlights corresponding buttons
 

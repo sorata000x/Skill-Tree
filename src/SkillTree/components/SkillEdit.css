@@ -4,11 +4,12 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 400px;
+  width: 500px;
   height: 100%;
   z-index: 100;
   display: flex;
   flex-direction: column;
+  gap: 3px;
 }
 
 .skill_edit_container > .action_container {
@@ -43,56 +44,62 @@
   gap: 2px;
 }
 
-.skill_edit_container > .skill_edit_form > .skill_edit_form > .form-group > .form-control {
-  width: 300px;
-  height: 24px;
+.form-control {
+  width: 400px;
+  height: 34px;
 }
 
-.skill_edit_container > .skill_edit_form > .form-level-group {
+.form-level-group {
   display: flex;
 }
 
 .skill_edit_form > .form-level-group > .form-group > .level {
-  width: 103px;
+  width: 122px;
 }
 
 .skill_edit_form > .form-level-group > .level-divider {
   display: flex;
   justify-content: center;
   align-items: end;
-  min-width: 10px;
-  height: 40px;
-  font-size: 12pt;
+  min-width: 14px;
+  height: 49px;
+  font-size: 14pt;
   line-height: 26px;
 }
 
 .skill_edit_form > .form-level-group > .form-group > .max_level {
-  width: 103px;
+  width: 122px;
 }
 
 .skill_edit_form > .form-level-group > .form-group > .increaseBy {
-  width: 105px;
+  width: 122px;
 }
 
 .skill_edit_form > .form-level-group > .increaseBy {
   margin-left: 20px;
 }
 
-input::file-selector-button {
-  height: 20px;
+.upload_image {
+  height: 42px;
+}
+
+.upload_image::file-selector-button {
+  height: 30px;
+  margin: 1px 8px 1px 1px;
+  padding: 0px 8px 0px 8px;
   border: none;
   background-color: gray;
-  border-radius: 2px;
+  border-radius: 3px;
   color: white;
   cursor: pointer;
 }
 
-input::file-selector-button:hover {
+.upload_image::file-selector-button:hover {
   background-color: rgb(148, 148, 148);
 }
 
 .skill_edit_form > .form-group > .description {
-  height: 270px;
+  height: 400px;
 }
 
 .skill_edit_form > .action {
@@ -103,11 +110,11 @@ input::file-selector-button:hover {
 }
 
 .skill_edit_form > .action > .abtn {
-  width: 70px;
+  width: 100px;
 }
 
 .skill_edit_form > .action > .abtn.abtn_add {
-  height: 26px;
+  height: 34px;
   border-radius: 3px;
   background-color: gray;
   color: white;
@@ -120,7 +127,7 @@ input::file-selector-button:hover {
 }
 
 .skill_edit_form > .action > .abtn.abtn_cancel {
-  height: 26px;
+  height: 34px;
   border-radius: 3px;
   background-color: white;
   border: 1px solid gray;

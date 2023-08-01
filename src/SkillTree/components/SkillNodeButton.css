@@ -1,8 +1,8 @@
 .skill_node_button_container {
   display: grid;
   align-items: center;
-  width: 140px;
-  height: 70px;
+  width: 160px;
+  height: 100px;
   pointer-events: auto;
 }
 
@@ -10,8 +10,8 @@
   background-color: white;
   border: none;
   border-radius: 50%;
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   margin-left: 30px;
   padding: 0;
   flex-shrink: 0;
@@ -37,13 +37,13 @@
 
 .skill_node_title {
   color: black;
-  font-size: 12pt;
+  font-size: 16pt;
   z-index: 10;
   grid-column: 1;
   grid-row: 1;
-  width: 80px;
+  width: 100px;
   text-align: center;
-  margin-left: 26px;
+  margin-left: 30px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -54,8 +54,8 @@
 .skill_node_level_container {
   display: flex;
   align-items: flex-start;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   margin: 0;
   transform: translate(-2px, -85px);
 }
@@ -64,12 +64,14 @@
   background-color: rgb(110, 110, 110);
   opacity: 0.5;
   width: 100px;
+  height: 100px;
 }
 
 .level_change_container {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   height: fit-content;
   grid-column: 2;
 }
@@ -81,34 +83,36 @@
   background-color: transparent;
   border: none;
   border-radius: 20%;
-  height: 40px;
-  width: 30px;
+  height: 45px;
+  width: 40px;
   padding: 0;
   cursor: pointer;
 }
 
+.level_change_icon {
+  color: rgb(100, 100, 100);
+}
+
 .level_change_divider {
   background-color: lightgrey;
-  width: 24px;
-  height: 1.8px;
-  margin-left: 3px;
+  width: 30px;
+  height: 1.7px;
   z-index: 10;
 }
 
 .skill_image {
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   grid-column: 1;
   grid-row: 1;
 }
 
 .skill_progress_container {
-  height: 80px;
-  width: 80px;
-  margin-left: 20px;
+  height: 114px;
+  width: 114px;
+  margin-left: 21px;
   grid-column: 1;
   grid-row: 1;
-  transform: translateX(3px);
   border-radius: 50%;
   border: 3px solid transparent;
   z-index: 2;

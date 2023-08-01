@@ -59,7 +59,7 @@ function SkillNodeButton({ skill, buttonRef, listeners, isDragOverlay }) {
             e.stopPropagation();
           }}
         >
-          <HiOutlinePlus className="level_change_icon" size={24} />
+          <HiOutlinePlus className="level_change_icon" size={28} />
         </button>
         <div className="level_change_divider" />
         <button
@@ -69,7 +69,7 @@ function SkillNodeButton({ skill, buttonRef, listeners, isDragOverlay }) {
             e.stopPropagation();
           }}
         >
-          <HiOutlineMinus className="level_change_icon" size={24} />
+          <HiOutlineMinus className="level_change_icon" size={28} />
         </button>
       </div>
     );

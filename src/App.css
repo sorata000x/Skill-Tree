@@ -1,12 +1,12 @@
 * {
-  font-size: 9pt;
+  font-size: 12pt;
 }
 
 input,
 textarea {
-  font-size: 10pt;
+  font-size: 13pt;
   border: 1px solid rgb(180, 180, 180);
-  border-radius: 2px;
+  border-radius: 4px;
   box-sizing: border-box;
   padding: 5px;
 }
@@ -37,8 +37,8 @@ textarea:focus {
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {

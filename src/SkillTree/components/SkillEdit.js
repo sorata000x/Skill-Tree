@@ -106,8 +106,8 @@ function SkillEdit() {
   return (
     <div className="skill_edit_container" onClick={(e) => e.stopPropagation()}>
       <div className="action_container">
-        <CgClose className="action_btn" size={16} onClick={close} />
-        <FaRegTrashAlt className="action_btn" size={14} onClick={deleteSkill} />
+        <CgClose className="action_btn" size={20} onClick={close} />
+        <FaRegTrashAlt className="action_btn" size={18} onClick={deleteSkill} />
       </div>
       <form className="skill_edit_form" onSubmit={handleSubmit}>
         <div className="form-group">
@@ -168,7 +168,7 @@ function SkillEdit() {
             <label for="upload_image">Image</label>
             <input
               id="upload_image"
-              className="upload_image"
+              className="form-control upload_image"
               type="file"
               onChange={(e) => handleChange("image", e.target.files[0])}
               accept="/image/*"

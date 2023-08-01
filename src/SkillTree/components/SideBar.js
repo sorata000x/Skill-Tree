@@ -47,7 +47,7 @@ function SideBar({ openAuth }) {
   const NewGroupButton = () => {
     return (
       <button className="new_group_button" onClick={addNewGroup}>
-        <HiOutlinePlus className="new_group_add_icon" size={10} />
+        <HiOutlinePlus className="new_group_add_icon" size={14} />
         New Group
       </button>
     );
@@ -125,7 +125,7 @@ function SideBar({ openAuth }) {
               { group.id === hovering && editing !== group.id &&
                 <BiSolidEditAlt 
                   className="edit_btn"
-                  size={14}
+                  size={21}
                   onClick={(e)=>setEditing(group.id)}/>}
             </button>
         ))}

@@ -64,7 +64,7 @@ function SkillLinks({ skills, buttons, excludes }) {
     const angle =
       Math.atan2(off_p.top - off_n.top, off_p.left - off_n.left) *
       (180 / Math.PI);
-    const top = off_p.top + off_p.height / 2 + 110;
+    const top = off_p.top + off_p.height / 2 + 140;
     const left = off_n.left + off_n.width / 2;
 
     let newLink = (
