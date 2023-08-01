@@ -149,14 +149,25 @@ const reducer = (state, action) => {
       let newSkills = [...state.skills];
 
       if (index >= 0) {
-        // remove skill from index
+        // Update children's parent to skill's parent
+        for (const skill of newSkills) {
+          if (skill.parent === newSkills[index].id) {
+            skill.parent = newSkills[index].parent;
+            // Move children to skill's original position
+            newSkills = arrayMove(newSkills, skill.id, newSkills[index].id)
+          }
+        }
+        // Remove skill from index
         newSkills.splice(index, 1);
       } else {
         console.warn(
           `Cant remove skill (id: ${action.id}) as it does not exist.`
         );
       }
-
+      setUserData({
+        ...state,
+        skills: newSkills,
+      });
       return {
         ...state,
         skills: newSkills,
@@ -208,6 +219,14 @@ const reducer = (state, action) => {
         ...state,
         activeGroup: index >= 0 ? state.groups[index] : null,
       };
+    }
+    case "SET_GROUP_NAME": {
+      const index = state.groups.findIndex((group) => group.id === action.id);
+      state.groups[index].name = action.name;
+      return {
+        ...state,
+        groups: [...state.groups]
+      }
     }
     // AUTHENTICATION
     case "SIGN_OUT": {

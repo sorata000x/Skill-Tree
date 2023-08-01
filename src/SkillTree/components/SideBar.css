@@ -78,7 +78,6 @@
 .group_tab {
   width: 174px;
   height: 32px;
-  padding-left: 12px;
   flex-shrink: 0;
   text-align: left;
   border: none;
@@ -87,10 +86,39 @@
   user-select: none;
   background-color: rgb(230, 230, 230);
   font-size: 9pt;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .group_tab:hover {
   background-color: rgb(220, 220, 220);
+}
+
+.group_input {
+  background-color: transparent;
+  border: none;
+  width: 132px;
+  font-size: 9pt;
+}
+
+.group_input:active, .group_input:focus {
+  border: none
+}
+
+.group_input:disabled {
+  color: black;
+  cursor: pointer;
+}
+
+.edit_btn {
+  padding: 5px;
+  border-radius: 2px;
+  color: rgb(80, 80, 80);
+}
+
+.edit_btn:hover {
+  background-color: rgb(210, 210, 210);
 }
 
 .user_btn {

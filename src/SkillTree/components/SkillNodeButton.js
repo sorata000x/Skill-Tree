@@ -96,7 +96,11 @@ function SkillNodeButton({ skill, buttonRef, listeners, isDragOverlay }) {
         setMouseOver(false);
       }}
     >
-      <div className="skill_node_title">{skill.title}</div>
+      <div 
+        className="skill_node_title"
+        onClick={handleClick}
+        {...listeners}
+        >{skill.title}</div>
       <button
         className={
           "skill_node_button" + (activeSkill?.id === skill.id ? " active" : "")

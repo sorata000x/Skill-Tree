@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useStateValue } from "../../StateProvider";
 import { HiOutlinePlus } from "react-icons/hi";
+import { BiSolidEditAlt } from "react-icons/bi"
 import "./SideBar.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { auth } from "../../firebase";
@@ -12,6 +13,8 @@ function SideBar({ openAuth }) {
   const [{ user, groups, activeGroup }, dispatch] = useStateValue();
   const navigate = useNavigate();
   const urlParam = useParams().pathParam;
+  const [hovering, setHovering] = useState('');
+  const [editing, setEditing] = useState('');
 
   const addNewGroup = () => {
     let newGroup = {
@@ -74,23 +77,57 @@ function SideBar({ openAuth }) {
     navigate(`/${group.id}`);
   };
 
+  const handleGroupBtnClick = (e, group) => {
+    navigate(`/${group.id}`);
+    setActiveGroup(group);
+  }
+
+  const setGroupName = (id, name) => {
+    dispatch({
+      type: "SET_GROUP_NAME",
+      id: id,
+      name: name,
+    })
+  }
+
+  const handleGroupNameInputKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      setEditing(null);
+    }
+  }
+
   return open ? (
-    <div className="side_bar_container">
+    <div 
+      className="side_bar_container">
       <div className="action_buttons_container">
         <NewGroupButton />
         <CloseSidebarButton />
       </div>
       <div className="group_tabs_container">
         {groups?.map((group) => (
-          <Link to={`/${group.id}`}>
             <button
               className="group_tab"
               style={urlParam === group.id ? {backgroundColor: 'rgb(220, 220, 220)'} : {}}
-              onClick={(e) => setActiveGroup(group)}
+              onClick={(e) => handleGroupBtnClick(e, group)}
+              onMouseEnter={() => setHovering(group.id)}
+              onMouseLeave={() => setHovering(null)} 
             >
-              {group.name}
+              { editing !== group.id ?
+                group.name :
+                <input 
+                  className="group_input" 
+                  autoFocus
+                  value={group.name}
+                  onChange={(e)=>{setGroupName(group.id, e.target.value)}}
+                  onBlur={(e)=>setEditing(null)}
+                  onKeyDown={handleGroupNameInputKeyDown}/> 
+                  }
+              { group.id === hovering && editing !== group.id &&
+                <BiSolidEditAlt 
+                  className="edit_btn"
+                  size={14}
+                  onClick={(e)=>setEditing(group.id)}/>}
             </button>
-          </Link>
         ))}
       </div>
       <button className="user_btn" onClick={handleAuthentication}>

@@ -7,18 +7,16 @@ To Myself:
 
 ## Doing
 
-- Refine skill edit bar
-  - Change x position
-  - Add delete button
+
 
 ## To Do
 
 Bug Fix
 
-- Prevent a skill node drop to its decendent
-- Drag overlay display
 
 Basic Feature
+
+- Change group name
 
 Advance Feature
 
@@ -45,7 +43,11 @@ Basic Feature
 UI
 
 - Refine skill edit bar
+  - Change x position
+  - Add delete button
 
 Bug Fix
 
+- Update children's parent if a skill is deleted
+- Prevent a skill node drop to its decendent
 - Drag overlay display
