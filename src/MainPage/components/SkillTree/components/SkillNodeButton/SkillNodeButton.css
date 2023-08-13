@@ -1,0 +1,124 @@
+.skill_node_button.container {
+  display: grid;
+  align-items: center;
+  width: 160px;
+  height: 100px;
+  pointer-events: auto;
+}
+
+.skill_node_button.button {
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  width: 96px;
+  height: 96px;
+  margin-left: 30px;
+  padding: 0;
+  flex-shrink: 0;
+  z-index: 3;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* 
+   * For scroll to display active button
+   * Reference: StackOverflow: scrollIntoView Scrolls just too far | https://stackoverflow.com/questions/24665602/scrollintoview-scrolls-just-too-far
+   */
+  scroll-margin: 100px 635px 300px 240px;
+  scroll-snap-margin: 100px 635px 300px 240px;
+  scroll-padding: 100px 635px 300px 240px;
+  grid-column: 1;
+  grid-row: 1;
+  display: grid;
+  transform: translateX(1px);
+}
+
+.skill_node_title {
+  color: black;
+  font-size: 16pt;
+  z-index: 10;
+  grid-column: 1;
+  grid-row: 1;
+  width: 100px;
+  text-align: center;
+  margin-left: 30px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.skill_node_level_container {
+  display: flex;
+  align-items: flex-start;
+  width: 100px;
+  height: 100px;
+  margin: 0;
+  transform: translate(-2px, -85px);
+}
+
+.skill_node_level {
+  background-color: rgb(110, 110, 110);
+  opacity: 0.5;
+  width: 100px;
+  height: 100px;
+}
+
+.level_change_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  grid-column: 2;
+}
+
+.level_change_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 20%;
+  height: 60px;
+  width: 40px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.level_change_icon {
+  color: rgb(100, 100, 100);
+}
+
+.level_change_divider {
+  background-color: lightgrey;
+  width: 30px;
+  height: 1.7px;
+  z-index: 10;
+}
+
+.skill_image {
+  width: 100px;
+  height: 100px;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.skill_progress_container {
+  height: 110px;
+  width: 110px;
+  margin-left: 21px;
+  grid-column: 1;
+  grid-row: 1;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  z-index: 2;
+}
+
+.skill_progress_container.active > .circular-progressbar {
+  border-radius: 50%;
+  box-shadow: 0 0 5px 3px #3d99c7;
+}

@@ -5,23 +5,44 @@ To Myself:
 - Endure, and persevere.
 - Respect the craft, make something beautiful.
 
+## Introduction
+
+This project is inspired by skill tree of various video game, as well as tree data structure in computer science.
+My aim is to combine these concepts to help visualizing data in a concise manner and organizing them easily. 
+
 ## Doing
 
-
+- Put components into seperated files
 
 ## To Do
+
+Code
+
+- Convert project to TypeScript
+  - (Prerequsite) learn TypeScript
 
 Bug Fix
 
 - 
 
+Core Feature
+
+- Delete group
+
 Basic Feature
 
-- 
-
-Advance Feature
-
+- Improve add node recognition
+- Hover skill node for preview
+- Make groups sortable
 - Dark mode
+
+Advanced Feature
+
+- Choose to have levels for a group or a skill
+- Store template
+- Export tree
+- Find & Share tree
+- Toggle children of a node
 
 UI
 
