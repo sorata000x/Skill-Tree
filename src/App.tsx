@@ -6,9 +6,10 @@ import { db, auth } from "./firebase.ts";
 import { doc, getDoc, collection } from "firebase/firestore";
 import { MainPage } from "MainPage";
 import { Firestore } from "firebase/firestore";
+import { Data } from "types";
 
 function App() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue() as [Data, React.Dispatch<any>];
   const urlParam = useParams().pathParam;
 
   useEffect(() => {
@@ -41,9 +42,7 @@ function App() {
 
   useEffect(() => {
     const getUserData = async () => {
-      const dba: Firestore = db;
-      console.log(doc(db, "users", user?.uid))
-      const usersCollection = collection(db, "users");
+      // @ts-ignore
       let userDoc = await getDoc(doc(db, "users", user?.uid));
       if (userDoc.data()) {
         dispatch({

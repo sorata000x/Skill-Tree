@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext, useReducer, useState } from "react";
 import type { Data } from 'types';
 
 const emptyState: Data = {
@@ -26,11 +26,15 @@ export const StateProvider = ({
   reducer, 
   initialState, 
   children }
-: Props) => (
-  <StateContext.Provider value={useReducer(reducer, initialState)}>
-    {children}
-  </StateContext.Provider>
-);
+: Props) => {
+  const [[state, dispatch], setContext] = useState([initialState, () => {}]);
+  
+  return (
+    <StateContext.Provider value={[state, dispatch]}>
+      {children}
+    </StateContext.Provider>
+  )
+};
 
 // Pull information from the data layer
-export const useStateValue = () => useContext(StateContext);
+export const useStateValue = (): [Data, React.Dispatch<any>] => useContext(StateContext);

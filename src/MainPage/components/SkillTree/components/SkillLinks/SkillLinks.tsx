@@ -12,7 +12,9 @@ export interface Props {
 export const SkillLinks = ({ skills, buttons, excludes }: Props) => {
   const [links, setLinks]: [Links, Function] = useState({});
 
+  /*
   useEffect(() => {
+    return;
     setLinks({});
     for (const skill of skills) {
       links[skill.id] = <div />;
@@ -22,6 +24,7 @@ export const SkillLinks = ({ skills, buttons, excludes }: Props) => {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
+    return;
     // Update links
     for (const skill of skills) {
       updateLink(skill);
@@ -31,7 +34,7 @@ export const SkillLinks = ({ skills, buttons, excludes }: Props) => {
     return () => {
       clearInterval(interval);
     };
-  }, [time]);
+  }, []);*/
 
   // Update the positon of the links between the nodes
   const updateLink = (skill: Skill) => {
