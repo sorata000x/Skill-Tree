@@ -38,7 +38,7 @@ export const LevelChangeButtons = ({level, maxLevel, increaseBy, setLevel}: Prop
   return (
     <div className="level_change_buttons">
       <button
-        title="increase level"
+        className="top"
         onClick={(e) => increaseLevel(e)}
         onDoubleClick={(e) => e.stopPropagation()}
       >
@@ -46,12 +46,13 @@ export const LevelChangeButtons = ({level, maxLevel, increaseBy, setLevel}: Prop
       </button>
       <div className="divider" />
       <button
-        title="decrease level"
+        className="bottom"
         onClick={(e) => decreaseLevel(e)}
         onDoubleClick={(e) => e.stopPropagation()}
       >
         <HiOutlineMinus className="icon" size={28} />
       </button>
+      <div className="curv"></div>
     </div>
   );
 };
