@@ -1,3 +1,4 @@
+import "./NodeButton.css";
 import React, { createRef, useEffect, useState } from "react";
 import { useStateValue } from "StateProvider";
 import { Skill } from "types";
@@ -36,13 +37,13 @@ export const NodeButton = ({
 
   return (
     <button
-      className={ "skill_node_button" + ( isActive ? " active" : "") }
+      className={ "node_button" + ( isActive ? " active" : "") }
       ref={ buttonRef }
       onClick={ handleClick }
       {...listeners}
     >
       {skill.image ? (
-        <img className="skill_image" alt="skill_image" src={skill.image} />
+        <img alt="skill image" src={skill.image} />
       ) : null}
     </button>
   )

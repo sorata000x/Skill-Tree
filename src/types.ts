@@ -34,3 +34,18 @@ export interface Data {
 export interface Links {
   [key: string]: React.ReactElement<any, any>,
 }
+
+export interface Action {
+  type: string,
+  id?: string,
+  skill?: Skill,
+  skills?: Array<Skill>,
+  parentID?: string,
+  group?: Group,
+  active?: Skill,
+  over?: Skill,
+  activeSkill?: Skill,
+  groups: Array<Group>,
+  name: string,
+  user: User,
+}

@@ -1,12 +1,12 @@
 import "./MainPage.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStateValue } from "StateProvider";
 import { useParams } from "react-router-dom";
 import { SideBar, SkillTree, SkillEdit, UserAuthDialog } from "./components";
-import { Skill } from "types";
+import { Skill, Data } from "types";
 
 export const MainPage = () => {
-  const [{ skills, activeSkill }, dispatch] = useStateValue();
+  const [{skills, activeSkill}, dispatch] = useStateValue();
   const groupId = useParams().pathParam;   // get current group from url parameter
   const [authOpen, setAuthOpen] = useState(false);
 
@@ -18,13 +18,15 @@ export const MainPage = () => {
     });
   };
 
+  useEffect(() => {
+    console.log('Main Page re-rendered')
+  }, [])
+
   return (
     <>
-      <div className="skill_container" onClick={(e) => handleClick(e)}>
+      <div className="main_page" onClick={(e) => handleClick(e)}>
         <SideBar openAuth={() => setAuthOpen(true)} />
-        <div className="skill_tree_outer_container">
-          <SkillTree skills={skills.filter((skill: Skill) => skill.group.id === groupId)} />
-        </div>
+        <SkillTree skills={skills.filter((skill: Skill) => skill.group.id === groupId)} />
         {activeSkill ? <SkillEdit /> : null}
       </div>
       <UserAuthDialog open={authOpen} close={() => setAuthOpen(false)} />

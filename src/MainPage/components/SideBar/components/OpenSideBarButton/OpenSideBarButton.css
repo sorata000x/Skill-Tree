@@ -1,0 +1,16 @@
+.open_sidebar_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  margin: 8px 0 0 8px;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  border: none;
+}
+
+.open_sidebar_button:hover {
+  background-color: rgb(245, 245, 245);
+}

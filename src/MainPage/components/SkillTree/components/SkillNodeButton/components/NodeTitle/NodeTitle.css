@@ -1,0 +1,15 @@
+.node_title {
+  color: black;
+  font-size: 16pt;
+  z-index: 10;
+  grid-column: 1;
+  grid-row: 1;
+  width: 100px;
+  text-align: center;
+  margin-left: 30px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}

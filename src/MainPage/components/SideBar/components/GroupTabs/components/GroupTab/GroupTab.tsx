@@ -48,7 +48,7 @@ export const GroupTab = ({group}: Props) => {
       }
       { hovering && editing &&
         <BiSolidEditAlt
-          className="edit_btn"
+          className="edit_button"
           size={21}
           onClick={()=>setEditing(true)}/> 
       }

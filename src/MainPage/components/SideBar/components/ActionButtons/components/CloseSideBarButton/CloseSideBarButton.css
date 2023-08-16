@@ -1,0 +1,16 @@
+.close_side_bar_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  margin: 8px 0 0 8px;
+  border-radius: 6px;
+  background-color: rgb(230, 230, 230);
+  cursor: pointer;
+  border: 1.1px solid rgb(200, 200, 200);
+}
+
+.close_side_bar_button:hover {
+  background-color: rgb(220, 220, 220);
+}

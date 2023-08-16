@@ -1,0 +1,29 @@
+.group_tab {
+  width: 245px;
+  height: 45px;
+  padding-left: 9px;
+  flex-shrink: 0;
+  text-align: left;
+  border: none;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  background-color: rgb(230, 230, 230);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.group_tab:hover {
+  background-color: rgb(220, 220, 220);
+}
+
+.group_tab > .edit_button {
+  padding: 5px;
+  border-radius: 5px;
+  color: rgb(80, 80, 80);
+}
+
+.group_tab > .edit_btn:hover {
+  background-color: rgb(210, 210, 210);
+}

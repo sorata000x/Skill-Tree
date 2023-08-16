@@ -10,7 +10,7 @@ export const SideBar = ({ openAuth }: Props) => {
   const [open, setOpen] = useState(true);
 
   return open ? 
-    <div className="side_bar_container">
+    <div className="side_bar">
       <ActionButtons 
         close={()=>setOpen(false)}
       />

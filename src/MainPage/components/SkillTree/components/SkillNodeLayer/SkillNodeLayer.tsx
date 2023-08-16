@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   SortableContext,
   horizontalListSortingStrategy,
@@ -7,6 +7,7 @@ import { SkillNodeContainer } from "../SkillNodeContainer";
 import "./SkillNodeLayer.css";
 import { useDroppable } from "@dnd-kit/core";
 import { Buttons, Skill } from "types";
+import { v4 as uuid } from "uuid";
 
 export interface Props {
   id: string              // id of current layer (which is the parent skill id, root if none)
@@ -18,6 +19,10 @@ export interface Props {
 // One row of skill nodes.
 export const SkillNodeLayer = ({ id, skills, buttons, isDragOverlay }: Props) => {
   const { setNodeRef } = useDroppable({ id });
+
+  useEffect(() => {
+    console.log('SkillNodeLayer re-rendered')
+  }, [])
 
   return (
     <SortableContext

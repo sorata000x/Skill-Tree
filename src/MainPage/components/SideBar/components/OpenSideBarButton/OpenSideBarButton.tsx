@@ -1,15 +1,16 @@
 import React from "react";
 import { FiSidebar } from "react-icons/fi";
+import "./OpenSideBarButton.css";
 
 export interface Props {
   handleClick: Function,
 }
 
-export const CloseSideBarButton = ({handleClick}: Props) => {
+export const OpenSideBarButton = ({handleClick}: Props) => {
   return (
     <button 
-      title="close side bar"
-      className="sidebar_button close" 
+      title="open side bar"
+      className="sidebar_button open" 
       onClick={(e) => handleClick(e)}
     >
       <FiSidebar />

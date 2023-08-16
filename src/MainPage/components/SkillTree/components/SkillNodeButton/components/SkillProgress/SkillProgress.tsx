@@ -1,26 +1,26 @@
 import { useStateValue } from 'StateProvider';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { Skill } from 'types';
+import "./SkillProgress.css";
 
 export interface Props {
-  skill: Skill,
+  id: string,
+  level: number,
+  maxLevel: number, 
 }
 
-export const SkillProgress = ({skill}: Props) => {
+export const SkillProgress = ({id, level, maxLevel}: Props) => {
 
   const [{activeSkill}, dispatch] = useStateValue();
 
   return (
     <div
-      className={
-        "skill_progress_container" +
-        (activeSkill?.id === skill.id ? " active" : "")
-      }
+      className={"skill_progress" + (activeSkill?.id === id ? " active" : "")}
     >
       {/* Example: Base react-circular-progressbar examples | https://codesandbox.io/s/vymm4oln6y?file=/index.js:6428-6517 */}
       <CircularProgressbar
-        value={(skill.level / skill.maxLevel) * 100}
+        value={(level / maxLevel) * 100}
         strokeWidth={50}
         className="circular-progressbar"
         styles={buildStyles({

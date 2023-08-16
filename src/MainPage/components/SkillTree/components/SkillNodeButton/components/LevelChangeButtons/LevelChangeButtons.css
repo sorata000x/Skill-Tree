@@ -1,0 +1,32 @@
+.level_change_buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  grid-column: 2;
+}
+
+.level_change_buttons > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 20%;
+  height: 60px;
+  width: 40px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.divider {
+  background-color: lightgrey;
+  width: 30px;
+  height: 1.7px;
+  z-index: 10;
+}
+
+.icon {
+  color: rgb(100, 100, 100);
+}

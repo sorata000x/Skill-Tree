@@ -2,6 +2,7 @@ import { useStateValue } from "StateProvider";
 import React from "react";
 import { CgClose } from "react-icons/cg";
 import { FaRegTrashAlt } from "react-icons/fa";
+import "./ActionButtons.css";
 
 export const ActionButtons = () => {
   const [{activeSkill}, dispatch] = useStateValue();
@@ -24,9 +25,9 @@ export const ActionButtons = () => {
   };
 
   return (
-    <div className="action_container">
-      <CgClose className="action_btn" size={20} onClick={()=>close()} />
-      <FaRegTrashAlt className="action_btn" size={18} onClick={()=>deleteSkill()} />
+    <div className="action_buttons">
+      <CgClose className="button" size={20} onClick={()=>close()} />
+      <FaRegTrashAlt className="button" size={18} onClick={()=>deleteSkill()} />
     </div>
   )
 }

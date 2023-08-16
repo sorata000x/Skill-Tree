@@ -1,0 +1,15 @@
+.skill_progress {
+  height: 110px;
+  width: 110px;
+  margin-left: 21px;
+  grid-column: 1;
+  grid-row: 1;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  z-index: 2;
+}
+
+.skill_progress.active > .circular-progressbar {
+  border-radius: 50%;
+  box-shadow: 0 0 5px 3px #3d99c7;
+}

@@ -1,0 +1,13 @@
+.skill_edit_form > .form-level-group {
+  display: flex;
+}
+
+.skill_edit_form > .level-divider {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  min-width: 14px;
+  height: 49px;
+  font-size: 14pt;
+  line-height: 26px;
+}

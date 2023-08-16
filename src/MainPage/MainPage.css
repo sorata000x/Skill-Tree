@@ -1,12 +1,5 @@
-.skill_container {
+.main_page {
   display: flex;
   height: 100vh;
   width: 100vw;
-}
-
-.skill_tree_outer_container {
-  width: 100%;
-  height: 100%;
-  overflow: scroll;
-  padding: 0;
 }

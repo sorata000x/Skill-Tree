@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SkillNodeButton.css";
-import { useStateValue } from "StateProvider";
 import "react-circular-progressbar/dist/styles.css";
-import { LevelChangeButtons, NodeButton, NodeTitle, SkillProgress } from "./components";
+import { NodeButton, NodeTitle, SkillProgress, LevelChangeButtons } from "./components";
 import { Skill } from "types";
+import { useStateValue } from "StateProvider";
 
 export interface Props {
   skill: Skill,
@@ -20,11 +20,25 @@ export const SkillNodeButton = ({
   isDragOverlay 
 }: Props) => {
   const [isMouseOver, setMouseOver] = useState(false);
-  const [{ activeSkill }, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
+
+  // Set the level of the skill for this button.
+  const setLevel = (level: number) => {
+    skill.level = level;
+    dispatch({
+      type: "SET_SKILL",
+      id: skill.id,
+      skill: skill,
+    });
+  };
+
+  useEffect(() => {
+    console.log(`skill level: ${skill.level}`)
+  }, [skill.level])
 
   return (
     <div
-      className="skill_node_button container"
+      className="skill_node_button"
       onMouseOver={(e) => {
         setMouseOver(true);
       }}
@@ -44,10 +58,16 @@ export const SkillNodeButton = ({
         isDragOverlay={isDragOverlay}
       />
       <SkillProgress 
-        skill={skill}
+        id={skill.id}
+        level={skill.level}
+        maxLevel={skill.maxLevel}
       />
       { isMouseOver ? 
-        <LevelChangeButtons skill={skill}/> 
+        <LevelChangeButtons
+          level={skill.level}
+          maxLevel={skill.maxLevel}
+          increaseBy={skill.increaseBy}
+          setLevel={setLevel}/> 
         : null }
     </div>
   );

@@ -2,18 +2,7 @@
   font-size: 12pt;
 }
 
-input,
-textarea {
-  font-size: 13pt;
-  border: 1px solid rgb(180, 180, 180);
-  border-radius: 4px;
-  box-sizing: border-box;
-  padding: 5px;
-}
-
-textarea {
-  resize: none;
-}
+/* Input & Textarea */
 
 /* 
  * Hide number spin buttons 
@@ -22,6 +11,19 @@ textarea {
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   display: none;
+}
+
+textarea {
+  resize: none;
+}
+
+input,
+textarea {
+  border: 1px solid rgb(180, 180, 180);
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 13pt;
+  padding: 5px;
 }
 
 input:active,
@@ -35,6 +37,8 @@ textarea:focus {
   border: 1.2px solid black;
   outline: none;
 }
+
+/* Scroll Bar */
 
 ::-webkit-scrollbar {
   width: 8px;

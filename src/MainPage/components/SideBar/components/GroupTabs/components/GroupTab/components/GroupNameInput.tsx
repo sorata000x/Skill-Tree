@@ -1,6 +1,7 @@
 import React from "react";
 import { useStateValue } from "StateProvider";
 import { Group } from "types";
+import "./GroupNameInput.css"
 
 export interface Props {
   group: Group,
@@ -28,7 +29,7 @@ export const GroupNameInput = ({group, setEditing}: Props) => {
   return (
     <input
       title="input group name"
-      className="group_input" 
+      className="group_name_input" 
       autoFocus
       value={group.name}
       onChange={e=>setGroupName(group.id, e.target.value)}

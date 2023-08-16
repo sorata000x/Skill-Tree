@@ -28,6 +28,10 @@ export const SkillTree = ({ skills }: Props) => {
     useStateValue();
   const group = activeGroup ? activeGroup.id : '';
 
+  useEffect(() => {
+    console.log('SkillTree re-rendered')
+  }, [])
+
   // Find the nearest (positioned) parent id of a skill.
   const getNearestParent = (px: number, py: number, id: string = '') => {
     // Get the distance from a parent node to a given point
@@ -194,49 +198,51 @@ export const SkillTree = ({ skills }: Props) => {
   }, [activeSkill]);
 
   return (
-    (!groups.length || !skills.length) ? 
-    <Instruction 
-      group={group}
-      skills={skills}
-      handleDoubleClick={handleDoubleClick}
-    /> :
-    <div
-      className={"skill_tree_container" + (activeSkill ? " expand" : "")}
-      onDoubleClick={handleDoubleClick}
-    >
-      {skills.length ? (
-        <>
-          <DndContext
-            sensors={sensors}
-            collisionDetection={closestCorners}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-          >
-            <SkillNodeLayer 
-              id="root" 
-              skills={skills} 
-              buttons={buttons}
-              />
-            <DragOverlay dropAnimation={dropAnimation}>
-              {dragOverlaySkills.length ? (
-                <SkillNodeContainer
-                  key={dragOverlaySkills[0] ? dragOverlaySkills[0].id : null}
-                  skill={dragOverlaySkills[0]}
-                  skills={dragOverlaySkills}
-                  buttons={dragOverlayButtons}
-                  isDragOverlay={true}
+    <div className="skill_tree"> {
+      (!groups.length || !skills.length) ? 
+      <Instruction 
+        group={group}
+        skills={skills}
+        handleDoubleClick={handleDoubleClick}
+      /> :
+      <div
+        className={"container" + (activeSkill ? " expand" : "")}
+        onDoubleClick={handleDoubleClick}
+      >
+        {skills.length ? (
+          <>
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCorners}
+              onDragStart={handleDragStart}
+              onDragEnd={handleDragEnd}
+            >
+              <SkillNodeLayer 
+                id="root" 
+                skills={skills} 
+                buttons={buttons}
                 />
-              ) : null}
-            </DragOverlay>
-          </DndContext>
-          <SkillLinks
-            skills={[...skills, ...dragOverlaySkills]}
-            buttons={{ ...buttons, ...dragOverlayButtons }}
-            excludes={draggingSkillIDs}
-          />
-        </>
-      ) : null}
-    </div>
+              <DragOverlay dropAnimation={dropAnimation}>
+                {dragOverlaySkills.length ? (
+                  <SkillNodeContainer
+                    key={dragOverlaySkills[0] ? dragOverlaySkills[0].id : null}
+                    skill={dragOverlaySkills[0]}
+                    skills={dragOverlaySkills}
+                    buttons={dragOverlayButtons}
+                    isDragOverlay={true}
+                  />
+                ) : null}
+              </DragOverlay>
+            </DndContext>
+            <SkillLinks
+              skills={[...skills, ...dragOverlaySkills]}
+              buttons={{ ...buttons, ...dragOverlayButtons }}
+              excludes={draggingSkillIDs}
+            />
+          </>
+        ) : null}
+      </div>
+    }</div>
   );
 }
 

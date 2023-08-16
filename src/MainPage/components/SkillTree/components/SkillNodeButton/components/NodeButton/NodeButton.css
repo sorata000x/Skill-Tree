@@ -1,0 +1,35 @@
+.node_button {
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  width: 96px;
+  height: 96px;
+  margin-left: 30px;
+  padding: 0;
+  flex-shrink: 0;
+  z-index: 3;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* 
+   * For scroll to display active button
+   * Reference: StackOverflow: scrollIntoView Scrolls just too far | https://stackoverflow.com/questions/24665602/scrollintoview-scrolls-just-too-far
+   */
+  scroll-margin: 100px 635px 300px 240px;
+  scroll-snap-margin: 100px 635px 300px 240px;
+  scroll-padding: 100px 635px 300px 240px;
+  grid-column: 1;
+  grid-row: 1;
+  display: grid;
+  transform: translateX(1px);
+}
+
+.node_button > img {
+  width: 100px;
+  height: 100px;
+  grid-column: 1;
+  grid-row: 1;
+}

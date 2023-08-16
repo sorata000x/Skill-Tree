@@ -2,13 +2,14 @@ import React from "react";
 import { useStateValue } from "StateProvider";
 import { auth } from "firebase.ts";
 import { useNavigate } from "react-router-dom";
+import "./UserButton.css";
 
 export interface Props {
   openAuth: Function,
 }
 
 export const UserButton = ({openAuth}: Props) => {
-  const [{ user }, dispatch] = useStateValue();
+  const [{user}, dispatch] = useStateValue();
   const navigate = useNavigate();
 
   const handleAuthentication = () => {
@@ -24,7 +25,7 @@ export const UserButton = ({openAuth}: Props) => {
   };
 
   return (
-    <button className="user_btn" onClick={handleAuthentication}>
+    <button className="user_button" onClick={handleAuthentication}>
       {user ? user.email : 'Login'}
     </button>
   );

@@ -3,7 +3,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { createRef } from "react";
 import { arrayMove } from "@dnd-kit/sortable";
 import { v4 as uuid } from "uuid";
-import type { Data, Skill, Group, Buttons } from "types"
+import type { Data, Skill, Group, Buttons, Action } from "types"
 import { User } from "firebase/auth";
 
 // Send current data to storage
@@ -53,28 +53,15 @@ const getInitialState = (): Data => {
 
 export const initialState: Data = getInitialState();
 
-export interface Action {
-  type: string,
-  id?: string,
-  skill?: Skill,
-  skills?: Array<Skill>,
-  parentID?: string,
-  group?: Group,
-  active?: Skill,
-  over?: Skill,
-  activeSkill?: Skill,
-  groups: Array<Group>,
-  name: string,
-  user: User,
-}
-
-const reducer = (state: Data, action: Action) => {
+const reducer = (state: Data, action: Action): Data => {
+  if(!state)
+    return state;
   switch (action.type) {
     // SKILLS
     case "SET_SKILLS": {
       if (!action.skills) {
         console.error('Operation SET_SKILLS requires {skills} attribute');
-        return;
+        return state;
       }
       // relace all the skills with a new set of skills
       let newSkills = action.skills;
@@ -93,22 +80,26 @@ const reducer = (state: Data, action: Action) => {
     case "SET_SKILL": {
       if (!action.id || !action.skill) {
         console.error('Operation SET_SKILL requires {id, skill} attributes');
-        return;
+        return state;
       }
+      console.log('SET_SKILL called')
       // Set an existing skill
-      let index = state.skills.findIndex((skill) => skill.id === action.id);
-      state.skills[index] = action.skill;
+      let newSkills = [...state.skills]
+      let index = newSkills.findIndex((skill) => skill.id === action.id);
+      newSkills[index] = action.skill;
       setUserData({
         ...state,
+        skills: [...newSkills],
       });
       return {
         ...state,
+        skills: [...newSkills],
       };
     }
     case "ADD_SKILL": {
       if (!action.parentID || !action.group) {
         console.error('Operation ADD_SKILL requires {parentID, group} attribute');
-        return;
+        return state;
       }
       // add a new skill. action = {skill}
       let newSkill: Skill = {
@@ -136,7 +127,7 @@ const reducer = (state: Data, action: Action) => {
     case "DROP_SKILL": {
       if (!action.active || !action.over) {
         console.error('Operation DROP_SKILL requires {active, over} attributes');
-        return;
+        return state;
       }
       // Whether node1 is descendent of node2
       const isDescendent = (node1: Skill, node2: Skill) => {
@@ -179,7 +170,7 @@ const reducer = (state: Data, action: Action) => {
     case "DELETE_SKILL": {
       if (!action.id) {
         console.error('Operation DELETE_SKILL requires {id} attribute');
-        return;
+        return state;
       }
 
       const index = state.skills.findIndex((skill) => skill.id === action.id);
@@ -225,7 +216,7 @@ const reducer = (state: Data, action: Action) => {
     case "SET_ACTIVE_SKILL": {
       if (!action.activeSkill) {
         console.error('Operation SET_ACTIVE_SKILL requires {activeSkill} attribute');
-        return;
+        return state;
       }
 
       return {
@@ -237,7 +228,7 @@ const reducer = (state: Data, action: Action) => {
     case "SET_GROUPS": {
       if (!action.groups) {
         console.error('Operation SET_GROUPS requires {groups} attribute');
-        return;
+        return state;
       }
 
       let newGroups = action.groups;
@@ -253,7 +244,7 @@ const reducer = (state: Data, action: Action) => {
     case "ADD_NEW_GROUP": {
       if (!action.group) {
         console.error('Operation ADD_NEW_GROUP requires {group} attribute');
-        return;
+        return state;
       }
 
       setUserData({
@@ -268,7 +259,7 @@ const reducer = (state: Data, action: Action) => {
     case "SET_ACTIVE_GROUP": {
       if (!action.id) {
         console.error('Operation SET_ACTIVE_GROUP requires {id} attribute');
-        return;
+        return state;
       }
 
       const index = state.groups.findIndex((group) => group.id === action.id);
@@ -280,7 +271,7 @@ const reducer = (state: Data, action: Action) => {
     case "SET_GROUP_NAME": {
       if (!action.id || !action.name) {
         console.error('Operation SET_GROUP_NAME requires {id, name} attribute');
-        return;
+        return state;
       }
 
       const index = state.groups.findIndex((group) => group.id === action.id);
@@ -299,7 +290,7 @@ const reducer = (state: Data, action: Action) => {
     case "SET_USER": {
       if (!action.user) {
         console.error('Operation SET_USER requires {user} attribute');
-        return;
+        return state;
       }
 
       return {

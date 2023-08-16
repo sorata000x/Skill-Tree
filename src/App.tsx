@@ -5,11 +5,10 @@ import { BrowserRouter as Router, Route, Routes, useParams } from "react-router-
 import { db, auth } from "./firebase.ts";
 import { doc, getDoc, collection } from "firebase/firestore";
 import { MainPage } from "MainPage";
-import { Firestore } from "firebase/firestore";
 import { Data } from "types";
 
 function App() {
-  const [{ user }, dispatch] = useStateValue() as [Data, React.Dispatch<any>];
+  const [{ user }, dispatch] = useStateValue();
   const urlParam = useParams().pathParam;
 
   useEffect(() => {

@@ -1,4 +1,5 @@
-import React from 'react'
+import "./NodeTitle.css";
+import React from 'react';
 import { useStateValue } from 'StateProvider';
 import { Skill } from 'types';
 
@@ -29,9 +30,11 @@ export const NodeTitle = ({
 
   return (
     <div 
-      className="skill_node_title"
+      className="node_title"
       onClick={handleClick}
       {...listeners}
-      >{skill.title}</div>
+      >
+      {skill.title}
+    </div>
   )
 }
