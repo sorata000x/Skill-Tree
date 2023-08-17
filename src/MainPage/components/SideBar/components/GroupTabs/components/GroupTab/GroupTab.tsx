@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useStateValue } from "StateProvider";
 import { BiSolidEditAlt } from "react-icons/bi"
 import { GroupNameInput } from "./components";
+import "./GroupTab.css"
 
 export interface Props {
   group: Group,
@@ -39,14 +40,14 @@ export const GroupTab = ({group}: Props) => {
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)} 
     >
-      { editing ?
+      { !editing ?
         group.name :
         <GroupNameInput 
           group={group}
           setEditing={setEditing}
         />
       }
-      { hovering && editing &&
+      { hovering && !editing &&
         <BiSolidEditAlt
           className="edit_button"
           size={21}

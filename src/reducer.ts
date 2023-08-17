@@ -54,12 +54,10 @@ const getInitialState = (): Data => {
 export const initialState: Data = getInitialState();
 
 const reducer = (state: Data, action: Action): Data => {
-  if(!state)
-    return state;
   switch (action.type) {
     // SKILLS
     case "SET_SKILLS": {
-      if (!action.skills) {
+      if (action.skills === undefined) {
         console.error('Operation SET_SKILLS requires {skills} attribute');
         return state;
       }
@@ -78,11 +76,10 @@ const reducer = (state: Data, action: Action): Data => {
       };
     }
     case "SET_SKILL": {
-      if (!action.id || !action.skill) {
+      if (action.id === undefined || action.skill === undefined) {
         console.error('Operation SET_SKILL requires {id, skill} attributes');
         return state;
       }
-      console.log('SET_SKILL called')
       // Set an existing skill
       let newSkills = [...state.skills]
       let index = newSkills.findIndex((skill) => skill.id === action.id);
@@ -97,7 +94,7 @@ const reducer = (state: Data, action: Action): Data => {
       };
     }
     case "ADD_SKILL": {
-      if (!action.parentID || !action.group) {
+      if (action.parentID === undefined || action.group === undefined) {
         console.error('Operation ADD_SKILL requires {parentID, group} attribute');
         return state;
       }
@@ -125,7 +122,7 @@ const reducer = (state: Data, action: Action): Data => {
       };
     }
     case "DROP_SKILL": {
-      if (!action.active || !action.over) {
+      if (action.active === undefined || action.over === undefined) {
         console.error('Operation DROP_SKILL requires {active, over} attributes');
         return state;
       }
@@ -168,7 +165,7 @@ const reducer = (state: Data, action: Action): Data => {
       };
     }
     case "DELETE_SKILL": {
-      if (!action.id) {
+      if (action.id === undefined) {
         console.error('Operation DELETE_SKILL requires {id} attribute');
         return state;
       }
@@ -214,11 +211,10 @@ const reducer = (state: Data, action: Action): Data => {
       };
     }
     case "SET_ACTIVE_SKILL": {
-      if (!action.activeSkill) {
+      if (action.activeSkill === undefined) {
         console.error('Operation SET_ACTIVE_SKILL requires {activeSkill} attribute');
         return state;
       }
-
       return {
         ...state,
         activeSkill: action.activeSkill,
@@ -226,7 +222,7 @@ const reducer = (state: Data, action: Action): Data => {
     }
     // GROUP
     case "SET_GROUPS": {
-      if (!action.groups) {
+      if (action.groups === undefined) {
         console.error('Operation SET_GROUPS requires {groups} attribute');
         return state;
       }
@@ -257,7 +253,7 @@ const reducer = (state: Data, action: Action): Data => {
       };
     }
     case "SET_ACTIVE_GROUP": {
-      if (!action.id) {
+      if (action.id === undefined) {
         console.error('Operation SET_ACTIVE_GROUP requires {id} attribute');
         return state;
       }
@@ -269,7 +265,7 @@ const reducer = (state: Data, action: Action): Data => {
       };
     }
     case "SET_GROUP_NAME": {
-      if (!action.id || !action.name) {
+      if (action.id === undefined || action.name === undefined) {
         console.error('Operation SET_GROUP_NAME requires {id, name} attribute');
         return state;
       }
@@ -288,7 +284,7 @@ const reducer = (state: Data, action: Action): Data => {
       };
     }
     case "SET_USER": {
-      if (!action.user) {
+      if (action.user === undefined) {
         console.error('Operation SET_USER requires {user} attribute');
         return state;
       }

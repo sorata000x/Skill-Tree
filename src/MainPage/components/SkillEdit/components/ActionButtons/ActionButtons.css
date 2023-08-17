@@ -1,15 +1,15 @@
-.action_buttons {
+.skill_edit > .action_buttons {
   display: flex;
   align-items: center;
   padding: 10px 12px 0 12px;
   justify-content: space-between;
 }
 
-.action_buttons > button { 
+.skill_edit > .action_buttons > button { 
   color: rgb(100, 100, 100);
   cursor: pointer;
 }
 
-.action_buttons > button:hover { 
+.skill_edit > .action_buttons > button:hover { 
   color: black;
 }

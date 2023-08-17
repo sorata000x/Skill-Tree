@@ -32,10 +32,6 @@ export const SkillNodeButton = ({
     });
   };
 
-  useEffect(() => {
-    console.log(`skill level: ${skill.level}`)
-  }, [skill.level])
-
   return (
     <div
       className="skill_node_button"

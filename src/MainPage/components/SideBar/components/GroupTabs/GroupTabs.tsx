@@ -10,7 +10,7 @@ export const GroupTabs = () => {
   return (
     <div className="group_tabs">
       {groups?.map((group: Group) => (
-        <GroupTab group={group} />
+        <GroupTab key={group.id} group={group} />
       ))}
     </div>
   )

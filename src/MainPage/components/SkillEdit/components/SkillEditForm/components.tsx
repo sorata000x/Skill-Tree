@@ -51,17 +51,17 @@ export const MaxLevelInput = ({handleChange}: InputProps) => {
 
   return (
     <div className="max_level_input">
-    <label htmlFor="max-level"> Max Level </label>
-    <input
-      id="max-level"
-      type="number"
-      autoComplete="off"
-      min={0}
-      max={9999999}
-      value={activeSkill?.maxLevel}
-      onChange={(e) => handleChange("maxLevel", e.target.value)}
-    />
-  </div>
+      <label htmlFor="max-level"> Max Level </label>
+      <input
+        id="max-level"
+        type="number"
+        autoComplete="off"
+        min={0}
+        max={9999999}
+        value={activeSkill?.maxLevel}
+        onChange={(e) => handleChange("maxLevel", e.target.value)}
+      />
+    </div>
   )
 }
 
@@ -70,9 +70,9 @@ export const IncreaseByInput = ({handleChange}: InputProps) => {
 
   return (
     <div className="increase_by_input">
-      <label htmlFor="increaseBy"> Increase by </label>
+      <label htmlFor="increase-by"> Increase by </label>
       <input
-        id="increaseBy"
+        id="increase-by"
         type="number"
         autoComplete="off"
         min={0}

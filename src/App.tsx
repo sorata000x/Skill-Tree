@@ -33,6 +33,8 @@ function App() {
       }
     });
     // Set active group
+    if (!urlParam)
+      return;
     dispatch({
       type: "SET_ACTIVE_GROUP",
       id: urlParam,
@@ -59,7 +61,7 @@ function App() {
         if (userDoc.data()?.groups && userDoc.data()?.groups.length) {
           dispatch({
             type: "SET_ACTIVE_GROUP",
-            activeGroup: userDoc.data()?.groups[0],
+            id: userDoc.data()?.groups[0].id,
           })
         }
       }

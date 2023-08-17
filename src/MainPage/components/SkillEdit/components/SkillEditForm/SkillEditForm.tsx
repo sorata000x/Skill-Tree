@@ -11,6 +11,7 @@ import {
 import { useStateValue } from "StateProvider";
 import { storage } from "firebase.ts";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import "./SkillEditForm.css";
 
 export const SkillEditForm = () => {
   const [{activeSkill, user}, dispatch] = useStateValue();
@@ -33,23 +34,24 @@ export const SkillEditForm = () => {
         break;
       }
       case "level": {
-        if(typeof value !== 'number') return;
+        if(typeof value !== 'string') return;
+        const newLevel = parseInt(value);
         // Cap to max level
-        if (value <= activeSkill.maxLevel) {
-          activeSkill.level = value
+        if (newLevel <= activeSkill.maxLevel) {
+          activeSkill.level = newLevel;
         } else {
           activeSkill.level = activeSkill.maxLevel;
         }
         break;
       }
       case "maxLevel": {
-        if(typeof value !== 'number') return;
-        activeSkill.maxLevel = value;
+        if(typeof value !== 'string') return;
+        activeSkill.maxLevel = parseInt(value);
         break;
       }
       case "increaseBy": {
-        if(typeof value !== 'number') return;
-        activeSkill.increaseBy = value;
+        if(typeof value !== 'string') return;
+        activeSkill.increaseBy = parseInt(value);
         break;
       }
       case "image": {

@@ -10,7 +10,7 @@ export const OpenSideBarButton = ({handleClick}: Props) => {
   return (
     <button 
       title="open side bar"
-      className="sidebar_button open" 
+      className="open_sidebar_button" 
       onClick={(e) => handleClick(e)}
     >
       <FiSidebar />

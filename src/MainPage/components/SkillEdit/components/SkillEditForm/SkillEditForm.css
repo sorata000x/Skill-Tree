@@ -1,8 +1,13 @@
-.skill_edit_form > .form-level-group {
-  display: flex;
+.skill_edit_form {
+  margin: 10px 30px 10px 20px;
 }
 
-.skill_edit_form > .level-divider {
+.skill_edit_form > .form-level-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.skill_edit_form > .form-level-group > .level-divider {
   display: flex;
   justify-content: center;
   align-items: end;

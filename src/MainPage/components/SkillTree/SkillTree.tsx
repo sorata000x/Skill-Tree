@@ -26,11 +26,7 @@ export interface Props {
 export const SkillTree = ({ skills }: Props) => {
   const [{ activeSkill, buttons, groups, activeGroup }, dispatch] =
     useStateValue();
-  const group = activeGroup ? activeGroup.id : '';
-
-  useEffect(() => {
-    console.log('SkillTree re-rendered')
-  }, [])
+  const group = activeGroup;
 
   // Find the nearest (positioned) parent id of a skill.
   const getNearestParent = (px: number, py: number, id: string = '') => {

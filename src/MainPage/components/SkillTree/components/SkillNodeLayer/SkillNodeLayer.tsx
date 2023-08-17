@@ -20,10 +20,6 @@ export interface Props {
 export const SkillNodeLayer = ({ id, skills, buttons, isDragOverlay }: Props) => {
   const { setNodeRef } = useDroppable({ id });
 
-  useEffect(() => {
-    console.log('SkillNodeLayer re-rendered')
-  }, [])
-
   return (
     <SortableContext
       id={id}

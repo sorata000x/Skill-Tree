@@ -18,10 +18,6 @@ export const MainPage = () => {
     });
   };
 
-  useEffect(() => {
-    console.log('Main Page re-rendered')
-  }, [])
-
   return (
     <>
       <div className="main_page" onClick={(e) => handleClick(e)}>

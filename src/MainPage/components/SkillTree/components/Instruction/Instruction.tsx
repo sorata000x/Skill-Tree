@@ -1,9 +1,10 @@
 import { useStateValue } from "StateProvider";
-import React from "react";
+import React, { useEffect } from "react";
 import { Group, Skill } from "types";
+import "./Instruction.css"
 
 export interface Props {
-  group: string,
+  group: Group | null,
   skills: Array<Skill>,
   handleDoubleClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void,
 }
