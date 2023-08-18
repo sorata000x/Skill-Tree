@@ -12,14 +12,11 @@ My aim is to combine these concepts to help visualizing data in a concise manner
 
 ## Doing
 
-- Put components into seperated files
+Core Feature
+
+- Delete group
 
 ## To Do
-
-Code
-
-- Convert project to TypeScript
-  - (Prerequsite) learn TypeScript
 
 Bug Fix
 
@@ -31,6 +28,7 @@ Core Feature
 
 Basic Feature
 
+- Preview skill
 - Improve add node recognition
 - Hover skill node for preview
 - Make groups sortable
@@ -74,3 +72,9 @@ Bug Fix
 - Update children's parent if a skill is deleted
 - Prevent a skill node drop to its decendent
 - Drag overlay display
+
+Code
+
+- Convert project to TypeScript
+  - (Prerequsite) learn TypeScript
+  - Put components into seperated files

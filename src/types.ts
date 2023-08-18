@@ -22,12 +22,22 @@ export interface Buttons {
   [key: string]: React.RefObject<HTMLButtonElement> 
 }
 
+export interface PopUp {
+  type: string,
+  // type: more_pop_up
+  group?: Group,
+  editGroupName?: Function,
+  top?: number,
+  left?: number,
+}
+
 export interface Data {
   skills: Array<Skill>,
   activeSkill: Skill | null,
   buttons: Buttons,
   groups: Array<Group>,
   activeGroup: Group | null,
+  popUp: PopUp | null,
   user: User | null,
 }
 
@@ -47,5 +57,6 @@ export interface Action {
   activeSkill?: Skill,
   groups: Array<Group>,
   name: string,
+  popUp: PopUp,
   user: User,
 }

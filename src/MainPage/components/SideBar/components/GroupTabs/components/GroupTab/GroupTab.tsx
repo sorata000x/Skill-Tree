@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import type { Group } from "types";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,8 @@ import { useStateValue } from "StateProvider";
 import { BiSolidEditAlt } from "react-icons/bi"
 import { GroupNameInput } from "./components";
 import "./GroupTab.css"
+import { FiMoreHorizontal, FiEdit } from "react-icons/fi";
+import ReactDOM from "react-dom";
 
 export interface Props {
   group: Group,
@@ -17,6 +19,8 @@ export const GroupTab = ({group}: Props) => {
   const urlParam = useParams().pathParam;
   const [hovering, setHovering] = useState(false);   // is hovering on the group tab
   const [editing, setEditing] = useState(false);
+  const [openMore, setOpenMore] = useState(false);
+  const morePopUpRef = createRef();
 
   // Set url parameter as current group id
   const setActiveGroup = () => {
@@ -30,6 +34,19 @@ export const GroupTab = ({group}: Props) => {
   const handleClick = (e: React.MouseEvent) => {
     navigate(`/${group.id}`);   // set url with current group id
     setActiveGroup();
+  }
+
+  const openMorePopUp = (e: React.MouseEvent) => {
+    dispatch({
+      type: "SET_POP_UP",
+      popUp: {
+        type: 'more_pop_up',
+        group: group,
+        editGroupName: ()=>setEditing(true),
+        top: e.clientY,
+        left: e.clientX,
+      }
+    })
   }
 
   return (
@@ -48,10 +65,10 @@ export const GroupTab = ({group}: Props) => {
         />
       }
       { hovering && !editing &&
-        <BiSolidEditAlt
-          className="edit_button"
+        <FiMoreHorizontal
+          className="more_button"
           size={21}
-          onClick={()=>setEditing(true)}/> 
+          onClick={(e)=>openMorePopUp(e)}/> 
       }
     </button>
   )

@@ -18,12 +18,12 @@
   background-color: rgb(220, 220, 220);
 }
 
-.group_tab > .edit_button {
+.group_tab > .more_button {
   padding: 5px;
   border-radius: 5px;
   color: rgb(80, 80, 80);
 }
 
-.group_tab > .edit_btn:hover {
+.group_tab > .more_button:hover {
   background-color: rgb(210, 210, 210);
 }

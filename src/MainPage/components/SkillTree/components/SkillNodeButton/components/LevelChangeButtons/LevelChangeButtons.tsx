@@ -39,6 +39,7 @@ export const LevelChangeButtons = ({level, maxLevel, increaseBy, setLevel}: Prop
     <div className="level_change_buttons">
       <button
         className="top"
+        aria-label="increase level"
         onClick={(e) => increaseLevel(e)}
         onDoubleClick={(e) => e.stopPropagation()}
       >
@@ -47,6 +48,7 @@ export const LevelChangeButtons = ({level, maxLevel, increaseBy, setLevel}: Prop
       <div className="divider" />
       <button
         className="bottom"
+        aria-label="decrease level"
         onClick={(e) => decreaseLevel(e)}
         onDoubleClick={(e) => e.stopPropagation()}
       >

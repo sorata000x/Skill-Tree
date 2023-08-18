@@ -25,6 +25,7 @@ const emptyState: Data = {
   buttons: {},
   groups: [],
   activeGroup: null,
+  popUp: null,
   user: null,
 };
 
@@ -47,6 +48,7 @@ const getInitialState = (): Data => {
     buttons: buttons,
     groups: groups,
     activeGroup: groups.length ? groups[0] : null,
+    popUp: null,
     user: null,
   };
 };
@@ -169,10 +171,8 @@ const reducer = (state: Data, action: Action): Data => {
         console.error('Operation DELETE_SKILL requires {id} attribute');
         return state;
       }
-
       const index = state.skills.findIndex((skill) => skill.id === action.id);
       let newSkills = [...state.skills];
-
       if (index >= 0) {
         // Update children's parent to skill's parent
         for (let i=0; i < newSkills.length; i++) {
@@ -226,7 +226,6 @@ const reducer = (state: Data, action: Action): Data => {
         console.error('Operation SET_GROUPS requires {groups} attribute');
         return state;
       }
-
       let newGroups = action.groups;
       setUserData({
         ...state,
@@ -242,7 +241,6 @@ const reducer = (state: Data, action: Action): Data => {
         console.error('Operation ADD_NEW_GROUP requires {group} attribute');
         return state;
       }
-
       setUserData({
         ...state,
         groups: [...state.groups, action.group],
@@ -257,8 +255,11 @@ const reducer = (state: Data, action: Action): Data => {
         console.error('Operation SET_ACTIVE_GROUP requires {id} attribute');
         return state;
       }
-
       const index = state.groups.findIndex((group) => group.id === action.id);
+      setUserData({
+        ...state,
+        activeGroup: index >= 0 ? state.groups[index] : null,
+      })
       return {
         ...state,
         activeGroup: index >= 0 ? state.groups[index] : null,
@@ -269,13 +270,65 @@ const reducer = (state: Data, action: Action): Data => {
         console.error('Operation SET_GROUP_NAME requires {id, name} attribute');
         return state;
       }
-
       const index = state.groups.findIndex((group) => group.id === action.id);
       state.groups[index].name = action.name;
+      setUserData({
+        ...state,
+        groups: [...state.groups]
+      })
       return {
         ...state,
         groups: [...state.groups]
       }
+    }
+    case "DELETE_GROUP": {
+      if (action.id === undefined) {
+        console.error('Operation DELETE_GROUP requires {id} attribute');
+        return state;
+      }
+      const index = state.groups.findIndex((group) => group.id === action.id);
+      let newGroups = [...state.groups];
+      if (index >= 0) {
+        // Remove group from index
+        newGroups.splice(index, 1);
+      } else {
+        console.warn(
+          `Cant remove group (id: ${action.id}) as it does not exist.`
+        );
+      }
+      setUserData({
+        ...state,
+        groups: newGroups,
+      });
+      return {
+        ...state,
+        groups: newGroups,
+      };
+    }
+    // POP UPS
+    case "SET_POP_UP": {
+      if (action.popUp === undefined) {
+        console.error('Operation SET_POP_UP requires {popUp} attribute');
+        return state;
+      }
+      setUserData({
+        ...state,
+        popUp: action.popUp,
+      });
+      return {
+        ...state,
+        popUp: action.popUp,
+      };
+    }
+    case "CLOSE_POP_UP": {
+      setUserData({
+        ...state,
+        popUp: null,
+      });
+      return {
+        ...state,
+        popUp: null,
+      };
     }
     // AUTHENTICATION
     case "SIGN_OUT": {
@@ -288,7 +341,6 @@ const reducer = (state: Data, action: Action): Data => {
         console.error('Operation SET_USER requires {user} attribute');
         return state;
       }
-
       return {
         ...state,
         user: action.user,

@@ -1,0 +1,29 @@
+.more_pop_up {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 250px;
+  width: 190px;
+  background-color: white;
+  transform: translateY(-26px);
+  box-shadow: 0 0 10px 3px lightgray;
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+}
+
+.more_pop_up > button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 190px;
+  height: 36px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.more_pop_up > button:hover { 
+  background-color: rgb(240, 240, 240);
+}

@@ -2,7 +2,7 @@ import "./MainPage.css";
 import React, { useEffect, useState } from "react";
 import { useStateValue } from "StateProvider";
 import { useParams } from "react-router-dom";
-import { SideBar, SkillTree, SkillEdit, UserAuthDialog } from "./components";
+import { SideBar, SkillTree, SkillEdit, PopUps } from "./components";
 import { Skill, Data } from "types";
 
 export const MainPage = () => {
@@ -18,14 +18,20 @@ export const MainPage = () => {
     });
   };
 
+  const closePopUp = () => {
+    dispatch({
+      type: "CLOSE_POP_UP"
+    })
+  }
+
   return (
     <>
-      <div className="main_page" onClick={(e) => handleClick(e)}>
+      <div id="main_page" className="main_page" onClick={(e) => handleClick(e)}>
         <SideBar openAuth={() => setAuthOpen(true)} />
         <SkillTree skills={skills.filter((skill: Skill) => skill.group.id === groupId)} />
         {activeSkill ? <SkillEdit /> : null}
       </div>
-      <UserAuthDialog open={authOpen} close={() => setAuthOpen(false)} />
+      <PopUps />
     </>
   );
 }

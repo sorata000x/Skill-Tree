@@ -12,16 +12,19 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import { useStateValue } from "StateProvider";
 
-export interface Props {
-  open: boolean,
-  close: Function,
-}
-
-export const UserAuthDialog = ({ open, close }: Props) => {
+export const UserAuthDialog = () => {
   const [type, setType] = useState("login");
   const navigate = useNavigate();
   const [maxWidth, setMaxWidth] = React.useState<DialogProps['maxWidth']>('lg');
+  const [{popUp}, dispatch] = useStateValue();
+
+  const close = () => {
+    dispatch({
+      type: "CLOSE_POP_UP"
+    })
+  }
 
   const signIn = (e: React.FormEvent<HTMLFormElement>) => {
     //if (!(e.target instanceof HTMLInputElement)) return;
@@ -66,7 +69,7 @@ export const UserAuthDialog = ({ open, close }: Props) => {
   };
 
   return (
-    <Dialog open={open} onClose={()=>close()} maxWidth={maxWidth}>
+    <Dialog open={popUp?.type === 'user_auth_dialog'} onClose={()=>close()} maxWidth={maxWidth}>
       <div className="dialog_container">
         <DialogTitle>
           {type === "login" ? "Sign In" : "Create Your Account"}
