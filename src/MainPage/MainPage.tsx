@@ -6,8 +6,8 @@ import { SideBar, SkillTree, SkillEdit, PopUps } from "./components";
 import { Skill, Data } from "types";
 
 export const MainPage = () => {
-  const [{skills, activeSkill}, dispatch] = useStateValue();
-  const groupId = useParams().pathParam;   // get current group from url parameter
+  const [{ skills, activeSkill }, dispatch] = useStateValue();
+  const groupId = useParams().pathParam; // get current group from url parameter
   const [authOpen, setAuthOpen] = useState(false);
 
   const handleClick = (e: React.MouseEvent) => {
@@ -20,18 +20,20 @@ export const MainPage = () => {
 
   const closePopUp = () => {
     dispatch({
-      type: "CLOSE_POP_UP"
-    })
-  }
+      type: "CLOSE_POP_UP",
+    });
+  };
 
   return (
     <>
       <div id="main_page" className="main_page" onClick={(e) => handleClick(e)}>
         <SideBar openAuth={() => setAuthOpen(true)} />
-        <SkillTree skills={skills.filter((skill: Skill) => skill.group.id === groupId)} />
+        <SkillTree
+          skills={skills.filter((skill: Skill) => skill.group.id === groupId)}
+        />
         {activeSkill ? <SkillEdit /> : null}
       </div>
       <PopUps />
     </>
   );
-}
+};

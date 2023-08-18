@@ -1,18 +1,17 @@
-import { useStateValue } from 'StateProvider';
-import React, { useEffect, useState } from 'react';
+import { useStateValue } from "StateProvider";
+import React, { useEffect, useState } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import { Skill } from 'types';
+import { Skill } from "types";
 import "./SkillProgress.css";
 
 export interface Props {
-  id: string,
-  level: number,
-  maxLevel: number, 
+  id: string;
+  level: number;
+  maxLevel: number;
 }
 
-export const SkillProgress = ({id, level, maxLevel}: Props) => {
-
-  const [{activeSkill}, dispatch] = useStateValue();
+export const SkillProgress = ({ id, level, maxLevel }: Props) => {
+  const [{ activeSkill }, dispatch] = useStateValue();
 
   return (
     <div
@@ -28,6 +27,5 @@ export const SkillProgress = ({id, level, maxLevel}: Props) => {
         })}
       />
     </div>
-  )
-}
-
+  );
+};

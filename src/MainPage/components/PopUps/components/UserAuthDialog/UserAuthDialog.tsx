@@ -17,14 +17,14 @@ import { useStateValue } from "StateProvider";
 export const UserAuthDialog = () => {
   const [type, setType] = useState("login");
   const navigate = useNavigate();
-  const [maxWidth, setMaxWidth] = React.useState<DialogProps['maxWidth']>('lg');
-  const [{popUp}, dispatch] = useStateValue();
+  const [maxWidth, setMaxWidth] = React.useState<DialogProps["maxWidth"]>("lg");
+  const [{ popUp }, dispatch] = useStateValue();
 
   const close = () => {
     dispatch({
-      type: "CLOSE_POP_UP"
-    })
-  }
+      type: "CLOSE_POP_UP",
+    });
+  };
 
   const signIn = (e: React.FormEvent<HTMLFormElement>) => {
     //if (!(e.target instanceof HTMLInputElement)) return;
@@ -52,7 +52,7 @@ export const UserAuthDialog = () => {
         // successfully created a new user with email and password
         if (auth) {
           close();
-          navigate('/');
+          navigate("/");
         }
       })
       .catch((error) => alert(error.message));
@@ -69,7 +69,11 @@ export const UserAuthDialog = () => {
   };
 
   return (
-    <Dialog open={popUp?.type === 'user_auth_dialog'} onClose={()=>close()} maxWidth={maxWidth}>
+    <Dialog
+      open={popUp?.type === "user_auth_dialog"}
+      onClose={() => close()}
+      maxWidth={maxWidth}
+    >
       <div className="dialog_container">
         <DialogTitle>
           {type === "login" ? "Sign In" : "Create Your Account"}
@@ -115,7 +119,7 @@ export const UserAuthDialog = () => {
             <Button type="submit" variant="contained">
               OK
             </Button>
-            <Button variant="outlined" onClick={()=>close()}>
+            <Button variant="outlined" onClick={() => close()}>
               Cancel
             </Button>
           </DialogActions>
@@ -123,4 +127,4 @@ export const UserAuthDialog = () => {
       </div>
     </Dialog>
   );
-}
+};

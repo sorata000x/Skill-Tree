@@ -5,11 +5,11 @@
   justify-content: space-between;
 }
 
-.skill_edit > .action_buttons > button { 
+.skill_edit > .action_buttons > button {
   color: rgb(100, 100, 100);
   cursor: pointer;
 }
 
-.skill_edit > .action_buttons > button:hover { 
+.skill_edit > .action_buttons > button:hover {
   color: black;
 }

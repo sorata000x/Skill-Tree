@@ -7,10 +7,10 @@ import { HiOutlinePlus } from "react-icons/hi";
 import "./NewGroupButton.css";
 
 export interface Props {
-  groups: Array<Group>,
+  groups: Array<Group>;
 }
 
-export const NewGroupButton = ({groups}: Props) => {
+export const NewGroupButton = ({ groups }: Props) => {
   const [{}, dispatch] = useStateValue();
   const navigate = useNavigate();
 
@@ -32,12 +32,12 @@ export const NewGroupButton = ({groups}: Props) => {
 
   return (
     <button
-      title="add new group" 
-      className="new_group_button" 
+      title="add new group"
+      className="new_group_button"
       onClick={addNewGroup}
-      >
+    >
       <HiOutlinePlus className="icon" size={14} />
       New Group
     </button>
   );
-}
+};

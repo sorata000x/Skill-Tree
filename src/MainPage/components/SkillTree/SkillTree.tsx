@@ -15,11 +15,16 @@ import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import "./SkillTree.css";
 import { v4 as uuid } from "uuid";
 import { useStateValue } from "StateProvider";
-import { Instruction, SkillLinks, SkillNodeLayer, SkillNodeContainer } from "./components";
+import {
+  Instruction,
+  SkillLinks,
+  SkillNodeLayer,
+  SkillNodeContainer,
+} from "./components";
 import { Skill, Buttons } from "types";
 
 export interface Props {
-  skills: Array<Skill>,   // skills to display
+  skills: Array<Skill>; // skills to display
 }
 
 // Tree of skill nodes and their links.
@@ -29,9 +34,13 @@ export const SkillTree = ({ skills }: Props) => {
   const group = activeGroup;
 
   // Find the nearest (positioned) parent id of a skill.
-  const getNearestParent = (px: number, py: number, id: string = '') => {
+  const getNearestParent = (px: number, py: number, id: string = "") => {
     // Get the distance from a parent node to a given point
-    const getParentDist = (parent: React.RefObject<HTMLButtonElement>, px: number, py: number) => {
+    const getParentDist = (
+      parent: React.RefObject<HTMLButtonElement>,
+      px: number,
+      py: number
+    ) => {
       if (!parent.current) {
         return Infinity;
       }
@@ -43,7 +52,7 @@ export const SkillTree = ({ skills }: Props) => {
       return dy >= 0 ? Math.sqrt(dx * dx + dy * dy) : Infinity;
     };
     // Calculate the distance of each parent skills and find the nearest one
-    let [target, minDist] = ['', Infinity];
+    let [target, minDist] = ["", Infinity];
     skills.forEach((skill) => {
       let dist = getParentDist(buttons[skill.id], px, py);
       if (dist < minDist && skill.id !== id) {
@@ -55,8 +64,8 @@ export const SkillTree = ({ skills }: Props) => {
     return target;
   };
 
-  /* 
-   * Dnd-kit Sortable 
+  /*
+   * Dnd-kit Sortable
    */
 
   const sensors = useSensors(
@@ -93,18 +102,21 @@ export const SkillTree = ({ skills }: Props) => {
       active: active,
       over: over,
     });
-    setDragOverlay('');
+    setDragOverlay("");
   };
 
-  const [dragOverlaySkills, setDragOverlaySkills]: [Array<Skill>, Function] = useState([]);
-  const [dragOverlayButtons, setDragOverlayButtons]: [Buttons, Function] = useState({});
-  const [draggingSkillIDs, setDraggingSkillIDs]: [Array<string>, Function] = useState([]);
+  const [dragOverlaySkills, setDragOverlaySkills]: [Array<Skill>, Function] =
+    useState([]);
+  const [dragOverlayButtons, setDragOverlayButtons]: [Buttons, Function] =
+    useState({});
+  const [draggingSkillIDs, setDraggingSkillIDs]: [Array<string>, Function] =
+    useState([]);
 
   // Copy over skills (with different IDs) starting from the target id for DragOverlay.
   const copySkills = (id: string) => {
     // Copy over sub array of skills from the given skill id
     let newSkills = [JSON.parse(JSON.stringify(getSkillByID(id)))];
-    for (let i=0; i<newSkills.length; i++) {
+    for (let i = 0; i < newSkills.length; i++) {
       for (const s of skills) {
         if (s.parent === newSkills[i].id) {
           newSkills = [...newSkills, JSON.parse(JSON.stringify(s))];
@@ -147,7 +159,7 @@ export const SkillTree = ({ skills }: Props) => {
     setDragOverlaySkills(newDragOverlaySkills);
     setDragOverlayButtons(createButtons(newDragOverlaySkills));
     let newDraggingSkillIDs = [id];
-    for (let i=0; i<newDraggingSkillIDs.length; i++) {
+    for (let i = 0; i < newDraggingSkillIDs.length; i++) {
       for (const s of skills) {
         if (s.parent === newDraggingSkillIDs[i]) {
           newDraggingSkillIDs = [...newDraggingSkillIDs, s.id];
@@ -194,52 +206,53 @@ export const SkillTree = ({ skills }: Props) => {
   }, [activeSkill]);
 
   return (
-    <div className="skill_tree"> {
-      (!groups.length || !skills.length) ? 
-      <Instruction 
-        group={group}
-        skills={skills}
-        handleDoubleClick={handleDoubleClick}
-      /> :
-      <div
-        className={"container" + (activeSkill ? " expand" : "")}
-        onDoubleClick={handleDoubleClick}
-      >
-        {skills.length ? (
-          <>
-            <DndContext
-              sensors={sensors}
-              collisionDetection={closestCorners}
-              onDragStart={handleDragStart}
-              onDragEnd={handleDragEnd}
-            >
-              <SkillNodeLayer 
-                id="root" 
-                skills={skills} 
-                buttons={buttons}
-                />
-              <DragOverlay dropAnimation={dropAnimation}>
-                {dragOverlaySkills.length ? (
-                  <SkillNodeContainer
-                    key={dragOverlaySkills[0] ? dragOverlaySkills[0].id : null}
-                    skill={dragOverlaySkills[0]}
-                    skills={dragOverlaySkills}
-                    buttons={dragOverlayButtons}
-                    isDragOverlay={true}
-                  />
-                ) : null}
-              </DragOverlay>
-            </DndContext>
-            <SkillLinks
-              skills={[...skills, ...dragOverlaySkills]}
-              buttons={{ ...buttons, ...dragOverlayButtons }}
-              excludes={draggingSkillIDs}
-            />
-          </>
-        ) : null}
-      </div>
-    }</div>
+    <div className="skill_tree">
+      {" "}
+      {!groups.length || !skills.length ? (
+        <Instruction
+          group={group}
+          skills={skills}
+          handleDoubleClick={handleDoubleClick}
+        />
+      ) : (
+        <div
+          className={"container" + (activeSkill ? " expand" : "")}
+          onDoubleClick={handleDoubleClick}
+        >
+          {skills.length ? (
+            <>
+              <DndContext
+                sensors={sensors}
+                collisionDetection={closestCorners}
+                onDragStart={handleDragStart}
+                onDragEnd={handleDragEnd}
+              >
+                <SkillNodeLayer id="root" skills={skills} buttons={buttons} />
+                <DragOverlay dropAnimation={dropAnimation}>
+                  {dragOverlaySkills.length ? (
+                    <SkillNodeContainer
+                      key={
+                        dragOverlaySkills[0] ? dragOverlaySkills[0].id : null
+                      }
+                      skill={dragOverlaySkills[0]}
+                      skills={dragOverlaySkills}
+                      buttons={dragOverlayButtons}
+                      isDragOverlay={true}
+                    />
+                  ) : null}
+                </DragOverlay>
+              </DndContext>
+              <SkillLinks
+                skills={[...skills, ...dragOverlaySkills]}
+                buttons={{ ...buttons, ...dragOverlayButtons }}
+                excludes={draggingSkillIDs}
+              />
+            </>
+          ) : null}
+        </div>
+      )}
+    </div>
   );
-}
+};
 
 export default SkillTree;

@@ -1,4 +1,14 @@
 .node_button {
+  display: grid;
+  align-items: center;
+  width: 120px;
+  height: 140px;
+  pointer-events: auto;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.node_button > button {
   background-color: white;
   border: none;
   border-radius: 50%;

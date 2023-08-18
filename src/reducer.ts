@@ -3,7 +3,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { createRef } from "react";
 import { arrayMove } from "@dnd-kit/sortable";
 import { v4 as uuid } from "uuid";
-import type { Data, Skill, Group, Buttons, Action } from "types"
+import type { Data, Skill, Group, Buttons, Action } from "types";
 import { User } from "firebase/auth";
 
 // Send current data to storage
@@ -32,15 +32,17 @@ const emptyState: Data = {
 // Get initial state from local storage or set to empty
 const getInitialState = (): Data => {
   // Reference: [StackOverflow] Argument of type 'string | null' is not assignable to parameter of type 'string'. Type 'null' is not assignable to type 'string' | https://stackoverflow.com/questions/46915002/argument-of-type-string-null-is-not-assignable-to-parameter-of-type-string
-  const skills: Array<Skill> = JSON.parse(localStorage.getItem("skills") || '{}')
-    ? JSON.parse(localStorage.getItem("skills") || '{}')
+  const skills: Array<Skill> = JSON.parse(
+    localStorage.getItem("skills") || "{}"
+  )
+    ? JSON.parse(localStorage.getItem("skills") || "{}")
     : [];
   const buttons: Buttons = {};
   for (const skill of skills) {
     buttons[skill.id] = createRef();
   }
-  const groups = JSON.parse(localStorage.getItem("groups") || '{}')
-    ? JSON.parse(localStorage.getItem("groups") || '{}')
+  const groups = JSON.parse(localStorage.getItem("groups") || "{}")
+    ? JSON.parse(localStorage.getItem("groups") || "{}")
     : [];
   return {
     skills: skills,
@@ -60,7 +62,7 @@ const reducer = (state: Data, action: Action): Data => {
     // SKILLS
     case "SET_SKILLS": {
       if (action.skills === undefined) {
-        console.error('Operation SET_SKILLS requires {skills} attribute');
+        console.error("Operation SET_SKILLS requires {skills} attribute");
         return state;
       }
       // relace all the skills with a new set of skills
@@ -79,11 +81,11 @@ const reducer = (state: Data, action: Action): Data => {
     }
     case "SET_SKILL": {
       if (action.id === undefined || action.skill === undefined) {
-        console.error('Operation SET_SKILL requires {id, skill} attributes');
+        console.error("Operation SET_SKILL requires {id, skill} attributes");
         return state;
       }
       // Set an existing skill
-      let newSkills = [...state.skills]
+      let newSkills = [...state.skills];
       let index = newSkills.findIndex((skill) => skill.id === action.id);
       newSkills[index] = action.skill;
       setUserData({
@@ -97,7 +99,9 @@ const reducer = (state: Data, action: Action): Data => {
     }
     case "ADD_SKILL": {
       if (action.parentID === undefined || action.group === undefined) {
-        console.error('Operation ADD_SKILL requires {parentID, group} attribute');
+        console.error(
+          "Operation ADD_SKILL requires {parentID, group} attribute"
+        );
         return state;
       }
       // add a new skill. action = {skill}
@@ -109,7 +113,7 @@ const reducer = (state: Data, action: Action): Data => {
         level: 0,
         maxLevel: 10,
         increaseBy: 1,
-        image: '',
+        image: "",
         description: "",
         group: action.group,
       };
@@ -125,14 +129,16 @@ const reducer = (state: Data, action: Action): Data => {
     }
     case "DROP_SKILL": {
       if (action.active === undefined || action.over === undefined) {
-        console.error('Operation DROP_SKILL requires {active, over} attributes');
+        console.error(
+          "Operation DROP_SKILL requires {active, over} attributes"
+        );
         return state;
       }
       // Whether node1 is descendent of node2
       const isDescendent = (node1: Skill, node2: Skill) => {
         let current = node1;
         for (const _ of state.skills) {
-          if (current.parent === 'root') {
+          if (current.parent === "root") {
             return false;
           }
           if (node2.id === current.parent) {
@@ -145,7 +151,7 @@ const reducer = (state: Data, action: Action): Data => {
           }
         }
         return false;
-      }
+      };
       let activeIndex = state.skills.findIndex(
         (skill) => skill.id === action.active?.id
       );
@@ -168,18 +174,18 @@ const reducer = (state: Data, action: Action): Data => {
     }
     case "DELETE_SKILL": {
       if (action.id === undefined) {
-        console.error('Operation DELETE_SKILL requires {id} attribute');
+        console.error("Operation DELETE_SKILL requires {id} attribute");
         return state;
       }
       const index = state.skills.findIndex((skill) => skill.id === action.id);
       let newSkills = [...state.skills];
       if (index >= 0) {
         // Update children's parent to skill's parent
-        for (let i=0; i < newSkills.length; i++) {
+        for (let i = 0; i < newSkills.length; i++) {
           if (newSkills[i].parent === newSkills[index].id) {
             newSkills[i].parent = newSkills[index].parent;
             // Move children to skill's original position
-            newSkills = arrayMove(newSkills, i, index)
+            newSkills = arrayMove(newSkills, i, index);
           }
         }
         // Remove skill from index
@@ -212,7 +218,9 @@ const reducer = (state: Data, action: Action): Data => {
     }
     case "SET_ACTIVE_SKILL": {
       if (action.activeSkill === undefined) {
-        console.error('Operation SET_ACTIVE_SKILL requires {activeSkill} attribute');
+        console.error(
+          "Operation SET_ACTIVE_SKILL requires {activeSkill} attribute"
+        );
         return state;
       }
       return {
@@ -223,7 +231,7 @@ const reducer = (state: Data, action: Action): Data => {
     // GROUP
     case "SET_GROUPS": {
       if (action.groups === undefined) {
-        console.error('Operation SET_GROUPS requires {groups} attribute');
+        console.error("Operation SET_GROUPS requires {groups} attribute");
         return state;
       }
       let newGroups = action.groups;
@@ -238,7 +246,7 @@ const reducer = (state: Data, action: Action): Data => {
     }
     case "ADD_NEW_GROUP": {
       if (!action.group) {
-        console.error('Operation ADD_NEW_GROUP requires {group} attribute');
+        console.error("Operation ADD_NEW_GROUP requires {group} attribute");
         return state;
       }
       setUserData({
@@ -252,14 +260,14 @@ const reducer = (state: Data, action: Action): Data => {
     }
     case "SET_ACTIVE_GROUP": {
       if (action.id === undefined) {
-        console.error('Operation SET_ACTIVE_GROUP requires {id} attribute');
+        console.error("Operation SET_ACTIVE_GROUP requires {id} attribute");
         return state;
       }
       const index = state.groups.findIndex((group) => group.id === action.id);
       setUserData({
         ...state,
         activeGroup: index >= 0 ? state.groups[index] : null,
-      })
+      });
       return {
         ...state,
         activeGroup: index >= 0 ? state.groups[index] : null,
@@ -267,23 +275,23 @@ const reducer = (state: Data, action: Action): Data => {
     }
     case "SET_GROUP_NAME": {
       if (action.id === undefined || action.name === undefined) {
-        console.error('Operation SET_GROUP_NAME requires {id, name} attribute');
+        console.error("Operation SET_GROUP_NAME requires {id, name} attribute");
         return state;
       }
       const index = state.groups.findIndex((group) => group.id === action.id);
       state.groups[index].name = action.name;
       setUserData({
         ...state,
-        groups: [...state.groups]
-      })
+        groups: [...state.groups],
+      });
       return {
         ...state,
-        groups: [...state.groups]
-      }
+        groups: [...state.groups],
+      };
     }
     case "DELETE_GROUP": {
       if (action.id === undefined) {
-        console.error('Operation DELETE_GROUP requires {id} attribute');
+        console.error("Operation DELETE_GROUP requires {id} attribute");
         return state;
       }
       const index = state.groups.findIndex((group) => group.id === action.id);
@@ -308,7 +316,7 @@ const reducer = (state: Data, action: Action): Data => {
     // POP UPS
     case "SET_POP_UP": {
       if (action.popUp === undefined) {
-        console.error('Operation SET_POP_UP requires {popUp} attribute');
+        console.error("Operation SET_POP_UP requires {popUp} attribute");
         return state;
       }
       setUserData({
@@ -338,7 +346,7 @@ const reducer = (state: Data, action: Action): Data => {
     }
     case "SET_USER": {
       if (action.user === undefined) {
-        console.error('Operation SET_USER requires {user} attribute');
+        console.error("Operation SET_USER requires {user} attribute");
         return state;
       }
       return {

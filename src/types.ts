@@ -1,62 +1,62 @@
 import { User } from "firebase/auth";
 
 export interface Skill {
-  id: string,
-  parent: string,
-  children: Array<Skill>,
-  title: string,
-  level: number,
-  maxLevel: number,
-  increaseBy: number,
-  image: string,
-  description: string,
-  group: Group,
+  id: string;
+  parent: string;
+  children: Array<Skill>;
+  title: string;
+  level: number;
+  maxLevel: number;
+  increaseBy: number;
+  image: string;
+  description: string;
+  group: Group;
 }
 
 export interface Group {
-  id: string,
-  name: string,
+  id: string;
+  name: string;
 }
 
-export interface Buttons { 
-  [key: string]: React.RefObject<HTMLButtonElement> 
+export interface Buttons {
+  [key: string]: React.RefObject<HTMLButtonElement>;
 }
 
 export interface PopUp {
-  type: string,
+  type: string;
   // type: more_pop_up
-  group?: Group,
-  editGroupName?: Function,
-  top?: number,
-  left?: number,
+  group?: Group;
+  editGroupName?: Function;
+  top?: number;
+  left?: number;
 }
 
 export interface Data {
-  skills: Array<Skill>,
-  activeSkill: Skill | null,
-  buttons: Buttons,
-  groups: Array<Group>,
-  activeGroup: Group | null,
-  popUp: PopUp | null,
-  user: User | null,
+  skills: Array<Skill>;
+  activeSkill: Skill | null;
+  buttons: Buttons;
+  groups: Array<Group>;
+  activeGroup: Group | null;
+  popUp: PopUp | null;
+  user: User | null;
 }
 
 export interface Links {
-  [key: string]: React.ReactElement<any, any>,
+  [key: string]: React.ReactElement<any, any>;
 }
 
 export interface Action {
-  type: string,
-  id?: string,
-  skill?: Skill,
-  skills?: Array<Skill>,
-  parentID?: string,
-  group?: Group,
-  active?: Skill,
-  over?: Skill,
-  activeSkill?: Skill,
-  groups: Array<Group>,
-  name: string,
-  popUp: PopUp,
-  user: User,
+  type: string;
+  id?: string;
+  skill?: Skill;
+  skills?: Array<Skill>;
+  parentID?: string;
+  group?: Group;
+  active?: Skill;
+  over?: Skill;
+  activeSkill?: Skill;
+  groups: Array<Group>;
+  name: string;
+  popUp: PopUp;
+  user: User;
 }

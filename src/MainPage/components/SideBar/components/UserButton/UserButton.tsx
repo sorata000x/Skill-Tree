@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 import "./UserButton.css";
 
 export interface Props {
-  openAuth: Function,
+  openAuth: Function;
 }
 
-export const UserButton = ({openAuth}: Props) => {
-  const [{user}, dispatch] = useStateValue();
+export const UserButton = ({ openAuth }: Props) => {
+  const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
 
   const handleAuthentication = () => {
@@ -18,7 +18,7 @@ export const UserButton = ({openAuth}: Props) => {
       dispatch({
         type: "SIGN_OUT",
       });
-      navigate('/');
+      navigate("/");
     } else {
       openAuth();
     }
@@ -26,7 +26,7 @@ export const UserButton = ({openAuth}: Props) => {
 
   return (
     <button className="user_button" onClick={handleAuthentication}>
-      {user ? user.email : 'Login'}
+      {user ? user.email : "Login"}
     </button>
   );
-}
+};

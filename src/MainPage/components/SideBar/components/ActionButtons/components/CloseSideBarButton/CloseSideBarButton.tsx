@@ -3,14 +3,14 @@ import { FiSidebar } from "react-icons/fi";
 import "./CloseSideBarButton.css";
 
 export interface Props {
-  handleClick: Function,
+  handleClick: Function;
 }
 
-export const CloseSideBarButton = ({handleClick}: Props) => {
+export const CloseSideBarButton = ({ handleClick }: Props) => {
   return (
-    <button 
+    <button
       title="close side bar"
-      className="close_side_bar_button" 
+      className="close_side_bar_button"
       onClick={(e) => handleClick(e)}
     >
       <FiSidebar />

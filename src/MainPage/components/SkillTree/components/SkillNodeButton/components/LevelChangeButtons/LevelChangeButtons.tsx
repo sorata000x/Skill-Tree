@@ -5,17 +5,23 @@ import { HiOutlinePlus, HiOutlineMinus } from "react-icons/hi";
 import { Skill } from "types.js";
 
 export interface Props {
-  level: number,
-  maxLevel: number, 
-  increaseBy: number,
-  setLevel: Function,
+  level: number;
+  maxLevel: number;
+  increaseBy: number;
+  setLevel: Function;
 }
 
-export const LevelChangeButtons = ({level, maxLevel, increaseBy, setLevel}: Props) => {
-
+export const LevelChangeButtons = ({
+  level,
+  maxLevel,
+  increaseBy,
+  setLevel,
+}: Props) => {
   const [, dispatch] = useStateValue();
 
-  const increaseLevel = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const increaseLevel = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     //e.stopPropagation();
     let newLevel = level + increaseBy;
     if (newLevel <= maxLevel) {
@@ -25,7 +31,9 @@ export const LevelChangeButtons = ({level, maxLevel, increaseBy, setLevel}: Prop
     }
   };
 
-  const decreaseLevel = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const decreaseLevel = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     //e.stopPropagation();
     let newLevel = level - increaseBy;
     if (newLevel >= 0) {

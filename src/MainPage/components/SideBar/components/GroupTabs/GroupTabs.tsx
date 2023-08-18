@@ -5,7 +5,7 @@ import { Group } from "types";
 import "./GroupTabs.css";
 
 export const GroupTabs = () => {
-  const [{groups}, ] = useStateValue();
+  const [{ groups }] = useStateValue();
 
   return (
     <div className="group_tabs">
@@ -13,5 +13,5 @@ export const GroupTabs = () => {
         <GroupTab key={group.id} group={group} />
       ))}
     </div>
-  )
-}
+  );
+};

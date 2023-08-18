@@ -3,16 +3,16 @@ import React from "react";
 import "./components.css";
 
 export interface InputProps {
-  handleChange: (type: string, value: any) => Promise<void>,
+  handleChange: (type: string, value: any) => Promise<void>;
 }
 
 export interface ActionButtonsProps {
-  close: Function,
+  close: Function;
 }
 
-export const TitleInput = ({handleChange}: InputProps) => {
-  const [{activeSkill}, ] = useStateValue();
- 
+export const TitleInput = ({ handleChange }: InputProps) => {
+  const [{ activeSkill }] = useStateValue();
+
   return (
     <div className="title_input">
       <label htmlFor="title">Title</label>
@@ -24,11 +24,11 @@ export const TitleInput = ({handleChange}: InputProps) => {
         onChange={(e) => handleChange("title", e.target.value)}
       />
     </div>
-  )
-}
+  );
+};
 
-export const LevelInput = ({handleChange}: InputProps) => {
-  const [{activeSkill}, ] = useStateValue();
+export const LevelInput = ({ handleChange }: InputProps) => {
+  const [{ activeSkill }] = useStateValue();
 
   return (
     <div className="level_input">
@@ -43,11 +43,11 @@ export const LevelInput = ({handleChange}: InputProps) => {
         onChange={(e) => handleChange("level", e.target.value)}
       />
     </div>
-  )
-}
+  );
+};
 
-export const MaxLevelInput = ({handleChange}: InputProps) => {
-  const [{activeSkill}, ] = useStateValue();
+export const MaxLevelInput = ({ handleChange }: InputProps) => {
+  const [{ activeSkill }] = useStateValue();
 
   return (
     <div className="max_level_input">
@@ -62,11 +62,11 @@ export const MaxLevelInput = ({handleChange}: InputProps) => {
         onChange={(e) => handleChange("maxLevel", e.target.value)}
       />
     </div>
-  )
-}
+  );
+};
 
-export const IncreaseByInput = ({handleChange}: InputProps) => {
-  const [{activeSkill}, ] = useStateValue();
+export const IncreaseByInput = ({ handleChange }: InputProps) => {
+  const [{ activeSkill }] = useStateValue();
 
   return (
     <div className="increase_by_input">
@@ -81,10 +81,10 @@ export const IncreaseByInput = ({handleChange}: InputProps) => {
         onChange={(e) => handleChange("increaseBy", e.target.value)}
       />
     </div>
-  )
-}
+  );
+};
 
-export const ImageUpload = ({handleChange}: InputProps) => {
+export const ImageUpload = ({ handleChange }: InputProps) => {
   return (
     <div className="image_upload">
       <label htmlFor="upload_image">Image</label>
@@ -95,11 +95,11 @@ export const ImageUpload = ({handleChange}: InputProps) => {
         accept="/image/*"
       />
     </div>
-  )
-}
+  );
+};
 
-export const DescriptionInput = ({handleChange}: InputProps) => {
-  const [{activeSkill}, ] = useStateValue();
+export const DescriptionInput = ({ handleChange }: InputProps) => {
+  const [{ activeSkill }] = useStateValue();
 
   return (
     <div className="description_input">
@@ -112,10 +112,10 @@ export const DescriptionInput = ({handleChange}: InputProps) => {
         onChange={(e) => handleChange("description", e.target.value)}
       />
     </div>
-  )
-}
+  );
+};
 
-export const ActionButtons = ({close}: ActionButtonsProps) => {
+export const ActionButtons = ({ close }: ActionButtonsProps) => {
   return (
     <div className="action_buttons">
       <button className="ok" type="submit">
@@ -125,5 +125,5 @@ export const ActionButtons = ({close}: ActionButtonsProps) => {
         Cancel
       </button>
     </div>
-  )
-}
+  );
+};

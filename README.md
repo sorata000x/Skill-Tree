@@ -8,23 +8,19 @@ To Myself:
 ## Introduction
 
 This project is inspired by skill tree of various video game, as well as tree data structure in computer science.
-My aim is to combine these concepts to help visualizing data in a concise manner and organizing them easily. 
+My aim is to combine these concepts to help visualizing data in a concise manner and organizing them easily.
 
 ## Doing
-
-Core Feature
-
-- Delete group
 
 ## To Do
 
 Bug Fix
 
-- 
+- Re-implement auth dialog
 
 Core Feature
 
-- Delete group
+-
 
 Basic Feature
 
@@ -51,15 +47,19 @@ UI
 
 ## Done
 
-Advance Feature
+Core Feature
 
-- Add picture to skill node
+- Delete group
 
 Basic Feature
 
 - Editing group name
 - Make skill tree scrollable so every nodes can be seen
 - Store active skill and group in state provider and highlights corresponding buttons
+
+Advance Feature
+
+- Add picture to skill node
 
 UI
 

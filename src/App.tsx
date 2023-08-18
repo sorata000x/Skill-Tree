@@ -1,7 +1,12 @@
 import "./App.css";
 import React, { useEffect } from "react";
 import { useStateValue } from "./StateProvider";
-import { BrowserRouter as Router, Route, Routes, useParams } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useParams,
+} from "react-router-dom";
 import { db, auth } from "./firebase.ts";
 import { doc, getDoc, collection } from "firebase/firestore";
 import { MainPage } from "MainPage";
@@ -33,12 +38,11 @@ function App() {
       }
     });
     // Set active group
-    if (!urlParam)
-      return;
+    if (!urlParam) return;
     dispatch({
       type: "SET_ACTIVE_GROUP",
       id: urlParam,
-    })
+    });
   }, []);
 
   useEffect(() => {
@@ -62,7 +66,7 @@ function App() {
           dispatch({
             type: "SET_ACTIVE_GROUP",
             id: userDoc.data()?.groups[0].id,
-          })
+          });
         }
       }
     };

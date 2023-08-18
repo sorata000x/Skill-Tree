@@ -1,12 +1,12 @@
 import React from "react";
-import { 
-  TitleInput, 
-  LevelInput, 
-  MaxLevelInput, 
-  IncreaseByInput, 
+import {
+  TitleInput,
+  LevelInput,
+  MaxLevelInput,
+  IncreaseByInput,
   ImageUpload,
   DescriptionInput,
-  ActionButtons, 
+  ActionButtons,
 } from "./components";
 import { useStateValue } from "StateProvider";
 import { storage } from "firebase.ts";
@@ -14,7 +14,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import "./SkillEditForm.css";
 
 export const SkillEditForm = () => {
-  const [{activeSkill, user}, dispatch] = useStateValue();
+  const [{ activeSkill, user }, dispatch] = useStateValue();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,16 +25,15 @@ export const SkillEditForm = () => {
   };
 
   const handleChange = async (type: string, value: any) => {
-    if (!activeSkill)
-      return;
+    if (!activeSkill) return;
     switch (type) {
       case "title": {
-        if(typeof value !== 'string') return;
+        if (typeof value !== "string") return;
         activeSkill.title = value;
         break;
       }
       case "level": {
-        if(typeof value !== 'string') return;
+        if (typeof value !== "string") return;
         const newLevel = parseInt(value);
         // Cap to max level
         if (newLevel <= activeSkill.maxLevel) {
@@ -45,20 +44,22 @@ export const SkillEditForm = () => {
         break;
       }
       case "maxLevel": {
-        if(typeof value !== 'string') return;
+        if (typeof value !== "string") return;
         activeSkill.maxLevel = parseInt(value);
         break;
       }
       case "increaseBy": {
-        if(typeof value !== 'string') return;
+        if (typeof value !== "string") return;
         activeSkill.increaseBy = parseInt(value);
         break;
       }
       case "image": {
-        if(value instanceof Blob || 
-           value instanceof Uint8Array ||
-           value instanceof ArrayBuffer) 
-         return;
+        if (
+          value instanceof Blob ||
+          value instanceof Uint8Array ||
+          value instanceof ArrayBuffer
+        )
+          return;
         if (user) {
           // Reference: How to upload image and Preview it using ReactJS ? | https://www.geeksforgeeks.org/how-to-upload-image-and-preview-it-using-reactjs/
           // Reference: Firebase Storage | https://modularfirebase.web.app/common-use-cases/storage/
@@ -108,16 +109,16 @@ export const SkillEditForm = () => {
 
   return (
     <form className="skill_edit_form" onSubmit={handleSubmit}>
-        <TitleInput handleChange={handleChange} />
-        <div className="form-level-group">
-          <LevelInput handleChange={handleChange} />
-          <div className="level-divider"> / </div>
-          <MaxLevelInput handleChange={handleChange} />
-          <IncreaseByInput handleChange={handleChange} />
-        </div>
-        {user && <ImageUpload handleChange={handleChange} />}
-        <DescriptionInput handleChange={handleChange} />
-        <ActionButtons close={close} />
-      </form>
-  )
-}
+      <TitleInput handleChange={handleChange} />
+      <div className="form-level-group">
+        <LevelInput handleChange={handleChange} />
+        <div className="level-divider"> / </div>
+        <MaxLevelInput handleChange={handleChange} />
+        <IncreaseByInput handleChange={handleChange} />
+      </div>
+      {user && <ImageUpload handleChange={handleChange} />}
+      <DescriptionInput handleChange={handleChange} />
+      <ActionButtons close={close} />
+    </form>
+  );
+};

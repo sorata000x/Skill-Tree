@@ -3,9 +3,9 @@ import "./SkillLinks.css";
 import { Buttons, Links, Skill } from "types";
 
 export interface Props {
-  skills: Array<Skill>,      // array of skills to display
-  buttons: Buttons,          // keys of skill ids corresponding to their button reference
-  excludes: Array<string>,   // skill ids to not render link (when they are being dragged)
+  skills: Array<Skill>; // array of skills to display
+  buttons: Buttons; // keys of skill ids corresponding to their button reference
+  excludes: Array<string>; // skill ids to not render link (when they are being dragged)
 }
 
 // Links between skill nodes.
@@ -38,7 +38,13 @@ export const SkillLinks = ({ skills, buttons, excludes }: Props) => {
 
   // Update the positon of the links between the nodes
   const updateLink = (skill: Skill) => {
-    if (!buttons[skill.id] || !buttons[skill.parent] || !buttons[skill.id].current || !buttons[skill.parent].current) return;
+    if (
+      !buttons[skill.id] ||
+      !buttons[skill.parent] ||
+      !buttons[skill.id].current ||
+      !buttons[skill.parent].current
+    )
+      return;
 
     /**
      * Get offsets of given element (for updateChildEdge).
@@ -88,4 +94,4 @@ export const SkillLinks = ({ skills, buttons, excludes }: Props) => {
   };
 
   return Object.values(links);
-}
+};

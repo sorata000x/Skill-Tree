@@ -10,14 +10,19 @@ import { Buttons, Skill } from "types";
 import { v4 as uuid } from "uuid";
 
 export interface Props {
-  id: string              // id of current layer (which is the parent skill id, root if none)
-  skills: Array<Skill>,   // all current skills
-  buttons: Buttons,
-  isDragOverlay?: boolean, // whether the layer is used by DragOverlay
+  id: string; // id of current layer (which is the parent skill id, root if none)
+  skills: Array<Skill>; // all current skills
+  buttons: Buttons;
+  isDragOverlay?: boolean; // whether the layer is used by DragOverlay
 }
 
 // One row of skill nodes.
-export const SkillNodeLayer = ({ id, skills, buttons, isDragOverlay }: Props) => {
+export const SkillNodeLayer = ({
+  id,
+  skills,
+  buttons,
+  isDragOverlay,
+}: Props) => {
   const { setNodeRef } = useDroppable({ id });
 
   return (
@@ -41,6 +46,6 @@ export const SkillNodeLayer = ({ id, skills, buttons, isDragOverlay }: Props) =>
       </div>
     </SortableContext>
   );
-}
+};
 
 export default SkillNodeLayer;

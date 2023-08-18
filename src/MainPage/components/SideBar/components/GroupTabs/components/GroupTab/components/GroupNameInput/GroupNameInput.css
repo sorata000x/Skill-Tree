@@ -5,8 +5,9 @@
   font-size: 12pt;
 }
 
-.group_name_input:active, .group_name_input:focus {
-  border: none
+.group_name_input:active,
+.group_name_input:focus {
+  border: none;
 }
 
 .group_name_input:disabled {

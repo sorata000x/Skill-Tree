@@ -7,15 +7,19 @@ import { SkillNodeLayer } from "../SkillNodeLayer";
 import type { Buttons, Skill } from "types";
 
 export interface Props {
-  skill: Skill,           // the root node of the subtree
-  skills: Array<Skill>,   // array of current skills
-  buttons: Buttons,       // keys of skill ids corresponding to their button reference
-  isDragOverlay?: boolean, // whether this container is used by DragOverlay
+  skill: Skill; // the root node of the subtree
+  skills: Array<Skill>; // array of current skills
+  buttons: Buttons; // keys of skill ids corresponding to their button reference
+  isDragOverlay?: boolean; // whether this container is used by DragOverlay
 }
 
 // A subtree of skill nodes consists of one root node and a node layer as children.
-export const SkillNodeContainer = ({ skill, skills, buttons, isDragOverlay }: Props) => {
-
+export const SkillNodeContainer = ({
+  skill,
+  skills,
+  buttons,
+  isDragOverlay,
+}: Props) => {
   /* For dnd-kit sortable
    * References:
    *  dnd-kit sortable documentation | https://docs.dndkit.com/presets/sortable
@@ -52,6 +56,6 @@ export const SkillNodeContainer = ({ skill, skills, buttons, isDragOverlay }: Pr
       </div>
     </div>
   );
-}
+};
 
 export default SkillNodeContainer;
