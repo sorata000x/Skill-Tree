@@ -7,18 +7,14 @@ import {
   UserButton,
 } from "./components";
 
-export interface Props {
-  openAuth: Function;
-}
-
-export const SideBar = ({ openAuth }: Props) => {
+export const SideBar = () => {
   const [open, setOpen] = useState(true);
 
   return open ? (
     <div className="side_bar">
       <ActionButtons close={() => setOpen(false)} />
       <GroupTabs />
-      <UserButton openAuth={openAuth} />
+      <UserButton />
     </div>
   ) : (
     <OpenSideBarButton handleClick={() => setOpen(true)} />

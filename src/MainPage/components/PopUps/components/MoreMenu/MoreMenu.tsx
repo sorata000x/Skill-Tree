@@ -3,9 +3,9 @@ import { FiMoreHorizontal, FiEdit } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
 import type { Group } from "types";
 import { useStateValue } from "StateProvider";
-import "./MorePopUp.css";
+import "./MoreMenu.css";
 
-export const MorePopUp = () => {
+export const MoreMenu = () => {
   const [{ popUp }, dispatch] = useStateValue();
   const ref: React.RefObject<HTMLDivElement> = createRef();
   const [top, setTop] = useState(-999);

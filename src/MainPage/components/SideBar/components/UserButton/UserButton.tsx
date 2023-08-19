@@ -4,11 +4,7 @@ import { auth } from "firebase.ts";
 import { useNavigate } from "react-router-dom";
 import "./UserButton.css";
 
-export interface Props {
-  openAuth: Function;
-}
-
-export const UserButton = ({ openAuth }: Props) => {
+export const UserButton = () => {
   const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
 
@@ -20,7 +16,10 @@ export const UserButton = ({ openAuth }: Props) => {
       });
       navigate("/");
     } else {
-      openAuth();
+      dispatch({
+        type: "SET_POP_UP",
+        popUp: {type: 'user_auth_dialog'}
+      })
     }
   };
 

@@ -8,7 +8,6 @@ import { Skill, Data } from "types";
 export const MainPage = () => {
   const [{ skills, activeSkill }, dispatch] = useStateValue();
   const groupId = useParams().pathParam; // get current group from url parameter
-  const [authOpen, setAuthOpen] = useState(false);
 
   const handleClick = (e: React.MouseEvent) => {
     // cancel active skill
@@ -27,7 +26,7 @@ export const MainPage = () => {
   return (
     <>
       <div id="main_page" className="main_page" onClick={(e) => handleClick(e)}>
-        <SideBar openAuth={() => setAuthOpen(true)} />
+        <SideBar />
         <SkillTree
           skills={skills.filter((skill: Skill) => skill.group.id === groupId)}
         />

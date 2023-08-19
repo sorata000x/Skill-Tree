@@ -12,11 +12,15 @@ My aim is to combine these concepts to help visualizing data in a concise manner
 
 ## Doing
 
+Basic Feature
+
+- Dark mode
+
 ## To Do
 
 Bug Fix
 
-- Re-implement auth dialog
+- 
 
 Core Feature
 
@@ -24,9 +28,7 @@ Core Feature
 
 Basic Feature
 
-- Preview skill
-- Improve add node recognition
-- Hover skill node for preview
+- Improve add node mouse click recognition
 - Make groups sortable
 - Dark mode
 
@@ -53,6 +55,7 @@ Core Feature
 
 Basic Feature
 
+- Skill Preview
 - Editing group name
 - Make skill tree scrollable so every nodes can be seen
 - Store active skill and group in state provider and highlights corresponding buttons
@@ -69,6 +72,7 @@ UI
 
 Bug Fix
 
+- Re-implement auth dialog
 - Update children's parent if a skill is deleted
 - Prevent a skill node drop to its decendent
 - Drag overlay display

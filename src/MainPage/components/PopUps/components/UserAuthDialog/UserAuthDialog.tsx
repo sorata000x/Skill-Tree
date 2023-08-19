@@ -13,6 +13,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "StateProvider";
+import { AuthFormContext } from "./components";
 
 export const UserAuthDialog = () => {
   const [type, setType] = useState("login");
@@ -24,6 +25,11 @@ export const UserAuthDialog = () => {
     dispatch({
       type: "CLOSE_POP_UP",
     });
+  };
+
+  const changeType = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setType(type === "login" ? "sign-up" : "login");
   };
 
   const signIn = (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,73 +64,27 @@ export const UserAuthDialog = () => {
       .catch((error) => alert(error.message));
   };
 
-  const changeType = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setType(type === "login" ? "sign-up" : "login");
-  };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     type === "login" ? signIn(e) : register(e);
   };
 
   return (
-    <Dialog
-      open={popUp?.type === "user_auth_dialog"}
-      onClose={() => close()}
-      maxWidth={maxWidth}
+    popUp?.type === "user_auth_dialog" ?
+    <div
+      className="user_auth_dialog"
+      onClick={(e)=>e.stopPropagation()}
     >
-      <div className="dialog_container">
-        <DialogTitle>
-          {type === "login" ? "Sign In" : "Create Your Account"}
-        </DialogTitle>
-        <form className="dialog_form" onSubmit={handleSubmit}>
-          <div className="dialog_context">
-            <TextField
-              name="email"
-              variant="outlined"
-              autoFocus
-              margin="dense"
-              label="Email Address"
-              type="email"
-              size="small"
-              fullWidth
-            />
-            <TextField
-              name="password"
-              variant="outlined"
-              autoFocus
-              margin="dense"
-              label="Password"
-              type="password"
-              size="small"
-              fullWidth
-            />
-            <DialogContentText style={{ marginTop: "10px" }}>
-              {type === "login"
-                ? `Don't have an account?`
-                : `Already have an account?`}
-              {type === "login" ? (
-                <button className="text_btn" onClick={changeType}>
-                  Sign Up
-                </button>
-              ) : (
-                <button className="text_btn" onClick={changeType}>
-                  Login
-                </button>
-              )}
-            </DialogContentText>
-          </div>
-          <DialogActions>
-            <Button type="submit" variant="contained">
-              OK
-            </Button>
-            <Button variant="outlined" onClick={() => close()}>
-              Cancel
-            </Button>
-          </DialogActions>
-        </form>
+      <div className="title">
+        {type === "login" ? "Sign In" : "Create Your Account"}
       </div>
-    </Dialog>
+      <form className="dialog_form" onSubmit={handleSubmit}>
+        <AuthFormContext type={type} changeType={changeType} />
+        <button className="submit" type="submit">
+          {type === "login" ? "Sign In" : "Sign Up"}
+        </button>
+      </form>
+    </div>
+    : null
   );
 };

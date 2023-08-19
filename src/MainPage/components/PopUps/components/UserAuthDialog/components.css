@@ -1,0 +1,26 @@
+.dialog_form > .dialog_context {
+
+}
+
+.dialog_form > .form_context > .text_field {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 10px 0;
+}
+
+.dialog_form > .form_context > .text_field > input {
+  width: 280px;
+  height: 36px;
+}
+
+.dialog_form > .form_context > .have_account_or {
+  color: gray;
+}
+
+.text_button {
+  border: none;
+  background-color: transparent;
+  color: rgb(47, 103, 245);
+  font-size: 12pt;
+  cursor: pointer;
+}

@@ -1,7 +1,7 @@
 import "./PopUps.css";
 import React from "react";
 import { useStateValue } from "StateProvider";
-import { MorePopUp, UserAuthDialog } from "./components";
+import { MoreMenu, UserAuthDialog } from "./components";
 
 export const PopUps = () => {
   const [{ popUp }, dispatch] = useStateValue();
@@ -13,9 +13,13 @@ export const PopUps = () => {
   };
 
   return popUp ? (
-    <div className="pop_ups" onClick={handleOnClick}>
+    <div
+      style={popUp.type === 'user_auth_dialog' ? {backgroundColor: 'rgba(0, 0, 0, 0.3)'} : {}}
+      className="pop_ups" 
+      onClick={handleOnClick}
+      >
       <UserAuthDialog />
-      <MorePopUp />
+      <MoreMenu />
     </div>
   ) : null;
 };

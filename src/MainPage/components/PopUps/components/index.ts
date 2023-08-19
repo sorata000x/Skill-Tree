@@ -1,2 +1,2 @@
-export { MorePopUp } from "./MorePopUp";
+export { MoreMenu } from "./MoreMenu";
 export { UserAuthDialog } from "./UserAuthDialog";
