@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useStateValue } from "./StateProvider";
 import {
   BrowserRouter as Router,
@@ -14,6 +14,7 @@ import { MainPage } from "MainPage";
 function App() {
   const [{ user, theme }, dispatch] = useStateValue();
   const urlParam = useParams().pathParam;
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     // Set app name
@@ -34,6 +35,7 @@ function App() {
           type: "SET_USER",
           user: null,
         });
+        setLoading(false);
       }
     });
     // Set active group
@@ -67,12 +69,19 @@ function App() {
             id: userDoc.data()?.groups[0].id,
           });
         }
+        dispatch({
+          type: "SET_THEME",
+          theme: userDoc.data()?.theme,
+        })
       }
+      setLoading(false);
     };
     if (user) {
       getUserData();
     }
   }, [user]);
+
+  if(isLoading) return;
 
   return (
     <div className={`App ${theme}`}>

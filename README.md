@@ -16,9 +16,7 @@ My aim is to combine these concepts to help visualizing data in a concise manner
 
 Bug Fix
 
-- Bug: Overwrites user data on log in
 - Need to show preview on skill edit on
-- Skill tree is not scrolling on long skill tree
 - Close all popups on mouse down instead of mouse up
 - SkillEdit
   - Hover effects for action buttons (close, delete)
@@ -86,6 +84,8 @@ UI
 
 Bug Fix
 
+- Bug: Overwrites user data on log in
+- Skill tree is not scrolling on long skill tree (8/20)
 - Re-implement auth dialog
 - Update children's parent if a skill is deleted
 - Prevent a skill node drop to its decendent
