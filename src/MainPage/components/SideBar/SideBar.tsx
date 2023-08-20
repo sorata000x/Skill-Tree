@@ -16,10 +16,10 @@ export const SideBar = () => {
     <div className="side_bar">
       <ActionButtons close={() => setOpen(false)} />
       <GroupTabs />
-      <UserButton handleClick={()=>setUserMenuOpen(true)} />
-      <UserMenu open={userMenuOpen} close={()=>setUserMenuOpen(false)} />
+      <UserButton handleClick={() => setUserMenuOpen(true)} />
+      <UserMenu open={userMenuOpen} close={() => setUserMenuOpen(false)} />
     </div>
   ) : (
-    <OpenSideBarButton handleClick={()=>setOpen(true)} />
+    <OpenSideBarButton handleClick={() => setOpen(true)} />
   );
 };

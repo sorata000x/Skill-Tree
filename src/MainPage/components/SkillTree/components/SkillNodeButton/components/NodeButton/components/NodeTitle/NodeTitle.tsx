@@ -10,7 +10,7 @@ export interface Props {
 }
 
 export const NodeTitle = ({ skill, listeners, isDragOverlay }: Props) => {
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   const handleClick = (e: Event) => {
     if (isDragOverlay) {

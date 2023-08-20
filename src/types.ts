@@ -45,7 +45,7 @@ export interface Data {
   popUp: PopUp | null;
   user: User | null;
   dragOverlay: DragOverlay;
-  theme: string,
+  theme: string;
 }
 
 export interface Links {
@@ -66,6 +66,6 @@ export interface Action {
   name?: string;
   popUp?: PopUp;
   user?: User;
-  dragOverlay?: DragOverlay,
-  theme?: string,
+  dragOverlay?: DragOverlay;
+  theme?: string;
 }

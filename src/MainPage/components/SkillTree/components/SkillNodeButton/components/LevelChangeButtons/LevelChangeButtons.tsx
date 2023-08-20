@@ -2,7 +2,6 @@ import React from "react";
 import "./LevelChangeButtons.css";
 import { useStateValue } from "StateProvider";
 import { HiOutlinePlus, HiOutlineMinus } from "react-icons/hi";
-import { Skill } from "types.js";
 
 export interface Props {
   level: number;
@@ -17,7 +16,6 @@ export const LevelChangeButtons = ({
   increaseBy,
   setLevel,
 }: Props) => {
-  const [, dispatch] = useStateValue();
 
   const increaseLevel = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>

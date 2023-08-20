@@ -1,5 +1,5 @@
 import { useStateValue } from "StateProvider";
-import React, { useEffect } from "react";
+import React from "react";
 import { Group, Skill } from "types";
 import "./Instruction.css";
 

@@ -3,8 +3,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { createRef } from "react";
 import { arrayMove } from "@dnd-kit/sortable";
 import { v4 as uuid } from "uuid";
-import type { Data, Skill, Group, Buttons, Action } from "types";
-import { User } from "firebase/auth";
+import type { Data, Skill, Buttons, Action } from "types";
 
 // Send current data to storage
 const setUserData = async (data: Data) => {
@@ -16,6 +15,7 @@ const setUserData = async (data: Data) => {
     await setDoc(doc(db, "users", auth.currentUser.uid), {
       skills: JSON.stringify(data.skills),
       groups: JSON.stringify(data.groups),
+      theme: data.theme,
     });
   }
 };
@@ -32,25 +32,26 @@ const emptyState: Data = {
     skills: [],
     buttons: {},
   },
-  theme: 'light',
+  theme: "light",
 };
 
 // Get initial state from local storage or set to empty
 const getInitialState = (): Data => {
+  // Get data from local storage if data exist
   // Reference: [StackOverflow] Argument of type 'string | null' is not assignable to parameter of type 'string'. Type 'null' is not assignable to type 'string' | https://stackoverflow.com/questions/46915002/argument-of-type-string-null-is-not-assignable-to-parameter-of-type-string
   const skills: Array<Skill> = JSON.parse(
-    localStorage.getItem("skills") || "{}"
+    localStorage.getItem("skills") || "[]"
   )
-    ? JSON.parse(localStorage.getItem("skills") || "{}")
+    ? JSON.parse(localStorage.getItem("skills") || "[]")
     : [];
   const buttons: Buttons = {};
   for (const skill of skills) {
     buttons[skill.id] = createRef();
   }
-  const theme: string = localStorage.getItem("theme") || "light";
-  const groups = JSON.parse(localStorage.getItem("groups") || "{}")
-    ? JSON.parse(localStorage.getItem("groups") || "{}")
+  const groups = JSON.parse(localStorage.getItem("groups") || "[]")
+    ? JSON.parse(localStorage.getItem("groups") || "[]")
     : [];
+  const theme: string = localStorage.getItem("theme") || "light";
   return {
     skills: skills,
     activeSkill: null,
@@ -381,7 +382,7 @@ const reducer = (state: Data, action: Action): Data => {
         console.error("Operation SET_THEME requires {theme} attribute");
         return state;
       }
-      console.log(`theme is ${action.theme}`)
+      console.log(`theme is ${action.theme}`);
       setUserData({
         ...state,
         theme: action.theme,

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   SortableContext,
   horizontalListSortingStrategy,
@@ -7,7 +7,6 @@ import { SkillNodeContainer } from "../SkillNodeContainer";
 import "./SkillNodeLayer.css";
 import { useDroppable } from "@dnd-kit/core";
 import { Buttons, Skill } from "types";
-import { v4 as uuid } from "uuid";
 
 export interface Props {
   id: string; // id of current layer (which is the parent skill id, root if none)

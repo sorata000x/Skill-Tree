@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef } from "react";
+import React, { useEffect, createRef } from "react";
 import {
   useSensors,
   useSensor,
@@ -15,11 +15,7 @@ import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import "./SkillTree.css";
 import { v4 as uuid } from "uuid";
 import { useStateValue } from "StateProvider";
-import {
-  Instruction,
-  SkillNodeLayer,
-  SkillNodeContainer,
-} from "./components";
+import { Instruction, SkillNodeLayer, SkillNodeContainer } from "./components";
 import { Skill, Buttons } from "types";
 
 export interface Props {
@@ -83,8 +79,8 @@ export const SkillTree = ({ skills }: Props) => {
         dragOverlay: {
           skills: [],
           buttons: {},
-        }
-      })
+        },
+      });
     }
 
     // Copy over skills (with different IDs) starting from the target id for DragOverlay.
@@ -136,8 +132,8 @@ export const SkillTree = ({ skills }: Props) => {
       dragOverlay: {
         skills: newDragOverlaySkills,
         buttons: createButtons(newDragOverlaySkills),
-      }
-    })
+      },
+    });
   };
 
   const handleDoubleClick = (event: React.MouseEvent) => {

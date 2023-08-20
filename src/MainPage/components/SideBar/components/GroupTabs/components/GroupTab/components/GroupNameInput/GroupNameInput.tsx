@@ -9,7 +9,7 @@ export interface Props {
 }
 
 export const GroupNameInput = ({ group, setEditing }: Props) => {
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   // Set group name of given id
   const setGroupName = (id: string, name: string) => {

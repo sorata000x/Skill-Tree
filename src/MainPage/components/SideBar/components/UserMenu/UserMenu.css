@@ -40,6 +40,6 @@
   color: rgba(255, 255, 255, 0.87);
 }
 
-.dark .user_menu > button:hover { 
+.dark .user_menu > button:hover {
   background-color: #4c4c4c;
 }

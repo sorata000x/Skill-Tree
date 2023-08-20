@@ -47,10 +47,10 @@
   background-color: #3b3b3b;
 }
 
-.dark .group_tab > .more_button { 
+.dark .group_tab > .more_button {
   color: rgba(255, 255, 255, 0.65);
 }
 
-.dark .group_tab > .more_button:hover { 
+.dark .group_tab > .more_button:hover {
   background-color: #3b3b3b;
 }

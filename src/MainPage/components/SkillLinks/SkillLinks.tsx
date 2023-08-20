@@ -1,18 +1,16 @@
-import React, { useState, useEffect, createRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./SkillLinks.css";
 import { Buttons, Links, Skill } from "types";
 import { useParams } from "react-router-dom";
-import { useStateValue } from "StateProvider";
 
 export interface Props {
-  skills: Array<Skill>,
-  buttons: Buttons,
-  excludes: Array<string>,
+  skills: Array<Skill>;
+  buttons: Buttons;
+  excludes: Array<string>;
 }
 
 // Links between skill nodes.
-export const SkillLinks = ({skills, buttons, excludes}: Props) => {
-  const groupId = useParams().pathParam; // get current group from url parameter
+export const SkillLinks = ({ skills, buttons, excludes }: Props) => {
   const [links, setLinks]: [Links, Function] = useState({});
 
   useEffect(() => {
@@ -78,7 +76,7 @@ export const SkillLinks = ({skills, buttons, excludes}: Props) => {
 
     let newLink = (
       <div
-        className="link dark" 
+        className="link dark"
         style={{
           width: length,
           left: left,
@@ -93,9 +91,5 @@ export const SkillLinks = ({skills, buttons, excludes}: Props) => {
     links[skill.id] = newLink;
   };
 
-  return (
-    <div className="links">
-      {Object.values(links)}
-    </div>
-  )
+  return <div className="links">{Object.values(links)}</div>;
 };

@@ -3,7 +3,6 @@
   height: 100%;
   overflow: scroll;
   padding: 0;
-  
 }
 
 .skill_tree > .container {
@@ -12,7 +11,7 @@
   min-height: 100%;
   height: 100%;
   display: grid;
-  background-color: transparent
+  background-color: transparent;
 }
 
 .skill_tree > .container.expand {

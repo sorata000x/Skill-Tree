@@ -1,4 +1,4 @@
-.skill_edit_form label { 
+.skill_edit_form label {
   font-weight: 500;
 }
 
@@ -120,9 +120,10 @@
 
 /* Dark Mode */
 
-.dark .skill_edit_form input, .dark .skill_edit_form textarea {
+.dark .skill_edit_form input,
+.dark .skill_edit_form textarea {
   background-color: #212121;
-  border: 1px solid rgba(255, 255, 255, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 0.87);
 }
 
@@ -132,7 +133,7 @@
 
 .dark .skill_edit_form > .action_buttons > .ok {
   background-color: rgb(80, 80, 80);
-  border: 1px solid rgba(255, 255, 255, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .dark .skill_edit_form > .action_buttons > .ok:hover {
@@ -141,7 +142,7 @@
 
 .dark .skill_edit_form > .action_buttons > .cancel {
   background-color: #2d2d2d;
-  border: 1px solid rgba(255, 255, 255, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 0.65);
 }
 

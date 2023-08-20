@@ -6,21 +6,18 @@ import { useStateValue } from "StateProvider";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { GroupNameInput } from "./components";
 import "./GroupTab.css";
-import { FiMoreHorizontal, FiEdit } from "react-icons/fi";
-import ReactDOM from "react-dom";
+import { FiMoreHorizontal } from "react-icons/fi";
 
 export interface Props {
   group: Group;
 }
 
 export const GroupTab = ({ group }: Props) => {
-  const [{ activeGroup }, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const navigate = useNavigate();
   const urlParam = useParams().pathParam;
   const [hovering, setHovering] = useState(false); // is hovering on the group tab
   const [editing, setEditing] = useState(false);
-  const [openMore, setOpenMore] = useState(false);
-  const morePopUpRef = createRef();
 
   // Set url parameter as current group id
   const setActiveGroup = () => {

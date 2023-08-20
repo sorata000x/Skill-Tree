@@ -8,9 +8,8 @@ import {
   useParams,
 } from "react-router-dom";
 import { db, auth } from "./firebase.ts";
-import { doc, getDoc, collection } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { MainPage } from "MainPage";
-import { Data } from "types";
 
 function App() {
   const [{ user, theme }, dispatch] = useStateValue();

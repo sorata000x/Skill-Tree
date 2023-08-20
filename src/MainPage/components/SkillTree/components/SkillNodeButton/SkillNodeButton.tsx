@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./SkillNodeButton.css";
 import "react-circular-progressbar/dist/styles.css";
 import { NodeButton, SkillProgress, LevelChangeButtons } from "./components";

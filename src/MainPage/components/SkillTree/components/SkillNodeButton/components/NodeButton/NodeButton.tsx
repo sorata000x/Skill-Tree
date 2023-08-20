@@ -1,5 +1,5 @@
 import "./NodeButton.css";
-import React, { createRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStateValue } from "StateProvider";
 import { Skill } from "types";
 import { NodeTitle, SkillPreview } from "./components";
@@ -20,8 +20,6 @@ export const NodeButton = ({
   const [{ activeSkill }, dispatch] = useStateValue();
   const [isActive, setActive] = useState(false);
   const [isMouseOver, setMouseOver] = useState(false);
-  const [openPreview, setOpenPreview] = useState(false);
-  const [timer, setTimer] = useState(setTimeout(() => {}, 0));
 
   useEffect(() => {
     setActive(activeSkill?.id === skill.id); // Update active
@@ -38,26 +36,11 @@ export const NodeButton = ({
     });
   };
 
-  const handleMouseOver = (e: React.MouseEvent) => {
-    setMouseOver(true);
-    setTimer(
-      setTimeout(() => {
-        setOpenPreview(true);
-      }, 10000)
-    );
-  };
-
-  const handleMouseOut = (e: React.MouseEvent) => {
-    setMouseOver(false);
-    setOpenPreview(false);
-    clearTimeout(timer);
-  };
-
   return (
     <div
       className="node_button"
-      onMouseOver={handleMouseOver}
-      onMouseOut={handleMouseOut}
+      onMouseOver={()=>setMouseOver(true)}
+      onMouseOut={()=>setMouseOver(false)}
     >
       <button
         className={isActive ? " active" : ""}
@@ -65,7 +48,7 @@ export const NodeButton = ({
         onClick={handleClick}
         {...listeners}
       >
-        {skill.image ? <img alt="skill image" src={skill.image} /> : null}
+        {skill.image ? <img alt="skill" src={skill.image} /> : null}
       </button>
       <NodeTitle
         skill={skill}

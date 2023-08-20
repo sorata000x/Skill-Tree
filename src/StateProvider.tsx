@@ -1,12 +1,10 @@
 import React, {
   createContext,
   useContext,
-  useEffect,
   useReducer,
-  useState,
   useCallback,
 } from "react";
-import type { Data, Action } from "types";
+import type { Data } from "types";
 import reducer, { initialState } from "./reducer";
 
 // Prepare the data layer

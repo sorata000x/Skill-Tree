@@ -12,12 +12,24 @@ My aim is to combine these concepts to help visualizing data in a concise manner
 
 ## Doing
 
-
 ## To Do
 
 Bug Fix
 
-- 
+- Bug: Overwrites user data on log in
+- Need to show preview on skill edit on
+- Skill tree is not scrolling on long skill tree
+- Close all popups on mouse down instead of mouse up
+- SkillEdit
+  - Hover effects for action buttons (close, delete)
+  - Prevent close skill edit on mouse up
+- Dark Mode
+  - Group tab edit input
+  - Skill edit number wheel
+  - Password input (UserAuthDialog)
+- Light Mode
+  - Need to rethink colors
+- Center skill node on active
 
 Core Feature
 
@@ -25,12 +37,12 @@ Core Feature
 
 Basic Feature
 
-- Improve add node mouse click recognition
 - Make groups sortable
-- Dark mode
+- Improve add node mouse click recognition
 
 Advanced Feature
 
+- Backup skills (edit history)
 - Choose to have levels for a group or a skill
 - Store template
 - Export tree
@@ -39,8 +51,6 @@ Advanced Feature
 
 UI
 
-- Refine level change buttons
-- Refine user auth dialog
 - Sidebar toggle animation
 - Fix skill link display when dropping nodes (it doesn't have the transition)
 
@@ -68,6 +78,8 @@ Advance Feature
 
 UI
 
+- Refine level change buttons
+- Refine user auth dialog
 - Refine skill edit bar
   - Change x position
   - Add delete button

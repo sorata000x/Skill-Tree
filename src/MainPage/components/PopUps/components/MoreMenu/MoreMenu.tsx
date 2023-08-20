@@ -1,7 +1,6 @@
-import React, { createRef, useEffect, useRef, useState } from "react";
-import { FiMoreHorizontal, FiEdit } from "react-icons/fi";
+import React, { createRef, useEffect, useState } from "react";
+import { FiEdit } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
-import type { Group } from "types";
 import { useStateValue } from "StateProvider";
 import "./MoreMenu.css";
 

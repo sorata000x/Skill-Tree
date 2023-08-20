@@ -11,7 +11,7 @@ export interface Props {
 }
 
 export const NewGroupButton = ({ groups }: Props) => {
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const navigate = useNavigate();
 
   const addNewGroup = () => {

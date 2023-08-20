@@ -5,12 +5,6 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "firebase.ts";
-import Dialog, { DialogProps } from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "StateProvider";
 import { AuthFormContext } from "./components";
@@ -18,7 +12,6 @@ import { AuthFormContext } from "./components";
 export const UserAuthDialog = () => {
   const [type, setType] = useState("login");
   const navigate = useNavigate();
-  const [maxWidth, setMaxWidth] = React.useState<DialogProps["maxWidth"]>("lg");
   const [{ popUp }, dispatch] = useStateValue();
 
   const close = () => {
@@ -69,12 +62,8 @@ export const UserAuthDialog = () => {
     type === "login" ? signIn(e) : register(e);
   };
 
-  return (
-    popUp?.type === "user_auth_dialog" ?
-    <div
-      className="user_auth_dialog"
-      onClick={(e)=>e.stopPropagation()}
-    >
+  return popUp?.type === "user_auth_dialog" ? (
+    <div className="user_auth_dialog" onClick={(e) => e.stopPropagation()}>
       <div className="title">
         {type === "login" ? "Sign In" : "Create Your Account"}
       </div>
@@ -85,6 +74,5 @@ export const UserAuthDialog = () => {
         </button>
       </form>
     </div>
-    : null
-  );
+  ) : null;
 };
