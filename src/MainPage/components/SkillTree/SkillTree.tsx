@@ -187,8 +187,7 @@ export const SkillTree = ({ skills }: Props) => {
 
   return (
     <div className="skill_tree">
-      {" "}
-      {!groups.length || !skills.length ? (
+      {(!groups.length || !skills.length) ? (
         <Instruction
           group={group}
           skills={skills}

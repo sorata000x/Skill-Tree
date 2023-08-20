@@ -55,3 +55,9 @@ textarea:focus {
   background: rgb(200, 200, 200);
   border-radius: 5px;
 }
+
+/* Dark Mode */
+
+.App.dark {
+  background-color: #212121;
+}
