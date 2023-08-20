@@ -1,18 +1,19 @@
-.more_menu {
+.user_menu {
   position: absolute;
   display: flex;
   flex-direction: column;
-  left: 250px;
-  width: 190px;
+  width: 234px;
   background-color: white;
   transform: translateY(-26px);
   box-shadow: 0 0 10px 3px lightgray;
   border-radius: 5px;
   border: none;
   padding: 5px;
+  bottom: 30px;
+  left: 8px;
 }
 
-.more_menu > button {
+.user_menu > button {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -24,21 +25,21 @@
   border-radius: 3px;
 }
 
-.more_menu > button:hover {
+.user_menu > button:hover {
   background-color: rgb(240, 240, 240);
 }
 
 /* Dark Mode */
 
-.dark .more_menu {
+.dark .user_menu {
   background-color: #393939;
   box-shadow: none;
 }
 
-.dark .more_menu > button {
+.dark .user_menu > button {
   color: rgba(255, 255, 255, 0.87);
 }
 
-.dark .more_menu > button:hover { 
+.dark .user_menu > button:hover { 
   background-color: #4c4c4c;
 }

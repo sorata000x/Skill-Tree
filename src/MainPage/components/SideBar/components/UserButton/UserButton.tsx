@@ -1,31 +1,17 @@
-import React from "react";
-import { useStateValue } from "StateProvider";
-import { auth } from "firebase.ts";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import "./UserButton.css";
+import { useStateValue } from "StateProvider";
 
-export const UserButton = () => {
-  const [{ user }, dispatch] = useStateValue();
-  const navigate = useNavigate();
+export interface Props {
+  handleClick: (e: React.MouseEvent)=>void;
+}
 
-  const handleAuthentication = () => {
-    if (user) {
-      auth.signOut();
-      dispatch({
-        type: "SIGN_OUT",
-      });
-      navigate("/");
-    } else {
-      dispatch({
-        type: "SET_POP_UP",
-        popUp: {type: 'user_auth_dialog'}
-      })
-    }
-  };
+export const UserButton = ({handleClick}: Props) => {
+  const [{user}] = useStateValue();
 
   return (
-    <button className="user_button" onClick={handleAuthentication}>
-      {user ? user.email : "Login"}
+    <button className="user_button" onClick={handleClick}>
+      {user ? user.email : "Guest"}
     </button>
   );
 };

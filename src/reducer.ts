@@ -11,6 +11,7 @@ const setUserData = async (data: Data) => {
   if (!auth.currentUser) {
     localStorage.setItem("skills", JSON.stringify(data.skills));
     localStorage.setItem("groups", JSON.stringify(data.groups));
+    localStorage.setItem("theme", data.theme);
   } else {
     await setDoc(doc(db, "users", auth.currentUser.uid), {
       skills: JSON.stringify(data.skills),
@@ -27,6 +28,11 @@ const emptyState: Data = {
   activeGroup: null,
   popUp: null,
   user: null,
+  dragOverlay: {
+    skills: [],
+    buttons: {},
+  },
+  theme: 'light',
 };
 
 // Get initial state from local storage or set to empty
@@ -41,6 +47,7 @@ const getInitialState = (): Data => {
   for (const skill of skills) {
     buttons[skill.id] = createRef();
   }
+  const theme: string = localStorage.getItem("theme") || "light";
   const groups = JSON.parse(localStorage.getItem("groups") || "{}")
     ? JSON.parse(localStorage.getItem("groups") || "{}")
     : [];
@@ -52,6 +59,11 @@ const getInitialState = (): Data => {
     activeGroup: groups.length ? groups[0] : null,
     popUp: null,
     user: null,
+    dragOverlay: {
+      skills: [],
+      buttons: {},
+    },
+    theme: theme,
   };
 };
 
@@ -228,6 +240,19 @@ const reducer = (state: Data, action: Action): Data => {
         activeSkill: action.activeSkill,
       };
     }
+    // DRAG_OVERLAY
+    case "SET_DRAG_OVERLAY": {
+      if (action.dragOverlay === undefined) {
+        console.error(
+          "Operation SET_DRAG_OVERLAY requires {dragOverlay} attribute"
+        );
+        return state;
+      }
+      return {
+        ...state,
+        dragOverlay: action.dragOverlay,
+      };
+    }
     // GROUP
     case "SET_GROUPS": {
       if (action.groups === undefined) {
@@ -319,10 +344,6 @@ const reducer = (state: Data, action: Action): Data => {
         console.error("Operation SET_POP_UP requires {popUp} attribute");
         return state;
       }
-      setUserData({
-        ...state,
-        popUp: action.popUp,
-      });
       return {
         ...state,
         popUp: action.popUp,
@@ -352,6 +373,22 @@ const reducer = (state: Data, action: Action): Data => {
       return {
         ...state,
         user: action.user,
+      };
+    }
+    // THEME
+    case "SET_THEME": {
+      if (action.theme === undefined) {
+        console.error("Operation SET_THEME requires {theme} attribute");
+        return state;
+      }
+      console.log(`theme is ${action.theme}`)
+      setUserData({
+        ...state,
+        theme: action.theme,
+      });
+      return {
+        ...state,
+        theme: action.theme,
       };
     }
     default:

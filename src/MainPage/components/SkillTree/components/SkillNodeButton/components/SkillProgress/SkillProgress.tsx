@@ -24,6 +24,8 @@ export const SkillProgress = ({ id, level, maxLevel }: Props) => {
         className="circular-progressbar"
         styles={buildStyles({
           strokeLinecap: "butt",
+          trailColor: 'transparent',
+          pathColor: '#4e6374',
         })}
       />
     </div>

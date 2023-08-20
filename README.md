@@ -12,9 +12,6 @@ My aim is to combine these concepts to help visualizing data in a concise manner
 
 ## Doing
 
-Basic Feature
-
-- Dark mode
 
 ## To Do
 
@@ -47,6 +44,10 @@ UI
 - Sidebar toggle animation
 - Fix skill link display when dropping nodes (it doesn't have the transition)
 
+Performace
+
+- Optimize skill link updating (could use React.useMemo?)
+
 ## Done
 
 Core Feature
@@ -55,6 +56,7 @@ Core Feature
 
 Basic Feature
 
+- Dark mode
 - Skill Preview
 - Editing group name
 - Make skill tree scrollable so every nodes can be seen

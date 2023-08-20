@@ -4,4 +4,9 @@
   background-color: rgb(230, 230, 230);
   width: 308px;
   height: 100%;
+  z-index: 10;
+}
+
+.dark .side_bar {
+  background-color: #2d2d2d;
 }

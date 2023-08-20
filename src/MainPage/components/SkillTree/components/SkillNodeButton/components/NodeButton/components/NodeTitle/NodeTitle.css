@@ -1,6 +1,7 @@
 .node_title {
-  color: black;
-  font-size: 16pt;
+  color: #212121;
+  font-size: 14pt;
+  font-weight: 500;
   z-index: 4;
   grid-column: 1;
   grid-row: 1;

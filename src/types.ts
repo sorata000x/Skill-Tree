@@ -31,6 +31,11 @@ export interface PopUp {
   left?: number;
 }
 
+export interface DragOverlay {
+  skills: Array<Skill>;
+  buttons: Buttons;
+}
+
 export interface Data {
   skills: Array<Skill>;
   activeSkill: Skill | null;
@@ -39,6 +44,8 @@ export interface Data {
   activeGroup: Group | null;
   popUp: PopUp | null;
   user: User | null;
+  dragOverlay: DragOverlay;
+  theme: string,
 }
 
 export interface Links {
@@ -50,13 +57,15 @@ export interface Action {
   id?: string;
   skill?: Skill;
   skills?: Array<Skill>;
+  activeSkill?: Skill;
   parentID?: string;
   group?: Group;
   active?: Skill;
   over?: Skill;
-  activeSkill?: Skill;
-  groups: Array<Group>;
-  name: string;
-  popUp: PopUp;
-  user: User;
+  groups?: Array<Group>;
+  name?: string;
+  popUp?: PopUp;
+  user?: User;
+  dragOverlay?: DragOverlay,
+  theme?: string,
 }

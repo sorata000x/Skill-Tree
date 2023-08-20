@@ -2,11 +2,11 @@ import "./MainPage.css";
 import React, { useEffect, useState } from "react";
 import { useStateValue } from "StateProvider";
 import { useParams } from "react-router-dom";
-import { SideBar, SkillTree, SkillEdit, PopUps } from "./components";
+import { SideBar, SkillTree, SkillEdit, PopUps, SkillLinks } from "./components";
 import { Skill, Data } from "types";
 
 export const MainPage = () => {
-  const [{ skills, activeSkill }, dispatch] = useStateValue();
+  const [{ skills, activeSkill, buttons, dragOverlay }, dispatch] = useStateValue();
   const groupId = useParams().pathParam; // get current group from url parameter
 
   const handleClick = (e: React.MouseEvent) => {
@@ -26,11 +26,19 @@ export const MainPage = () => {
   return (
     <>
       <div id="main_page" className="main_page" onClick={(e) => handleClick(e)}>
-        <SideBar />
-        <SkillTree
-          skills={skills.filter((skill: Skill) => skill.group.id === groupId)}
+        <SkillLinks
+          skills={[...skills.filter((skill: Skill) => skill.group.id === groupId), ...dragOverlay.skills]}
+          buttons={{ ...buttons, ...dragOverlay.buttons }}
+          excludes={[...dragOverlay.skills.map(skill=>skill.id)]}
         />
-        {activeSkill ? <SkillEdit /> : null}
+        <div className="container">
+          <SideBar />
+          <SkillTree
+            skills={skills.filter((skill: Skill) => skill.group.id === groupId)}
+          />
+          {activeSkill ? <SkillEdit /> : null}
+        </div>
+        
       </div>
       <PopUps />
     </>

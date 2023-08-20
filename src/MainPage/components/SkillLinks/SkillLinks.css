@@ -1,0 +1,19 @@
+.links {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.link {
+  position: absolute;
+  background-color: rgb(180, 180, 180);
+  height: 3px;
+  z-index: -1;
+}
+
+.link.dark {
+  background-color: #c6c6c693;
+}

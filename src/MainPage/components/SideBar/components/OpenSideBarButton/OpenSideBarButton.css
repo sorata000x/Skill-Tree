@@ -6,11 +6,21 @@
   height: 45px;
   margin: 8px 0 0 8px;
   border-radius: 6px;
-  background-color: white;
+  background-color: transparent;
   cursor: pointer;
   border: none;
 }
 
 .open_sidebar_button:hover {
   background-color: rgb(245, 245, 245);
+}
+
+/* Dark Mode */
+
+.dark .open_sidebar_button {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.dark .open_sidebar_button:hover {
+  background-color: #3b3b3b;
 }

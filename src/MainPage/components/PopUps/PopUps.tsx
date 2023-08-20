@@ -14,7 +14,7 @@ export const PopUps = () => {
 
   return popUp ? (
     <div
-      style={popUp.type === 'user_auth_dialog' ? {backgroundColor: 'rgba(0, 0, 0, 0.3)'} : {}}
+      style={popUp.type === 'user_auth_dialog' ? {backgroundColor: 'rgba(70, 70, 70, 0.8)'} : {}}
       className="pop_ups" 
       onClick={handleOnClick}
       >

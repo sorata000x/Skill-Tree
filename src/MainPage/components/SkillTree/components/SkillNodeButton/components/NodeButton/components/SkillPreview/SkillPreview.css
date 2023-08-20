@@ -3,7 +3,7 @@
   max-width: 300px;
   background-color: white;
   box-shadow: 0 0 10px 3px lightgray;
-  z-index: 5;
+  z-index: 20;
   transform: translate(calc(-100% - 10px), calc(50% - 52px));
   border-radius: 5px;
   display: flex;
@@ -19,7 +19,7 @@
 }
 
 .fade-in {
-  animation: fadeIn 0.7s;
+  animation: fadeIn 0.8s;
 }
 
 @keyframes fadeIn {
@@ -32,4 +32,12 @@
   100% {
     opacity: 1;
   }
+}
+
+/* Dark Mode */
+
+.dark .skill_preview {
+  background-color: #393939;
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0.87);
 }

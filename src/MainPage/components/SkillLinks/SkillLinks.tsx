@@ -1,40 +1,40 @@
 import React, { useState, useEffect, createRef } from "react";
 import "./SkillLinks.css";
 import { Buttons, Links, Skill } from "types";
+import { useParams } from "react-router-dom";
+import { useStateValue } from "StateProvider";
 
 export interface Props {
-  skills: Array<Skill>; // array of skills to display
-  buttons: Buttons; // keys of skill ids corresponding to their button reference
-  excludes: Array<string>; // skill ids to not render link (when they are being dragged)
+  skills: Array<Skill>,
+  buttons: Buttons,
+  excludes: Array<string>,
 }
 
 // Links between skill nodes.
-export const SkillLinks = ({ skills, buttons, excludes }: Props) => {
+export const SkillLinks = ({skills, buttons, excludes}: Props) => {
+  const groupId = useParams().pathParam; // get current group from url parameter
   const [links, setLinks]: [Links, Function] = useState({});
 
-  /*
   useEffect(() => {
-    return;
     setLinks({});
     for (const skill of skills) {
       links[skill.id] = <div />;
     }
-  }, [links, skills]);
+  }, [skills]);
 
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
-    return;
     // Update links
     for (const skill of skills) {
       updateLink(skill);
     }
     // Update every 1 ms
-    const interval = setInterval(() => setTime(new Date()), 1);
+    const interval = setInterval(() => setTime(new Date()), 0);
     return () => {
       clearInterval(interval);
     };
-  }, []);*/
+  });
 
   // Update the positon of the links between the nodes
   const updateLink = (skill: Skill) => {
@@ -78,7 +78,7 @@ export const SkillLinks = ({ skills, buttons, excludes }: Props) => {
 
     let newLink = (
       <div
-        className="link"
+        className="link dark" 
         style={{
           width: length,
           left: left,
@@ -93,5 +93,9 @@ export const SkillLinks = ({ skills, buttons, excludes }: Props) => {
     links[skill.id] = newLink;
   };
 
-  return Object.values(links);
+  return (
+    <div className="links">
+      {Object.values(links)}
+    </div>
+  )
 };

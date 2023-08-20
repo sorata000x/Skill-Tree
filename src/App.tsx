@@ -13,7 +13,7 @@ import { MainPage } from "MainPage";
 import { Data } from "types";
 
 function App() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, theme }, dispatch] = useStateValue();
   const urlParam = useParams().pathParam;
 
   useEffect(() => {
@@ -76,7 +76,7 @@ function App() {
   }, [user]);
 
   return (
-    <div className="App">
+    <div className={`App ${theme}`}>
       <Router>
         <Routes>
           <Route path="/" element={<MainPage />} />

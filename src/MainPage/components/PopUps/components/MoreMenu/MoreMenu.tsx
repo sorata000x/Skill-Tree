@@ -12,7 +12,7 @@ export const MoreMenu = () => {
   const [left, setLeft] = useState(-999);
 
   useEffect(() => {
-    if (!popUp || popUp.type !== "more_pop_up" || !popUp.top || !popUp.left) {
+    if (!popUp || popUp.type !== "more_menu" || !popUp.top || !popUp.left) {
       setTop(-999);
       setLeft(-999);
     } else {
@@ -41,8 +41,8 @@ export const MoreMenu = () => {
     close();
   };
 
-  return popUp?.type === "more_pop_up" ? (
-    <div ref={ref} style={{ top: top, left: left }} className="more_pop_up">
+  return popUp?.type === "more_menu" ? (
+    <div ref={ref} style={{ top: top, left: left }} className="more_menu">
       <button onClick={handleDelete}>
         <FaRegTrashAlt />
         Delete

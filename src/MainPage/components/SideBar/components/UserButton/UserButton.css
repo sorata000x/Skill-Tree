@@ -13,3 +13,15 @@
 .user_button:hover {
   background-color: rgb(220, 220, 220);
 }
+
+/* Dark Mode */
+
+.dark .user_button {
+  background-color: #2d2d2d;
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.dark .user_button:hover {
+  background-color: #3b3b3b;
+}

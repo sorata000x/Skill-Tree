@@ -36,11 +36,11 @@ export const GroupTab = ({ group }: Props) => {
     setActiveGroup();
   };
 
-  const openMorePopUp = (e: React.MouseEvent) => {
+  const openMoreMenu = (e: React.MouseEvent) => {
     dispatch({
       type: "SET_POP_UP",
       popUp: {
-        type: "more_pop_up",
+        type: "more_menu",
         group: group,
         editGroupName: () => setEditing(true),
         top: e.clientY,
@@ -51,10 +51,7 @@ export const GroupTab = ({ group }: Props) => {
 
   return (
     <button
-      className="group_tab"
-      style={
-        urlParam === group.id ? { backgroundColor: "rgb(220, 220, 220)" } : {}
-      }
+      className={"group_tab" + (urlParam === group.id ? " active" : "")}
       onClick={(e) => handleClick(e)}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
@@ -68,7 +65,7 @@ export const GroupTab = ({ group }: Props) => {
         <FiMoreHorizontal
           className="more_button"
           size={21}
-          onClick={(e) => openMorePopUp(e)}
+          onClick={(e) => openMoreMenu(e)}
         />
       )}
     </button>

@@ -1,3 +1,4 @@
+import { useStateValue } from "StateProvider";
 import "./SkillPreview.css";
 import React, { useEffect, useState } from "react";
 import type { Skill } from "types";
@@ -8,7 +9,8 @@ export interface Props {
 }
 
 export const SkillPreview = ({ open, skill }: Props) => {
-  return open ? (
+  const [{activeSkill}] = useStateValue();
+  return (open && !activeSkill) ? (
     <div
       className="skill_preview fade-in"
       onMouseOver={(e) => e.stopPropagation()}

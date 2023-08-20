@@ -40,7 +40,7 @@ export const SkillNodeButton = ({
     <div
       className="skill_node_button"
       onMouseOver={(e) => handleMouseOver(e)}
-      onMouseLeave={(e) => {
+      onMouseOut={(e) => {
         setMouseOver(false);
       }}
     >
