@@ -50,12 +50,13 @@ export const NodeButton = ({
       >
         {skill.image ? <img alt="skill" src={skill.image} /> : null}
       </button>
+      <SkillPreview open={isMouseOver} skill={skill} />
       <NodeTitle
         skill={skill}
         listeners={listeners}
         isDragOverlay={isDragOverlay}
       />
-      <SkillPreview open={isMouseOver} skill={skill} />
+      
     </div>
   );
 };

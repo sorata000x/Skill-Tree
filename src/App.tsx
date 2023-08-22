@@ -14,6 +14,8 @@ import { MainPage } from "MainPage";
 function App() {
   const [{ user, theme }, dispatch] = useStateValue();
   const urlParam = useParams().pathParam;
+  // Render after data loaded
+  // Reference: https://stackoverflow.com/questions/51556988/react-render-component-asynchronously-after-data-is-fetched
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {

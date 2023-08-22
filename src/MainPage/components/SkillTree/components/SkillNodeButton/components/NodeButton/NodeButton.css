@@ -1,4 +1,5 @@
 .node_button {
+  position: relative;
   display: grid;
   align-items: center;
   width: 120px;

@@ -10,12 +10,19 @@ To Myself:
 This project is inspired by skill tree of various video game, as well as tree data structure in computer science.
 My aim is to combine these concepts to help visualizing data in a concise manner and organizing them easily.
 
+## What Do I Use Skill Tree For?
+
+- Very nice way to document what I have learned and plan out what I need to learn
+
 ## Doing
+
+
 
 ## To Do
 
 Bug Fix
 
+- Skill preview position is off if scrolled
 - Need to show preview on skill edit on
 - Close all popups on mouse down instead of mouse up
 - SkillEdit
@@ -28,6 +35,7 @@ Bug Fix
 - Light Mode
   - Need to rethink colors
 - Center skill node on active
+- Need to update group after deleting current group
 
 Core Feature
 
@@ -35,8 +43,10 @@ Core Feature
 
 Basic Feature
 
+- Trash can
 - Make groups sortable
 - Improve add node mouse click recognition
+- Turn description textarea into rich text
 
 Advanced Feature
 
@@ -45,10 +55,12 @@ Advanced Feature
 - Store template
 - Export tree
 - Find & Share tree
-- Toggle children of a node
+- Toggle tree
+- Zoomer (- 100% +) button on top right corner
 
 UI
 
+- Make title smaller if too much characters for one word
 - Sidebar toggle animation
 - Fix skill link display when dropping nodes (it doesn't have the transition)
 

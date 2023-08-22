@@ -4,7 +4,7 @@
   background-color: white;
   box-shadow: 0 0 10px 3px lightgray;
   z-index: 20;
-  transform: translate(calc(-100% - 10px), calc(50% - 52px));
+  transform: translate(calc(-100% - 10px), 0);
   border-radius: 5px;
   display: flex;
   flex-direction: column;

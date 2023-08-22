@@ -6,13 +6,13 @@
 }
 
 .skill_tree > .container {
-  min-width: 100%;
+  min-width: calc(100% - 200px);
   width: min-content;
   min-height: 100%;
   height: min-content;
   display: grid;
   background-color: transparent;
-  margin: 30px 100px 50px 100px;
+  padding: 30px 100px 50px 100px;
 }
 
 .skill_tree > .container.expand {
