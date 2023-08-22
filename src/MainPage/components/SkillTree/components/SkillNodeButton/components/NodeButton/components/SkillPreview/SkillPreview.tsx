@@ -9,8 +9,7 @@ export interface Props {
 }
 
 export const SkillPreview = ({ open, skill }: Props) => {
-  const [{ activeSkill }] = useStateValue();
-  return open && !activeSkill ? (
+  return open ? (
     <div
       className="skill_preview fade-in"
       onMouseOver={(e) => e.stopPropagation()}

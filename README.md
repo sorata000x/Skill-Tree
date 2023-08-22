@@ -22,8 +22,8 @@ My aim is to combine these concepts to help visualizing data in a concise manner
 
 Bug Fix
 
-- Skill preview position is off if scrolled
-- Need to show preview on skill edit on
+- Need to show preview on skill edit
+- Group tab more button stop propagation
 - Close all popups on mouse down instead of mouse up
 - SkillEdit
   - Hover effects for action buttons (close, delete)
