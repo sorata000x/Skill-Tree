@@ -1,2 +1,2 @@
 export { CloseSideBarButton } from "./CloseSideBarButton";
-export { NewGroupButton } from "./NewGroupButton";
+export { UserButton } from "./UserButton";

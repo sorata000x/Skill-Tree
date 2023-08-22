@@ -14,7 +14,9 @@ export const MoreButton = ({ open, group, handleClick }: Props) => {
   const [, dispatch] = useStateValue();
 
   return (
-    <button className="more_button">
+    <button 
+      className="more_button"
+      title="more">
       <FiMoreHorizontal
         className="more_button"
         size={21}

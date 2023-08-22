@@ -1,3 +1,5 @@
 .side_bar > .action_buttons {
   display: flex;
+  padding: 9px;
+  gap: 6px;
 }

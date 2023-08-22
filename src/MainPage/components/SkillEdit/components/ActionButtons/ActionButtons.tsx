@@ -26,10 +26,10 @@ export const ActionButtons = () => {
 
   return (
     <div className="action_buttons">
-      <button>
+      <button title="close">
         <CgClose className="button" size={20} onClick={() => close()} />
       </button>
-      <button>
+      <button title="delete skill">
         <FaRegTrashAlt
           className="button"
           size={18}

@@ -22,13 +22,8 @@ My aim is to combine these concepts to help visualizing data in a concise manner
 
 Bug Fix
 
-- SkillEdit
-  - Hover effects for action buttons (close, delete)
-  - Prevent close skill edit on mouse up
 - Dark Mode
-  - Group tab edit input
   - Skill edit number wheel
-  - Password input (UserAuthDialog)
 - Light Mode
   - Need to rethink colors
 - Center skill node on active
@@ -93,6 +88,9 @@ UI
 
 Bug Fix
 
+- SkillEdit (8/22)
+  - Hover effects for action buttons (close, delete)
+  - Prevent close skill edit on mouse up
 - Close all popups on mouse down instead of mouse up (8/22)
 - Dark mode for inputs (8/22)
 - Group tab more button stop propagation (8/22)
