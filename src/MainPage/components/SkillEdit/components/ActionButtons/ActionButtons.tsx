@@ -26,12 +26,16 @@ export const ActionButtons = () => {
 
   return (
     <div className="action_buttons">
-      <CgClose className="button" size={20} onClick={() => close()} />
-      <FaRegTrashAlt
-        className="button"
-        size={18}
-        onClick={() => deleteSkill()}
-      />
+      <button>
+        <CgClose className="button" size={20} onClick={() => close()} />
+      </button>
+      <button>
+        <FaRegTrashAlt
+          className="button"
+          size={18}
+          onClick={() => deleteSkill()}
+        />
+      </button>
     </div>
   );
 };

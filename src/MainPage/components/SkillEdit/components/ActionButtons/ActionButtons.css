@@ -6,10 +6,18 @@
 }
 
 .skill_edit > .action_buttons > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 2px;
+  padding: 4px;
   color: rgb(100, 100, 100);
   cursor: pointer;
+  background-color: transparent;
 }
 
 .skill_edit > .action_buttons > button:hover {
   color: black;
+  background-color: rgb(234, 234, 234);
 }
