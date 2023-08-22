@@ -34,6 +34,7 @@ export interface PopUp {
 export interface DragOverlay {
   skills: Array<Skill>;
   buttons: Buttons;
+  parentId: string;
 }
 
 export interface Data {

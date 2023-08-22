@@ -17,7 +17,7 @@ export const NodeButton = ({
   listeners,
   isDragOverlay,
 }: Props) => {
-  const [{ activeSkill }, dispatch] = useStateValue();
+  const [{ activeSkill, buttons, dragOverlay }, dispatch] = useStateValue();
   const [isActive, setActive] = useState(false);
   const [isMouseOver, setMouseOver] = useState(false);
 
@@ -56,7 +56,11 @@ export const NodeButton = ({
         listeners={listeners}
         isDragOverlay={isDragOverlay}
       />
-      <SkillLink skill={skill} />
+      <SkillLink 
+        skill={skill} 
+        buttons={isDragOverlay ? { ...buttons, ...dragOverlay.buttons} : buttons}
+        isDragOverlay={isDragOverlay} 
+      />
     </div>
   );
 };

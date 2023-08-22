@@ -79,6 +79,7 @@ export const SkillTree = ({ skills }: Props) => {
         dragOverlay: {
           skills: [],
           buttons: {},
+          parentId: 'root',
         },
       });
     }
@@ -125,13 +126,23 @@ export const SkillTree = ({ skills }: Props) => {
       }
       return cb;
     };
-
+    const getSkillParentId = (id: string) => {
+      let p = 'root';
+      for(const s of skills) {
+        if (s.id === id) {
+          p = s.parent;
+          break;
+        }
+      }
+      return p;
+    }
     const newDragOverlaySkills = copySkills(id);
     dispatch({
       type: "SET_DRAG_OVERLAY",
       dragOverlay: {
         skills: newDragOverlaySkills,
         buttons: createButtons(newDragOverlaySkills),
+        parentId: getSkillParentId(id),
       },
     });
   };

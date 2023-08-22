@@ -31,6 +31,7 @@ const emptyState: Data = {
   dragOverlay: {
     skills: [],
     buttons: {},
+    parentId: 'root',
   },
   theme: "light",
 };
@@ -63,6 +64,7 @@ const getInitialState = (): Data => {
     dragOverlay: {
       skills: [],
       buttons: {},
+      parentId: 'root',
     },
     theme: theme,
   };
