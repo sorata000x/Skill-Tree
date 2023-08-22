@@ -94,6 +94,7 @@ UI
 
 Bug Fix
 
+- Dark mode for inputs (8/22)
 - Group tab more button stop propagation (8/22)
 - Need to show preview on skill edit (8/22)
 - Bug: Overwrites user data on log in

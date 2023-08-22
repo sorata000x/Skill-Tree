@@ -80,7 +80,7 @@
 
 .skill_edit_form > .description_input > textarea {
   width: 400px;
-  height: 400px;
+  height: 300px;
 }
 
 .skill_edit_form > .action_buttons {
