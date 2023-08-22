@@ -2,7 +2,7 @@ import "./NodeButton.css";
 import React, { useEffect, useState } from "react";
 import { useStateValue } from "StateProvider";
 import { Skill } from "types";
-import { NodeTitle, SkillPreview } from "./components";
+import { NodeTitle, SkillPreview, SkillLink } from "./components";
 
 export interface Props {
   skill: Skill;
@@ -56,7 +56,7 @@ export const NodeButton = ({
         listeners={listeners}
         isDragOverlay={isDragOverlay}
       />
-      
+      <SkillLink skill={skill} />
     </div>
   );
 };

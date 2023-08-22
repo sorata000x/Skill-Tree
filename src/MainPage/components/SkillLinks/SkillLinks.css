@@ -14,6 +14,6 @@
   z-index: -1;
 }
 
-.link.dark {
+.dark .link {
   background-color: #c6c6c693;
 }
