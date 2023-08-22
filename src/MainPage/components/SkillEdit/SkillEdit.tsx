@@ -5,7 +5,7 @@ import { ActionButtons, SkillEditForm } from "./components";
 // A panel to edit a skill.
 export const SkillEdit = () => {
   return (
-    <div className="skill_edit" onClick={(e) => e.stopPropagation()}>
+    <div className="skill_edit" onMouseDown={(e) => e.stopPropagation()}>
       <ActionButtons />
       <SkillEditForm />
     </div>

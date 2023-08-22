@@ -16,7 +16,7 @@ export const MainPage = () => {
     useStateValue();
   const groupId = useParams().pathParam; // get current group from url parameter
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleMouseDown = (e: React.MouseEvent) => {
     // cancel active skill
     dispatch({
       type: "SET_ACTIVE_SKILL",
@@ -26,7 +26,7 @@ export const MainPage = () => {
 
   return (
     <>
-      <div id="main_page" className="main_page" onClick={(e) => handleClick(e)}>
+      <div id="main_page" className="main_page" onMouseDown={(e) => handleMouseDown(e)}>
         <SkillLinks
           skills={[
             ...skills.filter((skill: Skill) => skill.group.id === groupId),

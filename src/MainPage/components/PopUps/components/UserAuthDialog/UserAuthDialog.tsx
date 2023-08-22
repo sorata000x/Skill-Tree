@@ -63,7 +63,7 @@ export const UserAuthDialog = () => {
   };
 
   return popUp?.type === "user_auth_dialog" ? (
-    <div className="user_auth_dialog" onClick={(e) => e.stopPropagation()}>
+    <div className="user_auth_dialog" onMouseDown={(e) => e.stopPropagation()}>
       <div className="title">
         {type === "login" ? "Sign In" : "Create Your Account"}
       </div>

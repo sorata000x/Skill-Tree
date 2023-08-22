@@ -20,7 +20,7 @@ export const PopUps = () => {
           : {}
       }
       className="pop_ups"
-      onClick={handleOnClick}
+      onMouseDown={handleOnClick}
     >
       <UserAuthDialog />
       <MoreMenu />

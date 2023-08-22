@@ -22,7 +22,6 @@ My aim is to combine these concepts to help visualizing data in a concise manner
 
 Bug Fix
 
-- Close all popups on mouse down instead of mouse up
 - SkillEdit
   - Hover effects for action buttons (close, delete)
   - Prevent close skill edit on mouse up
@@ -94,6 +93,7 @@ UI
 
 Bug Fix
 
+- Close all popups on mouse down instead of mouse up (8/22)
 - Dark mode for inputs (8/22)
 - Group tab more button stop propagation (8/22)
 - Need to show preview on skill edit (8/22)
