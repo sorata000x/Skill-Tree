@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "StateProvider";
 import { BiSolidEditAlt } from "react-icons/bi";
-import { GroupNameInput } from "./components";
+import { GroupNameInput, MoreButton } from "./components";
 import "./GroupTab.css";
-import { FiMoreHorizontal } from "react-icons/fi";
+
 
 export interface Props {
   group: Group;
@@ -33,7 +33,8 @@ export const GroupTab = ({ group }: Props) => {
     setActiveGroup();
   };
 
-  const openMoreMenu = (e: React.MouseEvent) => {
+  const handleClickMore = (e: React.MouseEvent) => {
+    e.stopPropagation();
     dispatch({
       type: "SET_POP_UP",
       popUp: {
@@ -58,13 +59,7 @@ export const GroupTab = ({ group }: Props) => {
       ) : (
         <GroupNameInput group={group} setEditing={setEditing} />
       )}
-      {hovering && !editing && (
-        <FiMoreHorizontal
-          className="more_button"
-          size={21}
-          onClick={(e) => openMoreMenu(e)}
-        />
-      )}
+      <MoreButton open={hovering && !editing} group={group} handleClick={handleClickMore}/>
     </button>
   );
 };

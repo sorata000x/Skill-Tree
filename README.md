@@ -22,8 +22,6 @@ My aim is to combine these concepts to help visualizing data in a concise manner
 
 Bug Fix
 
-- Need to show preview on skill edit
-- Group tab more button stop propagation
 - Close all popups on mouse down instead of mouse up
 - SkillEdit
   - Hover effects for action buttons (close, delete)
@@ -96,6 +94,8 @@ UI
 
 Bug Fix
 
+- Group tab more button stop propagation (8/22)
+- Need to show preview on skill edit (8/22)
 - Bug: Overwrites user data on log in
 - Skill tree is not scrolling on long skill tree (8/20)
 - Re-implement auth dialog

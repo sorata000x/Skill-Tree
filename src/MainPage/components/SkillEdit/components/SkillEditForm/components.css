@@ -120,13 +120,6 @@
 
 /* Dark Mode */
 
-.dark .skill_edit_form input,
-.dark .skill_edit_form textarea {
-  background-color: #212121;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.87);
-}
-
 .dark .skill_edit_form > .action_buttons > button {
   font-weight: 600;
 }

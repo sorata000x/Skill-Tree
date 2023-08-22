@@ -20,10 +20,3 @@
   font-size: 12pt;
   cursor: pointer;
 }
-
-/* Dark Mode */
-
-.dark .user_auth_dialog input {
-  background-color: #212121;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
