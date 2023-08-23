@@ -42,6 +42,11 @@ export const NodeButton = ({
       onMouseOver={()=>setMouseOver(true)}
       onMouseOut={()=>setMouseOver(false)}
     >
+      <SkillLink 
+        skill={skill} 
+        buttons={isDragOverlay ? { ...buttons, ...dragOverlay.buttons} : buttons}
+        isDragOverlay={isDragOverlay} 
+      />
       <button
         className={isActive ? " active" : ""}
         ref={buttonRef}
@@ -55,11 +60,6 @@ export const NodeButton = ({
         skill={skill}
         listeners={listeners}
         isDragOverlay={isDragOverlay}
-      />
-      <SkillLink 
-        skill={skill} 
-        buttons={isDragOverlay ? { ...buttons, ...dragOverlay.buttons} : buttons}
-        isDragOverlay={isDragOverlay} 
       />
     </div>
   );

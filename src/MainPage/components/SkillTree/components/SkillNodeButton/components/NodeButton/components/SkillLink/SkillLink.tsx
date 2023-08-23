@@ -27,7 +27,8 @@ export const SkillLink = ({skill, buttons, isDragOverlay}: Props) => {
   const getLink = () => {
     const isDragOverlayRoot = isDragOverlay && skill.parent === 'root';  // connect drag overlay root to original parent
     let nodeRef = buttons[skill.id];
-    let parentRef = buttons[isDragOverlayRoot ? dragOverlay.parentId : skill.parent ];
+    //let parentRef = buttons[isDragOverlayRoot ? dragOverlay.parentId : skill.parent];
+    let parentRef = buttons[skill.parent];
     // Get offsets of given element (for updateChildEdge).
     // Reference: How to Draw a Line Between Two divs with JavaScript? | https://thewebdev.info/2021/09/12/how-to-draw-a-line-between-two-divs-with-javascript/
     const getOffset = (el: React.RefObject<HTMLButtonElement>) => {

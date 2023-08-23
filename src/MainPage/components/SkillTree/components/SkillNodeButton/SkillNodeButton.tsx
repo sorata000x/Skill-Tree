@@ -20,7 +20,7 @@ export const SkillNodeButton = ({
   isDragOverlay,
 }: Props) => {
   const [isMouseOver, setMouseOver] = useState(false);
-  const [, dispatch] = useStateValue();
+  const [{buttons, dragOverlay}, dispatch] = useStateValue();
 
   // Set the level of the skill for this button.
   const setLevel = (level: number) => {
@@ -50,7 +50,6 @@ export const SkillNodeButton = ({
         listeners={listeners}
         isDragOverlay={isDragOverlay}
       />
-
       <SkillProgress
         id={skill.id}
         level={skill.level}

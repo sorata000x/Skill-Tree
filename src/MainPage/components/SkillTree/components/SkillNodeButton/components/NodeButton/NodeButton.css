@@ -18,7 +18,7 @@
   margin-left: 9px;
   padding: 0;
   flex-shrink: 0;
-  z-index: 3;
+  z-index: 7;
   overflow: hidden;
   cursor: pointer;
   -webkit-user-select: none;

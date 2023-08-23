@@ -24,7 +24,7 @@ export const SkillProgress = ({ id, level, maxLevel }: Props) => {
         styles={buildStyles({
           strokeLinecap: "butt",
           trailColor: "transparent",
-          pathColor: "#4e6374",
+          pathColor: "#446682",
         })}
       />
     </div>
