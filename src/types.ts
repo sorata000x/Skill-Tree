@@ -11,6 +11,7 @@ export interface Skill {
   image: string;
   description: string;
   group: Group;
+  treeOpen: boolean;
 }
 
 export interface Group {
@@ -69,4 +70,5 @@ export interface Action {
   user?: User;
   dragOverlay?: DragOverlay;
   theme?: string;
+  treeOpen?: boolean;
 }

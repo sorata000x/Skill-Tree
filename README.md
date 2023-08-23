@@ -16,11 +16,7 @@ My aim is to combine these concepts to help visualizing data in a concise manner
 
 ## Doing
 
-Advanced Feature
-- Toggle Skill Trees
 
-Bug
-- Skill Link
 
 ## To Do
 
@@ -30,7 +26,6 @@ Bug Fix
   - Skill edit number wheel
 - Light Mode
   - Need to rethink colors
-- Center skill node on active
 - Need to update group after deleting current group
 
 Core Feature
@@ -81,6 +76,7 @@ Basic Feature
 Advance Feature
 
 - Add picture to skill node
+- Toggle Skill Trees
 
 UI
 
@@ -92,6 +88,7 @@ UI
 
 Bug Fix
 
+- Skill Link (8/23)
 - SkillEdit (8/22)
   - Hover effects for action buttons (close, delete)
   - Prevent close skill edit on mouse up

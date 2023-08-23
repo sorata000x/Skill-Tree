@@ -4,6 +4,9 @@ import { createRef } from "react";
 import { arrayMove } from "@dnd-kit/sortable";
 import { v4 as uuid } from "uuid";
 import type { Data, Skill, Buttons, Action } from "types";
+import { emptyState, emptySkill } from "data";
+
+// For get user data, see App.tsx
 
 // Send current data to local storage / firebase
 const setUserData = async (data: Data) => {
@@ -18,22 +21,6 @@ const setUserData = async (data: Data) => {
       theme: data.theme,
     });
   }
-};
-
-const emptyState: Data = {
-  skills: [],
-  activeSkill: null,
-  buttons: {},
-  groups: [],
-  activeGroup: null,
-  popUp: null,
-  user: null,
-  dragOverlay: {
-    skills: [],
-    buttons: {},
-    parentId: 'root',
-  },
-  theme: "light",
 };
 
 // Get initial state from local storage or set to empty
@@ -84,8 +71,12 @@ const reducer = (state: Data, action: Action): Data => {
       console.debug(`SET SKILLS TO {${action.skills}}`)
       // relace all the skills with a new set of skills
       let newSkills = action.skills;
-      for (const skill of newSkills) {
-        state.buttons[skill.id] = createRef();
+      for (let i=0; i<newSkills.length; i++) {
+        newSkills[i] = {
+          ...emptySkill,    // pre-define all properties (data patch)
+          ...newSkills[i],
+        }
+        state.buttons[newSkills[i].id] = createRef();
       }
       setUserData({
         ...state,
@@ -135,6 +126,7 @@ const reducer = (state: Data, action: Action): Data => {
         image: "",
         description: "",
         group: action.group,
+        treeOpen: true,
       };
       state.buttons[newSkill.id] = createRef();
       setUserData({
@@ -249,6 +241,25 @@ const reducer = (state: Data, action: Action): Data => {
       return {
         ...state,
         activeSkill: action.activeSkill,
+      };
+    }
+    case "SET_SKILL_TREE_OPEN": {
+      console.debug("SET_SKILL_TREE_OPEN");
+      if (action.id === undefined || action.treeOpen === undefined) {
+        console.error(
+          "Operation SET_SKILL_TREE_OPEN requires {id, treeOpen} attributes"
+        )
+        return state;
+      }
+      let newSkills = [...state.skills];
+      for(const skill of newSkills) {
+        if (skill.id === action.id) {
+          skill.treeOpen = action.treeOpen;
+        }
+      }
+      return {
+        ...state,
+        skills: [...newSkills],
       };
     }
     // DRAG_OVERLAY

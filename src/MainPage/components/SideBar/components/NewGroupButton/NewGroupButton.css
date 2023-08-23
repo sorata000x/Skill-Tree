@@ -4,10 +4,10 @@
   text-align: left;
   height: 53px;
   background-color: rgb(230, 230, 230);
-  border: 1.1px solid rgb(200, 200, 200);
+  border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin: 12px 8px 8px 8px;
+  margin: 12px 8px 8px 4px;
 }
 
 .new_group_button:hover {
@@ -22,7 +22,6 @@
 
 .dark .new_group_button {
   background-color: #2d2d2d;
-  border: 1px solid rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 0.65);
 }
 

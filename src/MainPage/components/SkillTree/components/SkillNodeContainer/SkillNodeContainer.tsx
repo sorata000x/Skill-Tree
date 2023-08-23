@@ -5,6 +5,8 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { SkillNodeLayer } from "../SkillNodeLayer";
 import type { Buttons, Skill } from "types";
+import { FiMoreHorizontal } from "react-icons/fi";
+import { useStateValue } from "StateProvider";
 
 export interface Props {
   skill: Skill; // the root node of the subtree
@@ -20,11 +22,6 @@ export const SkillNodeContainer = ({
   buttons,
   isDragOverlay,
 }: Props) => {
-  const [treeOpen, setTreeOpen] = useState(true); 
-
-  const toggleTree = () => {
-    setTreeOpen(treeOpen ? false : true);
-  }
 
   /* Dnd-kit Sortable */
   /* References:
@@ -51,15 +48,18 @@ export const SkillNodeContainer = ({
           buttonRef={buttons[skill.id]}
           listeners={listeners}
           isDragOverlay={isDragOverlay}
-          toggleTree={toggleTree}
         />
-        { treeOpen ?
+        { skill.treeOpen ?
           <SkillNodeLayer
             id={skill.id}
             skills={skills}
             buttons={buttons}
             isDragOverlay={isDragOverlay}
-          /> : null}
+          /> : 
+          <FiMoreHorizontal 
+            className="more_icon"
+            size={60}
+          /> }
       </div>
     </div>
   );

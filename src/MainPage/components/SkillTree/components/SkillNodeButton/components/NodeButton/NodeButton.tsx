@@ -9,7 +9,6 @@ export interface Props {
   buttonRef: React.RefObject<HTMLButtonElement>;
   listeners: any;
   isDragOverlay?: boolean;
-  toggleTree: Function;
 }
 
 export const NodeButton = ({
@@ -17,7 +16,6 @@ export const NodeButton = ({
   buttonRef,
   listeners,
   isDragOverlay,
-  toggleTree,
 }: Props) => {
   const [{ activeSkill, buttons, dragOverlay }, dispatch] = useStateValue();
   const [isActive, setActive] = useState(false);
@@ -32,6 +30,13 @@ export const NodeButton = ({
   const handleClick = (e: React.MouseEvent) => {
     if (isDragOverlay) return;
     e.stopPropagation();
+    const toggleTree = () => {
+      dispatch({
+        type: "SET_SKILL_TREE_OPEN",
+        id: skill.id,
+        treeOpen: skill.treeOpen ? false : true,
+      })
+    }
     toggleTree();
     window.scrollTo(scrollX, scrollY);
   };

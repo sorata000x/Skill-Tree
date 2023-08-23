@@ -32,7 +32,6 @@ export const NewGroupButton = ({ groups }: Props) => {
 
   return (
     <button
-      title="add new group"
       className="new_group_button"
       onClick={()=>addNewGroup()}
     >

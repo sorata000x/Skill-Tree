@@ -1,3 +1,10 @@
+/**
+ * Note: 
+ *  - The reason for binding link with node button instead of passing button reference
+ *    and render all links in the background is so the link can move with button and
+ *    cause less manual rendering.
+ */
+
 import { Skill, Buttons } from "types";
 import "./SkillLink.css";
 import React, { useState, useEffect } from "react";
@@ -10,13 +17,13 @@ export interface Props {
 }
 
 export const SkillLink = ({skill, buttons, isDragOverlay}: Props) => {
-  const [{ dragOverlay}, ] = useStateValue();
+  //const [{ dragOverlay}, ] = useStateValue();
   const [updating, setUpdating] = useState(true);  // only update when interacting with page
   const [time, setTime] = useState(new Date());  // to keep updating link
 
   useEffect(() => {
     // Note: Time needed to render might differ
-    setTimeout(()=>setUpdating(false), 100);  // Give link some time to render
+    setTimeout(()=>setUpdating(false), 100);  // Give link some time to finish render
     document.addEventListener("mousedown", ()=>setUpdating(true));
     document.addEventListener("mouseup", ()=>setTimeout(()=>setUpdating(false), 100));
   }, [])
@@ -32,9 +39,10 @@ export const SkillLink = ({skill, buttons, isDragOverlay}: Props) => {
 
   // Update the positon of the links between the node and its parent
   const getLink = () => {
-    const isDragOverlayRoot = isDragOverlay && skill.parent === 'root';  // connect drag overlay root to original parent
+    /* Connecting drag overlay root with original parent (doesn't work well)
+     const isDragOverlayRoot = isDragOverlay && skill.parent === 'root';  // connect drag overlay root to original parent
+     let parentRef = buttons[isDragOverlayRoot ? dragOverlay.parentId : skill.parent]; */
     let nodeRef = buttons[skill.id];
-    //let parentRef = buttons[isDragOverlayRoot ? dragOverlay.parentId : skill.parent];
     let parentRef = buttons[skill.parent];
     // Get offsets of given element (for updateChildEdge).
     // Reference: How to Draw a Line Between Two divs with JavaScript? | https://thewebdev.info/2021/09/12/how-to-draw-a-line-between-two-divs-with-javascript/

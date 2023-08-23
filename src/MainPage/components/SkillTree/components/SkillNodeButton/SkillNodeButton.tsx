@@ -10,7 +10,6 @@ export interface Props {
   buttonRef: React.RefObject<HTMLButtonElement>;
   listeners: any;
   isDragOverlay?: boolean;
-  toggleTree: Function;
 }
 
 // A button of skill node
@@ -19,7 +18,6 @@ export const SkillNodeButton = ({
   buttonRef,
   listeners,
   isDragOverlay,
-  toggleTree,
 }: Props) => {
   const [isMouseOver, setMouseOver] = useState(false);
   const [, dispatch] = useStateValue();
@@ -51,7 +49,6 @@ export const SkillNodeButton = ({
         buttonRef={buttonRef}
         listeners={listeners}
         isDragOverlay={isDragOverlay}
-        toggleTree={toggleTree}
       />
       <SkillProgress
         id={skill.id}

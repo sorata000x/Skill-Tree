@@ -7,3 +7,8 @@
   padding-top: 10px;
   padding-bottom: 30px;
 }
+
+.skill_node_container > .more_icon {
+  color: #c6c6c6;
+  transform: translate(-14px, -30px);
+}
