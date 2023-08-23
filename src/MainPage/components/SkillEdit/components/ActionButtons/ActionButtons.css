@@ -24,7 +24,7 @@
 
 /* Dark Mode */
 
-.skill_edit > .action_buttons > button:hover {
-  color: black;
-  background-color: rgb(234, 234, 234);
+.dark .skill_edit > .action_buttons > button:hover {
+  color: rgb(150, 150, 150);
+  background-color: #3b3b3b;
 }
