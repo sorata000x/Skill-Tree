@@ -15,7 +15,7 @@ export const SkillLink = ({skill, buttons, isDragOverlay}: Props) => {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
-    if (!dragOverlay.skills) return;  // Only updates when dragging
+    if (!dragOverlay.skills.length) return;  // Only updates when dragging
     // Update every 0 ms
     const interval = setInterval(() => setTime(new Date()), 0);
     return () => {

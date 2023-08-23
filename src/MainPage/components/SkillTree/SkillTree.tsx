@@ -69,7 +69,7 @@ export const SkillTree = ({ skills }: Props) => {
       active: active,
       over: over,
     });
-    setDragOverlay("");
+    setTimeout(()=>setDragOverlay(""), 100);
   };
 
   const setDragOverlay = (id: string) => {
@@ -82,6 +82,7 @@ export const SkillTree = ({ skills }: Props) => {
           parentId: 'root',
         },
       });
+      return;
     }
 
     // Copy over skills (with different IDs) starting from the target id for DragOverlay.

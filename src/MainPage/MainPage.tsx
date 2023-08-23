@@ -7,7 +7,6 @@ import {
   SkillTree,
   SkillEdit,
   PopUps,
-  SkillLinks,
 } from "./components";
 import { Skill } from "types";
 
@@ -27,14 +26,7 @@ export const MainPage = () => {
   return (
     <>
       <div id="main_page" className="main_page" onMouseDown={(e) => handleMouseDown(e)}>
-        <SkillLinks
-          skills={[
-            ...skills.filter((skill: Skill) => skill.group.id === groupId),
-            ...dragOverlay.skills,
-          ]}
-          buttons={{ ...buttons, ...dragOverlay.buttons }}
-          excludes={[...dragOverlay.skills.map((skill) => skill.id)]}
-        />
+
         <div className="container">
           <SideBar />
           <SkillTree
