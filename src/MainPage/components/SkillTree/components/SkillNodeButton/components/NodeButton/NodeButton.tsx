@@ -9,6 +9,7 @@ export interface Props {
   buttonRef: React.RefObject<HTMLButtonElement>;
   listeners: any;
   isDragOverlay?: boolean;
+  toggleTree: Function;
 }
 
 export const NodeButton = ({
@@ -16,25 +17,33 @@ export const NodeButton = ({
   buttonRef,
   listeners,
   isDragOverlay,
+  toggleTree,
 }: Props) => {
   const [{ activeSkill, buttons, dragOverlay }, dispatch] = useStateValue();
   const [isActive, setActive] = useState(false);
   const [isMouseOver, setMouseOver] = useState(false);
+  const scrollX = window.scrollX;
+  const scrollY = window.scrollY;
 
   useEffect(() => {
     setActive(activeSkill?.id === skill.id); // Update active
   }, [activeSkill, skill]);
 
-  const handleClick = (e: Event) => {
-    if (isDragOverlay) {
-      return;
-    }
+  const handleClick = (e: React.MouseEvent) => {
+    if (isDragOverlay) return;
+    e.stopPropagation();
+    toggleTree();
+    window.scrollTo(scrollX, scrollY);
+  };
+
+  const handleDoubleClick = (e: React.MouseEvent) => {
+    if (isDragOverlay) return;
     e.stopPropagation();
     dispatch({
       type: "SET_ACTIVE_SKILL",
       activeSkill: skill,
     });
-  };
+  }
 
   return (
     <div
@@ -51,6 +60,7 @@ export const NodeButton = ({
         className={isActive ? " active" : ""}
         ref={buttonRef}
         onClick={handleClick}
+        onDoubleClick={handleDoubleClick}
         {...listeners}
       >
         {skill.image ? <img alt="skill" src={skill.image} /> : null}
@@ -60,6 +70,8 @@ export const NodeButton = ({
         skill={skill}
         listeners={listeners}
         isDragOverlay={isDragOverlay}
+        handleClick={(e)=>handleClick(e)}
+        handleDoubleClick={(e)=>handleDoubleClick(e)}
       />
     </div>
   );

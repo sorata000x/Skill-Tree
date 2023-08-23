@@ -10,6 +10,7 @@ export interface Props {
   buttonRef: React.RefObject<HTMLButtonElement>;
   listeners: any;
   isDragOverlay?: boolean;
+  toggleTree: Function;
 }
 
 // A button of skill node
@@ -18,9 +19,10 @@ export const SkillNodeButton = ({
   buttonRef,
   listeners,
   isDragOverlay,
+  toggleTree,
 }: Props) => {
   const [isMouseOver, setMouseOver] = useState(false);
-  const [{buttons, dragOverlay}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   // Set the level of the skill for this button.
   const setLevel = (level: number) => {
@@ -49,6 +51,7 @@ export const SkillNodeButton = ({
         buttonRef={buttonRef}
         listeners={listeners}
         isDragOverlay={isDragOverlay}
+        toggleTree={toggleTree}
       />
       <SkillProgress
         id={skill.id}

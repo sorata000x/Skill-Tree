@@ -7,24 +7,19 @@ export interface Props {
   skill: Skill;
   listeners: any;
   isDragOverlay?: boolean;
+  handleClick: (e: React.MouseEvent)=>void;
+  handleDoubleClick: (e: React.MouseEvent)=>void;
 }
 
-export const NodeTitle = ({ skill, listeners, isDragOverlay }: Props) => {
+export const NodeTitle = ({ skill, listeners, isDragOverlay, handleClick, handleDoubleClick }: Props) => {
   const [, dispatch] = useStateValue();
 
-  const handleClick = (e: Event) => {
-    if (isDragOverlay) {
-      return;
-    }
-    e.stopPropagation();
-    dispatch({
-      type: "SET_ACTIVE_SKILL",
-      activeSkill: skill,
-    });
-  };
-
   return (
-    <div className="node_title" onClick={handleClick} {...listeners}>
+    <div 
+      className="node_title" 
+      onClick={(e)=>handleClick(e)}
+      onDoubleClick={(e)=>handleDoubleClick(e)}
+      {...listeners}>
       {skill.title}
     </div>
   );

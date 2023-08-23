@@ -33,7 +33,8 @@ export const SkillTree = ({ skills }: Props) => {
     // Reference: Coding Ceauty: How to Scroll to an Element in React | https://codingbeautydev.com/blog/react-scroll-to-element/#:~:text=Key%20takeaways,scroll%20to%20the%20desired%20element.
     if (activeSkill) {
       buttons[activeSkill.id].current?.scrollIntoView({
-        block: "start",
+        block: "center",
+        inline: "center",
         behavior: "smooth",
       });
     }

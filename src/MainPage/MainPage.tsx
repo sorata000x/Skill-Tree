@@ -26,7 +26,6 @@ export const MainPage = () => {
   return (
     <>
       <div id="main_page" className="main_page" onMouseDown={(e) => handleMouseDown(e)}>
-
         <div className="container">
           <SideBar />
           <SkillTree

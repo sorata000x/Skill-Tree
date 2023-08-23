@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { SkillNodeButton } from "../SkillNodeButton";
 import "./SkillNodeContainer.css";
 import { useSortable } from "@dnd-kit/sortable";
@@ -20,11 +20,16 @@ export const SkillNodeContainer = ({
   buttons,
   isDragOverlay,
 }: Props) => {
-  /* For dnd-kit sortable
-   * References:
+  const [treeOpen, setTreeOpen] = useState(true); 
+
+  const toggleTree = () => {
+    setTreeOpen(treeOpen ? false : true);
+  }
+
+  /* Dnd-kit Sortable */
+  /* References:
    *  dnd-kit sortable documentation | https://docs.dndkit.com/presets/sortable
-   *  dnd-kit sortable example: drag and drop to-do | https://codesandbox.io/s/react-drag-drop-todo-rwn8d3?file=/src/components/BoardSectionList.tsx:2714-2726
-   */
+   *  dnd-kit sortable example: drag and drop to-do | https://codesandbox.io/s/react-drag-drop-todo-rwn8d3?file=/src/components/BoardSectionList.tsx:2714-2726 */
 
   const { listeners, setNodeRef, transform, transition, isDragging } =
     useSortable({
@@ -46,13 +51,15 @@ export const SkillNodeContainer = ({
           buttonRef={buttons[skill.id]}
           listeners={listeners}
           isDragOverlay={isDragOverlay}
+          toggleTree={toggleTree}
         />
-        <SkillNodeLayer
-          id={skill.id}
-          skills={skills}
-          buttons={buttons}
-          isDragOverlay={isDragOverlay}
-        />
+        { treeOpen ?
+          <SkillNodeLayer
+            id={skill.id}
+            skills={skills}
+            buttons={buttons}
+            isDragOverlay={isDragOverlay}
+          /> : null}
       </div>
     </div>
   );

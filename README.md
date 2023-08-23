@@ -16,7 +16,11 @@ My aim is to combine these concepts to help visualizing data in a concise manner
 
 ## Doing
 
+Advanced Feature
+- Toggle Skill Trees
 
+Bug
+- Skill Link
 
 ## To Do
 

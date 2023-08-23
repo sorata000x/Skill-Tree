@@ -11,11 +11,18 @@ export interface Props {
 
 export const SkillLink = ({skill, buttons, isDragOverlay}: Props) => {
   const [{ dragOverlay}, ] = useStateValue();
-
-  const [time, setTime] = useState(new Date());
+  const [updating, setUpdating] = useState(true);  // only update when interacting with page
+  const [time, setTime] = useState(new Date());  // to keep updating link
 
   useEffect(() => {
-    if (!dragOverlay.skills.length) return;  // Only updates when dragging
+    // Note: Time needed to render might differ
+    setTimeout(()=>setUpdating(false), 100);  // Give link some time to render
+    document.addEventListener("mousedown", ()=>setUpdating(true));
+    document.addEventListener("mouseup", ()=>setTimeout(()=>setUpdating(false), 100));
+  }, [])
+
+  useEffect(() => {
+    if (!updating) return;
     // Update every 0 ms
     const interval = setInterval(() => setTime(new Date()), 0);
     return () => {
