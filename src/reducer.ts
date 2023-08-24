@@ -87,8 +87,6 @@ const reducer = (state: Data, action: Action): Data => {
         }
       }
 
-      console.log(JSON.stringify(newSkills))
-
       setUserData({
         ...state,
         skills: [...newSkills],

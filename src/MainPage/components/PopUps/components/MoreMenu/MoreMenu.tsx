@@ -38,6 +38,7 @@ export const MoreMenu = () => {
 
   const handleEdit = (e: React.MouseEvent) => {
     e.stopPropagation();
+    e.preventDefault();   // Prevent onBlue for GroupNameInput from firing
     popUp?.editGroupName?.();
     close();
   };
@@ -45,7 +46,7 @@ export const MoreMenu = () => {
   return popUp?.type === "more_menu" ? (
     <div 
       ref={ref} 
-      style={{ top: top, left: left }} 
+      style={{top: top, left: left}} 
       className="more_menu">
       <button onMouseDown={(e)=>handleDelete(e)}>
         <FaRegTrashAlt />

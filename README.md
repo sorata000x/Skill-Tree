@@ -28,6 +28,7 @@ Bug Fix
 - Light Mode
   - Need to rethink colors
 - Need to update group after deleting current group
+- Group not active after load / login
 
 Core Feature
 
@@ -52,6 +53,7 @@ Advanced Feature
 UX
 
 - Improve node drop behavior
+- Insert node in corresponding click position instead of just append in the end
 
 UI
 
@@ -63,6 +65,13 @@ Performace
 
 - Optimize skill link updating
   - Update: Optimized, but could be better.
+
+Idea
+
+- Have multiple buttons
+- Checklist
+- Deadline
+- Password view
 
 ## Done
 
@@ -97,6 +106,7 @@ UI
 
 Bug Fix
 
+- Can't edit group name
 - Skill Link (8/23)
 - SkillEdit (8/22)
   - Hover effects for action buttons (close, delete)

@@ -20,8 +20,6 @@ export const NodeButton = ({
   const [{ activeSkill, buttons, dragOverlay }, dispatch] = useStateValue();
   const [isActive, setActive] = useState(false);
   const [isMouseOver, setMouseOver] = useState(false);
-  const scrollX = window.scrollX;
-  const scrollY = window.scrollY;
 
   useEffect(() => {
     setActive(activeSkill?.id === skill.id); // Update active
@@ -38,7 +36,6 @@ export const NodeButton = ({
       })
     }
     toggleTree();
-    window.scrollTo(scrollX, scrollY);
   };
 
   const handleDoubleClick = (e: React.MouseEvent) => {

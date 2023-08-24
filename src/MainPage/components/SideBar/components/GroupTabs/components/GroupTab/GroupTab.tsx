@@ -19,6 +19,10 @@ export const GroupTab = ({ group }: Props) => {
   const [hovering, setHovering] = useState(false); // is hovering on the group tab
   const [editing, setEditing] = useState(false);
 
+  useEffect(() => {
+    console.log(`editing: ${editing}`)
+  }, [editing])
+
   // Set url parameter as current group id
   const setActiveGroup = () => {
     dispatch({
@@ -40,7 +44,7 @@ export const GroupTab = ({ group }: Props) => {
       popUp: {
         type: "more_menu",
         group: group,
-        editGroupName: () => setEditing(true),
+        editGroupName: ()=>setEditing(true),
         top: e.clientY,
         left: e.clientX,
       },

@@ -11,7 +11,6 @@ export interface Props {
 }
 
 export const MoreButton = ({ open, group, handleClick }: Props) => {
-  const [, dispatch] = useStateValue();
 
   return (
     <button 
