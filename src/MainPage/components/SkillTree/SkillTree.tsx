@@ -160,33 +160,35 @@ export const SkillTree = ({ skills }: Props) => {
       });
     };
     // Find the nearest (positioned) parent id of a skill
-    const getNearestParent = (px: number, py: number, id: string = "") => {
-      // Get the distance from a parent node to a given point
-      const getParentDist = (
-        parent: React.RefObject<HTMLButtonElement>,
-        px: number,
-        py: number
-      ) => {
-        if (!parent.current) {
-          return Infinity;
-        }
-        const rect = parent.current.getBoundingClientRect();
-        let cx = rect.left + window.pageXOffset + rect.width / 2;
-        let cy = rect.top + window.pageYOffset + rect.height / 2;
-        let dx = px - cx;
-        let dy = py - cy;
-        return dy >= 0 ? Math.sqrt(dx * dx + dy * dy) : Infinity;
-      };
-      // Calculate the distance of each parent skills and find the nearest one
-      let [target, minDist] = ["", Infinity];
+    const getNearestParent = (px: number, py: number) => {
+      let np = 'root';
+      // get smallest distance in y
+      let dy = Infinity;
       skills.forEach((skill) => {
-        let dist = getParentDist(buttons[skill.id], px, py);
-        if (dist < minDist && skill.id !== id) {
-          target = skill.id;
-          minDist = dist;
+        const rect = buttons[skill.id].current?.getBoundingClientRect();
+        if(!rect) return;
+        let ry = rect.bottom;
+        let c_dy = py - ry;
+        if(c_dy >= 0 && c_dy < dy) {  // Only gets node above
+          dy = c_dy;
         }
-      });
-      return target;
+      })
+      // get nearest node in x in nearest y distance parents
+      let dx = Infinity;
+      skills.forEach((skill) => {
+        const rect = buttons[skill.id].current?.getBoundingClientRect();
+        if(!rect) return;
+        let ry = rect.bottom;
+        let c_dy = py - ry;
+        if(c_dy !== dy) return;
+        let rx = rect.left + window.pageXOffset + rect.width / 2;
+        let c_dx = px - rx;
+        if(Math.abs(c_dx) < dx) {   // Nearest in either direction
+          dx = Math.abs(c_dx);
+          np = skill.id;
+        }
+      })
+      return np;
     };
     // Add new skill
     if (!group) return;

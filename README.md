@@ -22,6 +22,7 @@ My aim is to combine these concepts to help visualizing data in a concise manner
 
 Bug Fix
 
+- Cant add node on load if don't click on group again
 - Dark Mode
   - Skill edit number wheel
 - Light Mode
@@ -36,7 +37,6 @@ Basic Feature
 
 - Trash can
 - Make groups sortable
-- Improve add node mouse click recognition
 - Turn description textarea into rich text
 
 Advanced Feature
@@ -49,6 +49,10 @@ Advanced Feature
 - Toggle tree
 - Zoomer (- 100% +) button on top right corner
 
+UX
+
+- Improve node drop behavior
+
 UI
 
 - Make title smaller if too much characters for one word
@@ -57,7 +61,8 @@ UI
 
 Performace
 
-- Optimize skill link updating (could use React.useMemo?)
+- Optimize skill link updating
+  - Update: Optimized, but could be better.
 
 ## Done
 
@@ -77,6 +82,10 @@ Advance Feature
 
 - Add picture to skill node
 - Toggle Skill Trees
+
+UX
+
+- Improve add node mouse click recognition
 
 UI
 
