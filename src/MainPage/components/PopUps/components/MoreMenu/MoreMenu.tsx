@@ -27,6 +27,7 @@ export const MoreMenu = () => {
   };
 
   const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (!popUp || !popUp.group) return;
     dispatch({
       type: "DELETE_GROUP",
@@ -36,17 +37,21 @@ export const MoreMenu = () => {
   };
 
   const handleEdit = (e: React.MouseEvent) => {
+    e.stopPropagation();
     popUp?.editGroupName?.();
     close();
   };
 
   return popUp?.type === "more_menu" ? (
-    <div ref={ref} style={{ top: top, left: left }} className="more_menu">
-      <button onClick={handleDelete}>
+    <div 
+      ref={ref} 
+      style={{ top: top, left: left }} 
+      className="more_menu">
+      <button onMouseDown={(e)=>handleDelete(e)}>
         <FaRegTrashAlt />
         Delete
       </button>
-      <button onClick={handleEdit}>
+      <button onMouseDown={(e)=>handleEdit(e)}>
         <FiEdit />
         Rename
       </button>

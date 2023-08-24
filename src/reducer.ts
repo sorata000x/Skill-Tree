@@ -78,6 +78,17 @@ const reducer = (state: Data, action: Action): Data => {
         }
         state.buttons[newSkills[i].id] = createRef();
       }
+
+      for (let i=0; i<newSkills.length; i++) {
+        for (let j=0; j<newSkills.length; j++) {
+          if(newSkills[i].id === newSkills[j].parent) {
+            newSkills[i].childrenCount++;
+          }
+        }
+      }
+
+      console.log(JSON.stringify(newSkills))
+
       setUserData({
         ...state,
         skills: [...newSkills],
@@ -118,7 +129,7 @@ const reducer = (state: Data, action: Action): Data => {
       let newSkill: Skill = {
         id: uuid(),
         parent: action.parentID,
-        children: [],
+        childrenCount: 0,
         title: "",
         level: 0,
         maxLevel: 10,

@@ -24,7 +24,7 @@ export const emptyGroup: Group = {
 export const emptySkill: Skill = {
   id: '',
   parent: 'root',
-  children: [],
+  childrenCount: 0,
   title: '',
   level: 0,
   maxLevel: 10,
