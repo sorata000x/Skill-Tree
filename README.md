@@ -33,9 +33,10 @@ Core Feature
 
 Basic Feature
 
+- Help button
+- Turn description textarea into rich text
 - Trash can
 - Make groups sortable
-- Turn description textarea into rich text
 
 Advanced Feature
 
@@ -103,7 +104,7 @@ UI
 
 Bug Fix
 
-- Group not active after load / login
+- Group not active after load / login (8/25)
 - Need to update group after deleting current group (8/25)
 - Cant add node on load if don't click on group again (8/25)
 - Can't edit group name (8/24)
