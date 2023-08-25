@@ -1,7 +1,7 @@
 import "./MainPage.css";
 import React, { useEffect } from "react";
 import { useStateValue } from "StateProvider";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   SideBar,
   SkillTree,
@@ -11,16 +11,33 @@ import {
 import { Skill } from "types";
 
 export const MainPage = () => {
-  const [{ skills, activeSkill, activeGroup }, dispatch] =
+  const [{ skills, activeSkill, groups, activeGroup, user }, dispatch] =
     useStateValue();
   const pathParam = useParams().pathParam; // get current group from url parameter
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch({
-      type: "SET_ACTIVE_GROUP",
-      id: pathParam,
-    })
-  }, [])
+    if (pathParam) {
+      dispatch({
+        type: "SET_ACTIVE_GROUP",
+        id: pathParam,
+      })
+    } else if (groups.length) {
+      dispatch({
+        type: "SET_ACTIVE_GROUP",
+        id: groups[0].id,
+      })
+      navigate(`/${groups[0].id}`);
+    }
+    // need groups as dependency because it updates after page load
+  }, [groups]);
+
+  useEffect(() => {
+    if(activeGroup)
+      navigate(`/${activeGroup.id}`);
+    else
+      navigate(`/`);
+  }, [activeGroup])
 
   const handleMouseDown = (e: React.MouseEvent) => {
     // cancel active skill

@@ -6,6 +6,7 @@ import {
   Route,
   Routes,
   useParams,
+  useNavigate,
 } from "react-router-dom";
 import { db, auth } from "./firebase.ts";
 import { doc, getDoc } from "firebase/firestore";

@@ -26,7 +26,6 @@ Bug Fix
   - Skill edit number wheel
 - Light Mode
   - Need to rethink colors
-- Group not active after load / login
 
 Core Feature
 
@@ -104,6 +103,7 @@ UI
 
 Bug Fix
 
+- Group not active after load / login
 - Need to update group after deleting current group (8/25)
 - Cant add node on load if don't click on group again (8/25)
 - Can't edit group name (8/24)
