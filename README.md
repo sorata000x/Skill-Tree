@@ -22,7 +22,6 @@ My aim is to combine these concepts to help visualizing data in a concise manner
 
 Bug Fix
 
-- Cant add node on load if don't click on group again
 - Dark Mode
   - Skill edit number wheel
 - Light Mode
@@ -106,7 +105,8 @@ UI
 
 Bug Fix
 
-- Can't edit group name
+- Cant add node on load if don't click on group again (8/25)
+- Can't edit group name (8/24)
 - Skill Link (8/23)
 - SkillEdit (8/22)
   - Hover effects for action buttons (close, delete)

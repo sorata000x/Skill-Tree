@@ -1,5 +1,5 @@
 import "./MainPage.css";
-import React from "react";
+import React, { useEffect } from "react";
 import { useStateValue } from "StateProvider";
 import { useParams } from "react-router-dom";
 import {
@@ -11,9 +11,16 @@ import {
 import { Skill } from "types";
 
 export const MainPage = () => {
-  const [{ skills, activeSkill, buttons, dragOverlay }, dispatch] =
+  const [{ skills, activeSkill, activeGroup }, dispatch] =
     useStateValue();
-  const groupId = useParams().pathParam; // get current group from url parameter
+  const pathParam = useParams().pathParam; // get current group from url parameter
+
+  useEffect(() => {
+    dispatch({
+      type: "SET_ACTIVE_GROUP",
+      id: pathParam,
+    })
+  }, [])
 
   const handleMouseDown = (e: React.MouseEvent) => {
     // cancel active skill
@@ -29,7 +36,7 @@ export const MainPage = () => {
         <div className="container">
           <SideBar />
           <SkillTree
-            skills={skills.filter((skill: Skill) => skill.group.id === groupId)}
+            skills={skills.filter((skill: Skill) => skill.group.id === activeGroup?.id)}
           />
           {activeSkill ? <SkillEdit /> : null}
         </div>

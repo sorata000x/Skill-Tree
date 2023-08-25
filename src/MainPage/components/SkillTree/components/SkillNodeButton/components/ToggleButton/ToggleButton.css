@@ -4,12 +4,11 @@
   grid-row: 2;
   background-color: transparent;
   padding-top: 5px;
-  transform: translate(17.5px, -30px);
+  transform: translate(12.5px, -30px);
   cursor: pointer;
   display: flex;
   height: 60px;
-  width: 80px;
-  border-radius: 10px;
+  width: 90px;
   align-items: center;
   justify-content: center;
   z-index: 1;
