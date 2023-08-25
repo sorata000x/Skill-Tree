@@ -3,12 +3,14 @@ import { FiEdit } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useStateValue } from "StateProvider";
 import "./MoreMenu.css";
+import { useNavigate } from "react-router-dom";
 
 export const MoreMenu = () => {
-  const [{ popUp }, dispatch] = useStateValue();
+  const [{ groups, popUp }, dispatch] = useStateValue();
   const ref: React.RefObject<HTMLDivElement> = createRef();
   const [top, setTop] = useState(-999);
   const [left, setLeft] = useState(-999);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!popUp || popUp.type !== "more_menu" || !popUp.top || !popUp.left) {
@@ -33,6 +35,7 @@ export const MoreMenu = () => {
       type: "DELETE_GROUP",
       id: popUp.group.id,
     });
+    navigate(`/${groups[0].id}`);
     close();
   };
 

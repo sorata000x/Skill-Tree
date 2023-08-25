@@ -5,6 +5,7 @@ import { arrayMove } from "@dnd-kit/sortable";
 import { v4 as uuid } from "uuid";
 import type { Data, Skill, Buttons, Action } from "types";
 import { emptyState, emptySkill } from "data";
+import { useNavigate } from "react-router-dom";
 
 // For get user data, see App.tsx
 
@@ -357,6 +358,7 @@ const reducer = (state: Data, action: Action): Data => {
           `Cant remove group (id: ${action.id}) as it does not exist.`
         );
       }
+
       setUserData({
         ...state,
         groups: newGroups,
@@ -364,6 +366,7 @@ const reducer = (state: Data, action: Action): Data => {
       return {
         ...state,
         groups: newGroups,
+        activeGroup: newGroups[0],
       };
     }
     // POP UPS
