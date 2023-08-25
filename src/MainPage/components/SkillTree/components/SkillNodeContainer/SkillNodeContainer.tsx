@@ -55,11 +55,7 @@ export const SkillNodeContainer = ({
             skills={skills}
             buttons={buttons}
             isDragOverlay={isDragOverlay}
-          /> : 
-          <FiMoreHorizontal 
-            className="more_icon"
-            size={60}
-          /> }
+          /> : null}
       </div>
     </div>
   );

@@ -6,6 +6,7 @@
   height: fit-content;
   grid-column: 2;
   transform: translateX(-20px);
+  margin-top: 9px;
 }
 
 .level_change_buttons > button {

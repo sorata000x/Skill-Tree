@@ -2,8 +2,8 @@
   position: relative;
   display: grid;
   align-items: center;
-  width: 120px;
-  height: 140px;
+  width: 116px;
+  height: 116px;
   pointer-events: auto;
   grid-column: 1;
   grid-row: 1;

@@ -3,7 +3,6 @@ import { User } from "firebase/auth";
 export interface Skill {
   id: string;
   parent: string;
-  childrenCount: number;
   title: string;
   level: number;
   maxLevel: number;

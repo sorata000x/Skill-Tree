@@ -1,0 +1,60 @@
+.toggle_button {
+  border: none;
+  width: min-content;
+  grid-row: 2;
+  background-color: transparent;
+  padding-top: 5px;
+  transform: translate(17.5px, -30px);
+  cursor: pointer;
+  display: flex;
+  height: 60px;
+  width: 80px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.toggle_button:hover {
+  background-color: #212121;
+}
+
+.toggle_button > .dot_icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 20px;
+  height: 30px;
+}
+
+.toggle_button > .dot_icons > img {
+  width: 16px;
+  height: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.toggle_button > .icon {
+  color: #c6c6c6;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.toggle_button > .icon2 {
+  color: black;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.toggle_button > .dots1 {
+  display: flex;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.toggle_button > .dots2 {
+  display: flex;
+  grid-row: 1;
+  grid-column: 1;
+}

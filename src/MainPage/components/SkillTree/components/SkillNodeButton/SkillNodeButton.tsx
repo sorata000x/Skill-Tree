@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SkillNodeButton.css";
 import "react-circular-progressbar/dist/styles.css";
-import { NodeButton, SkillProgress, LevelChangeButtons } from "./components";
+import { NodeButton, SkillProgress, LevelChangeButtons, ToggleButton } from "./components";
 import { Skill } from "types";
 import { useStateValue } from "StateProvider";
 
@@ -63,6 +63,7 @@ export const SkillNodeButton = ({
           setLevel={setLevel}
         />
       ) : null}
+      <ToggleButton skill={skill} />
     </div>
   );
 };
