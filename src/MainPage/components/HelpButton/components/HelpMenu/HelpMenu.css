@@ -1,0 +1,43 @@
+.help_menu {
+  height: 100px;
+  background-color: rgb(230, 230, 230);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.help_menu > button {
+  border: none;
+  height: 30px;
+  margin: 5px 0 5px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding-left: 10px;
+}
+
+.help_menu > .divider { 
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.30);
+}
+
+.help_menu > .update_container {
+  padding: 10px;
+}
+
+/* Dark Mode */
+
+.dark .help_menu {
+  background-color: #2d2d2d;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.dark .help_menu > button {
+  background-color: #2d2d2d;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.dark .help_menu > button:hover {
+  background-color: #252525;
+}

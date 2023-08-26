@@ -40,9 +40,13 @@ export const UserMenu = ({ open, close }: Props) => {
     } else {
       dispatch({
         type: "SET_POP_UP",
-        popUp: { type: "user_auth_dialog" },
+        popUp: { 
+          type: "user_auth_dialog",
+          focus: true,
+        },
       });
     }
+    close();
   };
 
   const switchTheme = () => {
@@ -50,6 +54,7 @@ export const UserMenu = ({ open, close }: Props) => {
       type: "SET_THEME",
       theme: theme === "light" ? "dark" : "light",
     });
+    close();
   };
 
   return open ? (

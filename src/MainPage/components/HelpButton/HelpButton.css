@@ -1,0 +1,32 @@
+.help_button {
+  position: absolute;
+  bottom: 30px;
+  right: 40px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-items: end;
+}
+
+.help_button > button {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: rgb(230, 230, 230);
+  cursor: pointer;
+}
+
+/* Dark Mode */
+
+.dark .help_button > button {
+  background-color: #2d2d2d;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.dark .help_button > button:hover { 
+  background-color: #3b3b3b;
+}

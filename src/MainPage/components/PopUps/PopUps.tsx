@@ -1,7 +1,7 @@
 import "./PopUps.css";
 import React from "react";
 import { useStateValue } from "StateProvider";
-import { MoreMenu, UserAuthDialog } from "./components";
+import { MoreMenu, UserAuthDialog, SupportPage } from "./components";
 
 export const PopUps = () => {
   const [{ popUp }, dispatch] = useStateValue();
@@ -14,16 +14,12 @@ export const PopUps = () => {
 
   return popUp ? (
     <div
-      style={
-        popUp.type === "user_auth_dialog"
-          ? { backgroundColor: "rgba(70, 70, 70, 0.8)" }
-          : {}
-      }
-      className="pop_ups"
+      className={`pop_ups ${popUp?.focus ? ' focus' : ''}`}
       onMouseDown={handleOnClick}
     >
       <UserAuthDialog />
       <MoreMenu />
+      <SupportPage />
     </div>
   ) : null;
 };

@@ -33,10 +33,10 @@ Core Feature
 
 Basic Feature
 
-- Help button
 - Turn description textarea into rich text
 - Trash can
 - Make groups sortable
+- Landing page
 
 Advanced Feature
 
@@ -79,6 +79,7 @@ Core Feature
 
 Basic Feature
 
+- Help button
 - Dark mode
 - Skill Preview
 - Editing group name

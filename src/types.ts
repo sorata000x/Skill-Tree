@@ -24,6 +24,7 @@ export interface Buttons {
 
 export interface PopUp {
   type: string;
+  focus?: boolean;
   // type: more_pop_up
   group?: Group;
   editGroupName?: Function;

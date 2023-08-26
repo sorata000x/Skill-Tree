@@ -6,3 +6,13 @@
   height: 100%;
   z-index: 10;
 }
+
+.pop_ups.focus {
+  background-color: rgba(70, 70, 70, 0.8);
+}
+
+/* Dark Mode */
+
+.dark .pop_ups.focus {
+  background-color: rgba(0, 0, 0, 0.5);
+}

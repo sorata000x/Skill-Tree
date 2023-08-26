@@ -7,6 +7,7 @@ import {
   SkillTree,
   SkillEdit,
   PopUps,
+  HelpButton,
 } from "./components";
 import { Skill } from "types";
 
@@ -48,17 +49,16 @@ export const MainPage = () => {
   };
 
   return (
-    <>
-      <div id="main_page" className="main_page" onMouseDown={(e) => handleMouseDown(e)}>
-        <div className="container">
-          <SideBar />
-          <SkillTree
-            skills={skills.filter((skill: Skill) => skill.group.id === activeGroup?.id)}
-          />
-          {activeSkill ? <SkillEdit /> : null}
-        </div>
+    <div id="main_page" className="main_page" onMouseDown={(e) => handleMouseDown(e)}>
+      <div className="container">
+        <SideBar />
+        <SkillTree
+          skills={skills.filter((skill: Skill) => skill.group.id === activeGroup?.id)}
+        />
+        {activeSkill ? <SkillEdit /> : null}
       </div>
+      <HelpButton />
       <PopUps />
-    </>
+    </div>
   );
 };
