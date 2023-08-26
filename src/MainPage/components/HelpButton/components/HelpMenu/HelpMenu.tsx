@@ -85,7 +85,7 @@ export const HelpMenu = ({open, close}: Props) => {
       </div>
       <div className="divider"></div>
       <div className="update_container">
-        SkillTree 0.16.20 <br />
+        SkillTree 0.18.0 <br />
         Updated {timePass()} ago
       </div>
     </div>) : null
