@@ -1,0 +1,30 @@
+.update_log {
+  position: absolute;
+  box-sizing: border-box;
+  width: 900px;
+  height: 600px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #2d2d2d;
+  color: rgba(255, 255, 255, 0.87);
+  border-radius: 8px;
+  padding: 20px;
+  font-size: 14pt;
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+
+.update_log > h1 {
+  font-size: 20pt;
+}
+
+.update_log > h2 {
+  font-size: 16pt;
+}
+
+.update_log > strong {
+  font-size: 14pt;
+  line-height: 30px;
+}

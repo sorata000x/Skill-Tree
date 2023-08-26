@@ -1,7 +1,7 @@
 import "./PopUps.css";
 import React from "react";
 import { useStateValue } from "StateProvider";
-import { MoreMenu, UserAuthDialog, SupportPage } from "./components";
+import { MoreMenu, UserAuthDialog, SupportPage, UpdateLog } from "./components";
 
 export const PopUps = () => {
   const [{ popUp }, dispatch] = useStateValue();
@@ -20,6 +20,7 @@ export const PopUps = () => {
       <UserAuthDialog />
       <MoreMenu />
       <SupportPage />
+      <UpdateLog />
     </div>
   ) : null;
 };

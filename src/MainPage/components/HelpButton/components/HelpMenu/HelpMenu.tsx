@@ -2,6 +2,7 @@ import { useStateValue } from "StateProvider";
 import "./HelpMenu.css"
 import React, {createRef, useEffect} from "react";
 import { RiLightbulbLine } from "react-icons/ri";
+import { GiNewShoot } from "react-icons/gi";
 
 // Need to update this file every deployment for now
 // Version: SkillTree major.minor.patch
@@ -42,6 +43,18 @@ export const HelpMenu = ({open, close}: Props) => {
     close();
   };
 
+  const handleClickUpdates = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    dispatch({
+      type: "SET_POP_UP",
+      popUp: {
+        type: "update_log",
+        focus: true,
+      },
+    });
+    close();
+  };
+
   const timePass = () => {
     const currentTime = new Date();
     const timePass = currentTime.valueOf() - updateTime.valueOf();
@@ -60,10 +73,16 @@ export const HelpMenu = ({open, close}: Props) => {
   return (
     open ? ( 
     <div className="help_menu" ref={ref}>
-      <button onClick={(e)=>handleClickSupport(e)}> 
-        <RiLightbulbLine /> 
-        Support 
-      </button>
+      <div className="button_container">
+        <button onClick={(e)=>handleClickSupport(e)}> 
+          <RiLightbulbLine /> 
+          Support 
+        </button>
+        <button onClick={(e)=>handleClickUpdates(e)}>
+          <GiNewShoot />
+          Updates
+        </button>
+      </div>
       <div className="divider"></div>
       <div className="update_container">
         SkillTree 0.16.20 <br />

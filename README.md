@@ -35,7 +35,6 @@ Basic Feature
 
 - Turn description textarea into rich text
 - Trash can
-- Make groups sortable
 - Landing page
 
 Advanced Feature
@@ -45,7 +44,6 @@ Advanced Feature
 - Store template
 - Export tree
 - Find & Share tree
-- Toggle tree
 - Zoomer (- 100% +) button on top right corner
 
 Additional Feature
@@ -59,7 +57,6 @@ UX
 UI
 
 - Sidebar toggle animation
-- Fix skill link display when dropping nodes (it doesn't have the transition)
 
 Performace
 
@@ -68,7 +65,7 @@ Performace
 
 Idea
 
-- Have multiple buttons
+- Have multiple buttons for skill edit
 - Checklist
 - Deadline
 - Password view
@@ -81,6 +78,7 @@ Core Feature
 
 Basic Feature
 
+- Make groups sortable (8/26)
 - Help button
 - Dark mode
 - Skill Preview
