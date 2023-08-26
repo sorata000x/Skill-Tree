@@ -5,7 +5,9 @@
   z-index: 8;
   grid-column: 1;
   grid-row: 1;
-  width: 100px;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
   text-align: center;
   margin-left: 10px;
   -webkit-user-select: none;
@@ -13,4 +15,5 @@
   -ms-user-select: none;
   user-select: none;
   cursor: pointer;
+  white-space: normal;
 }

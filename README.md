@@ -55,7 +55,6 @@ UX
 
 UI
 
-- Make title smaller if too much characters for one word
 - Sidebar toggle animation
 - Fix skill link display when dropping nodes (it doesn't have the transition)
 
@@ -93,10 +92,12 @@ Advance Feature
 
 UX
 
-- Improve add node mouse click recognition
+- Shrink title if get longer
+- Allow drop to peer
 
 UI
 
+- Shrink title if too long
 - Refine level change buttons
 - Refine user auth dialog
 - Refine skill edit bar
@@ -129,3 +130,8 @@ Code
 - Convert project to TypeScript
   - (Prerequsite) learn TypeScript
   - Put components into seperated files
+
+## Dependency
+
+- @dnd-kit
+- typefit
