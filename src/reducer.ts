@@ -139,7 +139,7 @@ const reducer = (state: Data, action: Action): Data => {
         skills: [...state.skills, newSkill],
       };
     }
-    case "DROP_SKILL": {
+    case "DROP_SKILL": {    // Change the positon of skill node (dnd-kit sortable)
       console.debug("DROP_SKILL");
       if (action.active === undefined || action.over === undefined) {
         console.error(
@@ -367,6 +367,30 @@ const reducer = (state: Data, action: Action): Data => {
         ...state,
         groups: newGroups,
         activeGroup: newGroups[0],
+      };
+    }
+    case "DROP_GROUP": {    // Change the positon of group tab (dnd-kit sortable)
+      console.debug("DROP_GROUP");
+      if (action.active === undefined || action.over === undefined) {
+        console.error(
+          "Operation DROP_GROUP requires {active, over} attributes"
+        );
+        return state;
+      }
+      let activeIndex = state.groups.findIndex(
+        (group) => group.id === action.active?.id
+      );
+      let overIndex = state.groups.findIndex(
+        (group) => group.id === action.over?.id
+      );
+      let newGroups = arrayMove(state.groups, activeIndex, overIndex);
+      setUserData({
+        ...state,
+        groups: newGroups,
+      });
+      return {
+        ...state,
+        groups: newGroups,
       };
     }
     // POP UPS

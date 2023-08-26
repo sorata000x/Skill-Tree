@@ -6,6 +6,8 @@ import { useStateValue } from "StateProvider";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { GroupNameInput, MoreButton } from "./components";
 import "./GroupTab.css";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 
 export interface Props {
@@ -33,6 +35,7 @@ export const GroupTab = ({ group }: Props) => {
   };
 
   const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
     navigate(`/${group.id}`); // set url with current group id
     setActiveGroup();
   };
@@ -51,12 +54,27 @@ export const GroupTab = ({ group }: Props) => {
     });
   };
 
+  /* Dnd-kit DragOverlay */
+
+  const { listeners, setNodeRef, transform, transition, isDragging } =
+    useSortable({ id: group.id, });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0 : 1,
+  };
+
   return (
     <button
       className={"group_tab" + (urlParam === group.id ? " active" : "")}
       onClick={(e) => handleClick(e)}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
+      // Dnd-kit DragOverlay
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
     >
       {!editing ? (
         group.name

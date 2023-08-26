@@ -48,10 +48,13 @@ Advanced Feature
 - Toggle tree
 - Zoomer (- 100% +) button on top right corner
 
+Additional Feature
+
+- Update log
+
 UX
 
-- Improve node drop behavior
-- Insert node in corresponding click position instead of just append in the end
+- Improve node drop behavior; Allow drop to peer
 
 UI
 
@@ -92,8 +95,7 @@ Advance Feature
 
 UX
 
-- Shrink title if get longer
-- Allow drop to peer
+- 
 
 UI
 

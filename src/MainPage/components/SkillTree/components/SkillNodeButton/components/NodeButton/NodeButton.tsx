@@ -49,7 +49,6 @@ export const NodeButton = ({
         className={isActive ? " active" : ""}
         ref={buttonRef}
         onClick={handleClick}
-        
         {...listeners}
       >
         {skill.image ? <img alt="skill" src={skill.image} /> : null}
