@@ -16,7 +16,7 @@ export const NodeTitle = ({ skill, listeners, isDragOverlay, handleClick }: Prop
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if(ref.current) textfit(ref.current, {alignVert: true, multiLine: true, maxFontSize: 22,});
+    if(ref.current) textfit(ref.current, {alignVert: true, multiLine: true, maxFontSize: 20,});
   })
 
   return (
