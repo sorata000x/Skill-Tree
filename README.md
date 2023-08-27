@@ -33,6 +33,7 @@ Core Feature
 
 Basic Feature
 
+- Group tree (folders)
 - Turn description textarea into rich text
 - Trash can
 - Landing page
@@ -52,7 +53,7 @@ Additional Feature
 
 UX
 
-- Improve node drop behavior; Allow drop to peer
+- 
 
 UI
 
@@ -93,7 +94,7 @@ Advance Feature
 
 UX
 
-- 
+- Improve node drop behavior; Allow drop to peer
 
 UI
 

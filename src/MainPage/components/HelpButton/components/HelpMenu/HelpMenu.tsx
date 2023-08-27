@@ -14,7 +14,7 @@ export interface Props {
 
 export const HelpMenu = ({open, close}: Props) => {
   const [{popUp}, dispatch] = useStateValue();
-  const updateTime = new Date("2023-08-26T16:45:00");
+  const updateTime = new Date("2023-08-26T18:37:00");
   const ref: React.RefObject<HTMLDivElement> = createRef();
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export const HelpMenu = ({open, close}: Props) => {
       </div>
       <div className="divider"></div>
       <div className="update_container">
-        SkillTree 0.18.0 <br />
+        SkillTree 0.19.0 <br />
         Updated {timePass()} ago
       </div>
     </div>) : null

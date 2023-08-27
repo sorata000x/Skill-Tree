@@ -40,6 +40,14 @@ export const SkillTree = ({ skills }: Props) => {
     }
   }, [activeSkill]);
 
+  const getSkillByID = (id: string) => {
+    let target = {};
+    skills.forEach((skill) => {
+      if (skill.id === id) target = skill;
+    });
+    return target;
+  };
+
   /*
    * Dnd-kit Sortable
    */
@@ -65,11 +73,48 @@ export const SkillTree = ({ skills }: Props) => {
   };
 
   const handleDragEnd = ({ active, over }: DragEndEvent) => {
-    dispatch({
-      type: "DROP_SKILL",
-      active: active,
-      over: over,
-    });
+    if (!active || !over || active.id === over.id) return;
+    const draggingSkill = dragOverlay.skills[0];
+    // Whether id1 skill node is under id2 skill node
+    const isNodeUnder = (ref1: React.RefObject<HTMLButtonElement>, ref2: React.RefObject<HTMLButtonElement>) => {
+      if (!ref1 || !ref2) return;
+      const getOffset = (el: React.RefObject<HTMLButtonElement>) => {
+        const rect = el?.current?.getBoundingClientRect();
+        if (!rect) return;
+        return {
+          top: rect.top + window.pageYOffset,
+          right: rect.right + window.pageXOffset,
+          bottom: rect.bottom + window.pageYOffset,
+          left: rect.left + window.pageXOffset,
+          width: rect.width,
+          height: rect.height,
+        };
+      };
+      let top1 = getOffset(ref1)?.top;
+      let bottom2 = getOffset(ref2)?.bottom;
+      if (top1 && bottom2) return top1 - bottom2 > 0;
+      return false;
+    }
+    let draggingRef = dragOverlay.buttons[draggingSkill.id];
+    let overRef = buttons[over.id.toString()];
+    if(isNodeUnder(draggingRef, overRef)) {
+      // Drop under peer
+      dispatch({
+        type: "SET_SKILL",
+        id: active.id,
+        skill: {
+          ...getSkillByID(active.id.toString()),
+          parent: over?.id.toString(),
+        }
+      })
+    } else {
+      // Normal drop
+      dispatch({
+        type: "DROP_SKILL",
+        active: active,
+        over: over,
+      });
+    }
     setTimeout(()=>setDragOverlay(""), 100);
   };
 
@@ -88,13 +133,6 @@ export const SkillTree = ({ skills }: Props) => {
 
     // Copy over skills (with different IDs) starting from the target id for DragOverlay.
     const copySkills = (id: string) => {
-      const getSkillByID = (id: string) => {
-        let target = {};
-        skills.forEach((skill) => {
-          if (skill.id === id) target = skill;
-        });
-        return target;
-      };
       // Copy over sub array of skills from the given skill id
       let newSkills = [JSON.parse(JSON.stringify(getSkillByID(id)))];
       for (let i = 0; i < newSkills.length; i++) {
