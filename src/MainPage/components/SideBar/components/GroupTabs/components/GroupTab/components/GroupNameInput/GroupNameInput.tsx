@@ -21,6 +21,7 @@ export const GroupNameInput = ({ group, setEditing }: Props) => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    e.stopPropagation()
     if (e.key === "Enter") {
       setEditing(false);
     }

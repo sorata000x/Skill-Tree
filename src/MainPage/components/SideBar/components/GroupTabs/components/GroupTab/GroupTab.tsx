@@ -21,10 +21,6 @@ export const GroupTab = ({ group }: Props) => {
   const [hovering, setHovering] = useState(false); // is hovering on the group tab
   const [editing, setEditing] = useState(false);
 
-  useEffect(() => {
-    console.log(`editing: ${editing}`)
-  }, [editing])
-
   // Set url parameter as current group id
   const setActiveGroup = () => {
     dispatch({
