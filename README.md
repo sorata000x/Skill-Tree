@@ -46,6 +46,8 @@ Advanced Feature
 - Export tree
 - Find & Share tree
 - Zoomer (- 100% +) button on top right corner
+- Skill Syncing
+  - Suggest syncing skill with the same title
 
 Additional Feature
 
