@@ -38,6 +38,10 @@
   transform: translateX(1px);
 }
 
+.node_button > button.active {
+  box-shadow: 0 0 5px 4px #446682;
+}
+
 .node_button > img {
   width: 100px;
   height: 100px;

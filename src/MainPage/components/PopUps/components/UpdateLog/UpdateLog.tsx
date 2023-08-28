@@ -11,6 +11,10 @@ export const UpdateLog = () => {
       <h1>Updates</h1> <br />
       --- Aug 27 2023 --- <br />
       <br />
+      <h2>Features</h2>
+      <strong>Website Icon</strong>
+       - Added Skill Tree icon for the website <br />
+      <br />
       <h2>Bug Fix</h2>
       <strong>Typing White Space For Group Name</strong>
        - Fixed the bug that group name input cancel editing if typing a white space <br />

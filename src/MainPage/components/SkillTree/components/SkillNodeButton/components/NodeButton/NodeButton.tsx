@@ -46,7 +46,7 @@ export const NodeButton = ({
         isDragOverlay={isDragOverlay} 
       />
       <button
-        className={isActive ? " active" : ""}
+        className={(isActive && !skill.maxLevel) ? " active" : ""}
         ref={buttonRef}
         onClick={handleClick}
         {...listeners}

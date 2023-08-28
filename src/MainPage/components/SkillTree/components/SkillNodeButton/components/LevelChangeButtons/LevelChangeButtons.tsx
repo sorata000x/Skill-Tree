@@ -41,7 +41,7 @@ export const LevelChangeButtons = ({
     }
   };
 
-  return (
+  return ( maxLevel ?
     <div className="level_change_buttons">
       <button
         className="top"
@@ -61,6 +61,6 @@ export const LevelChangeButtons = ({
         <HiOutlineMinus className="icon" size={28} />
       </button>
       <div className="curv"></div>
-    </div>
+    </div> : null
   );
 };
