@@ -122,7 +122,7 @@ const reducer = (state: Data, action: Action): Data => {
         parent: action.parentID,
         title: "",
         level: 0,
-        maxLevel: 10,
+        maxLevel: 0,
         increaseBy: 1,
         image: "",
         description: "",

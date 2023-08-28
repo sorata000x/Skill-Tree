@@ -29,7 +29,7 @@ export const SkillProgress = ({ id, level, maxLevel }: Props) => {
         })}
       >
         <RadialSeparators
-          count={maxLevel}
+          count={maxLevel <= 50 ? maxLevel : 50}
         />
       </CircularProgressbarWithChildren>
     </div> : null
