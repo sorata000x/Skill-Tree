@@ -1,21 +1,44 @@
 .skill_preview {
   position: absolute;
-  max-width: 300px;
+  transform: translate(calc(-100% + 20px), calc(50% - 48px));
+  z-index: 20;
+  padding-right: 30px;
+}
+
+.skill_preview > .container {
+  
+  width: max-content;
+  max-width: 274px;
+  height: min-content;
   background-color: white;
   box-shadow: 0 0 10px 3px lightgray;
-  z-index: 20;
-  transform: translate(calc(-100% - 10px), 0);
-  border-radius: 5px;
+  border-radius: 7px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  align-content: flex-start;
   padding: 10px;
   gap: 10px;
 }
 
-.skill_preview > p {
+.skill_preview > .container > p {
   font-size: 14pt;
   margin: 0;
-  overflow-wrap: break-word;
+  color: #c6c6c6;
+}
+
+.skill_preview > .container > .info_group {
+  display: flex;
+  flex-direction: column;
+  color: #c6c6c6;
+}
+
+.skill_preview > .container > .info_group > .label {
+  font-weight: bold;
+}
+
+.skill_preview > .container > .info_group > .value {
+
 }
 
 .fade-in {
@@ -36,7 +59,7 @@
 
 /* Dark Mode */
 
-.dark .skill_preview {
+.dark .skill_preview > .container {
   background-color: #393939;
   box-shadow: none;
   color: rgba(255, 255, 255, 0.87);

@@ -7,9 +7,10 @@
 
 .skill_tree > .container {
   min-width: calc(100% - 200px);
-  width: min-content;
+  width: fit-content;
+  width: -moz-fit-content;
   min-height: 100%;
-  height: min-content;
+  height: fit-content;
   display: grid;
   background-color: transparent;
   padding: 30px 100px 50px 100px;

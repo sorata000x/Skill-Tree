@@ -9,6 +9,7 @@ import { Skill, Buttons } from "types";
 import "./SkillLink.css";
 import React, { useState, useEffect } from "react";
 import { useStateValue } from "StateProvider";
+import { getOffset } from "utilities";
 
 export interface Props {
   skill: Skill,
@@ -44,18 +45,6 @@ export const SkillLink = ({skill, buttons, isDragOverlay}: Props) => {
      let parentRef = buttons[isDragOverlayRoot ? dragOverlay.parentId : skill.parent]; */
     let nodeRef = buttons[skill.id];
     let parentRef = buttons[skill.parent];
-    // Get offsets of given element (for updateChildEdge).
-    // Reference: How to Draw a Line Between Two divs with JavaScript? | https://thewebdev.info/2021/09/12/how-to-draw-a-line-between-two-divs-with-javascript/
-    const getOffset = (el: React.RefObject<HTMLButtonElement>) => {
-      const rect = el?.current?.getBoundingClientRect();
-      if (!rect) return;
-      return {
-        left: rect.left + window.pageXOffset,
-        top: rect.top + window.pageYOffset,
-        width: rect.width,
-        height: rect.height,
-      };
-    };
     const off_p = getOffset(parentRef);
     const off_n = getOffset(nodeRef);
     if (!off_p || !off_n) return;

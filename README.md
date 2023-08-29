@@ -16,12 +16,18 @@ My aim is to combine these concepts to help visualizing data in a concise manner
 
 ## Doing
 
+- Skill preview
+  - adjust skill preview positon to fit screen
+  - retain \n character
 
+(Next)
+- Rich text
 
 ## To Do
 
 Bug Fix
 
+- Might need to worry about old data overwrites new data if in different tabs
 - Dark Mode
   - Skill edit number wheel
 - Light Mode
@@ -34,7 +40,8 @@ Core Feature
 Basic Feature
 
 - Group tree (folders)
-- Turn description textarea into rich text
+- Rich texts
+- Embeding images
 - Trash can
 - Landing page
 
