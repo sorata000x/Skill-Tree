@@ -1,4 +1,5 @@
 .skill_edit_form label {
+  color: rgba(255, 255, 255, 0.50);
   font-weight: 500;
 }
 
@@ -39,7 +40,6 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  margin-left: 20px;
 }
 
 .skill_edit_form > .form-level-group > .increase_by_input > input {
@@ -81,64 +81,4 @@
 .skill_edit_form > .description_input > textarea {
   width: 400px;
   height: 300px;
-}
-
-.skill_edit_form > .action_buttons {
-  display: flex;
-  gap: 10px;
-  position: absolute;
-  left: 21px;
-  bottom: 25px;
-}
-
-.skill_edit_form > .action_buttons > .ok {
-  width: 100px;
-  height: 34px;
-  border-radius: 3px;
-  background-color: gray;
-  color: white;
-  border: 1px solid gray;
-  cursor: pointer;
-}
-
-.skill_edit_form > .action_buttons > .ok {
-  background-color: rgb(148, 148, 148);
-}
-
-.skill_edit_form > .action_buttons > .cancel {
-  width: 100px;
-  height: 34px;
-  border-radius: 3px;
-  background-color: white;
-  border: 1px solid gray;
-  cursor: pointer;
-}
-
-.skill_edit_form > .action_buttons > .cancel:hover {
-  background-color: rgb(245, 245, 245);
-}
-
-/* Dark Mode */
-
-.dark .skill_edit_form > .action_buttons > button {
-  font-weight: 600;
-}
-
-.dark .skill_edit_form > .action_buttons > .ok {
-  background-color: rgb(80, 80, 80);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.dark .skill_edit_form > .action_buttons > .ok:hover {
-  background-color: rgb(90, 90, 90);
-}
-
-.dark .skill_edit_form > .action_buttons > .cancel {
-  background-color: #2d2d2d;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.65);
-}
-
-.dark .skill_edit_form > .action_buttons > .cancel:hover {
-  background-color: #3b3b3b;
 }

@@ -9,6 +9,7 @@
 .skill_edit_form > .form-level-group {
   display: flex;
   flex-direction: row;
+  gap: 17px;
 }
 
 .skill_edit_form > .form-level-group > .level-divider {
@@ -20,4 +21,8 @@
   font-size: 14pt;
   line-height: 26px;
   font-weight: 500;
+}
+
+hr.solid {
+  width: 394px;
 }

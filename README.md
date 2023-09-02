@@ -22,6 +22,9 @@ My aim is to combine these concepts to help visualizing data in a concise manner
 
 (Next)
 - Rich text
+  - ~~packages~~
+  - ~~regex~~
+  - tokenizer!
 
 ## To Do
 
@@ -144,4 +147,8 @@ Code
 ## Dependency
 
 - @dnd-kit
+  - sortable & draggable skill tree
 - typefit
+  - better skill title size handling
+- draft-js
+  - rich text editor
