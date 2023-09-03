@@ -3,7 +3,7 @@ import { useStateValue } from "StateProvider";
 import { storage } from "firebase.ts";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import "./SkillEditForm.css";
-import { InputGroup, ActionButtons, RichTextEditor, DraftEditor } from "./components";
+import { InputGroup, ActionButtons, DraftEditor } from "./components";
 
 export const SkillEditForm = () => {
   const [{ activeSkill, user }, dispatch] = useStateValue();
