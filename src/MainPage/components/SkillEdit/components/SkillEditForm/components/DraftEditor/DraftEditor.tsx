@@ -6,7 +6,7 @@
  *    - Embed image, files, etc.
  */
 
-import { Editor, EditorState, ContentState, RichUtils, convertToRaw, convertFromRaw, SelectionState, Modifier, ContentBlock, genKey } from 'draft-js';
+import { Editor, EditorState, ContentState, RichUtils, convertToRaw, convertFromRaw, SelectionState, Modifier, ContentBlock, genKey, getDefaultKeyBinding } from 'draft-js';
 import { List } from 'immutable';
 import React, { createRef, useState } from 'react';
 import "./DraftEditor.css"
@@ -29,14 +29,11 @@ export const DraftEditor = ({value, onChange}: Props) => {
   const isJson = (str: string | undefined) => {
     // Reference: StackOverflow: How to test if a string is JSON or not? | https://stackoverflow.com/questions/9804777/how-to-test-if-a-string-is-json-or-not
     if (!str) return false;
-    try {
-        JSON.parse(str);
-    } catch (e) {
-        return false;
-    }
+    try { JSON.parse(str); } 
+    catch (e) { return false; }
     return true;
   }
-  // Read, Empty, or String
+  // Read data as raw value, convert from text if not JSON string, create empty if no value
   const [editorState, setEditorState] = 
     useState( value ? EditorState.createWithContent( 
       isJson(value) ? convertFromRaw(JSON.parse(value)) : ContentState.createFromText(value)
@@ -52,18 +49,27 @@ export const DraftEditor = ({value, onChange}: Props) => {
     setEditorState(editorState)
   }
 
+  const keyBindingFn = (e: React.KeyboardEvent<{}>) => {
+    if (e.key === 'Enter' && e.shiftKey) return 'insert-soft-newline';
+    return getDefaultKeyBinding(e);
+  }
+
   const handleKeyCommand = (
     command: string, 
     editorState: EditorState, 
     eventTimeStamp: number
   ) => {
-    // 
-    const newState = RichUtils.handleKeyCommand(editorState, command);
-    if (newState) {
-      setEditorState(newState);
-      return 'handled';
+    let newEditorState: EditorState | null | undefined = editorState;
+    if (command === 'insert-soft-newline') {
+      newEditorState = RichUtils.insertSoftNewline(newEditorState);
     }
-    return 'not-handled';
+    else {
+      // See the list of key commands handle by RichUtils | https://github.com/facebookarchive/draft-js/blob/main/src/model/modifier/RichTextEditorUtil.js#L81
+      newEditorState = RichUtils.handleKeyCommand(newEditorState, command);
+      if (!newEditorState) return 'not-handled';
+    }
+    setEditorState(newEditorState);
+    return 'handled';
   } 
 
   // Convert tokenizer type to style string
@@ -128,7 +134,7 @@ export const DraftEditor = ({value, onChange}: Props) => {
   const handleNewBlockListenerClick = () => {
     // Create new block if last block is not empty (reference to Notion note)
     // Reference
-    // - (Alternative) StackOverflow | Draft js add new block on return key | https://stackoverflow.com/questions/58989732/draft-js-add-new-block-on-return-key
+    // | (Alternative) StackOverflow | Draft js add new block on return key | https://stackoverflow.com/questions/58989732/draft-js-add-new-block-on-return-key
     // 1. Check if last block is empty
     const contentState = editorState.getCurrentContent();
     const lastBlock = contentState.getLastBlock();
@@ -162,6 +168,7 @@ export const DraftEditor = ({value, onChange}: Props) => {
         editorState={editorState}
         spellCheck={true}
         onChange={(es)=>handleChange(es)}
+        keyBindingFn={keyBindingFn}
         handleKeyCommand={(cm, es, ets)=>handleKeyCommand(cm, es, ets)}
         handleBeforeInput={(c, es, ets)=>handleBeforeInput(c, es, ets)}
       />

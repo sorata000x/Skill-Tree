@@ -8,7 +8,16 @@
   font-size: 13pt;
   padding: 1px;
   margin-top: 8px;
-  line-height: 30px;
+}
+
+.DraftEditor-root .public-DraftStyleDefault-block {
+  margin-bottom: 6px;
+}
+
+.soft-line-break {
+  line-height: 20px;
+  background-color: red;
+  color: blue;
 }
 
 .new_block_listener {
