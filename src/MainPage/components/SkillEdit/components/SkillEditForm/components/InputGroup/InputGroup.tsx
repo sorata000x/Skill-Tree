@@ -12,6 +12,7 @@ export interface Props {
   min?: number,
   max?: number,
   accept?: string,
+  placeHolder?: string,
 }
 
 export const InputGroup = ({ 
@@ -23,7 +24,8 @@ export const InputGroup = ({
   handleChange, 
   min=0, 
   max=0,
-  accept="" 
+  accept="",
+  placeHolder=""
 }: Props) => {
   const [{ activeSkill }] = useStateValue();
 
@@ -39,6 +41,7 @@ export const InputGroup = ({
         min={min}
         max={max}
         accept={accept}
+        placeholder={placeHolder}
       />
     </div>
   );

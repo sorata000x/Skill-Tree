@@ -11,13 +11,13 @@
   line-height: 30px;
 }
 
-.newblock_listener {
+.new_block_listener {
   height: 100%;
   width: 100%;
   background-color: transparent;
 }
 
-.newblock_listener:active {
+.new_block_listener:active {
   cursor: default;
 }
 

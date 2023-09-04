@@ -98,6 +98,7 @@ export const SkillEditForm = () => {
         id="title"
         type="text"
         label="Title"
+        placeHolder="Untitled"
         value={activeSkill?.title}
         handleChange={(v)=>handleChange('title', v)}/>
       <div className="form-level-group">

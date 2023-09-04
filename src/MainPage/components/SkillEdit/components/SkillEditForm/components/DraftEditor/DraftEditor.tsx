@@ -57,6 +57,7 @@ export const DraftEditor = ({value, onChange}: Props) => {
     editorState: EditorState, 
     eventTimeStamp: number
   ) => {
+    // 
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
       setEditorState(newState);
@@ -126,6 +127,8 @@ export const DraftEditor = ({value, onChange}: Props) => {
 
   const handleNewBlockListenerClick = () => {
     // Create new block if last block is not empty (reference to Notion note)
+    // Reference
+    // - (Alternative) StackOverflow | Draft js add new block on return key | https://stackoverflow.com/questions/58989732/draft-js-add-new-block-on-return-key
     // 1. Check if last block is empty
     const contentState = editorState.getCurrentContent();
     const lastBlock = contentState.getLastBlock();
@@ -163,7 +166,7 @@ export const DraftEditor = ({value, onChange}: Props) => {
         handleBeforeInput={(c, es, ets)=>handleBeforeInput(c, es, ets)}
       />
       <div 
-        className='newblock_listener' 
+        className='new_block_listener' 
         onClick={(e)=>handleNewBlockListenerClick()} />
     </div>
   )
