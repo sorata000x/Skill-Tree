@@ -1,7 +1,6 @@
 /* 
  * Note
  * - Might want to implement later:
- *    - Create list by '- '
  *    - Code block '```'
  *    - Embed image, files, etc.
  */
@@ -90,45 +89,88 @@ export const DraftEditor = ({value, onChange}: Props) => {
     eventTimeStamp: number,
   ) => {
     // Markdown text formatting with tokenizer
-    if(!['*', '_', '~', '`'].includes(chars)) return 'not-handled';
-    // 1. Gets current block and cursor position
-    const content = editorState.getCurrentContent();
-    const selection = editorState.getSelection();
-    const end = selection.getEndOffset();
-    const block = content.getBlockForKey(selection.getAnchorKey());
-    const word = block.getText();
-    // 2. Tokenize inputted string
-    let {type, token, start} = getToken(word.slice(0, end) + chars);
-    if (type === TYPE.NONE) return 'not-handled';
-    // 3. Replace with formatted text
-    const newSelection = new SelectionState({
-      anchorKey: block.getKey(),
-      anchorOffset: start,
-      focusKey: block.getKey(),
-      focusOffset: end,
-    })
-    const contentReplaced = Modifier.replaceText(
-      content,
-      newSelection,
-      token,
-      editorState.getCurrentInlineStyle().add(typeToStyle(type)),
-    )
-    let editorStateModified = EditorState.push(
-      editorState,
-      contentReplaced,
-      'insert-fragment'
-    )
-    // 4. Put cursor to original position
-    //    Reference: How to stop DraftJS cursor jumping to beginning of text? | https://stackoverflow.com/questions/43868815/how-to-stop-draftjs-cursor-jumping-to-beginning-of-text
-    editorStateModified = EditorState.forceSelection(editorStateModified, new SelectionState({
-      anchorKey: block.getKey(),
-      anchorOffset: start+token.length,
-      focusKey: block.getKey(),
-      focusOffset: start+token.length,
-    }));
-    // 5. Update editor state
-    setEditorState(editorStateModified);
-    return 'handled';
+    if(['*', '_', '~', '`'].includes(chars)) {
+      // 1. Gets current block and cursor position
+      const content = editorState.getCurrentContent();
+      const selection = editorState.getSelection();
+      const end = selection.getEndOffset();
+      const block = content.getBlockForKey(selection.getAnchorKey());
+      const word = block.getText();
+      // 2. Tokenize inputted string
+      let {type, token, start} = getToken(word.slice(0, end) + chars);
+      if (type === TYPE.NONE) return 'not-handled';
+      // 3. Replace with formatted text
+      const newSelection = new SelectionState({
+        anchorKey: block.getKey(),
+        anchorOffset: start,
+        focusKey: block.getKey(),
+        focusOffset: end,
+      })
+      const contentReplaced = Modifier.replaceText(
+        content,
+        newSelection,
+        token,
+        editorState.getCurrentInlineStyle().add(typeToStyle(type)),
+      )
+      let editorStateModified = EditorState.push(
+        editorState,
+        contentReplaced,
+        'insert-fragment'
+      )
+      // 4. Put cursor to original position
+      //    Reference: How to stop DraftJS cursor jumping to beginning of text? | https://stackoverflow.com/questions/43868815/how-to-stop-draftjs-cursor-jumping-to-beginning-of-text
+      editorStateModified = EditorState.forceSelection(editorStateModified, new SelectionState({
+        anchorKey: block.getKey(),
+        anchorOffset: start+token.length,
+        focusKey: block.getKey(),
+        focusOffset: start+token.length,
+      }));
+      // 5. Update editor state
+      setEditorState(editorStateModified);
+      return 'handled';
+    } 
+    // Creating list 
+    if ([' '].includes(chars)) {
+      // 1. Get current block and word
+      const content = editorState.getCurrentContent();
+      const selection = editorState.getSelection();
+      const block = content.getBlockForKey(selection.getAnchorKey());
+      const word = block.getText();
+      // 2. Set list style
+      let style = 'unstyled';
+      switch(word) {
+        case '-': style = "unordered-list-item"; break;
+        case '1.': style = "ordered-list-item"; break;
+      }
+      if (style === 'unstyled') return 'not-handled';
+      // 3. Remove existing characters
+      const contentReplaced = Modifier.removeRange(
+        content,
+        new SelectionState({
+          anchorKey: block.getKey(),
+          anchorOffset: 0,
+          focusKey: block.getKey(),
+          focusOffset: block.getText().length,
+        }),
+        'backward'
+      )
+      let editorStateModified = EditorState.push(
+        editorState,
+        contentReplaced,
+        'remove-range'
+      )
+      // 4. Move cursor to the end
+      editorStateModified = EditorState.forceSelection(editorStateModified, new SelectionState({
+        anchorKey: block.getKey(),
+        anchorOffset: block.getText().length,
+        focusKey: block.getKey(),
+        focusOffset: block.getText().length,
+      }));
+      // 5. Update editor state
+      setEditorState(RichUtils.toggleBlockType(editorStateModified, style))
+      return 'handled';
+    }
+    return 'not-handled';
   } 
 
   const handleNewBlockListenerClick = () => {

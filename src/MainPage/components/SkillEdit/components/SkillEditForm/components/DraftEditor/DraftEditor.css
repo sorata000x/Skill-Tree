@@ -14,6 +14,12 @@
   margin-bottom: 6px;
 }
 
+.DraftEditor-root ul.public-DraftStyleDefault-ul, .DraftEditor-root ol.public-DraftStyleDefault-ol {
+  margin: 0;
+  padding: 0px;
+  padding-left: 24px;
+}
+
 .soft-line-break {
   line-height: 20px;
   background-color: red;
