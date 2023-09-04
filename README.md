@@ -91,6 +91,13 @@ Core Feature
 
 Basic Feature
 
+- Rich text editor
+  - Text formatting
+    - bold, italic, underline, strike through, code (9/2)
+    - command formatting (9/2)
+    - markdown formatting (9/2)
+  - UX
+    - add new block so last block always empty (9/3)
 - Make groups sortable (8/26)
 - Help button
 - Dark mode

@@ -11,6 +11,16 @@
   line-height: 30px;
 }
 
+.newblock_listener {
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+}
+
+.newblock_listener:active {
+  cursor: default;
+}
+
 /* Dark Mode */
 
 .dark .draft_editor {
