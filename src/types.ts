@@ -1,5 +1,10 @@
 import { User } from "firebase/auth";
 
+export interface Icon {
+  name: string,
+  url: string,
+}
+
 export interface Skill {
   id: string;
   parent: string;
@@ -7,7 +12,7 @@ export interface Skill {
   level: number;
   maxLevel: number;
   increaseBy: number;
-  image: string;
+  icon: Icon | null;
   description: string;
   group: Group;
   treeOpen: boolean;

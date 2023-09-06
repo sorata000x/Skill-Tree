@@ -18,9 +18,10 @@ export interface Props {
 
 /* 
  * Reference
- * React Rocket: Draft-js - Saving data to the server | https://reactrocket.com/post/draft-js-persisting-content/
- * StackOverflow: draftjs how to initiate an editor with content | https://stackoverflow.com/questions/35884112/draftjs-how-to-initiate-an-editor-with-content
- * StackOverflow: handleBeforeInput example | https://stackoverflow.com/questions/38241444/draft-js-replace-text-using-handlebeforeinput-doesnt-change-the-editorstate
+ * | CodeSandbox: Draft-js example | https://codesandbox.io/s/draftjs-ytf7q?file=/src/components/Editor/DraftEditor.js
+ * | React Rocket: Draft-js - Saving data to the server | https://reactrocket.com/post/draft-js-persisting-content/
+ * | StackOverflow: draftjs how to initiate an editor with content | https://stackoverflow.com/questions/35884112/draftjs-how-to-initiate-an-editor-with-content
+ * | StackOverflow: handleBeforeInput example | https://stackoverflow.com/questions/38241444/draft-js-replace-text-using-handlebeforeinput-doesnt-change-the-editorstate
  */
 
 export const DraftEditor = ({value, onChange}: Props) => {

@@ -3,7 +3,7 @@ import { useStateValue } from "StateProvider";
 import { storage } from "firebase.ts";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import "./SkillEditForm.css";
-import { InputGroup, ActionButtons, DraftEditor } from "./components";
+import { InputGroup, DraftEditor, IconInputGroup } from "./components";
 
 export const SkillEditForm = () => {
   const [{ activeSkill, user }, dispatch] = useStateValue();
@@ -41,12 +41,12 @@ export const SkillEditForm = () => {
         activeSkill.increaseBy = parseInt(value);
         break;
       }
-      case "image": {
+      case "icon": {
         if (user) {
           // Reference: How to upload image and Preview it using ReactJS ? | https://www.geeksforgeeks.org/how-to-upload-image-and-preview-it-using-reactjs/
           // Reference: Firebase Storage | https://modularfirebase.web.app/common-use-cases/storage/
           if(!value) return;
-          const storageRef = ref(storage, `/images/${user.uid}/${value}`);
+          const storageRef = ref(storage, `/images/${user.uid}/${value.name}`);
           const uploadTask = uploadBytesResumable(storageRef, value);
           uploadTask.on(
             "state_changed",
@@ -54,7 +54,11 @@ export const SkillEditForm = () => {
             (error) => {},
             () => {
               getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                activeSkill.image = url;
+                const newIcon = {
+                  name: value.name,
+                  url: url,
+                }
+                activeSkill.icon = newIcon;
                 dispatch({
                   type: "SET_SKILL",
                   id: activeSkill.id,
@@ -72,7 +76,6 @@ export const SkillEditForm = () => {
         break;
       }
       default: {
-        console.log('default')
         return;
       }
     }
@@ -81,13 +84,6 @@ export const SkillEditForm = () => {
       type: "SET_SKILL",
       id: activeSkill.id,
       skill: activeSkill,
-    });
-  };
-
-  const close = () => {
-    dispatch({
-      type: "SET_ACTIVE_SKILL",
-      activeSkill: null,
     });
   };
 
@@ -130,14 +126,7 @@ export const SkillEditForm = () => {
           min={0}
           max={9999999}/>
       </div>
-      {user && 
-      <InputGroup 
-        className="image_upload"
-        id="image"
-        type="file"
-        label="Image"
-        handleChange={(v)=>handleChange('image', v)}
-        accept="/image/*"/>}
+      { user && <IconInputGroup addIcon={(v)=>handleChange('icon', v)}/> }
       <hr className="solid" />
       <DraftEditor
         value={activeSkill?.description}

@@ -34,7 +34,6 @@ export const SkillPreview = ({ open, skill }: Props) => {
       let dy = -offset.top;
       translateY = `calc(50% - 48px + ${dy + 10}px)`;
     }
-    console.log(`translate(${translateX}, ${translateY})`)
     ref.current.style.transform = `translate(${translateX}, ${translateY})`;
   }, [ref])
 

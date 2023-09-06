@@ -93,6 +93,8 @@ Basic Feature
 
 - Rich text editor
   - Text formatting
+    - creating list ('1. 'ordered, '- 'unordered) (9/4)
+    - insert soft newline (shift + enter) (9/4)
     - bold, italic, underline, strike through, code (9/2)
     - command formatting (9/2)
     - markdown formatting (9/2)

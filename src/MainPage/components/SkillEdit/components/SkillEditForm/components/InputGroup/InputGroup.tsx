@@ -1,6 +1,5 @@
 import "./InputGroup.css";
 import React from "react";
-import { useStateValue } from "StateProvider";
 
 export interface Props {
   className: string,
@@ -27,8 +26,6 @@ export const InputGroup = ({
   accept="",
   placeHolder=""
 }: Props) => {
-  const [{ activeSkill }] = useStateValue();
-
   return (
     <div className={className}>
       <label htmlFor={id}>{label}</label>
@@ -37,7 +34,7 @@ export const InputGroup = ({
         type={type}
         autoComplete="off"
         value={value}
-        onChange={(e)=> id === 'image' ? handleChange(e.target.files?.[0].name) : handleChange(e.target.value)}
+        onChange={(e)=>handleChange(e.target.value)}
         min={min}
         max={max}
         accept={accept}

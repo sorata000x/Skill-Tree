@@ -46,39 +46,3 @@
   width: 122px;
   height: 34px;
 }
-
-.skill_edit_form > .image_upload {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.skill_edit_form > .image_upload > input {
-  height: 42px;
-}
-
-.skill_edit_form > .image_upload > input::file-selector-button {
-  height: 30px;
-  margin: 1px 8px 1px 1px;
-  padding: 0px 8px 0px 8px;
-  border: none;
-  background-color: gray;
-  border-radius: 3px;
-  color: white;
-  cursor: pointer;
-}
-
-.skill_edit_form > .image_upload > input::file-selector-button:hover {
-  background-color: rgb(148, 148, 148);
-}
-
-.skill_edit_form > .description_input {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.skill_edit_form > .description_input > textarea {
-  width: 400px;
-  height: 300px;
-}

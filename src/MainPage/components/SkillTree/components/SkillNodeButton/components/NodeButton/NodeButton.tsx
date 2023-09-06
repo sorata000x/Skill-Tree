@@ -50,9 +50,7 @@ export const NodeButton = ({
         ref={buttonRef}
         onClick={handleClick}
         {...listeners}
-      >
-        {skill.image ? <img alt="skill" src={skill.image} /> : null}
-      </button>
+      />
       <SkillPreview open={isMouseOver} skill={skill} />
       <NodeTitle
         skill={skill}
@@ -60,6 +58,12 @@ export const NodeButton = ({
         isDragOverlay={isDragOverlay}
         handleClick={(e)=>handleClick(e)}
       />
+      { skill.icon ? <img 
+        className="skill_icon" 
+        alt="skill" 
+        src={skill.icon.url} 
+        onClick={(e)=>handleClick(e)}
+      /> : null }
     </div>
   );
 };
