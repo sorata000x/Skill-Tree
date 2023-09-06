@@ -16,15 +16,7 @@ My aim is to combine these concepts to help visualizing data in a concise manner
 
 ## Doing
 
-- Skill preview
-  - adjust skill preview positon to fit screen
-  - retain \n character
 
-(Next)
-- Rich text
-  - ~~packages~~
-  - ~~regex~~
-  - tokenizer!
 
 ## To Do
 
@@ -50,6 +42,7 @@ Basic Feature
 
 Advanced Feature
 
+- Preview tree when hovering on group tabs
 - Backup skills (edit history)
 - Choose to have levels for a group or a skill
 - Store template
@@ -91,7 +84,11 @@ Core Feature
 
 Basic Feature
 
-- Rich text editor
+- SkillEdit
+  - Image upload (9/5)
+  - DraftEditor
+  - 'Title', 'Level', 'Max Level', 'Increase By' inputs
+- DraftEditor (Rich text editor)
   - Text formatting
     - creating list ('1. 'ordered, '- 'unordered) (9/4)
     - insert soft newline (shift + enter) (9/4)
@@ -100,7 +97,9 @@ Basic Feature
     - markdown formatting (9/2)
   - UX
     - add new block so last block always empty (9/3)
-- Make groups sortable (8/26)
+- SideBar
+  - GroupTabs
+    - Make groups sortable (8/26)
 - Help button
 - Dark mode
 - Skill Preview

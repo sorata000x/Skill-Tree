@@ -3,7 +3,8 @@ import { useStateValue } from "StateProvider";
 import { storage } from "firebase.ts";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import "./SkillEditForm.css";
-import { InputGroup, DraftEditor, IconInputGroup } from "./components";
+import { InputGroup, IconInputGroup } from "./components";
+import { DraftEditor } from "MainPage/components/DraftEditor";
 
 export const SkillEditForm = () => {
   const [{ activeSkill, user }, dispatch] = useStateValue();
@@ -129,6 +130,7 @@ export const SkillEditForm = () => {
       { user && <IconInputGroup addIcon={(v)=>handleChange('icon', v)}/> }
       <hr className="solid" />
       <DraftEditor
+        style={{width: "394px", height: "300px"}}
         value={activeSkill?.description}
         onChange={(v)=>handleChange("description", v)}/>
     </form>

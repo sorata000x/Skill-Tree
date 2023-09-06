@@ -9,6 +9,12 @@ export const UpdateLog = () => {
     popUp?.type === "update_log" ?
     <div className="update_log">
       <h1>Updates</h1> <br />
+      --- Sep 5 2023 --- <br />
+      <br />
+      <h2>Improvement</h2>
+      <strong>Better Skill Icon Upload Button</strong>
+       - Make skill icon upload button looks better <br />
+      <br /><br />
       --- Aug 27 2023 --- <br />
       <br />
       <h2>Features</h2>

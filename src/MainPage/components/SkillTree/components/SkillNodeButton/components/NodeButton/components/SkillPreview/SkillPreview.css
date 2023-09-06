@@ -6,7 +6,6 @@
 }
 
 .skill_preview > .container {
-  
   width: max-content;
   max-width: 274px;
   height: min-content;
@@ -55,6 +54,10 @@
   100% {
     opacity: 1;
   }
+}
+
+.draft-editor {
+  height: 10px;
 }
 
 /* Dark Mode */

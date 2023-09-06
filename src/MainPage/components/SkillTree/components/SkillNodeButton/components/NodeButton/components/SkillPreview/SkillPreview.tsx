@@ -2,6 +2,7 @@ import "./SkillPreview.css";
 import React, { useState, createRef, useEffect } from "react";
 import type { Skill } from "types";
 import { getOffset } from "utilities";
+import { DraftEditor } from "MainPage/components/DraftEditor";
 
 export interface Props {
   open: boolean;
@@ -65,7 +66,10 @@ export const SkillPreview = ({ open, skill }: Props) => {
         </div>
         <div className="info_group">
           <div className="label">Description</div>
-          <div className="value">{skill.description}</div>
+          <DraftEditor
+            style={{minWidth: "150px", maxWidth: "274px"}}
+            value={skill.description}
+            readOnly={true}/>
         </div>
       </div>
     </div>

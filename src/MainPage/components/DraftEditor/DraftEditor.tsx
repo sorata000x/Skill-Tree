@@ -12,8 +12,10 @@ import "./DraftEditor.css"
 import { TYPE, getToken } from "./tokenizer";
 
 export interface Props {
+  style?: Object,
   value: string | undefined,
-  onChange: (v: string)=>void,
+  onChange?: (v: string)=>void,
+  readOnly?: boolean,
 }
 
 /* 
@@ -24,7 +26,7 @@ export interface Props {
  * | StackOverflow: handleBeforeInput example | https://stackoverflow.com/questions/38241444/draft-js-replace-text-using-handlebeforeinput-doesnt-change-the-editorstate
  */
 
-export const DraftEditor = ({value, onChange}: Props) => {
+export const DraftEditor = ({style, value, onChange, readOnly}: Props) => {
   const editor: React.LegacyRef<Editor> = createRef();
   const isJson = (str: string | undefined) => {
     // Reference: StackOverflow: How to test if a string is JSON or not? | https://stackoverflow.com/questions/9804777/how-to-test-if-a-string-is-json-or-not
@@ -42,6 +44,7 @@ export const DraftEditor = ({value, onChange}: Props) => {
   const handleChange = (
     editorState: EditorState
   ) => {
+    if(!onChange) return;
     // Save data to storage
     const contentState = editorState.getCurrentContent();
     onChange(JSON.stringify(convertToRaw(contentState)));
@@ -205,7 +208,7 @@ export const DraftEditor = ({value, onChange}: Props) => {
   }
 
   return (
-    <div className='draft_editor' >
+    <div className='draft_editor' style={style}>
       <Editor 
         ref={editor}
         editorState={editorState}
@@ -214,6 +217,7 @@ export const DraftEditor = ({value, onChange}: Props) => {
         keyBindingFn={keyBindingFn}
         handleKeyCommand={(cm, es, ets)=>handleKeyCommand(cm, es, ets)}
         handleBeforeInput={(c, es, ets)=>handleBeforeInput(c, es, ets)}
+        readOnly={readOnly}
       />
       <div 
         className='new_block_listener' 

@@ -14,8 +14,8 @@ export interface Props {
 
 export const HelpMenu = ({open, close}: Props) => {
   const [{popUp}, dispatch] = useStateValue();
-  const version = "0.20.0";
-  const updateTime = new Date("2023-08-27T19:40:00");
+  const version = "0.22.0";
+  const updateTime = new Date("2023-09-05T23:20:00");
   const ref: React.RefObject<HTMLDivElement> = createRef();
 
   useEffect(() => {

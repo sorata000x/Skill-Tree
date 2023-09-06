@@ -55,9 +55,9 @@ export const MainPage = () => {
         <SkillTree
           skills={skills.filter((skill: Skill) => skill.group.id === activeGroup?.id)}
         />
+        <HelpButton />
         {activeSkill ? <SkillEdit /> : null}
       </div>
-      <HelpButton />
       <PopUps />
     </div>
   );
