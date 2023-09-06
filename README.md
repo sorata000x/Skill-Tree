@@ -35,7 +35,6 @@ Core Feature
 Basic Feature
 
 - Group tree (folders)
-- Rich texts
 - Embeding images
 - Trash can
 - Landing page

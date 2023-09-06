@@ -43,7 +43,7 @@ export const SkillPreview = ({ open, skill }: Props) => {
     setMouseOver(true);
   }
 
-  const handleMouseLeave = (e: React.MouseEvent) => {
+  const handleMouseOut = (e: React.MouseEvent) => {
     e.stopPropagation();
     setMouseOver(false);
   }
@@ -52,7 +52,7 @@ export const SkillPreview = ({ open, skill }: Props) => {
     <div
       className="skill_preview fade-in"
       onMouseOver={(e) => handleMouseOver(e)}
-      onMouseLeave={(e) => handleMouseLeave(e)}
+      onMouseOut={(e) => handleMouseOut(e)}
       ref={ref}
     >
       <div className="container">
@@ -67,7 +67,7 @@ export const SkillPreview = ({ open, skill }: Props) => {
         <div className="info_group">
           <div className="label">Description</div>
           <DraftEditor
-            style={{minWidth: "150px", maxWidth: "274px"}}
+            style={{minWidth: "150px", maxWidth: "274px", maxHeight: "500px", overflow: "scroll"}}
             value={skill.description}
             readOnly={true}/>
         </div>
