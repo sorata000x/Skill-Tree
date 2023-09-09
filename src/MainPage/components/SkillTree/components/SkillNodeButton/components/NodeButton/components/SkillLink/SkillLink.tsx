@@ -57,7 +57,7 @@ export const SkillLink = ({skill, buttons, isDragOverlay}: Props) => {
       (180 / Math.PI);
     return (
       <div
-        className="link"
+        className="skill_link"
         style={{
           width: length,
           left: '56px',

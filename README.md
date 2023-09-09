@@ -10,9 +10,58 @@ To Myself:
 This project is inspired by skill tree of various video game, as well as tree data structure in computer science.
 My aim is to combine these concepts to help visualizing data in a concise manner and organizing them easily.
 
+Excellent tool to track the progress towards your goal.
+
+A good runner not only need ... but also ..., ..., and .....
+A great singer ....
+This app is built to help you break down the skill you needed and to track the progress towards you goal, whether it is .... or to become the better version of yourself.
+
 ## What Do I Use Skill Tree For?
 
 - Very nice way to document what I have learned and plan out what I need to learn
+
+## Structure
+
+- MainPage
+  - DraftEditor
+    - ToolBar
+  - HelpButton
+    - HelpMenu
+  - PopUps
+    - MoreMenu
+    - SupportPage
+    - UpdateLog
+    - UserAuthDialog
+  - SideBar
+    - ActionButtons
+      - CloseSideBarButton
+      - UserButton
+    - GroupTabs
+      - GroupTab
+        - GroupNameInput
+        - MoreButton
+    - NewGroupButton
+    - OpenSideBarButton
+    - UserMenu
+  - SkillEdit
+    - ActionButtons
+    - SkillEditForm
+      - IconInputGroup
+      - InputGroup
+  - SkillTree
+    - Instruction
+    - SkillNodeButton
+      - LevelChangeButtons
+      - NodeButton
+        - NodeTitle
+        - SkillLink
+        - SkillPreview
+      - SkillProgress
+        - Seperator
+        - RadialSeperators
+      - ToggleButton
+    - SkillNodeContainer
+    - SkillNodeLayer
 
 ## Doing
 
@@ -84,21 +133,23 @@ Core Feature
 Basic Feature
 
 - SkillEdit
-  - Image upload (9/5)
+  - Image upload - (9/5)
   - DraftEditor
   - 'Title', 'Level', 'Max Level', 'Increase By' inputs
 - DraftEditor (Rich text editor)
+  - ToolBar (link, bold, italic, underline, strike through) - (9/9)
+  - Embedding link to text - (9/9)
   - Text formatting
-    - creating list ('1. 'ordered, '- 'unordered) (9/4)
-    - insert soft newline (shift + enter) (9/4)
-    - bold, italic, underline, strike through, code (9/2)
-    - command formatting (9/2)
-    - markdown formatting (9/2)
+    - creating list ('1. 'ordered, '- 'unordered) - (9/4)
+    - insert soft newline (shift + enter) - (9/4)
+    - bold, italic, underline, strike through, code - (9/2)
+    - command formatting - (9/2)
+    - markdown formatting - (9/2)
   - UX
-    - add new block so last block always empty (9/3)
+    - add new block so last block always empty - (9/3)
 - SideBar
   - GroupTabs
-    - Make groups sortable (8/26)
+    - Make groups sortable - (8/26)
 - Help button
 - Dark mode
 - Skill Preview

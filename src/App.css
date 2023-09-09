@@ -11,6 +11,17 @@ hr.solid {
   margin: 0;
 }
 
+::selection {
+  background-color: #355269;
+}
+
+a {
+  color: gray;
+  cursor: pointer;
+  text-decoration: underline rgba(128, 128, 128, 0.5) solid 1px;
+  font-size: 14pt;
+}
+
 /* Input & Textarea */
 
 /* 

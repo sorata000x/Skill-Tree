@@ -9,6 +9,12 @@ export const UpdateLog = () => {
     popUp?.type === "update_log" ?
     <div className="update_log">
       <h1>Updates</h1> <br />
+      --- Sep 9 2023 --- <br />
+      <br />
+      <h2>Feature</h2>
+      <strong>Link Embedding Editor Toolbar</strong>
+       - Link can be embedded into text from the editor toolbar. <br />
+      <br /><br />
       --- Sep 5 2023 --- <br />
       <br />
       <h2>Improvement</h2>
