@@ -249,7 +249,7 @@ export const DraftEditor = ({value, style, readOnly, onChange}: Props) => {
     const range = selection?.getRangeAt(0); 
     const rect = range?.getBoundingClientRect();
     return {
-      top: rect?.top-40,
+      top: rect?.top-35,
       right: window.innerWidth-rect?.left-150,
     };
   }
