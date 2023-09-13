@@ -124,7 +124,6 @@ const reducer = (state: Data, action: Action): Data => {
         level: 0,
         maxLevel: 0,
         increaseBy: 1,
-        icon: null,
         description: "",
         group: action.group,
         treeOpen: true,

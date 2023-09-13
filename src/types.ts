@@ -3,6 +3,7 @@ import { User } from "firebase/auth";
 export interface Icon {
   name: string,
   url: string,
+  scale: number,
 }
 
 export interface Skill {
@@ -12,7 +13,7 @@ export interface Skill {
   level: number;
   maxLevel: number;
   increaseBy: number;
-  icon: Icon | null;
+  icon?: Icon;
   description: string;
   group: Group;
   treeOpen: boolean;
@@ -35,6 +36,8 @@ export interface PopUp {
   editGroupName?: Function;
   top?: number;
   left?: number;
+  // type: image_edit
+  icon?: Icon;
 }
 
 export interface DragOverlay {

@@ -28,7 +28,6 @@ export const emptySkill: Skill = {
   level: 0,
   maxLevel: 10,
   increaseBy: 1,
-  icon: null,
   description: '',
   group: emptyGroup,
   treeOpen: true,

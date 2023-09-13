@@ -2,7 +2,7 @@ import "./NodeButton.css";
 import React, { useEffect, useRef, useState } from "react";
 import { useStateValue } from "StateProvider";
 import { Skill } from "types";
-import { NodeTitle, SkillPreview, SkillLink } from "./components";
+import { NodeTitle, SkillPreview, SkillLink, NodeIcon } from "./components";
 
 export interface Props {
   skill: Skill;
@@ -58,12 +58,13 @@ export const NodeButton = ({
         isDragOverlay={isDragOverlay}
         handleClick={(e)=>handleClick(e)}
       />
-      { skill.icon ? <img 
-        className="skill_icon" 
-        alt="skill" 
-        src={skill.icon.url} 
+      <NodeIcon 
+        open={!!skill.icon}
+        src={skill.icon?.url}
+        scale={skill.icon?.scale}
         onClick={(e)=>handleClick(e)}
-      /> : null }
+        listeners={listeners}
+      />
     </div>
   );
 };

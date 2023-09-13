@@ -58,13 +58,16 @@ export const SkillEditForm = () => {
                 const newIcon = {
                   name: value.name,
                   url: url,
+                  scale: 1,
                 }
-                activeSkill.icon = newIcon;
                 dispatch({
-                  type: "SET_SKILL",
-                  id: activeSkill.id,
-                  skill: activeSkill,
-                });
+                  type: "SET_POP_UP",
+                  popUp: {
+                    type: "image_edit",
+                    focus: true,
+                    icon: newIcon,
+                  }
+                })
               });
             }
           );
@@ -127,7 +130,7 @@ export const SkillEditForm = () => {
           min={0}
           max={9999999}/>
       </div>
-      { user && <IconInputGroup addIcon={(v)=>handleChange('icon', v)}/> }
+      { user && <IconInputGroup setIcon={(v)=>handleChange('icon', v)}/> }
       <hr className="solid" />
       <DraftEditor
         style={{width: "394px", height: "300px"}}

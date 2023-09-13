@@ -49,14 +49,14 @@ export const MainPage = () => {
   };
 
   return (
-    <div id="main_page" className="main_page" onMouseDown={(e) => handleMouseDown(e)}>
-      <div className="container">
+    <div id="main_page" className="main_page">
+      <div className="container" onMouseDown={handleMouseDown}>
         <SideBar />
         <SkillTree
           skills={skills.filter((skill: Skill) => skill.group.id === activeGroup?.id)}
         />
         <HelpButton />
-        {activeSkill ? <SkillEdit /> : null}
+        <SkillEdit open={!!activeSkill} />
       </div>
       <PopUps />
     </div>

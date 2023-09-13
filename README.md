@@ -65,7 +65,8 @@ This app is built to help you break down the skill you needed and to track the p
 
 ## Doing
 
-
+- Maintain uploaded image's ratio
+- Start drawing icons
 
 ## To Do
 
@@ -134,7 +135,7 @@ Basic Feature
 
 - SkillEdit
   - Image upload - (9/5)
-  - DraftEditor
+  - Rich text editor (DraftEditor.js)
   - 'Title', 'Level', 'Max Level', 'Increase By' inputs
 - DraftEditor (Rich text editor)
   - ToolBar (link, bold, italic, underline, strike through) - (9/9)

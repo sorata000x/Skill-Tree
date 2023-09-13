@@ -1,0 +1,139 @@
+.image_edit {
+  background-color: black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image_edit > .title {
+  font-size: 16pt;
+  font-weight: bold;
+  width: 100%;
+  padding: 20px 50px 20px 20px;
+  box-sizing: border-box;
+}
+
+.image_edit > .crop_container {
+  background-color: #212121;
+  width: 460px;
+  height: 300px;
+  border-radius: 5px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.image_edit > .crop_container > .back_image_container {
+  grid-row: 1;
+  grid-column: 1;
+  width: 460px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image_edit > .crop_container > .filter {
+  background-color: rgba(0, 0, 0, 0.4);
+  grid-row: 1;
+  grid-column: 1;
+  width: 460px;
+  height: 300px;
+}
+
+.image_edit > .crop_container > .center_image_container {
+  background-color: transparent;
+  grid-row: 1;
+  grid-column: 1;
+  width: 460px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image_edit > .crop_container > .center_image_container > .crop_circle {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.85);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.image_edit > .slider_container {
+  width: 80%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.image_edit .slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  background-color: gray;
+}
+
+.image_edit .slider:focus {
+  background-color: gray;
+}
+
+.image_edit .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 28px;
+  background: rgb(225, 225, 225);
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.image_edit > .action_buttons {
+  display: flex;
+}
+
+.image_edit > .action_buttons > button {
+  background-color: transparent;
+  width: 70px;
+  height: 32px;
+  border: none;
+  border-radius: 3px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+}
+
+.image_edit > .action_buttons > .skip_button {
+  margin-right: 240px;
+}
+
+.image_edit > .action_buttons > .spacer {
+  width: 240px;
+}
+
+.image_edit > .action_buttons > .cancel_button {
+  margin-right: 14px;
+}
+
+.image_edit > .action_buttons > .apply_button {
+  background-color: gray;
+}
+
+/* Dark Mode */
+
+.image_edit {
+  background-color: #2d2d2d;
+}

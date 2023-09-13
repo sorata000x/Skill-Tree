@@ -1,7 +1,11 @@
 /*  Note
- * - Might want to implement later:
+ * - Wish List
+ *    - `--` to dash line
  *    - Code block '```'
  *    - Embed image, files, etc.
+ * - Bug
+ *    - SELECT style persist if reload when inputting link
+ *       - Might somehow not saving SELECT style to storage
  */
 
 import { Editor, EditorState, ContentState, RichUtils, convertToRaw, convertFromRaw, SelectionState, Modifier, ContentBlock, genKey, getDefaultKeyBinding, CompositeDecorator } from 'draft-js';
