@@ -1,6 +1,5 @@
 import "./NodeTitle.css";
 import React, { useRef, useEffect } from "react";
-import { useStateValue } from "StateProvider";
 import { Skill } from "types";
 import textfit from "textfit";
 
@@ -11,8 +10,10 @@ export interface Props {
   handleClick: (e: React.MouseEvent)=>void;
 }
 
+/**
+ * Skill title text that shrinks to fit the node button size
+ */
 export const NodeTitle = ({ skill, listeners, isDragOverlay, handleClick }: Props) => {
-  const [, dispatch] = useStateValue();
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {

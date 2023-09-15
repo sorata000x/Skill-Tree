@@ -6,18 +6,26 @@ import {
   SideBar,
   SkillTree,
   SkillEdit,
-  PopUps,
   HelpButton,
 } from "./components";
 import { Skill } from "types";
 
+/**
+ * Main page of the skill trees including:
+ * - SideBar    | side bar that contains various utilities  (left)
+ * - SkillTree  | the skill tree                            (middle)
+ * - HelpButton | ? help button                             (bottom right)
+ * - SkillEdit  | side window to edit skill                 (right, open by clicking skill node)
+ * - popUp      | pop up window (UserAuthDialog, SupportPage, UpdateLog)
+ */
 export const MainPage = () => {
-  const [{ skills, activeSkill, groups, activeGroup, user }, dispatch] =
+  const [{ skills, activeSkill, groups, activeGroup, popUp }, dispatch] =
     useStateValue();
   const pathParam = useParams().pathParam; // get current group from url parameter
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Set active group based on current URL or set to the first group if no path param
     if (pathParam) {
       dispatch({
         type: "SET_ACTIVE_GROUP",
@@ -41,7 +49,7 @@ export const MainPage = () => {
   }, [activeGroup])
 
   const handleMouseDown = (e: React.MouseEvent) => {
-    // cancel active skill
+    // Cancel active skill
     dispatch({
       type: "SET_ACTIVE_SKILL",
       activeSkill: null,
@@ -49,7 +57,7 @@ export const MainPage = () => {
   };
 
   return (
-    <div id="main_page" className="main_page">
+    <div className="main_page">
       <div className="container" onMouseDown={handleMouseDown}>
         <SideBar />
         <SkillTree
@@ -58,7 +66,7 @@ export const MainPage = () => {
         <HelpButton />
         <SkillEdit open={!!activeSkill} />
       </div>
-      <PopUps />
+      { popUp }
     </div>
   );
 };

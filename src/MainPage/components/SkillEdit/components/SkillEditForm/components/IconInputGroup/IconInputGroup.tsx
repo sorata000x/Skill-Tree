@@ -7,8 +7,11 @@ export interface Props {
   setIcon: (v: any)=>void,
 }
 
+/**
+ * Icon upload label and button that shows current icon if exist
+ */
 export const IconInputGroup = ({setIcon}: Props) => {
-  const [{activeSkill}, dispatch] = useStateValue();
+  const [{activeSkill}, ] = useStateValue();
   const iconInputRef: React.LegacyRef<HTMLInputElement> = createRef();
   const imgRef: React.RefObject<HTMLImageElement> = createRef();
   const [{imgWidth, imgHeight}, setImgDimension] = useState({imgWidth: 70, imgHeight: 70});

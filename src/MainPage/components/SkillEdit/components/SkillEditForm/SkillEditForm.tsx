@@ -3,14 +3,21 @@ import { useStateValue } from "StateProvider";
 import { storage } from "firebase.ts";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import "./SkillEditForm.css";
-import { InputGroup, IconInputGroup } from "./components";
+import { InputGroup, IconInputGroup, ImageEdit } from "./components";
 import { DraftEditor } from "MainPage/components/DraftEditor";
 
+/**
+ * Inputs to edit the current (active) skill including:
+ * - InputGroup     | title input, level input, max level input, increase by input group
+ * - IconInputGroup | icon image upload group
+ * - DraftEditor    | description input (rich text)
+ */
 export const SkillEditForm = () => {
   const [{ activeSkill, user }, dispatch] = useStateValue();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Close on submit
     dispatch({
       type: "SET_ACTIVE_SKILL",
       activeSkill: null,
@@ -19,6 +26,7 @@ export const SkillEditForm = () => {
 
   const handleChange = async (id: string, value: any) => {
     if (!activeSkill) return;
+    // Set input data to storage
     switch (id) {
       case "title": {
         activeSkill.title = value;
@@ -62,11 +70,7 @@ export const SkillEditForm = () => {
                 }
                 dispatch({
                   type: "SET_POP_UP",
-                  popUp: {
-                    type: "image_edit",
-                    focus: true,
-                    icon: newIcon,
-                  }
+                  popUp: <ImageEdit skill={activeSkill} icon={newIcon} />
                 })
               });
             }
@@ -83,7 +87,6 @@ export const SkillEditForm = () => {
         return;
       }
     }
-
     dispatch({
       type: "SET_SKILL",
       id: activeSkill.id,

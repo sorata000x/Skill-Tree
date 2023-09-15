@@ -11,6 +11,13 @@ export interface Props {
   isDragOverlay?: boolean;
 }
 
+/**
+ * Button as node, click to open skill edit side window
+ * - SkillLink    | a link of to this skill node's parent node button 
+ * - SkillPreview | small popup to show skill info, show by hovering on node button
+ * - NodeTitle    | skill's title
+ * - NodeIcon     | skill's icon
+ */
 export const NodeButton = ({
   skill,
   buttonRef,

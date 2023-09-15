@@ -32,6 +32,15 @@ export interface PopUp {
   type: string;
   focus?: boolean;
   // type: more_pop_up
+  morePopUpData: {
+    group: Group,
+    pos: {
+      top: number,
+      left: number,
+    },
+    editGroupName: Function;
+  }
+
   group?: Group;
   editGroupName?: Function;
   top?: number;
@@ -52,7 +61,7 @@ export interface Data {
   buttons: Buttons;
   groups: Array<Group>;
   activeGroup: Group | null;
-  popUp: PopUp | null;
+  popUp: any;
   user: User | null;
   dragOverlay: DragOverlay;
   theme: string;

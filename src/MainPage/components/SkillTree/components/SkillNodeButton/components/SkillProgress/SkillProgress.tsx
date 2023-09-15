@@ -10,6 +10,10 @@ export interface Props {
   maxLevel: number;
 }
 
+/**
+ * Circular progress bar around (actually is behind) the node button, utilize react-circular-progressbar package
+ * Show only if maxLevel > 0
+ */
 export const SkillProgress = ({ id, level, maxLevel }: Props) => {
   const [{ activeSkill }, ] = useStateValue();
 

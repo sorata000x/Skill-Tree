@@ -1,4 +1,4 @@
-import "./ToolBar.css"
+import "./ToolBar.css";
 import React, { createRef, useState } from "react";
 import { MdFormatBold, MdFormatItalic, MdFormatUnderlined, MdStrikethroughS, MdCode } from "react-icons/md";
 import { AiOutlineLink } from "react-icons/ai";
@@ -19,6 +19,12 @@ export interface Props {
  * | How to change the button text of <input type="file" />? | https://stackoverflow.com/questions/1944267/how-to-change-the-button-text-of-input-type-file
  */
 
+/**
+ * Tool bar with buttons to format text and create text link
+ * - Link button
+ * - Link input (show if link button clicked)
+ * - Text Formatting: Bold, Italic, Underline, Strike through, Code
+ */
 export const ToolBar = ({
   top, 
   right, 

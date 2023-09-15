@@ -1,14 +1,6 @@
-/**
- * Note: 
- *  - The reason for binding link with node button instead of passing button reference
- *    and render all links in the background is so the link can move with button and
- *    cause less manual rendering.
- */
-
 import { Skill, Buttons } from "types";
 import "./SkillLink.css";
 import React, { useState, useEffect } from "react";
-import { useStateValue } from "StateProvider";
 import { getOffset } from "utilities";
 
 export interface Props {
@@ -17,6 +9,13 @@ export interface Props {
   isDragOverlay: boolean | undefined,
 }
 
+/**
+ * Line to connect from a node button to its parent node button
+ * Note: 
+ * - The reason for binding link with node button instead of passing button reference
+ *   and render all links in the background is so the link can move with button and
+ *   cause less manual rendering.
+ */
 export const SkillLink = ({skill, buttons, isDragOverlay}: Props) => {
   //const [{ dragOverlay}, ] = useStateValue();
   const [updating, setUpdating] = useState(true);  // only update when interacting with page

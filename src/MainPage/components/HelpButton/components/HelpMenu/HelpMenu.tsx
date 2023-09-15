@@ -1,8 +1,9 @@
 import { useStateValue } from "StateProvider";
 import "./HelpMenu.css"
-import React, {createRef, useEffect} from "react";
+import React, { createRef, useEffect } from "react";
 import { RiLightbulbLine } from "react-icons/ri";
 import { GiNewShoot } from "react-icons/gi";
+import { SupportPage, UpdateLog } from "./components";
 
 // Need to update this file every deployment for now
 // Version: SkillTree major.minor.patch
@@ -12,13 +13,20 @@ export interface Props {
   close: Function,
 }
 
+/**
+ * Menu that contains website info and buttons including:
+ * - Support button
+ * - Update button
+ * - Website version, last update date time
+ */
 export const HelpMenu = ({open, close}: Props) => {
-  const [{popUp}, dispatch] = useStateValue();
-  const version = "0.23.0";
-  const updateTime = new Date("2023-09-09T10:59:00");
+  const [{}, dispatch] = useStateValue();
+  const VERSION = "0.23.0";
+  const UPDATE_TIME = new Date("2023-09-09T10:59:00");
   const ref: React.RefObject<HTMLDivElement> = createRef();
 
   useEffect(() => {
+    // Close if click outside
     function handleClickOutside(e: MouseEvent) {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         close();
@@ -36,11 +44,8 @@ export const HelpMenu = ({open, close}: Props) => {
     e.stopPropagation();
     dispatch({
       type: "SET_POP_UP",
-      popUp: {
-        type: "support_page",
-        focus: true,
-      },
-    });
+      popUp: <SupportPage />
+    })
     close();
   };
 
@@ -48,17 +53,15 @@ export const HelpMenu = ({open, close}: Props) => {
     e.stopPropagation();
     dispatch({
       type: "SET_POP_UP",
-      popUp: {
-        type: "update_log",
-        focus: true,
-      },
-    });
+      popUp: <UpdateLog />
+    })
     close();
   };
 
+  // Calculates how long since the update data time
   const timePass = () => {
     const currentTime = new Date();
-    const timePass = currentTime.valueOf() - updateTime.valueOf();
+    const timePass = currentTime.valueOf() - UPDATE_TIME.valueOf();
     if (Math.floor(timePass / (1000 * 3600 * 24)) > 0) {
       return `${Math.floor(timePass / (1000 * 3600 * 24))} days`;
     } else if (Math.floor(timePass / (1000 * 3600)) > 0) {
@@ -86,7 +89,7 @@ export const HelpMenu = ({open, close}: Props) => {
       </div>
       <div className="divider"></div>
       <div className="update_container">
-        SkillTree {version} <br />
+        SkillTree {VERSION} <br />
         Updated {timePass()} ago
       </div>
     </div>) : null

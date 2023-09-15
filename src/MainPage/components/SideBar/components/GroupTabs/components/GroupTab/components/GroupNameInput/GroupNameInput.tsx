@@ -8,6 +8,9 @@ export interface Props {
   setEditing: Function;
 }
 
+/**
+ * Group name input field for editing group name
+ */
 export const GroupNameInput = ({ group, setEditing }: Props) => {
   const [, dispatch] = useStateValue();
 
@@ -33,9 +36,9 @@ export const GroupNameInput = ({ group, setEditing }: Props) => {
       className="group_name_input"
       autoFocus
       value={group.name}
-      onChange={(e) => setGroupName(group.id, e.target.value)}
-      onBlur={() => setEditing(false)}
-      onKeyDown={(e) => handleKeyDown(e)}
+      onChange={(e)=>setGroupName(group.id, e.target.value)}
+      onBlur={()=>setEditing(false)}
+      onKeyDown={(e)=>handleKeyDown(e)}
     />
   );
 };

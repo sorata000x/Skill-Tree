@@ -1,22 +1,23 @@
 import "./UserMenu.css";
 import React, { createRef, useEffect } from "react";
-import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
-import { BiLogIn, BiLogOut } from "react-icons/bi";
-import { useStateValue } from "StateProvider";
-import { auth } from "firebase.ts";
-import { useNavigate } from "react-router-dom";
+import { ThemeButton, AuthButton } from "./components";
 
 export interface Props {
   open: boolean;
   close: Function;
 }
 
-export const UserMenu = ({ open, close }: Props) => {
-  const [{ user, theme }, dispatch] = useStateValue();
-  const navigate = useNavigate();
+/**
+ * A popup menu show under UserButton if clicked
+ * - ThemeButton    | change theme (light / dark)
+ * - AuthButton     | authentication (logout / open auth dialog if login)
+ * - UserAuthDialog | auth button click to close menu and open auth dialog window
+ */
+export const UserMenu = ({open, close}: Props) => {
   const ref: React.RefObject<HTMLDivElement> = createRef();
 
   useEffect(() => {
+    // Close self if clicked outside
     function handleClickOutside(e: MouseEvent) {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         close();
@@ -30,61 +31,9 @@ export const UserMenu = ({ open, close }: Props) => {
     };
   }, [ref]);
 
-  const handleAuthentication = () => {
-    if (user) {
-      auth.signOut();
-      dispatch({
-        type: "SIGN_OUT",
-      });
-      navigate("/");
-    } else {
-      dispatch({
-        type: "SET_POP_UP",
-        popUp: { 
-          type: "user_auth_dialog",
-          focus: true,
-        },
-      });
-    }
-    close();
-  };
-
-  const switchTheme = () => {
-    dispatch({
-      type: "SET_THEME",
-      theme: theme === "light" ? "dark" : "light",
-    });
-    close();
-  };
-
-  return open ? (
-    <div className="user_menu" ref={ref}>
-      <button onClick={() => switchTheme()}>
-        {theme === "light" ? (
-          <>
-            <MdOutlineDarkMode />
-            Dark Mode
-          </>
-        ) : (
-          <>
-            <MdOutlineLightMode />
-            Light Mode
-          </>
-        )}
-      </button>
-      <button onClick={() => handleAuthentication()}>
-        {user ? (
-          <>
-            <BiLogOut />
-            Logout
-          </>
-        ) : (
-          <>
-            <BiLogIn />
-            Login
-          </>
-        )}
-      </button>
-    </div>
-  ) : null;
+  return open ? 
+  <div className="user_menu" ref={ref}>
+    <ThemeButton onClick={(e)=>close()} />
+    <AuthButton onClick={(e)=>close()} />
+  </div> : null;
 };

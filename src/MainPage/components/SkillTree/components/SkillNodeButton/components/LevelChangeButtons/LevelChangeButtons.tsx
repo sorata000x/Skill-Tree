@@ -1,6 +1,5 @@
 import React from "react";
 import "./LevelChangeButtons.css";
-import { useStateValue } from "StateProvider";
 import { HiOutlinePlus, HiOutlineMinus } from "react-icons/hi";
 
 export interface Props {
@@ -10,6 +9,10 @@ export interface Props {
   setLevel: Function;
 }
 
+/**
+ * Buttons to increase or decrease the skill level
+ * Show only if maxLevel > 0
+ */
 export const LevelChangeButtons = ({
   level,
   maxLevel,
@@ -20,7 +23,6 @@ export const LevelChangeButtons = ({
   const increaseLevel = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    //e.stopPropagation();
     let newLevel = level + increaseBy;
     if (newLevel <= maxLevel) {
       setLevel(newLevel);
@@ -32,7 +34,6 @@ export const LevelChangeButtons = ({
   const decreaseLevel = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    //e.stopPropagation();
     let newLevel = level - increaseBy;
     if (newLevel >= 0) {
       setLevel(newLevel);
@@ -60,7 +61,6 @@ export const LevelChangeButtons = ({
       >
         <HiOutlineMinus className="icon" size={28} />
       </button>
-      <div className="curv"></div>
     </div> : null
   );
 };

@@ -15,7 +15,10 @@ export interface Props {
   isDragOverlay?: boolean; // whether the layer is used by DragOverlay
 }
 
-// One row of skill nodes.
+/**
+ * Contain a row of skill nodes, sortable with Dnd-kit Sortable
+ * - SkillNodeContainer | contains one node in the row and its children
+ */
 export const SkillNodeLayer = ({
   id,
   skills,

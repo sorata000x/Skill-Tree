@@ -63,6 +63,10 @@ This app is built to help you break down the skill you needed and to track the p
     - SkillNodeContainer
     - SkillNodeLayer
 
+## Guideline
+
+- Let components take care of themselves if it is possible
+
 ## Doing
 
 - Maintain uploaded image's ratio

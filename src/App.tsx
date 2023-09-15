@@ -6,15 +6,19 @@ import {
   Route,
   Routes,
   useParams,
-  useNavigate,
 } from "react-router-dom";
 import { db, auth } from "./firebase.ts";
 import { doc, getDoc } from "firebase/firestore";
 import { MainPage } from "MainPage";
 
+/**
+ * Main functionalities
+ * - Route to different pages
+ * - Handle authentication (set user)
+ * - Set user data
+ */
 function App() {
   const [{ user, theme }, dispatch] = useStateValue();
-  const urlParam = useParams().pathParam;
   // Render after data loaded
   // Reference: https://stackoverflow.com/questions/51556988/react-render-component-asynchronously-after-data-is-fetched
   const [isLoading, setLoading] = useState(true);
@@ -40,12 +44,6 @@ function App() {
         });
         setLoading(false);
       }
-    });
-    // Set active group
-    if (!urlParam) return;
-    dispatch({
-      type: "SET_ACTIVE_GROUP",
-      id: urlParam,
     });
   }, []);
 

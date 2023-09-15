@@ -10,6 +10,9 @@ export interface Props {
   groups: Array<Group>;
 }
 
+/**
+ * Button to create a new group tab
+ */
 export const NewGroupButton = ({ groups }: Props) => {
   const [, dispatch] = useStateValue();
   const navigate = useNavigate();

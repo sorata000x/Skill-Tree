@@ -12,7 +12,13 @@ export interface Props {
   isDragOverlay?: boolean;
 }
 
-// A button of skill node
+/**
+ * Skill button contains:
+ * - NodeButton        | node button
+ * - SkillProgress     | progress bar around button
+ * - LevelChangeButton | buttons to change skill level
+ * - ToggleButton      | button to toggle subtree
+ */
 export const SkillNodeButton = ({
   skill,
   buttonRef,
@@ -39,10 +45,8 @@ export const SkillNodeButton = ({
   return (
     <div
       className="skill_node_button"
-      onMouseOver={(e) => handleMouseOver(e)}
-      onMouseOut={(e) => {
-        setMouseOver(false);
-      }}
+      onMouseOver={(e)=>handleMouseOver(e)}
+      onMouseOut={(e)=>setMouseOver(false)}
     >
       <NodeButton
         skill={skill}

@@ -6,16 +6,20 @@ export interface Props {
   open: boolean,
 }
 
-// A panel to edit a skill.
+/**
+ * Skill edit window on the right of the page, show if a skill is activated
+ * - ActionButtons | close button, delete button (top)
+ * - SkillEditForm | inputs to edit skill infos
+ */
 export const SkillEdit = ({open}: Props) => {
-  if(!open) return;
   return (
+    open ?
     <div 
       className="skill_edit" 
-      onMouseDown={(e)=>e.stopPropagation()}
+      onMouseDown={(e)=>e.stopPropagation()}  // prevent close on mouse down on parent
       >
       <ActionButtons />
       <SkillEditForm />
-    </div>
+    </div> : null
   );
 };

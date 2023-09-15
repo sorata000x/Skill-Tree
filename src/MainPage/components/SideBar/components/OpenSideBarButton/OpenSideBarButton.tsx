@@ -6,12 +6,15 @@ export interface Props {
   handleClick: Function;
 }
 
+/**
+ * Open side bar if clicked (top left if SideBar is closed)
+ */
 export const OpenSideBarButton = ({ handleClick }: Props) => {
   return (
     <button
       title="open side bar"
       className="open_sidebar_button"
-      onClick={(e) => handleClick(e)}
+      onClick={(e)=>handleClick(e)}
     >
       <FiSidebar />
     </button>

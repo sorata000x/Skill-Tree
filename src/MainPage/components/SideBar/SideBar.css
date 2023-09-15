@@ -7,6 +7,12 @@
   z-index: 10;
 }
 
+.side_bar > .button_group_top {
+  display: flex;
+  padding: 9px;
+  gap: 6px;
+}
+
 /* Dark Mode */
 
 .dark .side_bar {

@@ -3,6 +3,10 @@ import React, { useState } from "react";
 import { BsQuestionLg } from "react-icons/bs";
 import { HelpMenu } from "./components";
 
+/**
+ * ? Help button at bottom right corner of the page
+ * - HelpMenu
+ */
 export const HelpButton = () => {
   const [openMenu, setOpenMenu] = useState(false);
 

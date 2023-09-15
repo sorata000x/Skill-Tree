@@ -1,4 +1,5 @@
-export { ActionButtons } from "./ActionButtons";
+export { CloseSideBarButton } from "./CloseSideBarButton";
+export { UserButton } from "./UserButton";
 export { GroupTabs } from "./GroupTabs";
 export { OpenSideBarButton } from "./OpenSideBarButton";
 export { UserMenu } from "./UserMenu";

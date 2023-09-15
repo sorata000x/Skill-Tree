@@ -9,12 +9,15 @@ export interface Props {
   skill: Skill;
 }
 
+/**
+ * Small popup that shows basic skill info (name, level, description)
+ */
 export const SkillPreview = ({ open, skill }: Props) => {
   const [isMouseOver, setMouseOver] = useState(false);
   const ref: React.RefObject<HTMLDivElement> = createRef();
 
-  // Adjust position to fit to screen
   useEffect(() => {
+    // Adjust position to fit to screen
     let offset = getOffset(ref);
     if (!offset || !ref.current) return;
     // default position (on the left)

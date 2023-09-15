@@ -32,6 +32,11 @@ export interface Props {
  * | CodeSandbox: Draft-js link example | https://codesandbox.io/s/draftjs-link-example-nz8fj?file=/src/index.js
  */
 
+/**
+ * Rich text editor utilizing draft-js library
+ * - Editor
+ * - ToolBar
+ */
 export const DraftEditor = ({value, style, readOnly, onChange}: Props) => {
   const ref: React.RefObject<HTMLDivElement> = createRef();
   const editorRef: React.RefObject<Editor> = createRef();

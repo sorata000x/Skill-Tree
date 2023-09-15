@@ -14,6 +14,9 @@ export interface Props {
   placeHolder?: string,
 }
 
+/**
+ * Input group including label and input field 
+ */
 export const InputGroup = ({ 
   id, 
   className, 

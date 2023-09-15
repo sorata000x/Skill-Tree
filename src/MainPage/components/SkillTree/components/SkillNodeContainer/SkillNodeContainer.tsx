@@ -15,7 +15,11 @@ export interface Props {
   isDragOverlay?: boolean; // whether this container is used by DragOverlay
 }
 
-// A subtree of skill nodes consists of one root node and a node layer as children.
+/**
+ * A subtree of skill nodes consists of one root node and its subtree.
+ * - SkillNodeButton | skill node button contains skill info
+ * - SkillNodeLayer  | contain row of skill node's children
+ */
 export const SkillNodeContainer = ({
   skill,
   skills,
@@ -57,7 +61,7 @@ export const SkillNodeContainer = ({
             skills={skills}
             buttons={buttons}
             isDragOverlay={isDragOverlay}
-          /> : null}
+          /> : null }
       </div>
     </div>
   );

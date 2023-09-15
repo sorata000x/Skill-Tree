@@ -1,27 +1,29 @@
-import React, { createRef, useEffect, useState } from "react";
+import React, { useState } from "react";
 import type { Group } from "types";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "StateProvider";
-import { BiSolidEditAlt } from "react-icons/bi";
 import { GroupNameInput, MoreButton } from "./components";
 import "./GroupTab.css";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-
 export interface Props {
   group: Group;
 }
 
+/**
+ * Tab button to navigate to different tree group
+ * - GroupNameInput | input for group name
+ * - MoreButton | button to open MoreMenu
+ */
 export const GroupTab = ({ group }: Props) => {
   const [, dispatch] = useStateValue();
   const navigate = useNavigate();
   const urlParam = useParams().pathParam;
-  const [hovering, setHovering] = useState(false); // is hovering on the group tab
   const [editing, setEditing] = useState(false);
 
-  // Set url parameter as current group id
+  // Set url parameter to current group id
   const setActiveGroup = () => {
     dispatch({
       type: "SET_ACTIVE_GROUP",
@@ -32,22 +34,8 @@ export const GroupTab = ({ group }: Props) => {
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation()
-    navigate(`/${group.id}`); // set url with current group id
+    navigate(`/${group.id}`); // set url to current group id
     setActiveGroup();
-  };
-
-  const handleClickMore = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    dispatch({
-      type: "SET_POP_UP",
-      popUp: {
-        type: "more_menu",
-        group: group,
-        editGroupName: ()=>setEditing(true),
-        top: e.clientY,
-        left: e.clientX,
-      },
-    });
   };
 
   /* Dnd-kit DragOverlay */
@@ -62,22 +50,25 @@ export const GroupTab = ({ group }: Props) => {
   };
 
   return (
-    <button
-      className={"group_tab" + (urlParam === group.id ? " active" : "")}
-      onClick={(e) => handleClick(e)}
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
-      // Dnd-kit DragOverlay
-      ref={setNodeRef}
-      style={style}
-      {...listeners}
-    >
-      {!editing ? (
-        group.name
-      ) : (
-        <GroupNameInput group={group} setEditing={setEditing} />
-      )}
-      <MoreButton open={hovering && !editing} group={group} handleClick={handleClickMore}/>
-    </button>
+    <>
+      <button
+        className={"group_tab" + (urlParam === group.id ? " active" : "")}
+        onClick={(e)=>handleClick(e)}
+        // Dnd-kit DragOverlay
+        ref={setNodeRef}
+        style={style}
+        {...listeners}
+      >
+        {!editing ? (
+          group.name
+        ) : (
+          <GroupNameInput group={group} setEditing={setEditing} />
+        )}
+        <MoreButton 
+          group={group} 
+          editGroupName={()=>setEditing(true)}
+          />
+      </button>
+    </>
   );
 };

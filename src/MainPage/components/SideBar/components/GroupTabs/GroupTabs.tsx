@@ -20,8 +20,17 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 
+/**
+ * Sortable list of group tabs utilizes dnd-kit sortable for sorting
+ * - GroupTab
+ */
 export const GroupTabs = () => {
   const [{groups}, dispatch] = useStateValue();
+
+  /* Dnd-kit Sortable & DragOverlay */
+
+  const [draggingGroup, setDraggingGroup]: [Group | null, Function] = useState(null);
+
   const sensors = useSensors(
     // Delay for onClick event of group tab
     useSensor(PointerSensor, {
@@ -33,20 +42,21 @@ export const GroupTabs = () => {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
-
-  const [draggingGroup, setDraggingGroup]: [Group | null, Function] = useState(null);
   
   const handleDragStart = ({ active }: DragStartEvent) => {
+    // Set active group for drag overlay
     let target = groups.find(group => group.id === active.id.toString());
     if (target) setDraggingGroup(target);
   };
 
   const handleDragEnd = ({ active, over }: DragEndEvent) => {
+    // Update new group tab order
     dispatch({
       type: "DROP_GROUP",
       active: active,
       over: over,
     });
+    // delay reset for dragging effect
     setTimeout(()=>setDraggingGroup(null), 100);
   };
 

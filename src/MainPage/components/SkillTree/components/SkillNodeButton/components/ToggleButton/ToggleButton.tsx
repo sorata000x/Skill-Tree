@@ -1,10 +1,7 @@
 import { useStateValue } from "StateProvider";
 import "./ToggleButton.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Skill } from "types";
-import { CgMoreAlt, CgMore } from "react-icons/cg";
-import { BsDot } from "react-icons/bs";
-import { PiDotsThreeOutlineThin, PiDotsThreeOutlineFill } from "react-icons/pi"
 
 // Reference: stackoverflow: React won't load local images | https://stackoverflow.com/questions/34582405/react-wont-load-local-images
 
@@ -12,9 +9,19 @@ export interface Props {
   skill: Skill,
 }
 
+/**
+ * Button to toggle skill tree
+ */
 export const ToggleButton = ({skill}: Props) => {
   const [{skills}, dispatch] = useStateValue();
   const [isMouseOver, setMouseOver] = useState(false);
+
+  const skillHasChildren = () => {
+    for(const s of skills) {
+      if (s.parent === skill.id) return true;
+    }
+    return false;
+  }
 
   const toggleTree = () => {
     dispatch({
@@ -24,14 +31,7 @@ export const ToggleButton = ({skill}: Props) => {
     })
   }
 
-  const skillHasChildren = () => {
-    for(const s of skills) {
-      if (s.parent === skill.id) return true;
-    }
-    return false;
-  }
-
-  const dotIcons = () => {
+  const DotIcons = () => {
     let iconName = '';
     if(!isMouseOver) {
       iconName = skill.treeOpen ? 'dot-outlined' : 'dot-filled';
@@ -57,7 +57,7 @@ export const ToggleButton = ({skill}: Props) => {
       onDoubleClick={(e)=>e.stopPropagation()}
       onMouseOver={()=>setMouseOver(true)}
       onMouseOut={()=>setMouseOver(false)}>
-      {dotIcons()}
+      {DotIcons()}
     </button> : null
   )
 }

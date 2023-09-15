@@ -11,6 +11,9 @@ export interface Props {
   ) => void;
 }
 
+/**
+ * Background text to prompt user to add a group or skill
+ */
 export const Instruction = ({ group, skills, handleDoubleClick }: Props) => {
   const [{ groups }] = useStateValue();
 
