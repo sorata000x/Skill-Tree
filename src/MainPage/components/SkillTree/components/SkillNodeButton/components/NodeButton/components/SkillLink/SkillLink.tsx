@@ -4,29 +4,31 @@ import React, { useState, useEffect } from "react";
 import { getOffset } from "utilities";
 
 export interface Props {
-  skill: Skill,
-  buttons: Buttons,
-  isDragOverlay: boolean | undefined,
+  skill: Skill;
+  buttons: Buttons;
+  isDragOverlay: boolean | undefined;
 }
 
 /**
  * Line to connect from a node button to its parent node button
- * Note: 
+ * Note:
  * - The reason for binding link with node button instead of passing button reference
  *   and render all links in the background is so the link can move with button and
  *   cause less manual rendering.
  */
-export const SkillLink = ({skill, buttons, isDragOverlay}: Props) => {
+export const SkillLink = ({ skill, buttons, isDragOverlay }: Props) => {
   //const [{ dragOverlay}, ] = useStateValue();
-  const [updating, setUpdating] = useState(true);  // only update when interacting with page
-  const [time, setTime] = useState(new Date());  // to keep updating link
+  const [updating, setUpdating] = useState(true); // only update when interacting with page
+  const [time, setTime] = useState(new Date()); // to keep updating link
 
   useEffect(() => {
     // Note: Time needed to render might differ
-    setTimeout(()=>setUpdating(false), 100);  // Give link some time to finish render
-    document.addEventListener("mousedown", ()=>setUpdating(true));
-    document.addEventListener("mouseup", ()=>setTimeout(()=>setUpdating(false), 100));
-  }, [])
+    setTimeout(() => setUpdating(false), 100); // Give link some time to finish render
+    document.addEventListener("mousedown", () => setUpdating(true));
+    document.addEventListener("mouseup", () =>
+      setTimeout(() => setUpdating(false), 100)
+    );
+  }, []);
 
   useEffect(() => {
     if (!updating) return;
@@ -59,8 +61,8 @@ export const SkillLink = ({skill, buttons, isDragOverlay}: Props) => {
         className="skill_link"
         style={{
           width: length,
-          left: '56px',
-          top: '70px',
+          left: "56px",
+          top: "70px",
           transform: `rotate(${angle}deg)`,
           transformOrigin: "top left",
         }}
@@ -68,5 +70,5 @@ export const SkillLink = ({skill, buttons, isDragOverlay}: Props) => {
     );
   };
 
-  return ( getLink() )
-}
+  return getLink();
+};

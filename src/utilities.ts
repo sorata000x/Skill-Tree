@@ -1,8 +1,8 @@
 export interface Offset {
-  left: number,
-  top: number,
-  width: number,
-  height: number,
+  left: number;
+  top: number;
+  width: number;
+  height: number;
 }
 
 // Get offsets of given element (for updateChildEdge).

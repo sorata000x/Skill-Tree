@@ -2,12 +2,7 @@ import "./MainPage.css";
 import React, { useEffect } from "react";
 import { useStateValue } from "StateProvider";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  SideBar,
-  SkillTree,
-  SkillEdit,
-  HelpButton,
-} from "./components";
+import { SideBar, SkillTree, SkillEdit, HelpButton } from "./components";
 import { Skill } from "types";
 
 /**
@@ -30,23 +25,21 @@ export const MainPage = () => {
       dispatch({
         type: "SET_ACTIVE_GROUP",
         id: pathParam,
-      })
+      });
     } else if (groups.length) {
       dispatch({
         type: "SET_ACTIVE_GROUP",
         id: groups[0].id,
-      })
+      });
       navigate(`/${groups[0].id}`);
     }
     // need groups as dependency because it updates after page load
   }, [groups]);
 
   useEffect(() => {
-    if(activeGroup)
-      navigate(`/${activeGroup.id}`);
-    else
-      navigate(`/`);
-  }, [activeGroup])
+    if (activeGroup) navigate(`/${activeGroup.id}`);
+    else navigate(`/`);
+  }, [activeGroup]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     // Cancel active skill
@@ -61,12 +54,14 @@ export const MainPage = () => {
       <div className="container" onMouseDown={handleMouseDown}>
         <SideBar />
         <SkillTree
-          skills={skills.filter((skill: Skill) => skill.group.id === activeGroup?.id)}
+          skills={skills.filter(
+            (skill: Skill) => skill.group.id === activeGroup?.id
+          )}
         />
         <HelpButton />
         <SkillEdit open={!!activeSkill} />
       </div>
-      { popUp }
+      {popUp}
     </div>
   );
 };

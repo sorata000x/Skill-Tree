@@ -19,7 +19,6 @@ export const LevelChangeButtons = ({
   increaseBy,
   setLevel,
 }: Props) => {
-
   const increaseLevel = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -42,7 +41,7 @@ export const LevelChangeButtons = ({
     }
   };
 
-  return ( maxLevel ?
+  return maxLevel ? (
     <div className="level_change_buttons">
       <button
         className="top"
@@ -61,6 +60,6 @@ export const LevelChangeButtons = ({
       >
         <HiOutlineMinus className="icon" size={28} />
       </button>
-    </div> : null
-  );
+    </div>
+  ) : null;
 };

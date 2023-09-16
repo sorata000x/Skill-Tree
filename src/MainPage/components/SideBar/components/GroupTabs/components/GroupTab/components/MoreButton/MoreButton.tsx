@@ -5,8 +5,8 @@ import { Group } from "types";
 import { MoreMenu } from "./components";
 
 export interface Props {
-  group: Group,
-  editGroupName: Function,
+  group: Group;
+  editGroupName: Function;
 }
 
 /**
@@ -15,33 +15,31 @@ export interface Props {
  */
 export const MoreButton = ({ group, editGroupName }: Props) => {
   const [moreMenuOpen, setMoreMenuOpen] = useState(false);
-  const [menuPos, setMenuPos] = useState({top: 0, left: 0});
+  const [menuPos, setMenuPos] = useState({ top: 0, left: 0 });
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     // set MoreMenu position near clicked position
-    setMenuPos({top: e.clientY+20, left: e.clientX});
+    setMenuPos({ top: e.clientY + 20, left: e.clientX });
     setMoreMenuOpen(true);
-  }
+  };
 
   return (
     <>
-      <button 
-        className="more_button"
-        title="more">
+      <button className="more_button" title="more">
         <FiMoreHorizontal
           className="more_button"
           size={21}
-          onClick={(e)=>handleClick(e)}
+          onClick={(e) => handleClick(e)}
         />
       </button>
-      <MoreMenu 
+      <MoreMenu
         open={moreMenuOpen}
-        close={()=>setMoreMenuOpen(false)}
+        close={() => setMoreMenuOpen(false)}
         group={group}
-        style={{...menuPos}}
+        style={{ ...menuPos }}
         editGroupName={editGroupName}
-        />
+      />
     </>
-  )
-}
+  );
+};

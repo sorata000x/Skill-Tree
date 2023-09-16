@@ -24,7 +24,7 @@ export const GroupNameInput = ({ group, setEditing }: Props) => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    e.stopPropagation()
+    e.stopPropagation();
     if (e.key === "Enter") {
       setEditing(false);
     }
@@ -36,9 +36,9 @@ export const GroupNameInput = ({ group, setEditing }: Props) => {
       className="group_name_input"
       autoFocus
       value={group.name}
-      onChange={(e)=>setGroupName(group.id, e.target.value)}
-      onBlur={()=>setEditing(false)}
-      onKeyDown={(e)=>handleKeyDown(e)}
+      onChange={(e) => setGroupName(group.id, e.target.value)}
+      onBlur={() => setEditing(false)}
+      onKeyDown={(e) => handleKeyDown(e)}
     />
   );
 };

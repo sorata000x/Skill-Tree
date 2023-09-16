@@ -34,10 +34,7 @@ export const NewGroupButton = ({ groups }: Props) => {
   };
 
   return (
-    <button
-      className="new_group_button"
-      onClick={()=>addNewGroup()}
-    >
+    <button className="new_group_button" onClick={() => addNewGroup()}>
       <HiOutlinePlus className="icon" size={14} />
       New Group
     </button>

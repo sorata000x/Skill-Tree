@@ -1,9 +1,9 @@
 import { User } from "firebase/auth";
 
 export interface Icon {
-  name: string,
-  url: string,
-  scale: number,
+  name: string;
+  url: string;
+  scale: number;
 }
 
 export interface Skill {
@@ -33,13 +33,13 @@ export interface PopUp {
   focus?: boolean;
   // type: more_pop_up
   morePopUpData: {
-    group: Group,
+    group: Group;
     pos: {
-      top: number,
-      left: number,
-    },
+      top: number;
+      left: number;
+    };
     editGroupName: Function;
-  }
+  };
 
   group?: Group;
   editGroupName?: Function;

@@ -1,6 +1,9 @@
 import { useStateValue } from "StateProvider";
 import React from "react";
-import { CircularProgressbarWithChildren, buildStyles } from "react-circular-progressbar";
+import {
+  CircularProgressbarWithChildren,
+  buildStyles,
+} from "react-circular-progressbar";
 import "./SkillProgress.css";
 import { RadialSeparators } from "./components";
 
@@ -15,9 +18,9 @@ export interface Props {
  * Show only if maxLevel > 0
  */
 export const SkillProgress = ({ id, level, maxLevel }: Props) => {
-  const [{ activeSkill }, ] = useStateValue();
+  const [{ activeSkill }] = useStateValue();
 
-  return ( maxLevel ?
+  return maxLevel ? (
     <div
       className={"skill_progress" + (activeSkill?.id === id ? " active" : "")}
     >
@@ -32,10 +35,8 @@ export const SkillProgress = ({ id, level, maxLevel }: Props) => {
           pathColor: "#446682",
         })}
       >
-        <RadialSeparators
-          count={maxLevel <= 50 ? maxLevel : 50}
-        />
+        <RadialSeparators count={maxLevel <= 50 ? maxLevel : 50} />
       </CircularProgressbarWithChildren>
-    </div> : null
-  );
+    </div>
+  ) : null;
 };

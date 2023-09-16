@@ -101,7 +101,8 @@ textarea:focus {
   color: rgba(255, 255, 255, 0.87);
 }
 
-.dark input:active, .dark input:focus {
+.dark input:active,
+.dark input:focus {
   background-color: #212121;
   padding-left: 3px;
 }

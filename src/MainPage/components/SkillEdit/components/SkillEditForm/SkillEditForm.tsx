@@ -54,7 +54,7 @@ export const SkillEditForm = () => {
         if (user) {
           // Reference: How to upload image and Preview it using ReactJS ? | https://www.geeksforgeeks.org/how-to-upload-image-and-preview-it-using-reactjs/
           // Reference: Firebase Storage | https://modularfirebase.web.app/common-use-cases/storage/
-          if(!value) return;
+          if (!value) return;
           const storageRef = ref(storage, `/images/${user.uid}/${value.name}`);
           const uploadTask = uploadBytesResumable(storageRef, value);
           uploadTask.on(
@@ -67,11 +67,11 @@ export const SkillEditForm = () => {
                   name: value.name,
                   url: url,
                   scale: 1,
-                }
+                };
                 dispatch({
                   type: "SET_POP_UP",
-                  popUp: <ImageEdit skill={activeSkill} icon={newIcon} />
-                })
+                  popUp: <ImageEdit skill={activeSkill} icon={newIcon} />,
+                });
               });
             }
           );
@@ -96,49 +96,54 @@ export const SkillEditForm = () => {
 
   return (
     <form className="skill_edit_form" onSubmit={handleSubmit}>
-      <InputGroup 
+      <InputGroup
         className="title_input"
         id="title"
         type="text"
         label="Title"
         placeHolder="Untitled"
         value={activeSkill?.title}
-        handleChange={(v)=>handleChange('title', v)}/>
+        handleChange={(v) => handleChange("title", v)}
+      />
       <div className="form-level-group">
-        <InputGroup 
+        <InputGroup
           className="level_input"
           id="level"
           type="number"
           label="Level"
           value={activeSkill?.level}
-          handleChange={(v)=>handleChange('level', v)}
+          handleChange={(v) => handleChange("level", v)}
           min={0}
-          max={activeSkill?.maxLevel}/>
-        <InputGroup 
+          max={activeSkill?.maxLevel}
+        />
+        <InputGroup
           className="max_level_input"
           id="max_level"
           type="number"
           label="Max Level"
           value={activeSkill?.maxLevel}
-          handleChange={(v)=>handleChange('max_level', v)}
+          handleChange={(v) => handleChange("max_level", v)}
           min={0}
-          max={9999999}/>
-        <InputGroup 
+          max={9999999}
+        />
+        <InputGroup
           className="increase_by_input"
           id="increase_by"
           type="number"
           label="Increase By"
           value={activeSkill?.increaseBy}
-          handleChange={(v)=>handleChange('increase_by', v)}
+          handleChange={(v) => handleChange("increase_by", v)}
           min={0}
-          max={9999999}/>
+          max={9999999}
+        />
       </div>
-      { user && <IconInputGroup setIcon={(v)=>handleChange('icon', v)}/> }
+      {user && <IconInputGroup setIcon={(v) => handleChange("icon", v)} />}
       <hr className="solid" />
       <DraftEditor
-        style={{width: "394px", height: "300px"}}
+        style={{ width: "394px", height: "300px" }}
         value={activeSkill?.description}
-        onChange={(v)=>handleChange("description", v)}/>
+        onChange={(v) => handleChange("description", v)}
+      />
     </form>
   );
 };

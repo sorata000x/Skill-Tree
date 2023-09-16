@@ -14,7 +14,7 @@ export const CloseSideBarButton = ({ handleClick }: Props) => {
     <button
       title="close side bar"
       className="close_side_bar_button"
-      onClick={(e)=>handleClick(e)}
+      onClick={(e) => handleClick(e)}
     >
       <FiSidebar />
     </button>

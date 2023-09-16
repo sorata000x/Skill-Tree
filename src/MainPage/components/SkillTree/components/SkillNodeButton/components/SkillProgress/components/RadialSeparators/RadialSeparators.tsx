@@ -1,13 +1,14 @@
-import "./RadialSeparators.css"
+import "./RadialSeparators.css";
 import React from "react";
 import { Separator } from "./components";
 
 export interface Props {
-  count: number,
+  count: number;
 }
 
-export const RadialSeparators = ({count}: Props) => {
+export const RadialSeparators = ({ count }: Props) => {
   return (
-    count && [...Array(count).keys()].map(i => <Separator turns={i / count} />)
-  )
-}
+    count &&
+    [...Array(count).keys()].map((i) => <Separator turns={i / count} />)
+  );
+};

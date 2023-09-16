@@ -20,9 +20,9 @@ export const UserAuthDialog = () => {
 
   const close = () => {
     dispatch({
-      type: "CLOSE_POP_UP"
-    })
-  }
+      type: "CLOSE_POP_UP",
+    });
+  };
 
   const changeType = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -66,8 +66,8 @@ export const UserAuthDialog = () => {
   };
 
   return (
-    <div className="dark_overlay" onClick={(e)=>close()}>
-      <div className="user_auth_dialog" onClick={(e)=>e.stopPropagation()}>
+    <div className="dark_overlay" onClick={(e) => close()}>
+      <div className="user_auth_dialog" onClick={(e) => e.stopPropagation()}>
         <div className="title">
           {type === "login" ? "Sign In" : "Create Your Account"}
         </div>

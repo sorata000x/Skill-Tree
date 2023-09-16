@@ -33,7 +33,7 @@ export const GroupTab = ({ group }: Props) => {
   };
 
   const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation()
+    e.stopPropagation();
     navigate(`/${group.id}`); // set url to current group id
     setActiveGroup();
   };
@@ -41,7 +41,7 @@ export const GroupTab = ({ group }: Props) => {
   /* Dnd-kit DragOverlay */
 
   const { listeners, setNodeRef, transform, transition, isDragging } =
-    useSortable({ id: group.id, });
+    useSortable({ id: group.id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -53,7 +53,7 @@ export const GroupTab = ({ group }: Props) => {
     <>
       <button
         className={"group_tab" + (urlParam === group.id ? " active" : "")}
-        onClick={(e)=>handleClick(e)}
+        onClick={(e) => handleClick(e)}
         // Dnd-kit DragOverlay
         ref={setNodeRef}
         style={style}
@@ -64,10 +64,7 @@ export const GroupTab = ({ group }: Props) => {
         ) : (
           <GroupNameInput group={group} setEditing={setEditing} />
         )}
-        <MoreButton 
-          group={group} 
-          editGroupName={()=>setEditing(true)}
-          />
+        <MoreButton group={group} editGroupName={() => setEditing(true)} />
       </button>
     </>
   );

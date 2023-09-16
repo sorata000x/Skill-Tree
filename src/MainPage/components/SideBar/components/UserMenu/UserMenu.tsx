@@ -13,7 +13,7 @@ export interface Props {
  * - AuthButton     | authentication (logout / open auth dialog if login)
  * - UserAuthDialog | auth button click to close menu and open auth dialog window
  */
-export const UserMenu = ({open, close}: Props) => {
+export const UserMenu = ({ open, close }: Props) => {
   const ref: React.RefObject<HTMLDivElement> = createRef();
 
   useEffect(() => {
@@ -31,9 +31,10 @@ export const UserMenu = ({open, close}: Props) => {
     };
   }, [ref]);
 
-  return open ? 
-  <div className="user_menu" ref={ref}>
-    <ThemeButton onClick={(e)=>close()} />
-    <AuthButton onClick={(e)=>close()} />
-  </div> : null;
+  return open ? (
+    <div className="user_menu" ref={ref}>
+      <ThemeButton onClick={(e) => close()} />
+      <AuthButton onClick={(e) => close()} />
+    </div>
+  ) : null;
 };

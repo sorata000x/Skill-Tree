@@ -20,9 +20,9 @@
   padding-left: 8px;
 }
 
-.help_menu > .divider { 
+.help_menu > .divider {
   height: 1px;
-  background-color: rgba(255, 255, 255, 0.30);
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .help_menu > .update_container {
@@ -33,12 +33,12 @@
 
 .dark .help_menu {
   background-color: #2d2d2d;
-  color: rgba(255, 255, 255, 0.80);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .dark .help_menu > .button_container > button {
   background-color: #2d2d2d;
-  color: rgba(255, 255, 255, 0.80);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .dark .help_menu > .button_container > button:hover {

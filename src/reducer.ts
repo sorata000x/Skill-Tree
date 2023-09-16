@@ -52,7 +52,7 @@ const getInitialState = (): Data => {
     dragOverlay: {
       skills: [],
       buttons: {},
-      parentId: 'root',
+      parentId: "root",
     },
     theme: theme,
   };
@@ -69,14 +69,14 @@ const reducer = (state: Data, action: Action): Data => {
         console.error("Operation SET_SKILLS requires {skills} attribute");
         return state;
       }
-      console.debug(`SET SKILLS TO {${action.skills}}`)
+      console.debug(`SET SKILLS TO {${action.skills}}`);
       // relace all the skills with a new set of skills
       let newSkills = action.skills;
-      for (let i=0; i<newSkills.length; i++) {
+      for (let i = 0; i < newSkills.length; i++) {
         newSkills[i] = {
-          ...emptySkill,    // pre-define all properties (data patch)
+          ...emptySkill, // pre-define all properties (data patch)
           ...newSkills[i],
-        }
+        };
         state.buttons[newSkills[i].id] = createRef();
       }
 
@@ -138,7 +138,8 @@ const reducer = (state: Data, action: Action): Data => {
         skills: [...state.skills, newSkill],
       };
     }
-    case "DROP_SKILL": {    // Change the positon of skill node (dnd-kit sortable)
+    case "DROP_SKILL": {
+      // Change the positon of skill node (dnd-kit sortable)
       console.debug("DROP_SKILL");
       if (action.active === undefined || action.over === undefined) {
         console.error(
@@ -248,11 +249,11 @@ const reducer = (state: Data, action: Action): Data => {
       if (action.id === undefined || action.treeOpen === undefined) {
         console.error(
           "Operation SET_SKILL_TREE_OPEN requires {id, treeOpen} attributes"
-        )
+        );
         return state;
       }
       let newSkills = [...state.skills];
-      for(const skill of newSkills) {
+      for (const skill of newSkills) {
         if (skill.id === action.id) {
           skill.treeOpen = action.treeOpen;
         }
@@ -368,7 +369,8 @@ const reducer = (state: Data, action: Action): Data => {
         activeGroup: newGroups[0],
       };
     }
-    case "DROP_GROUP": {    // Change the positon of group tab (dnd-kit sortable)
+    case "DROP_GROUP": {
+      // Change the positon of group tab (dnd-kit sortable)
       console.debug("DROP_GROUP");
       if (action.active === undefined || action.over === undefined) {
         console.error(

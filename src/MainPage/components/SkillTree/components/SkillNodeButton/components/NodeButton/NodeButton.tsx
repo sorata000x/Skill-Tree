@@ -13,7 +13,7 @@ export interface Props {
 
 /**
  * Button as node, click to open skill edit side window
- * - SkillLink    | a link of to this skill node's parent node button 
+ * - SkillLink    | a link of to this skill node's parent node button
  * - SkillPreview | small popup to show skill info, show by hovering on node button
  * - NodeTitle    | skill's title
  * - NodeIcon     | skill's icon
@@ -39,21 +39,23 @@ export const NodeButton = ({
       type: "SET_ACTIVE_SKILL",
       activeSkill: skill,
     });
-  }
+  };
 
   return (
     <div
       className="node_button"
-      onMouseOver={()=>setMouseOver(true)}
-      onMouseOut={()=>setMouseOver(false)}
+      onMouseOver={() => setMouseOver(true)}
+      onMouseOut={() => setMouseOver(false)}
     >
-      <SkillLink 
-        skill={skill} 
-        buttons={isDragOverlay ? { ...buttons, ...dragOverlay.buttons} : buttons}
-        isDragOverlay={isDragOverlay} 
+      <SkillLink
+        skill={skill}
+        buttons={
+          isDragOverlay ? { ...buttons, ...dragOverlay.buttons } : buttons
+        }
+        isDragOverlay={isDragOverlay}
       />
       <button
-        className={(isActive && !skill.maxLevel) ? " active" : ""}
+        className={isActive && !skill.maxLevel ? " active" : ""}
         ref={buttonRef}
         onClick={handleClick}
         {...listeners}
@@ -63,13 +65,13 @@ export const NodeButton = ({
         skill={skill}
         listeners={listeners}
         isDragOverlay={isDragOverlay}
-        handleClick={(e)=>handleClick(e)}
+        handleClick={(e) => handleClick(e)}
       />
-      <NodeIcon 
+      <NodeIcon
         open={!!skill.icon}
         src={skill.icon?.url}
         scale={skill.icon?.scale}
-        onClick={(e)=>handleClick(e)}
+        onClick={(e) => handleClick(e)}
         listeners={listeners}
       />
     </div>

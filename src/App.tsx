@@ -73,7 +73,7 @@ function App() {
         dispatch({
           type: "SET_THEME",
           theme: userDoc.data()?.theme,
-        })
+        });
       }
       setLoading(false);
     };
@@ -82,7 +82,7 @@ function App() {
     }
   }, [user]);
 
-  if(isLoading) return;
+  if (isLoading) return;
 
   return (
     <div className={`App ${theme}`}>

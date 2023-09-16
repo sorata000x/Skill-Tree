@@ -4,14 +4,14 @@ import React from "react";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 
 export interface Props {
-  onClick: (e: React.MouseEvent)=>void,
+  onClick: (e: React.MouseEvent) => void;
 }
 
 /**
  * Theme control button (light / dark)
  */
-export const ThemeButton = ({onClick}: Props) => {
-  const [{theme}, dispatch] = useStateValue();
+export const ThemeButton = ({ onClick }: Props) => {
+  const [{ theme }, dispatch] = useStateValue();
 
   // Switch theme to light (default) or dark mode
   const handleClick = (e: React.MouseEvent) => {
@@ -36,5 +36,5 @@ export const ThemeButton = ({onClick}: Props) => {
         </>
       )}
     </button>
-  )
-}
+  );
+};

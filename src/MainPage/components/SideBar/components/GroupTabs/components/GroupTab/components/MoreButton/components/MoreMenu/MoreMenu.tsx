@@ -7,20 +7,26 @@ import { useNavigate } from "react-router-dom";
 import { Group } from "types";
 
 export interface Props {
-  open: boolean,
-  close: Function,
-  group: Group,
+  open: boolean;
+  close: Function;
+  group: Group;
   style: {
-    top: number,
-    left: number,
-  },
-  editGroupName: Function,
+    top: number;
+    left: number;
+  };
+  editGroupName: Function;
 }
 
 /**
  * Menu that contains buttons to operate on group tab
  */
-export const MoreMenu = ({open, close, group, style, editGroupName}: Props) => {
+export const MoreMenu = ({
+  open,
+  close,
+  group,
+  style,
+  editGroupName,
+}: Props) => {
   const [{ groups }, dispatch] = useStateValue();
   const ref: React.RefObject<HTMLDivElement> = createRef();
   const navigate = useNavigate();
@@ -40,25 +46,24 @@ export const MoreMenu = ({open, close, group, style, editGroupName}: Props) => {
 
   const handleEdit = (e: React.MouseEvent) => {
     e.stopPropagation();
-    e.preventDefault();   // Prevent onBlur for GroupNameInput from firing
+    e.preventDefault(); // Prevent onBlur for GroupNameInput from firing
     editGroupName();
     close();
   };
 
   return open ? (
-    <div 
-      className="menu_overlay" 
-      onClick={(e)=>close()}>
-      <div 
-        ref={ref} 
-        style={style} 
+    <div className="menu_overlay" onClick={(e) => close()}>
+      <div
+        ref={ref}
+        style={style}
         className="more_menu"
-        onClick={(e)=>e.stopPropagation()}>
-        <button onMouseDown={(e)=>handleDelete(e)}>
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button onMouseDown={(e) => handleDelete(e)}>
           <FaRegTrashAlt />
           Delete
         </button>
-        <button onMouseDown={(e)=>handleEdit(e)}>
+        <button onMouseDown={(e) => handleEdit(e)}>
           <FiEdit />
           Rename
         </button>

@@ -7,14 +7,14 @@ import { auth } from "firebase.ts";
 import { useNavigate } from "react-router-dom";
 
 export interface Props {
-  onClick: (e: React.MouseEvent)=>void,
+  onClick: (e: React.MouseEvent) => void;
 }
 
 /**
  * Authentication button (login / logout)
  */
-export const AuthButton = ({onClick}: Props) => {
-  const [{user}, dispatch] = useStateValue();
+export const AuthButton = ({ onClick }: Props) => {
+  const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
 
   const handleClick = (e: React.MouseEvent) => {
@@ -29,13 +29,13 @@ export const AuthButton = ({onClick}: Props) => {
     } else {
       dispatch({
         type: "SET_POP_UP",
-        popUp: <UserAuthDialog />
-      })
+        popUp: <UserAuthDialog />,
+      });
     }
-  }
+  };
 
   return (
-    <button onClick={(e)=>handleClick(e)}>
+    <button onClick={(e) => handleClick(e)}>
       {user ? (
         <>
           <BiLogOut />
@@ -48,5 +48,5 @@ export const AuthButton = ({onClick}: Props) => {
         </>
       )}
     </button>
-  )
-}
+  );
+};

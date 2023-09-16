@@ -1,5 +1,5 @@
 import { useStateValue } from "StateProvider";
-import "./HelpMenu.css"
+import "./HelpMenu.css";
 import React, { createRef, useEffect } from "react";
 import { RiLightbulbLine } from "react-icons/ri";
 import { GiNewShoot } from "react-icons/gi";
@@ -9,8 +9,8 @@ import { SupportPage, UpdateLog } from "./components";
 // Version: SkillTree major.minor.patch
 
 export interface Props {
-  open: boolean,
-  close: Function,
+  open: boolean;
+  close: Function;
 }
 
 /**
@@ -19,10 +19,10 @@ export interface Props {
  * - Update button
  * - Website version, last update date time
  */
-export const HelpMenu = ({open, close}: Props) => {
+export const HelpMenu = ({ open, close }: Props) => {
   const [{}, dispatch] = useStateValue();
-  const VERSION = "0.23.0";
-  const UPDATE_TIME = new Date("2023-09-09T10:59:00");
+  const VERSION = "0.23.2";
+  const UPDATE_TIME = new Date("2023-09-14T17:03:00");
   const ref: React.RefObject<HTMLDivElement> = createRef();
 
   useEffect(() => {
@@ -44,8 +44,8 @@ export const HelpMenu = ({open, close}: Props) => {
     e.stopPropagation();
     dispatch({
       type: "SET_POP_UP",
-      popUp: <SupportPage />
-    })
+      popUp: <SupportPage />,
+    });
     close();
   };
 
@@ -53,8 +53,8 @@ export const HelpMenu = ({open, close}: Props) => {
     e.stopPropagation();
     dispatch({
       type: "SET_POP_UP",
-      popUp: <UpdateLog />
-    })
+      popUp: <UpdateLog />,
+    });
     close();
   };
 
@@ -68,21 +68,20 @@ export const HelpMenu = ({open, close}: Props) => {
       return `${Math.floor(timePass / (1000 * 3600))} hours`;
     } else if (Math.floor(timePass / (1000 * 60)) > 0) {
       return `${Math.floor(timePass / (1000 * 60))} minutes`;
-    } else if (Math.floor(timePass / (1000)) > 0) {
-      return `${Math.floor(timePass / (1000))} seconds`;
+    } else if (Math.floor(timePass / 1000) > 0) {
+      return `${Math.floor(timePass / 1000)} seconds`;
     }
     return `0 second`;
-  }
+  };
 
-  return (
-    open ? ( 
+  return open ? (
     <div className="help_menu" ref={ref}>
       <div className="button_container">
-        <button onClick={(e)=>handleClickSupport(e)}> 
-          <RiLightbulbLine /> 
-          Support 
+        <button onClick={(e) => handleClickSupport(e)}>
+          <RiLightbulbLine />
+          Support
         </button>
-        <button onClick={(e)=>handleClickUpdates(e)}>
+        <button onClick={(e) => handleClickUpdates(e)}>
           <GiNewShoot />
           Updates
         </button>
@@ -92,6 +91,6 @@ export const HelpMenu = ({open, close}: Props) => {
         SkillTree {VERSION} <br />
         Updated {timePass()} ago
       </div>
-    </div>) : null
-  )
-}
+    </div>
+  ) : null;
+};

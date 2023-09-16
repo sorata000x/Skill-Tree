@@ -7,26 +7,37 @@ export interface Props {
   skill: Skill;
   listeners: any;
   isDragOverlay?: boolean;
-  handleClick: (e: React.MouseEvent)=>void;
+  handleClick: (e: React.MouseEvent) => void;
 }
 
 /**
  * Skill title text that shrinks to fit the node button size
  */
-export const NodeTitle = ({ skill, listeners, isDragOverlay, handleClick }: Props) => {
+export const NodeTitle = ({
+  skill,
+  listeners,
+  isDragOverlay,
+  handleClick,
+}: Props) => {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if(ref.current) textfit(ref.current, {alignVert: true, multiLine: true, maxFontSize: 20,});
-  })
+    if (ref.current)
+      textfit(ref.current, {
+        alignVert: true,
+        multiLine: true,
+        maxFontSize: 20,
+      });
+  });
 
   return (
-    <div 
-      className="node_title" 
-      onClick={(e)=>handleClick(e)}
+    <div
+      className="node_title"
+      onClick={(e) => handleClick(e)}
       ref={ref}
-      {...listeners}>
-        {skill.title}
+      {...listeners}
+    >
+      {skill.title}
     </div>
   );
 };

@@ -56,7 +56,10 @@ export const SkillTree = ({ skills }: Props) => {
   };
 
   // Whether id1 skill node is under id2 skill node
-  const isNodeUnder = (ref1: React.RefObject<HTMLButtonElement>, ref2: React.RefObject<HTMLButtonElement>) => {
+  const isNodeUnder = (
+    ref1: React.RefObject<HTMLButtonElement>,
+    ref2: React.RefObject<HTMLButtonElement>
+  ) => {
     if (!ref1 || !ref2) return;
     const getOffset = (el: React.RefObject<HTMLButtonElement>) => {
       const rect = el?.current?.getBoundingClientRect();
@@ -74,7 +77,7 @@ export const SkillTree = ({ skills }: Props) => {
     let bottom2 = getOffset(ref2)?.bottom;
     if (top1 && bottom2) return top1 - bottom2 > 0;
     return false;
-  }
+  };
 
   // Copy over skills (with different IDs) starting from the target id
   const copySkills = (id: string) => {
@@ -114,15 +117,15 @@ export const SkillTree = ({ skills }: Props) => {
   };
 
   const getSkillParentId = (id: string) => {
-    let p = 'root';
-    for(const s of skills) {
+    let p = "root";
+    for (const s of skills) {
       if (s.id === id) {
         p = s.parent;
         break;
       }
     }
     return p;
-  }
+  };
 
   // Add skill to a parent
   const addSkill = (parentID: string) => {
@@ -135,33 +138,35 @@ export const SkillTree = ({ skills }: Props) => {
   };
   // Find the nearest (positioned) parent id of a skill
   const getNearestParent = (px: number, py: number) => {
-    let np = 'root';
+    let np = "root";
     // get smallest distance in y
     let dy = Infinity;
     skills.forEach((skill) => {
       const rect = buttons[skill.id].current?.getBoundingClientRect();
-      if(!rect) return;
+      if (!rect) return;
       let ry = rect.bottom;
       let c_dy = py - ry;
-      if(c_dy >= 0 && c_dy < dy) {  // Only gets node above
+      if (c_dy >= 0 && c_dy < dy) {
+        // Only gets node above
         dy = c_dy;
       }
-    })
+    });
     // get nearest node in x in nearest y distance parents
     let dx = Infinity;
     skills.forEach((skill) => {
       const rect = buttons[skill.id].current?.getBoundingClientRect();
-      if(!rect) return;
+      if (!rect) return;
       let ry = rect.bottom;
       let c_dy = py - ry;
-      if(c_dy !== dy) return;
+      if (c_dy !== dy) return;
       let rx = rect.left + window.pageXOffset + rect.width / 2;
       let c_dx = px - rx;
-      if(Math.abs(c_dx) < dx) {   // Nearest in either direction
+      if (Math.abs(c_dx) < dx) {
+        // Nearest in either direction
         dx = Math.abs(c_dx);
         np = skill.id;
       }
-    })
+    });
     return np;
   };
 
@@ -193,7 +198,8 @@ export const SkillTree = ({ skills }: Props) => {
     const draggingSkill = dragOverlay.skills[0];
     let draggingRef = dragOverlay.buttons[draggingSkill.id];
     let overRef = buttons[over.id.toString()];
-    if(isNodeUnder(draggingRef, overRef)) {   // drop to over node if active node is under it
+    if (isNodeUnder(draggingRef, overRef)) {
+      // drop to over node if active node is under it
       // Drop under peer
       dispatch({
         type: "SET_SKILL",
@@ -201,8 +207,8 @@ export const SkillTree = ({ skills }: Props) => {
         skill: {
           ...getSkillByID(active.id.toString()),
           parent: over?.id.toString(),
-        }
-      })
+        },
+      });
     } else {
       // Normal drop
       dispatch({
@@ -212,7 +218,7 @@ export const SkillTree = ({ skills }: Props) => {
       });
     }
     // deplay for smooth dropping behavior
-    setTimeout(()=>setDragOverlay(""), 100);
+    setTimeout(() => setDragOverlay(""), 100);
   };
 
   const setDragOverlay = (id: string) => {
@@ -222,7 +228,7 @@ export const SkillTree = ({ skills }: Props) => {
         dragOverlay: {
           skills: [],
           buttons: {},
-          parentId: 'root',
+          parentId: "root",
         },
       });
       return;
@@ -251,7 +257,7 @@ export const SkillTree = ({ skills }: Props) => {
 
   return (
     <div className="skill_tree">
-      {(!groups.length || !skills.length) ? (
+      {!groups.length || !skills.length ? (
         <Instruction
           group={group}
           skills={skills}

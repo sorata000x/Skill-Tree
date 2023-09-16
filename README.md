@@ -3,11 +3,12 @@
 To Myself:
 
 - Endure, and persevere.
+- Trust the process.
 - Respect the craft, make something beautiful.
 
 ## Introduction
 
-This project is inspired by skill tree of various video game, as well as tree data structure in computer science.
+This project is inspired by skill tree of various video game, as well as tree data structure in computer science, which is used for fast navigate and search.
 My aim is to combine these concepts to help visualizing data in a concise manner and organizing them easily.
 
 Excellent tool to track the progress towards your goal.
@@ -111,7 +112,7 @@ Additional Feature
 
 UX
 
-- 
+-
 
 UI
 

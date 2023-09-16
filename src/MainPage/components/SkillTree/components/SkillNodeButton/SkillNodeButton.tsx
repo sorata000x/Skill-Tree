@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import "./SkillNodeButton.css";
 import "react-circular-progressbar/dist/styles.css";
-import { NodeButton, SkillProgress, LevelChangeButtons, ToggleButton } from "./components";
+import {
+  NodeButton,
+  SkillProgress,
+  LevelChangeButtons,
+  ToggleButton,
+} from "./components";
 import { Skill } from "types";
 import { useStateValue } from "StateProvider";
 
@@ -45,8 +50,8 @@ export const SkillNodeButton = ({
   return (
     <div
       className="skill_node_button"
-      onMouseOver={(e)=>handleMouseOver(e)}
-      onMouseOut={(e)=>setMouseOver(false)}
+      onMouseOver={(e) => handleMouseOver(e)}
+      onMouseOut={(e) => setMouseOver(false)}
     >
       <NodeButton
         skill={skill}

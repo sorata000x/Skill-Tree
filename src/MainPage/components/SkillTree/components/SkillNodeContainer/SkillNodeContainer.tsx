@@ -26,7 +26,6 @@ export const SkillNodeContainer = ({
   buttons,
   isDragOverlay,
 }: Props) => {
-
   /* Dnd-kit Sortable */
   /* References:
    *  dnd-kit sortable documentation | https://docs.dndkit.com/presets/sortable
@@ -45,9 +44,7 @@ export const SkillNodeContainer = ({
   };
 
   return (
-    <div 
-      ref={setNodeRef} 
-      style={style}>
+    <div ref={setNodeRef} style={style}>
       <div className="skill_node_container">
         <SkillNodeButton
           skill={skill}
@@ -55,13 +52,14 @@ export const SkillNodeContainer = ({
           listeners={listeners}
           isDragOverlay={isDragOverlay}
         />
-        { skill.treeOpen ?
+        {skill.treeOpen ? (
           <SkillNodeLayer
             id={skill.id}
             skills={skills}
             buttons={buttons}
             isDragOverlay={isDragOverlay}
-          /> : null }
+          />
+        ) : null}
       </div>
     </div>
   );

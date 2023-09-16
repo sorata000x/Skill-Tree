@@ -4,7 +4,7 @@ import { useStateValue } from "StateProvider";
 import { Group } from "types";
 import "./GroupTabs.css";
 import {
-  DndContext, 
+  DndContext,
   closestCenter,
   KeyboardSensor,
   PointerSensor,
@@ -13,23 +13,24 @@ import {
   DragOverlay,
   DragStartEvent,
   DragEndEvent,
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   SortableContext,
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
+} from "@dnd-kit/sortable";
 
 /**
  * Sortable list of group tabs utilizes dnd-kit sortable for sorting
  * - GroupTab
  */
 export const GroupTabs = () => {
-  const [{groups}, dispatch] = useStateValue();
+  const [{ groups }, dispatch] = useStateValue();
 
   /* Dnd-kit Sortable & DragOverlay */
 
-  const [draggingGroup, setDraggingGroup]: [Group | null, Function] = useState(null);
+  const [draggingGroup, setDraggingGroup]: [Group | null, Function] =
+    useState(null);
 
   const sensors = useSensors(
     // Delay for onClick event of group tab
@@ -42,10 +43,10 @@ export const GroupTabs = () => {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
-  
+
   const handleDragStart = ({ active }: DragStartEvent) => {
     // Set active group for drag overlay
-    let target = groups.find(group => group.id === active.id.toString());
+    let target = groups.find((group) => group.id === active.id.toString());
     if (target) setDraggingGroup(target);
   };
 
@@ -57,27 +58,26 @@ export const GroupTabs = () => {
       over: over,
     });
     // delay reset for dragging effect
-    setTimeout(()=>setDraggingGroup(null), 100);
+    setTimeout(() => setDraggingGroup(null), 100);
   };
 
   return (
     <div className="group_tabs">
-      <DndContext 
+      <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
-        <SortableContext 
-          items={groups}
-          strategy={verticalListSortingStrategy}
-        >
+        <SortableContext items={groups} strategy={verticalListSortingStrategy}>
           {groups?.map((group: Group) => (
             <GroupTab key={group.id} group={group} />
           ))}
         </SortableContext>
         <DragOverlay>
-          {draggingGroup ? <GroupTab key="dragging-tab" group={draggingGroup}/> : null}
+          {draggingGroup ? (
+            <GroupTab key="dragging-tab" group={draggingGroup} />
+          ) : null}
         </DragOverlay>
       </DndContext>
     </div>

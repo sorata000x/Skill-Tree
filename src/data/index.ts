@@ -1,4 +1,4 @@
-import type {Data, Skill, Group} from "types";
+import type { Data, Skill, Group } from "types";
 
 export const emptyState: Data = {
   skills: [],
@@ -11,24 +11,24 @@ export const emptyState: Data = {
   dragOverlay: {
     skills: [],
     buttons: {},
-    parentId: 'root',
+    parentId: "root",
   },
   theme: "light",
 };
 
 export const emptyGroup: Group = {
-  id: '',
-  name: '',
-}
+  id: "",
+  name: "",
+};
 
 export const emptySkill: Skill = {
-  id: '',
-  parent: 'root',
-  title: '',
+  id: "",
+  parent: "root",
+  title: "",
   level: 0,
   maxLevel: 10,
   increaseBy: 1,
-  description: '',
+  description: "",
   group: emptyGroup,
   treeOpen: true,
-}
+};
