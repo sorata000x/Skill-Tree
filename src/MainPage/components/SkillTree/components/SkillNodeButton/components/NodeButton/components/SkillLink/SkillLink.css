@@ -1,6 +1,6 @@
 .skill_link {
   position: absolute;
-  background-color: rgb(180, 180, 180);
+  background-color: rgba(180, 180, 180, 0.6);
   height: 3px;
   z-index: -1;
 }
