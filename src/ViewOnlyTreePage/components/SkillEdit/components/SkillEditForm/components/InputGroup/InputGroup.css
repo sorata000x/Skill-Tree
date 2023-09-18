@@ -1,0 +1,48 @@
+.skill_edit_form label {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+}
+
+.skill_edit_form > .title_input {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.skill_edit_form > .title_input > input {
+  width: 400px;
+  height: 34px;
+}
+
+.skill_edit_form > .form-level-group > .level_input {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.skill_edit_form > .form-level-group > .level_input > input {
+  width: 122px;
+  height: 34px;
+}
+
+.skill_edit_form > .form-level-group > .max_level_input {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.skill_edit_form > .form-level-group > .max_level_input > input {
+  width: 122px;
+  height: 34px;
+}
+
+.skill_edit_form > .form-level-group > .increase_by_input {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.skill_edit_form > .form-level-group > .increase_by_input > input {
+  width: 122px;
+  height: 34px;
+}

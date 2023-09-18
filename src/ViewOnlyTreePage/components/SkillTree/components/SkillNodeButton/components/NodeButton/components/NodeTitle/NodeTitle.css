@@ -1,0 +1,19 @@
+.node_title {
+  color: #212121;
+  font-size: 14pt;
+  font-weight: 500;
+  z-index: 8;
+  grid-column: 1;
+  grid-row: 1;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  text-align: center;
+  margin-left: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  white-space: normal;
+}

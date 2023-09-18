@@ -1,0 +1,18 @@
+.view_only_tree_page {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: transparent;
+  overflow: hidden;
+  grid-row: 1;
+  grid-column: 1;
+  z-index: 0;
+}

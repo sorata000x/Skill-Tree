@@ -1,7 +1,7 @@
 import "./MainPage.css";
 import React, { useEffect } from "react";
 import { useStateValue } from "StateProvider";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { SideBar, SkillTree, SkillEdit, HelpButton } from "./components";
 import { Skill } from "types";
 
@@ -14,10 +14,20 @@ import { Skill } from "types";
  * - popUp      | pop up window (UserAuthDialog, SupportPage, UpdateLog)
  */
 export const MainPage = () => {
-  const [{ skills, activeSkill, groups, activeGroup, popUp }, dispatch] =
+  const [{ skills, activeSkill, groups, activeGroup, popUp, user }, dispatch] =
     useStateValue();
   const pathParam = useParams().pathParam; // get current group from url parameter
   const navigate = useNavigate();
+
+  // Get the search parameters
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Get a specific query parameter
+  const share = searchParams.get('share');
+
+  useEffect(() => {
+    console.log(`queryParamValue: ${share}`)
+  }, [share])
 
   useEffect(() => {
     // Set active group based on current URL or set to the first group if no path param
@@ -32,14 +42,11 @@ export const MainPage = () => {
         id: groups[0].id,
       });
       navigate(`/${groups[0].id}`);
+    } else {
+      navigate(`/`);
     }
     // need groups as dependency because it updates after page load
   }, [groups]);
-
-  useEffect(() => {
-    if (activeGroup) navigate(`/${activeGroup.id}`);
-    else navigate(`/`);
-  }, [activeGroup]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     // Cancel active skill
@@ -48,6 +55,19 @@ export const MainPage = () => {
       activeSkill: null,
     });
   };
+
+  const handleShareClick = (e: React.MouseEvent) => {
+    if(!user) return;
+    navigator.clipboard.writeText(
+      `${window.location.protocol}'//'${window.location.host}/${activeGroup?.id}?share=${user.uid}`
+    );
+  }
+
+  useEffect(() => {
+    console.log(JSON.stringify(skills.filter(
+      (skill: Skill) => skill.group.id === activeGroup?.id
+    )))
+  }, [activeGroup])
 
   return (
     <div className="main_page">
@@ -58,6 +78,12 @@ export const MainPage = () => {
             (skill: Skill) => skill.group.id === activeGroup?.id
           )}
         />
+        <div className="topbar">
+          {activeGroup?.id}
+          <div className="topbar_action_buttons">
+            <button onClick={(e)=>handleShareClick(e)}> Share </button>
+          </div>
+        </div>
         <HelpButton />
         <SkillEdit open={!!activeSkill} />
       </div>

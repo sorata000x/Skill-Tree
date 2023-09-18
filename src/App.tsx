@@ -10,6 +10,7 @@ import {
 import { db, auth } from "./firebase.ts";
 import { doc, getDoc } from "firebase/firestore";
 import { MainPage } from "MainPage";
+import { ViewOnlyTreePage } from "ViewOnlyTreePage/ViewOnlyTreePage.tsx";
 
 /**
  * Main functionalities
@@ -22,6 +23,10 @@ function App() {
   // Render after data loaded
   // Reference: https://stackoverflow.com/questions/51556988/react-render-component-asynchronously-after-data-is-fetched
   const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    console.log(`pathParam App: ${window.location.search}`)
+  }, []);
 
   useEffect(() => {
     // Set app name
@@ -47,6 +52,7 @@ function App() {
     });
   }, []);
 
+  // Get user data
   useEffect(() => {
     const getUserData = async () => {
       // @ts-ignore
@@ -89,6 +95,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/share" element={<ViewOnlyTreePage />} />
           <Route path={`/:pathParam?`} element={<MainPage />} />
         </Routes>
       </Router>
