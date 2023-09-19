@@ -1,0 +1,32 @@
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: min-content;
+  grid-row: 1;
+  grid-column: 1;
+  box-sizing: border-box;
+  padding: 10px;
+  z-index: 9;
+}
+
+.topbar > p {
+  margin: 7px;
+}
+
+.topbar > .topbar_action_buttons {
+  margin-right: 10px;
+}
+
+.topbar > .topbar_action_buttons > button {
+  border: 0;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 8px;
+  border-radius: 3px;
+}
+
+.topbar > .topbar_action_buttons > button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}

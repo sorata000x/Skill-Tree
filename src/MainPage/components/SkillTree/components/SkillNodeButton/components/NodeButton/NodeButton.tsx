@@ -46,6 +46,7 @@ export const NodeButton = ({
       className="node_button"
       onMouseOver={() => setMouseOver(true)}
       onMouseOut={() => setMouseOver(false)}
+      onMouseDown={(e)=>e.stopPropagation()}
     >
       <SkillLink
         skill={skill}

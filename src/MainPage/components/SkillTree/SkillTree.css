@@ -3,6 +3,8 @@
   height: 100%;
   padding: 0;
   overflow: scroll;
+  grid-row: 1;
+  grid-column: 1;
 }
 
 .skill_tree > .container {

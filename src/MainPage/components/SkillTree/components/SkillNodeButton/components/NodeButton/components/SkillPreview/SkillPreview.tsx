@@ -56,8 +56,8 @@ export const SkillPreview = ({ open, skill }: Props) => {
   return open || isMouseOver ? (
     <div
       className="skill_preview fade-in"
-      onMouseOver={(e) => handleMouseOver(e)}
-      onMouseOut={(e) => handleMouseOut(e)}
+      onMouseEnter={(e) => handleMouseOver(e)}
+      onMouseLeave={(e) => handleMouseOut(e)}
       ref={ref}
     >
       <div className="container">

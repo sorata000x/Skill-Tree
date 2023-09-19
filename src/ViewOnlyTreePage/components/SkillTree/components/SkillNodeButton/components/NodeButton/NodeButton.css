@@ -7,6 +7,7 @@
   pointer-events: auto;
   grid-column: 1;
   grid-row: 1;
+  
 }
 
 .node_button > button {
@@ -36,6 +37,8 @@
   grid-row: 1;
   display: grid;
   transform: translateX(1px);
+  scroll-margin-top: 20vh;
+  scroll-snap-margin-top: 20vh;
 }
 
 .node_button > button.active {

@@ -2,7 +2,7 @@ import "./MainPage.css";
 import React, { useEffect } from "react";
 import { useStateValue } from "StateProvider";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { SideBar, SkillTree, SkillEdit, HelpButton } from "./components";
+import { SideBar, TopBar, SkillTree, SkillEdit, HelpButton } from "./components";
 import { Skill } from "types";
 
 /**
@@ -26,10 +26,6 @@ export const MainPage = () => {
   const share = searchParams.get('share');
 
   useEffect(() => {
-    console.log(`queryParamValue: ${share}`)
-  }, [share])
-
-  useEffect(() => {
     // Set active group based on current URL or set to the first group if no path param
     if (pathParam) {
       dispatch({
@@ -49,6 +45,7 @@ export const MainPage = () => {
   }, [groups]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
+    console.log('test')
     // Cancel active skill
     dispatch({
       type: "SET_ACTIVE_SKILL",
@@ -56,33 +53,17 @@ export const MainPage = () => {
     });
   };
 
-  const handleShareClick = (e: React.MouseEvent) => {
-    if(!user) return;
-    navigator.clipboard.writeText(
-      `${window.location.protocol}'//'${window.location.host}/${activeGroup?.id}?share=${user.uid}`
-    );
-  }
-
-  useEffect(() => {
-    console.log(JSON.stringify(skills.filter(
-      (skill: Skill) => skill.group.id === activeGroup?.id
-    )))
-  }, [activeGroup])
-
   return (
     <div className="main_page">
       <div className="container" onMouseDown={handleMouseDown}>
         <SideBar />
-        <SkillTree
-          skills={skills.filter(
-            (skill: Skill) => skill.group.id === activeGroup?.id
-          )}
-        />
-        <div className="topbar">
-          {activeGroup?.id}
-          <div className="topbar_action_buttons">
-            <button onClick={(e)=>handleShareClick(e)}> Share </button>
-          </div>
+        <div className="layout_column">
+          <TopBar />
+          <SkillTree
+            skills={skills.filter(
+              (skill: Skill) => skill.group.id === activeGroup?.id
+            )}
+          />
         </div>
         <HelpButton />
         <SkillEdit open={!!activeSkill} />

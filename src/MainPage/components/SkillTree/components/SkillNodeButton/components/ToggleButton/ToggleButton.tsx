@@ -56,6 +56,7 @@ export const ToggleButton = ({ skill }: Props) => {
       onDoubleClick={(e) => e.stopPropagation()}
       onMouseOver={() => setMouseOver(true)}
       onMouseOut={() => setMouseOver(false)}
+      onMouseDown={(e)=>e.stopPropagation()}
     >
       {DotIcons()}
     </button>

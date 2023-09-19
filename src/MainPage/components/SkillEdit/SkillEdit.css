@@ -3,8 +3,7 @@
   box-shadow: 0 0 10px 10px lightgray;
   position: absolute;
   top: 0;
-  right: 0;
-  width: 440px;
+  width: calc(50% - 308px);
   height: 100%;
   z-index: 10;
   display: flex;
@@ -18,4 +17,5 @@
   color: rgba(255, 255, 255, 0.87);
   background-color: #2d2d2d;
   box-shadow: none;
+  background-color: red;
 }

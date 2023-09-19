@@ -1,5 +1,10 @@
+.App {
+  
+}
+
 body {
   font-size: 12pt;
+  overflow: hidden;
 }
 
 button {
