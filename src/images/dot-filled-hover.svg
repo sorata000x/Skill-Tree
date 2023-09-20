@@ -2,13 +2,13 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="200px"
-   height="200px"
+   width="200mm"
+   height="200mm"
    viewBox="0 0 200 200"
    version="1.1"
    id="svg1"
-   sodipodiDocname="dot-outlined.svg"
    inkscapeVersion="1.3 (0e150ed, 2023-07-21)"
+   sodipodiDocname="circle-filled.svg"
    xmlnsInkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlnsSodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,12 +25,12 @@
      inkscapeDocument-units="mm"
      inkscapeZoom="0.66335684"
      inkscapeCx="356.52003"
-     inkscapeCy="380.63978"
+     inkscapeCy="381.39352"
      inkscapeWindow-width="1440"
-     inkscapeWindow-height="760"
+     inkscapeWindow-height="763"
      inkscapeWindow-x="0"
      inkscapeWindow-y="25"
-     inkscapeWindow-maximized="0"
+     inkscapeWindow-maximized="1"
      inkscapeCurrent-layer="layer1" />
   <defs
      id="defs1" />
@@ -39,22 +39,10 @@
      inkscapeGroupmode="layer"
      id="layer1">
     <circle
-       style="fill:#212121;stroke-width:0.264583"
+       style="fill:rgba(130, 130, 130);stroke-width:0.264583"
        id="path1"
        cx="100"
        cy="100"
-       r="98" />
-    <circle
-       style="fill:rgb(80, 80, 80);stroke-width:0.264583"
-       id="path2"
-       cx="100"
-       cy="100"
        r="80" />
-    <circle
-       style="fill:#212121;fill-opacity:1;stroke-width:0.264583"
-       id="path3"
-       cx="100"
-       cy="100"
-       r="50" />
   </g>
 </svg>

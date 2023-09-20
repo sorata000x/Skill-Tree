@@ -4,7 +4,7 @@
   grid-row: 2;
   background-color: transparent;
   padding-top: 5px;
-  transform: translate(12.5px, -30px);
+  transform: translate(12.5px, -32px);
   cursor: pointer;
   display: flex;
   height: 60px;
@@ -14,46 +14,33 @@
   z-index: 1;
 }
 
-.toggle_button:hover {
-  background-color: #212121;
-}
-
 .toggle_button > .dot_icons {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 8px;
   margin-top: 20px;
   height: 30px;
 }
 
 .toggle_button > .dot_icons > img {
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
   user-select: none;
   -webkit-user-select: none;
 }
 
-.toggle_button > .icon {
-  color: #c6c6c6;
-  grid-row: 1;
-  grid-column: 1;
+.toggle_button > .dot_icons > svg.default {
+  color: rgb(80, 80, 80);
 }
 
-.toggle_button > .icon2 {
-  color: black;
-  grid-row: 1;
-  grid-column: 1;
+.hover-in {
+  color: rgb(130, 130, 130);
+  animation-name: hover-in;
+  animation-duration: 0.1s;
 }
 
-.toggle_button > .dots1 {
-  display: flex;
-  grid-row: 1;
-  grid-column: 1;
-}
-
-.toggle_button > .dots2 {
-  display: flex;
-  grid-row: 1;
-  grid-column: 1;
+@keyframes hover-in {
+  from {color: rgb(80, 80, 80);}
+  to {color: rgb(130, 130, 130);}
 }

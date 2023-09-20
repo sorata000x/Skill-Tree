@@ -45,7 +45,7 @@
        cy="100"
        r="98" />
     <circle
-       style="fill:rgb(80, 80, 80);stroke-width:0.264583"
+       style="fill:rgba(130, 130, 130);stroke-width:0.264583"
        id="path2"
        cx="100"
        cy="100"

@@ -1,33 +1,48 @@
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="100%" viewBox="0 0 136 136" enable-background="new 0 0 136 136" xml:space="preserve">
-<path fill="#000000" opacity="1.000000" stroke="none" 
-	d="
-M76.000000,137.000000 
-	C50.689510,137.000000 25.879021,137.000000 1.034266,137.000000 
-	C1.034266,91.731232 1.034266,46.462433 1.034266,1.096817 
-	C46.226902,1.096817 91.454079,1.096817 136.840637,1.096817 
-	C136.840637,46.332886 136.840637,91.666389 136.840637,137.000000 
-	C116.796204,137.000000 96.648102,137.000000 76.000000,137.000000 
-M36.697975,126.961548 
-	C45.673981,131.884888 55.391415,134.567566 65.507950,134.889938 
-	C80.855713,135.378983 95.155289,131.608414 107.512085,122.019691 
-	C126.115913,107.583366 135.814041,88.973183 134.013397,65.025810 
-	C132.535858,45.375633 124.230873,29.229534 108.631355,17.211885 
-	C92.631927,4.886143 74.394829,1.323826 54.623692,4.734640 
-	C41.058735,7.074794 30.390818,14.187140 20.648666,23.659931 
-	C1.461174,42.316910 -1.932520,74.639458 8.709877,97.230164 
-	C14.675873,109.894226 24.326927,119.223579 36.697975,126.961548 
-z"/>
-<path fill="#C6C6C6" opacity="1.000000" stroke="none" 
-	d="
-M36.377792,126.763092 
-	C24.326927,119.223579 14.675873,109.894226 8.709877,97.230164 
-	C-1.932520,74.639458 1.461174,42.316910 20.648666,23.659931 
-	C30.390818,14.187140 41.058735,7.074794 54.623692,4.734640 
-	C74.394829,1.323826 92.631927,4.886143 108.631355,17.211885 
-	C124.230873,29.229534 132.535858,45.375633 134.013397,65.025810 
-	C135.814041,88.973183 126.115913,107.583366 107.512085,122.019691 
-	C95.155289,131.608414 80.855713,135.378983 65.507950,134.889938 
-	C55.391415,134.567566 45.673981,131.884888 36.377792,126.763092 
-z"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="200mm"
+   height="200mm"
+   viewBox="0 0 200 200"
+   version="1.1"
+   id="svg1"
+   inkscapeVersion="1.3 (0e150ed, 2023-07-21)"
+   sodipodiDocname="circle-filled.svg"
+   xmlnsInkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlnsSodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlnsSvg="http://www.w3.org/2000/svg">
+  <sodipodiNamedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscapeShowpageshadow="2"
+     inkscapePageopacity="0.0"
+     inkscapePagecheckerboard="0"
+     inkscapeDeskcolor="#d1d1d1"
+     inkscapeDocument-units="mm"
+     inkscapeZoom="0.66335684"
+     inkscapeCx="356.52003"
+     inkscapeCy="381.39352"
+     inkscapeWindow-width="1440"
+     inkscapeWindow-height="763"
+     inkscapeWindow-x="0"
+     inkscapeWindow-y="25"
+     inkscapeWindow-maximized="1"
+     inkscapeCurrent-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscapeLabel="Layer 1"
+     inkscapeGroupmode="layer"
+     id="layer1">
+    <circle
+       style="fill:rgb(80, 80, 80);stroke-width:0.264583"
+       id="path1"
+       cx="100"
+       cy="100"
+       r="80" />
+  </g>
 </svg>
