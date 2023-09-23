@@ -50,7 +50,7 @@ export const SkillTree = ({skills}: Props) => {
       parentID: "root",
       group: activeGroup,
     })
-  }, [])
+  }, [skills])
 
   useEffect(() => {
     // Scroll activated skill button to the center for better view
@@ -290,7 +290,10 @@ export const SkillTree = ({skills}: Props) => {
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
           >
-            <div style={{transform: `scale(${activeGroup.zoom})`, transformOrigin: "top left"}}>
+            <div style={{
+              transform: `scale(${activeGroup.zoom})`, 
+              transformOrigin: "top left",
+              }}>
               {
                 rootSkill ? 
                 <SkillNodeContainer

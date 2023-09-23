@@ -29,9 +29,9 @@
    * For scroll to display active button
    * Reference: StackOverflow: scrollIntoView Scrolls just too far | https://stackoverflow.com/questions/24665602/scrollintoview-scrolls-just-too-far
    */
-  scroll-margin: 100px 0px 0px calc((50vw - 200px)/2);
-  scroll-snap-margin: 100px 0px 0px calc((50vw - 200px)/2);
-  scroll-padding: 100px 0px 0px calc((50vw - 200px)/2);
+  scroll-margin: 100px calc((50vw - 200px)/2) 0px calc((50vw - 200px)/2);
+  scroll-snap-margin: 100px calc((50vw - 200px)/2) 0px calc((50vw - 200px)/2);
+  scroll-padding: 100px calc((50vw - 200px)/2) 0px calc((50vw - 200px)/2);
   grid-column: 1;
   grid-row: 1;
   display: grid;

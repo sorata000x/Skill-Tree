@@ -28,6 +28,7 @@ import React, { createRef, useEffect, useState } from "react";
 import "./DraftEditor.css";
 import { TYPE, getToken } from "./tokenizer";
 import { ToolBar } from "./components";
+import { useStateValue } from "StateProvider";
 
 export interface Props {
   value: string | undefined;
@@ -55,6 +56,7 @@ export const DraftEditor = ({ value, style, readOnly, onChange }: Props) => {
   const ref: React.RefObject<HTMLDivElement> = createRef();
   const editorRef: React.RefObject<Editor> = createRef();
   const [openToolBar, setToolBarOpen]: [boolean, Function] = useState(false);
+  const [{activeSkill}, ] = useStateValue();
 
   // decorator strategy for text link
   const findLinkEntities = (
@@ -115,7 +117,7 @@ export const DraftEditor = ({ value, style, readOnly, onChange }: Props) => {
         )
       : EditorState.createEmpty(decorator)
     )
-  }, [value])
+  }, [activeSkill])
 
   const styleMap = {
     // Set selecting text background color to sustain selection when inputting link

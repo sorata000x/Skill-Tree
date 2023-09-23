@@ -12,11 +12,10 @@
   min-width: calc(100% - 200px);
   width: min-content;
   height: min-content;
-  display: grid;
   background-color: transparent;
   justify-content: center;
   box-sizing: border-box;
-  margin: 60px 100px 200px 100px;
+  padding: 60px 100px 200px 100px;
 }
 
 .skill_tree > .container.expand {
