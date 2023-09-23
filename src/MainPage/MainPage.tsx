@@ -52,15 +52,21 @@ export const MainPage = () => {
     });
   };
 
+  
+
   return (
     <div className="main_page">
       <div className="container" onMouseDown={handleMouseDown}>
         <SideBar />
         <div className="layout_column">
-          <TopBar />
+          <TopBar style={{width: activeSkill ? "calc(100% - 556px)" : "100%"}} />
           <SkillTree 
             skills={skills.filter(
-              (skill: Skill) => skill.group.id === activeGroup?.id
+              (skill: Skill) => {
+                if(skill.group.id === activeGroup?.id)
+                  console.log(`skill: ${JSON.stringify(skill)}`)
+                return skill.group.id === activeGroup?.id;
+              }
             )}
           />
         </div>

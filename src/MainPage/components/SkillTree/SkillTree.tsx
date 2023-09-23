@@ -33,9 +33,10 @@ export const SkillTree = ({skills}: Props) => {
     useStateValue();
   const group = activeGroup;
   const [rootSkill, setRootSkill]: [Skill | null, Function] = useState(null);
-
+  
   useEffect(() => {
     if (!activeGroup) return;
+    
     // Find root skill and set it
     for(const s of skills) {
       if(s.parent === "root") {
@@ -290,10 +291,9 @@ export const SkillTree = ({skills}: Props) => {
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
           >
-            <div style={{
-              transform: `scale(${activeGroup.zoom})`, 
-              transformOrigin: "top left",
-              }}>
+            <div 
+              className="scale_container" 
+              style={{ transform: `scale(${activeGroup.zoom})` }}>
               {
                 rootSkill ? 
                 <SkillNodeContainer

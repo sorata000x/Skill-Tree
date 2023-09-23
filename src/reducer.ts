@@ -119,7 +119,7 @@ const reducer = (state: Data, action: Action): Data => {
       }
       // add a new skill. action = {skill}
       let newSkill: Skill = {
-        id: uuid(),
+        id: action.id ? action.id : uuid(),
         parent: action.parentID,
         title: action.name ? action.name : "",
         level: 0,

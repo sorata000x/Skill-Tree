@@ -3,7 +3,11 @@ import "./TopBar.css";
 import React from "react";
 import { ZoomButton } from "./components";
 
-export const TopBar = () => {
+export interface Props {
+  style: Object,
+}
+
+export const TopBar = ({style}: Props) => {
   const [{activeGroup, user}, ] = useStateValue();
 
   const handleShareClick = (e: React.MouseEvent) => {
@@ -14,7 +18,7 @@ export const TopBar = () => {
   }
 
   return (
-    <div className="topbar">
+    <div className="topbar" style={style}>
       <p>{activeGroup?.name}</p>
       <ZoomButton />
       <div className="topbar_action_buttons">

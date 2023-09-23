@@ -1,3 +1,6 @@
+- Patch data
+- Document update log
+
 # Skill Tree
 
 To Myself:
