@@ -34,7 +34,7 @@
   margin: 0;
 }
 
-.dialog_form > .submit {
+.user_auth_dialog .dialog_form > .submit {
   width: 100%;
   height: 38px;
   border-radius: 3px;
@@ -45,7 +45,7 @@
   font-weight: bold;
 }
 
-.dialog_form > .submit:hover {
+.user_auth_dialog .dialog_form > .submit:hover {
   background-color: rgb(140, 140, 140);
 }
 

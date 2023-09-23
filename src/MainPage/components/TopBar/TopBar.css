@@ -1,5 +1,6 @@
 .topbar {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
   height: min-content;
@@ -8,6 +9,7 @@
   box-sizing: border-box;
   padding: 10px;
   z-index: 9;
+  background-color: #2121219f;
 }
 
 .topbar > p {

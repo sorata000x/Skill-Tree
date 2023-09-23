@@ -6,6 +6,7 @@ import { v4 as uuid } from "uuid";
 import type { Data, Skill, Buttons, Action } from "types";
 import { emptyState, emptySkill } from "data";
 import { useNavigate } from "react-router-dom";
+import { emptyGroup } from "data";
 
 // For get user data, see App.tsx
 
@@ -120,7 +121,7 @@ const reducer = (state: Data, action: Action): Data => {
       let newSkill: Skill = {
         id: uuid(),
         parent: action.parentID,
-        title: "",
+        title: action.name ? action.name : "",
         level: 0,
         maxLevel: 0,
         increaseBy: 1,
@@ -277,6 +278,13 @@ const reducer = (state: Data, action: Action): Data => {
         dragOverlay: action.dragOverlay,
       };
     }
+    case "REMOVE_DRAG_OVERLAY": {
+      console.debug("REMOVE_DRAG_OVERLAY");
+      return {
+        ...state,
+        dragOverlay: null,
+      }
+    }
     // GROUP
     case "SET_GROUPS": {
       console.log("SET_GROUPS");
@@ -285,6 +293,13 @@ const reducer = (state: Data, action: Action): Data => {
         return state;
       }
       let newGroups = action.groups;
+      // Patch data
+      newGroups.forEach(g => {
+        g = {
+          ...emptyGroup,
+          ...g
+        }
+      })
       setUserData({
         ...state,
         groups: [...newGroups],
@@ -332,7 +347,29 @@ const reducer = (state: Data, action: Action): Data => {
         return state;
       }
       const index = state.groups.findIndex((group) => group.id === action.id);
+      if(index < 0) return state;
       state.groups[index].name = action.name;
+      setUserData({
+        ...state,
+        groups: [...state.groups],
+      });
+      return {
+        ...state,
+        groups: [...state.groups],
+      };
+    }
+    case "SET_GROUP": {
+      console.debug("SET_GROUP");
+      if (action.group === undefined) {
+        console.error("Operation SET_GROUP requires {group} attribute");
+        return state;
+      }
+      const index = state.groups.findIndex((group) => group.id === action.group?.id);
+      console.log(`index: ${index}`);
+      console.log(`group: ${JSON.stringify(action.group)}`)
+      if(index < 0) return state;
+      state.groups[index] = action.group;
+      console.log(`groups: ${JSON.stringify(state.groups)}`)
       setUserData({
         ...state,
         groups: [...state.groups],

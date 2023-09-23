@@ -1,6 +1,5 @@
 import "./ViewOnlyTreePage.css";
 import React, { useEffect, useState, createRef } from "react";
-import { SkillTree, SkillEdit } from "./components";
 import { useStateValue } from "StateProvider";
 import { Buttons } from "types";
 
@@ -27,8 +26,6 @@ export const ViewOnlyTreePage = () => {
   return (
     <div className="view_only_tree_page"> 
       <div className="container" onMouseDown={handleMouseDown}>
-        <SkillTree skills={skills}/>
-        <SkillEdit open={!!activeSkill} />
       </div>
     </div>
   )

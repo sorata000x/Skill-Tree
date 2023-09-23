@@ -5,22 +5,17 @@ import "./Instruction.css";
 
 export interface Props {
   group: Group | null;
-  skills: Array<Skill>;
-  handleDoubleClick: (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => void;
 }
 
 /**
  * Background text to prompt user to add a group or skill
  */
-export const Instruction = ({ group, skills, handleDoubleClick }: Props) => {
+export const Instruction = ({ group }: Props) => {
   const [{ groups }] = useStateValue();
 
   return (
-    <div className="instruction" onDoubleClick={handleDoubleClick}>
+    <div className="instruction">
       {!groups.length && "Create A Group To Start"}
-      {group && !skills.length && "Double Click To Create A Skill"}
     </div>
   );
 };

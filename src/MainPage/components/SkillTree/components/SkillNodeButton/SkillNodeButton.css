@@ -1,7 +1,8 @@
 .skill_node_button {
   display: grid;
   align-items: start;
-  width: 148px;
+  width: 155px;
   height: 160px;
   pointer-events: auto;
+  box-sizing: border-box;
 }

@@ -7,7 +7,7 @@
   cursor: default;
 }
 
-.more_menu {
+.menu_overlay .more_menu {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@
   z-index: 11;
 }
 
-.more_menu > button {
+.menu_overlay .more_menu > button {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -34,18 +34,18 @@
   border-radius: 3px;
 }
 
-.more_menu > button:hover {
+.menu_overlay .more_menu > button:hover {
   background-color: rgb(240, 240, 240);
 }
 
 /* Dark Mode */
 
-.dark .more_menu {
+.dark .menu_overlay .more_menu {
   background-color: #393939;
   box-shadow: none;
 }
 
-.dark .more_menu > button {
+.dark .menu_overlay .more_menu > button {
   color: rgba(255, 255, 255, 0.87);
 }
 

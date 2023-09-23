@@ -5,7 +5,7 @@
   align-items: center;
   height: fit-content;
   grid-column: 2;
-  transform: translateX(-16px);
+  transform: translateX(-55px);
   margin-top: 9px;
 }
 
@@ -24,12 +24,12 @@
 
 .level_change_buttons > button.top {
   border-radius: 0px 30px 0px 0px;
-  transform: translate(-34px, 0px);
+  
 }
 
 .level_change_buttons > button.bottom {
   border-radius: 0px 0px 30px 0px;
-  transform: translate(-34px, 0px);
+  
 }
 
 .level_change_buttons > button:hover {
@@ -38,10 +38,9 @@
 
 .level_change_buttons > .divider {
   background-color: gray;
-  width: 50px;
+  width: 90px;
   height: 1.6px;
   z-index: 10;
-  transform: translate(-20px, 0);
 }
 
 .level_change_buttons > button > .icon {

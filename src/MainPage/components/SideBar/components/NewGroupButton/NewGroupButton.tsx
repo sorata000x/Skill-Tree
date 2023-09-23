@@ -21,6 +21,7 @@ export const NewGroupButton = ({ groups }: Props) => {
     let newGroup = {
       id: uuid(),
       name: `Group ${groups.length + 1}`,
+      zoom: 1,
     };
     dispatch({
       type: "ADD_NEW_GROUP",

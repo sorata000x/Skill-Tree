@@ -22,6 +22,7 @@ export interface Skill {
 export interface Group {
   id: string;
   name: string;
+  zoom: number;
 }
 
 export interface Buttons {
@@ -63,7 +64,7 @@ export interface Data {
   activeGroup: Group | null;
   popUp: any;
   user: User | null;
-  dragOverlay: DragOverlay;
+  dragOverlay: DragOverlay | null;
   theme: string;
 }
 

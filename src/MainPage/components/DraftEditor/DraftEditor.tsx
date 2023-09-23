@@ -24,7 +24,7 @@ import {
   CompositeDecorator,
 } from "draft-js";
 import { List } from "immutable";
-import React, { createRef, useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import "./DraftEditor.css";
 import { TYPE, getToken } from "./tokenizer";
 import { ToolBar } from "./components";
@@ -102,8 +102,11 @@ export const DraftEditor = ({ value, style, readOnly, onChange }: Props) => {
   };
 
   // Read data as raw value, convert from text if not JSON string, create empty if no value
-  const [editorState, setEditorState] = useState(
-    value
+  const [editorState, setEditorState] = useState(EditorState.createEmpty(decorator));
+
+  useEffect(() => {
+    setEditorState(
+      value
       ? EditorState.createWithContent(
           isJson(value)
             ? convertFromRaw(JSON.parse(value))
@@ -111,7 +114,8 @@ export const DraftEditor = ({ value, style, readOnly, onChange }: Props) => {
           decorator
         )
       : EditorState.createEmpty(decorator)
-  );
+    )
+  }, [value])
 
   const styleMap = {
     // Set selecting text background color to sustain selection when inputting link

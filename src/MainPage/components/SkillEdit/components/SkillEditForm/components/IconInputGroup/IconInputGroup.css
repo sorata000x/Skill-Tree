@@ -44,12 +44,3 @@
 .icon_input_group > .upload_icon_button > .icon {
   margin: 2px 0 0 3px;
 }
-
-.test {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: aquamarine;
-}

@@ -1,6 +1,7 @@
 import { useStateValue } from "StateProvider";
 import "./TopBar.css";
 import React from "react";
+import { ZoomButton } from "./components";
 
 export const TopBar = () => {
   const [{activeGroup, user}, ] = useStateValue();
@@ -15,6 +16,7 @@ export const TopBar = () => {
   return (
     <div className="topbar">
       <p>{activeGroup?.name}</p>
+      <ZoomButton />
       <div className="topbar_action_buttons">
         <button onClick={(e)=>handleShareClick(e)}> Share </button>
       </div>

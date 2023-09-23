@@ -51,7 +51,7 @@ export const NodeButton = ({
       <SkillLink
         skill={skill}
         buttons={
-          isDragOverlay ? { ...buttons, ...dragOverlay.buttons } : buttons
+          isDragOverlay ? { ...buttons, ...dragOverlay?.buttons } : buttons
         }
         isDragOverlay={isDragOverlay}
       />

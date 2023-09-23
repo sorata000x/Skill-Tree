@@ -1,4 +1,5 @@
 import type { Data, Skill, Group } from "types";
+import { v4 as uuid } from "uuid";
 
 export const emptyState: Data = {
   skills: [],
@@ -17,12 +18,13 @@ export const emptyState: Data = {
 };
 
 export const emptyGroup: Group = {
-  id: "",
-  name: "",
+  id: uuid(),
+  name: "Untitled",
+  zoom: 1,
 };
 
 export const emptySkill: Skill = {
-  id: "",
+  id: uuid(),
   parent: "root",
   title: "",
   level: 0,

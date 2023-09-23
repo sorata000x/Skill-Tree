@@ -1,1 +1,0 @@
-export { IconInputGroup } from "./IconInputGroup";

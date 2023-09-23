@@ -1,1 +1,0 @@
-export { SkillProgress } from "./SkillProgress";

@@ -1,1 +1,0 @@
-export { SkillLink } from "./SkillLink";

@@ -1,15 +1,15 @@
-.tool_bar {
+.draft_editor .tool_bar {
   position: absolute;
   border-radius: 3px;
   background-color: #2d2d2d;
   box-shadow: 0 0 5px 1px #212121;
 }
 
-.tool_bar div {
+.draft_editor .tool_bar div {
   display: flex;
 }
 
-.tool_bar button {
+.draft_editor .tool_bar button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,19 +20,13 @@
   cursor: pointer;
 }
 
-.tool_bar button:hover {
+.draft_editor .tool_bar button:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-.tool_bar .link_button {
+.draft_editor .tool_bar .link_button {
   gap: 4px;
   border-right: 1px solid gray;
   padding-right: 10px;
   border-radius: 3px 0 0 3px;
-}
-
-.tool_bar .format_button {
-}
-
-.tool_bar .link_input {
 }

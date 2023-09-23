@@ -45,7 +45,6 @@ export const MainPage = () => {
   }, [groups]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
-    console.log('test')
     // Cancel active skill
     dispatch({
       type: "SET_ACTIVE_SKILL",
@@ -59,7 +58,7 @@ export const MainPage = () => {
         <SideBar />
         <div className="layout_column">
           <TopBar />
-          <SkillTree
+          <SkillTree 
             skills={skills.filter(
               (skill: Skill) => skill.group.id === activeGroup?.id
             )}

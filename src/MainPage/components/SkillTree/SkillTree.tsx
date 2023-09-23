@@ -1,4 +1,4 @@
-import React, { useEffect, createRef } from "react";
+import React, { useEffect, createRef, useState } from "react";
 import {
   useSensors,
   useSensor,
@@ -15,11 +15,11 @@ import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import "./SkillTree.css";
 import { v4 as uuid } from "uuid";
 import { useStateValue } from "StateProvider";
-import { Instruction, SkillNodeLayer, SkillNodeContainer } from "./components";
+import { Instruction, SkillNodeLayer, SkillNodeContainer, SkillDragOverlay } from "./components";
 import { Skill, Buttons } from "types";
 
 export interface Props {
-  skills: Array<Skill>; // skills to display
+  skills: Array<Skill>,
 }
 
 /**
@@ -28,10 +28,29 @@ export interface Props {
  * - SkillNodeLayer     | contains the root row of skill nodes
  * - SkillNodeContainer | contains one skill node and its children (for dragOverlay)
  */
-export const SkillTree = ({ skills }: Props) => {
+export const SkillTree = ({skills}: Props) => {
   const [{ activeSkill, buttons, groups, activeGroup, dragOverlay }, dispatch] =
     useStateValue();
   const group = activeGroup;
+  const [rootSkill, setRootSkill]: [Skill | null, Function] = useState(null);
+
+  useEffect(() => {
+    if (!activeGroup) return;
+    // Find root skill and set it
+    for(const s of skills) {
+      if(s.parent === "root") {
+        setRootSkill(s);
+        return;
+      }
+    }
+    // If no root skill, create one with group name
+    dispatch({
+      type: "ADD_SKILL",
+      name: activeGroup?.name,
+      parentID: "root",
+      group: activeGroup,
+    })
+  }, [])
 
   useEffect(() => {
     // Scroll activated skill button to the center for better view
@@ -39,7 +58,7 @@ export const SkillTree = ({ skills }: Props) => {
     if (activeSkill) {
       buttons[activeSkill.id].current?.scrollIntoView({
         block: "start",
-        inline: "center",
+        inline: "start",
         behavior: "smooth",
       });
     }
@@ -47,6 +66,8 @@ export const SkillTree = ({ skills }: Props) => {
 
   /* Utils */
 
+  // Get skill by ID
+  // Usage: copySkills
   const getSkillByID = (id: string) => {
     let target = {};
     skills.forEach((skill) => {
@@ -56,6 +77,7 @@ export const SkillTree = ({ skills }: Props) => {
   };
 
   // Whether id1 skill node is under id2 skill node
+  // Usage: handleDragEnd
   const isNodeUnder = (
     ref1: React.RefObject<HTMLButtonElement>,
     ref2: React.RefObject<HTMLButtonElement>
@@ -80,10 +102,12 @@ export const SkillTree = ({ skills }: Props) => {
   };
 
   // Copy over skills (with different IDs) starting from the target id
+  // Usage: setDragOverlay
   const copySkills = (id: string) => {
     // Copy over sub array of skills from the given skill id
     let newSkills = [JSON.parse(JSON.stringify(getSkillByID(id)))];
     for (let i = 0; i < newSkills.length; i++) {
+      // copy down from parents to their children
       for (const s of skills) {
         if (s.parent === newSkills[i].id) {
           newSkills = [...newSkills, JSON.parse(JSON.stringify(s))];
@@ -108,6 +132,7 @@ export const SkillTree = ({ skills }: Props) => {
   };
 
   // Create buttons for target skills
+  // Usage: setDragOverlay
   const createButtons = (targets: Array<Skill>) => {
     let cb: Buttons = {};
     for (const t of targets) {
@@ -136,6 +161,7 @@ export const SkillTree = ({ skills }: Props) => {
       group: group,
     });
   };
+
   // Find the nearest (positioned) parent id of a skill
   const getNearestParent = (px: number, py: number) => {
     let np = "root";
@@ -184,17 +210,33 @@ export const SkillTree = ({ skills }: Props) => {
     })
   );
 
-  const dropAnimation = {
-    ...defaultDropAnimation,
-  };
-
   const handleDragStart = ({ active }: DragStartEvent) => {
     setDragOverlay(active.id.toString());
   };
 
+  const setDragOverlay = (id: string) => {
+    // Remove drag overlay if not dragging any node
+    if (!id) {
+      dispatch({
+        type: "REMOVE_DRAG_OVERLAY",
+      });
+      return;
+    }
+    // Copy subtree from the dragging ID and set it as drag overlay
+    const newDragOverlaySkills = copySkills(id);
+    dispatch({
+      type: "SET_DRAG_OVERLAY",
+      dragOverlay: {
+        skills: newDragOverlaySkills,
+        buttons: createButtons(newDragOverlaySkills),
+        parentId: getSkillParentId(id),
+      },
+    });
+  };
+
   const handleDragEnd = ({ active, over }: DragEndEvent) => {
     // Handle where to drop dragging node
-    if (!active || !over || active.id === over.id) return;
+    if (!active || !over || active.id === over.id || !dragOverlay) return;
     const draggingSkill = dragOverlay.skills[0];
     let draggingRef = dragOverlay.buttons[draggingSkill.id];
     let overRef = buttons[over.id.toString()];
@@ -217,80 +259,51 @@ export const SkillTree = ({ skills }: Props) => {
         over: over,
       });
     }
-    // deplay for smooth dropping behavior
+    // delay for smooth dropping behavior
     setTimeout(() => setDragOverlay(""), 100);
   };
 
-  const setDragOverlay = (id: string) => {
-    if (!id) {
-      dispatch({
-        type: "SET_DRAG_OVERLAY",
-        dragOverlay: {
-          skills: [],
-          buttons: {},
-          parentId: "root",
-        },
-      });
-      return;
-    }
-    const newDragOverlaySkills = copySkills(id);
-    dispatch({
-      type: "SET_DRAG_OVERLAY",
-      dragOverlay: {
-        skills: newDragOverlaySkills,
-        buttons: createButtons(newDragOverlaySkills),
-        parentId: getSkillParentId(id),
-      },
-    });
-  };
+  /* HTML Event */
 
   const handleDoubleClick = (event: React.MouseEvent) => {
     // Add new skill if double click on background
     if (!group) return;
-    if (!skills.length) {
-      addSkill("root");
-      return;
-    }
     let target = getNearestParent(event.clientX, event.clientY);
-    addSkill(target ? target : "root");
+    if(target) addSkill(target);
   };
 
+  if (!activeGroup) return;
+
   return (
-    <div className="skill_tree">
-      {!groups.length || !skills.length ? (
+    <div className="skill_tree" onDoubleClick={handleDoubleClick}>
+      {!groups.length ? (
         <Instruction
           group={group}
-          skills={skills}
-          handleDoubleClick={handleDoubleClick}
         />
       ) : (
         <div
-          className={"container" + (activeSkill ? " expand" : "")}
-          onDoubleClick={handleDoubleClick}
+          className={"container" + (activeSkill ? " expand" : "")}  // if a skill is active, expand the container so it can be scroll into center
         >
-          {skills.length ? (
-            <DndContext
-              sensors={sensors}
-              collisionDetection={closestCorners}
-              onDragStart={handleDragStart}
-              onDragEnd={handleDragEnd}
-            >
-              <SkillNodeLayer id="root" skills={skills} buttons={buttons} />
-              <DragOverlay dropAnimation={dropAnimation}>
-                {dragOverlay.skills.length ? (
-                  <SkillNodeContainer
-                    key={
-                      dragOverlay.skills[0] ? dragOverlay.skills[0].id : null
-                    }
-                    skill={dragOverlay.skills[0]}
-                    skills={dragOverlay.skills}
-                    buttons={dragOverlay.buttons}
-                    isDragOverlay={true}
-                  />
-                ) : null}
-              </DragOverlay>
-            </DndContext>
-          ) : null}
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCorners}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+          >
+            <div style={{transform: `scale(${activeGroup.zoom})`, transformOrigin: "top left"}}>
+              {
+                rootSkill ? 
+                <SkillNodeContainer
+                  skill={rootSkill}
+                  skills={skills.filter(
+                    (skill: Skill) => skill.group.id === activeGroup?.id
+                  )}
+                  buttons={buttons}
+                /> : null
+              }
+            </div>
+            <SkillDragOverlay />
+          </DndContext>
         </div>
       )}
     </div>

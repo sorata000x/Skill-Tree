@@ -21,17 +21,13 @@
   padding-left: 24px;
 }
 
-.soft-line-break {
-  line-height: 20px;
-}
-
-.new_block_listener {
+.draft_editor > .new_block_listener {
   height: 100%;
   width: 100%;
   background-color: transparent;
 }
 
-.new_block_listener:active {
+.draft_editor > .new_block_listener:active {
   cursor: default;
 }
 

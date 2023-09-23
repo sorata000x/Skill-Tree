@@ -2,6 +2,7 @@ import { Skill, Buttons } from "types";
 import "./SkillLink.css";
 import React, { useState, useEffect } from "react";
 import { getOffset } from "utilities";
+import { useStateValue } from "StateProvider";
 
 export interface Props {
   skill: Skill;
@@ -17,7 +18,7 @@ export interface Props {
  *   cause less manual rendering.
  */
 export const SkillLink = ({ skill, buttons, isDragOverlay }: Props) => {
-  //const [{ dragOverlay}, ] = useStateValue();
+  const [{activeGroup}, ] = useStateValue();
   const [updating, setUpdating] = useState(true); // only update when interacting with page
   const [time, setTime] = useState(new Date()); // to keep updating link
 
@@ -60,7 +61,7 @@ export const SkillLink = ({ skill, buttons, isDragOverlay }: Props) => {
       <div
         className="skill_link"
         style={{
-          width: length,
+          width: length / (activeGroup?.zoom ? activeGroup?.zoom : 1),
           left: "56px",
           top: "60px",
           transform: `rotate(${angle}deg)`,

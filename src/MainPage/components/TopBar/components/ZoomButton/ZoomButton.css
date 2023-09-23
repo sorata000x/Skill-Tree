@@ -1,0 +1,33 @@
+.zoom_button {
+  display: flex;
+  height: 26px;
+  margin-right: 50px;
+}
+
+.zoom_button > .percentage {
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.zoom_button > button {
+  background-color: #4c4c4c;
+  color: rgba(255, 255, 255, 0.65);
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.zoom_button > .increase {
+  border-radius: 3px 0px 0px 3px;
+}
+
+.zoom_button > .decrease {
+  border-radius: 0px 3px 3px 0px;
+}

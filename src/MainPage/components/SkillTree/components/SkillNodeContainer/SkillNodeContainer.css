@@ -5,8 +5,3 @@
   justify-content: center;
   width: min-content;
 }
-
-.skill_node_container > .more_icon {
-  color: #c6c6c6;
-  transform: translate(-14px, -30px);
-}

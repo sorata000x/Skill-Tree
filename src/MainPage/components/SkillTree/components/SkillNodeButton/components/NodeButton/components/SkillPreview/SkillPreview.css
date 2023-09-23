@@ -36,9 +36,6 @@
   font-weight: bold;
 }
 
-.skill_preview > .container > .info_group > .value {
-}
-
 .fade-in {
   animation: fadeIn 0.8s;
 }
@@ -53,10 +50,6 @@
   100% {
     opacity: 1;
   }
-}
-
-.draft-editor {
-  height: 10px;
 }
 
 /* Dark Mode */
