@@ -60,7 +60,7 @@ export const GroupTab = ({ group }: Props) => {
         {...listeners}
       >
         {!editing ? (
-          group.name
+          <div style={{width: "232px", overflow: "hidden"}}>{group.name}</div>
         ) : (
           <GroupNameInput group={group} setEditing={setEditing} />
         )}
