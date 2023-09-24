@@ -18,6 +18,13 @@ export const UpdateLog = () => {
     <div className="overlay" onClick={(e) => close()}>
       <div className="update_log">
         <h1>Updates</h1> <br />
+        --- Sep 23 2023 --- <br />
+        <br />
+        <h2>Feature</h2>
+        <strong>Tree Zooming</strong>
+        - You can now adjust the tree size with buttons for a better view of your trees! <br />
+        <br />
+        <br />
         --- Sep 9 2023 --- <br />
         <br />
         <h2>Feature</h2>
