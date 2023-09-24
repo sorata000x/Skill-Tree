@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SkillNodeButton } from "../SkillNodeButton";
 import "./SkillNodeContainer.css";
 import { useSortable } from "@dnd-kit/sortable";
@@ -26,6 +26,8 @@ export const SkillNodeContainer = ({
   buttons,
   isDragOverlay,
 }: Props) => {
+  const [{activeGroup}, ] = useStateValue();
+
   /* Dnd-kit Sortable */
   /* References:
    *  dnd-kit sortable documentation | https://docs.dndkit.com/presets/sortable
@@ -45,7 +47,10 @@ export const SkillNodeContainer = ({
 
   return (
     <div ref={setNodeRef} style={style}>
-      <div className="skill_node_container">
+      <div 
+        className="skill_node_container" 
+        style={skill.parent === "root" ? {transform: `scale(${activeGroup?.zoom})`} : {}}   // adjust tree size according to group zoom only for root so to not repeat scaling
+        >
         <SkillNodeButton
           skill={skill}
           buttonRef={buttons[skill.id]}

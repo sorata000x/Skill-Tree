@@ -62,11 +62,7 @@ export const MainPage = () => {
           <TopBar style={{width: activeSkill ? "calc(100% - 556px)" : "100%"}} />
           <SkillTree 
             skills={skills.filter(
-              (skill: Skill) => {
-                if(skill.group.id === activeGroup?.id)
-                  console.log(`skill: ${JSON.stringify(skill)}`)
-                return skill.group.id === activeGroup?.id;
-              }
+              (skill: Skill) => skill.group.id === activeGroup?.id
             )}
           />
         </div>

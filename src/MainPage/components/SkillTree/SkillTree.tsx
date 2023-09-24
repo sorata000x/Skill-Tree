@@ -293,7 +293,8 @@ export const SkillTree = ({skills}: Props) => {
           >
             <div 
               className="scale_container" 
-              style={{ transform: `scale(${activeGroup.zoom})` }}>
+
+              >
               {
                 rootSkill ? 
                 <SkillNodeContainer
@@ -305,7 +306,7 @@ export const SkillTree = ({skills}: Props) => {
                 /> : null
               }
             </div>
-            <SkillDragOverlay />
+              <SkillDragOverlay />
           </DndContext>
         </div>
       )}

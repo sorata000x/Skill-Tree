@@ -4,4 +4,5 @@
   align-items: center;
   justify-content: center;
   width: min-content;
+  transform-origin: top left;
 }
