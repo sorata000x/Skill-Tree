@@ -20,6 +20,8 @@ import { Skill, Buttons } from "types";
 
 export interface Props {
   skills: Array<Skill>,
+  buttons: Buttons,
+  viewOnly?: boolean,
 }
 
 /**
@@ -28,22 +30,28 @@ export interface Props {
  * - SkillNodeLayer     | contains the root row of skill nodes
  * - SkillNodeContainer | contains one skill node and its children (for dragOverlay)
  */
-export const SkillTree = ({skills}: Props) => {
-  const [{ activeSkill, buttons, groups, activeGroup, dragOverlay }, dispatch] =
+export const SkillTree = ({skills, buttons, viewOnly}: Props) => {
+  const [{ activeSkill, groups, activeGroup, dragOverlay }, dispatch] =
     useStateValue();
   const group = activeGroup;
   const [rootSkill, setRootSkill]: [Skill | null, Function] = useState(null);
   
   useEffect(() => {
-    if (!activeGroup) return;
+    
+
+    console.log(`skills: ${JSON.stringify(skills)}`)
     
     // Find root skill and set it
     for(const s of skills) {
       if(s.parent === "root") {
         setRootSkill(s);
+        console.log(`set root skill to: ${JSON.stringify(s)}`)
         return;
       }
     }
+
+    if (!activeGroup) return;
+
     // If no root skill, create one with group name
     dispatch({
       type: "ADD_SKILL",
@@ -273,8 +281,6 @@ export const SkillTree = ({skills}: Props) => {
     if(target) addSkill(target);
   };
 
-  if (!activeGroup) return;
-
   return (
     <div className="skill_tree" onDoubleClick={handleDoubleClick}>
       {!groups.length ? (
@@ -293,15 +299,12 @@ export const SkillTree = ({skills}: Props) => {
           >
             <div 
               className="scale_container" 
-
               >
               {
                 rootSkill ? 
                 <SkillNodeContainer
                   skill={rootSkill}
-                  skills={skills.filter(
-                    (skill: Skill) => skill.group.id === activeGroup?.id
-                  )}
+                  skills={skills}
                   buttons={buttons}
                 /> : null
               }

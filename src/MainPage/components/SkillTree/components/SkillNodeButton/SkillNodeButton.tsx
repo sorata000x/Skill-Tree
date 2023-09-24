@@ -7,10 +7,11 @@ import {
   LevelChangeButtons,
   ToggleButton,
 } from "./components";
-import { Skill } from "types";
+import { Buttons, Skill } from "types";
 import { useStateValue } from "StateProvider";
 
 export interface Props {
+  buttons: Buttons,
   skill: Skill;
   buttonRef: React.RefObject<HTMLButtonElement>;
   listeners: any;
@@ -25,6 +26,7 @@ export interface Props {
  * - ToggleButton      | button to toggle subtree
  */
 export const SkillNodeButton = ({
+  buttons,
   skill,
   buttonRef,
   listeners,
@@ -54,6 +56,7 @@ export const SkillNodeButton = ({
       onMouseOut={(e) => setMouseOver(false)}
     >
         <NodeButton
+          buttons={buttons}
           skill={skill}
           buttonRef={buttonRef}
           listeners={listeners}

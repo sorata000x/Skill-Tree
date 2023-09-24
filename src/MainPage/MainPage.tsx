@@ -14,7 +14,7 @@ import { Skill } from "types";
  * - popUp      | pop up window (UserAuthDialog, SupportPage, UpdateLog)
  */
 export const MainPage = () => {
-  const [{ skills, activeSkill, groups, activeGroup, popUp, user }, dispatch] =
+  const [{ skills, activeSkill, groups, activeGroup, popUp, user, buttons }, dispatch] =
     useStateValue();
   const pathParam = useParams().pathParam; // get current group from url parameter
   const navigate = useNavigate();
@@ -64,6 +64,7 @@ export const MainPage = () => {
             skills={skills.filter(
               (skill: Skill) => skill.group.id === activeGroup?.id
             )}
+            buttons={buttons}
           />
         </div>
         <HelpButton />

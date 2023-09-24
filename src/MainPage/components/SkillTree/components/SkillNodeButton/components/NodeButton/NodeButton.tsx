@@ -1,10 +1,11 @@
 import "./NodeButton.css";
 import React, { useEffect, useRef, useState } from "react";
 import { useStateValue } from "StateProvider";
-import { Skill } from "types";
+import { Buttons, Skill } from "types";
 import { NodeTitle, SkillPreview, SkillLink, NodeIcon } from "./components";
 
 export interface Props {
+  buttons: Buttons;
   skill: Skill;
   buttonRef: React.RefObject<HTMLButtonElement>;
   listeners: any;
@@ -19,12 +20,13 @@ export interface Props {
  * - NodeIcon     | skill's icon
  */
 export const NodeButton = ({
+  buttons,
   skill,
   buttonRef,
   listeners,
   isDragOverlay,
 }: Props) => {
-  const [{ activeSkill, buttons, dragOverlay }, dispatch] = useStateValue();
+  const [{ activeSkill, dragOverlay }, dispatch] = useStateValue();
   const [isActive, setActive] = useState(false);
   const [isMouseOver, setMouseOver] = useState(false);
 
