@@ -1,80 +1,15 @@
-- Patch data
-- Document update log
-
-# Skill Tree
-
-To Myself:
-
-- Endure, and persevere.
-- Trust the process.
-- Respect the craft, make something beautiful.
-
 ## Introduction
 
 This project is inspired by skill tree of various video game, as well as tree data structure in computer science, which is used for fast navigate and search.
 My aim is to combine these concepts to help visualizing data in a concise manner and organizing them easily.
-
 Excellent tool to track the progress towards your goal.
-
-A good runner not only need ... but also ..., ..., and .....
-A great singer ....
-This app is built to help you break down the skill you needed and to track the progress towards you goal, whether it is .... or to become the better version of yourself.
 
 ## What Do I Use Skill Tree For?
 
 - Very nice way to document what I have learned and plan out what I need to learn
 
-## Structure
-
-- MainPage
-  - DraftEditor
-    - ToolBar
-  - HelpButton
-    - HelpMenu
-  - PopUps
-    - MoreMenu
-    - SupportPage
-    - UpdateLog
-    - UserAuthDialog
-  - SideBar
-    - ActionButtons
-      - CloseSideBarButton
-      - UserButton
-    - GroupTabs
-      - GroupTab
-        - GroupNameInput
-        - MoreButton
-    - NewGroupButton
-    - OpenSideBarButton
-    - UserMenu
-  - SkillEdit
-    - ActionButtons
-    - SkillEditForm
-      - IconInputGroup
-      - InputGroup
-  - SkillTree
-    - Instruction
-    - SkillNodeButton
-      - LevelChangeButtons
-      - NodeButton
-        - NodeTitle
-        - SkillLink
-        - SkillPreview
-      - SkillProgress
-        - Seperator
-        - RadialSeperators
-      - ToggleButton
-    - SkillNodeContainer
-    - SkillNodeLayer
-
-## Guideline
-
-- Let components take care of themselves if it is possible
-
 ## Doing
 
-- Maintain uploaded image's ratio
-- Start drawing icons
 
 ## To Do
 

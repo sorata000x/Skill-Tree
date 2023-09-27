@@ -1,7 +1,7 @@
 .group_tabs {
   display: flex;
   flex-direction: column;
-  width: 250px;
+  width: 260px;
   height: 100%;
   padding: 5px;
   overflow: hidden;
