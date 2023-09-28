@@ -38,16 +38,21 @@
   transform: translateX(1px);
 }
 
-.node_button > button.active {
-  box-shadow: 0 0 5px 4px #669ac4;
-}
-
-.node_button > button > img {
-  width: 100px;
-  height: 100px;
+.node_button > .button_listener {
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 96px;
+  height: 96px;
+  margin-left: 9px;
+  z-index: 10;
+  cursor: pointer;
   grid-column: 1;
   grid-row: 1;
-  background-color: blue;
+}
+
+.node_button > button.active {
+  box-shadow: 0 0 5px 4px #669ac4;
 }
 
 /* Dark Mode */

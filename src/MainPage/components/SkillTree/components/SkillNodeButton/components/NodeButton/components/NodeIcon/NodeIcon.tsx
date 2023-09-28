@@ -5,8 +5,6 @@ export interface Props {
   open: boolean;
   src: string | undefined;
   scale: number | undefined;
-  onClick: (e: React.MouseEvent) => void;
-  listeners: any;
 }
 
 /**
@@ -16,8 +14,6 @@ export const NodeIcon = ({
   open,
   src,
   scale = 1,
-  onClick,
-  listeners,
 }: Props) => {
   const ref: React.RefObject<HTMLImageElement> = createRef();
   const [MAX_WIDTH, MAX_HEIGHT] = [96, 96];
@@ -41,13 +37,12 @@ export const NodeIcon = ({
   if (!open) return;
 
   return open ? (
-    <div className="node_icon" {...listeners}>
+    <div className="node_icon">
       <img
         ref={ref}
         alt="skill icon"
         src={src}
         style={{ width: size.width, height: size.height }}
-        onClick={onClick}
       />
     </div>
   ) : null;

@@ -5,9 +5,7 @@ import textfit from "textfit";
 
 export interface Props {
   skill: Skill;
-  listeners: any;
   isDragOverlay?: boolean;
-  handleClick: (e: React.MouseEvent) => void;
 }
 
 /**
@@ -15,11 +13,9 @@ export interface Props {
  */
 export const NodeTitle = ({
   skill,
-  listeners,
   isDragOverlay,
-  handleClick,
 }: Props) => {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (ref.current)
@@ -33,9 +29,7 @@ export const NodeTitle = ({
   return (
     <div
       className="node_title"
-      onClick={(e) => handleClick(e)}
       ref={ref}
-      {...listeners}
     >
       {skill.title}
     </div>

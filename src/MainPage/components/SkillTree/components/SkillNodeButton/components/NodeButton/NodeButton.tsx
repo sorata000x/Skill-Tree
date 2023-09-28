@@ -46,8 +46,6 @@ export const NodeButton = ({
   return (
     <div
       className="node_button"
-      onMouseOver={() => setMouseOver(true)}
-      onMouseOut={() => setMouseOver(false)}
       onMouseDown={(e)=>e.stopPropagation()}
     >
       <SkillLink
@@ -60,22 +58,25 @@ export const NodeButton = ({
       <button
         className={isActive && !skill.maxLevel ? " active" : ""}
         ref={buttonRef}
-        onClick={handleClick}
         {...listeners}
       />
-      <SkillPreview open={isMouseOver} skill={skill} />
+      <SkillPreview 
+        open={isMouseOver} 
+        skill={skill} />
       <NodeTitle
         skill={skill}
-        listeners={listeners}
         isDragOverlay={isDragOverlay}
-        handleClick={(e) => handleClick(e)}
       />
       <NodeIcon
         open={!!skill.icon}
         src={skill.icon?.url}
         scale={skill.icon?.scale}
+      />
+      <div className="button_listener"
         onClick={(e) => handleClick(e)}
-        listeners={listeners}
+        onMouseOver={() => setMouseOver(true)}
+        onMouseOut={() => setMouseOver(false)}
+        {...listeners}
       />
     </div>
   );
