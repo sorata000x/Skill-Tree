@@ -16,12 +16,12 @@ button {
 }
 
 hr.solid {
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   margin: 0;
 }
 
 ::selection {
-  background-color: #355269;
+  background-color: #bad0e9;
 }
 
 a {
@@ -114,4 +114,13 @@ textarea:focus {
 .dark input:focus {
   background-color: #212121;
   padding-left: 3px;
+}
+
+.dark hr.solid {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0;
+}
+
+.dark ::selection {
+  background-color: #355269;
 }

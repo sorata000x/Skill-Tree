@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { useStateValue } from "StateProvider";
 import React, { useEffect, useState } from "react";
 
 export interface Props {
@@ -7,6 +8,8 @@ export interface Props {
 }
 
 export const DotOutlined = ({hover, style}: Props) => {
+  const [{theme}, ] = useStateValue();
+
   return (
     <svg
       width="20px"
@@ -18,7 +21,7 @@ export const DotOutlined = ({hover, style}: Props) => {
       style={style}>
       <g>
         <circle
-          style={{fill: "#212121", strokeWidth: "0.264583"}}
+          style={{fill: theme === "light" ? "white" : "#212121", strokeWidth: "0.264583"}}
           id="path1"
           cx="100"
           cy="100"
@@ -30,7 +33,7 @@ export const DotOutlined = ({hover, style}: Props) => {
           cy="100"
           r="80" />
         <circle
-          style={{fill: "#212121", fillOpacity: "1", strokeWidth: "0.264583"}}
+          style={{fill: theme === "light" ? "white" : "#212121", fillOpacity: "1", strokeWidth: "0.264583"}}
           id="path3"
           cx="100"
           cy="100"

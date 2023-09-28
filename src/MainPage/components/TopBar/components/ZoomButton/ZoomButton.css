@@ -14,8 +14,8 @@
 }
 
 .zoom_button > button {
-  background-color: #4c4c4c;
-  color: rgba(255, 255, 255, 0.65);
+  background-color: #d4d4d4;
+  color: rgba(255, 255, 255, 0.85);
   width: 30px;
   display: flex;
   align-items: center;
@@ -30,4 +30,11 @@
 
 .zoom_button > .decrease {
   border-radius: 0px 3px 3px 0px;
+}
+
+/* Dark Mode */
+
+.dark .zoom_button > button {
+  background-color: #4c4c4c;
+  color: rgba(255, 255, 255, 0.65);
 }

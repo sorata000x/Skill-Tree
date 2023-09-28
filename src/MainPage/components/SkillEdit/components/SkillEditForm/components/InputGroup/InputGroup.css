@@ -1,5 +1,9 @@
+.skill_edit_form input {
+  padding-left: 6px;
+}
+
 .skill_edit_form label {
-  color: rgba(255, 255, 255, 0.5);
+  color: black;
   font-weight: 500;
 }
 
@@ -10,39 +14,46 @@
 }
 
 .skill_edit_form > .title_input > input {
-  width: 400px;
+  width: 90%;
   height: 34px;
 }
 
 .skill_edit_form > .form-level-group > .level_input {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
 .skill_edit_form > .form-level-group > .level_input > input {
-  width: 122px;
   height: 34px;
 }
 
 .skill_edit_form > .form-level-group > .max_level_input {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
 .skill_edit_form > .form-level-group > .max_level_input > input {
-  width: 122px;
   height: 34px;
 }
 
 .skill_edit_form > .form-level-group > .increase_by_input {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
 .skill_edit_form > .form-level-group > .increase_by_input > input {
-  width: 122px;
   height: 34px;
+}
+
+/* Dark Mode */
+
+.dark .skill_edit_form label {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
 }

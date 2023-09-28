@@ -1,7 +1,7 @@
 import { useStateValue } from "StateProvider";
 import "./ZoomButton.css";
 import React, { useEffect, useState } from "react";
-import { HiOutlinePlus, HiOutlineMinus } from "react-icons/hi";
+import { FaPlus, FaMinus } from "react-icons/fa6";
 
 export const ZoomButton = () => {
   const [{activeGroup}, dispatch] = useStateValue();
@@ -85,7 +85,7 @@ export const ZoomButton = () => {
         className="increase"
         onClick={(e)=>zoomIn()}
         >
-        <HiOutlinePlus />
+        <FaPlus />
       </button>
       <div className="percentage">
         {`${Math.round(zoom * 100)}%`}
@@ -94,7 +94,7 @@ export const ZoomButton = () => {
         className="decrease"
         onClick={(e)=>zoomOut()}
         >
-        <HiOutlineMinus />
+        <FaMinus />
       </button>
     </div>
   )

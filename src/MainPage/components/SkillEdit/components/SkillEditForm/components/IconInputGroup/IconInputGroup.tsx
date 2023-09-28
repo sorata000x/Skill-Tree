@@ -54,11 +54,6 @@ export const IconInputGroup = ({ setIcon }: Props) => {
       />
       <button
         className="upload_icon_button"
-        style={
-          activeSkill?.icon
-            ? { backgroundColor: "#c6c6c6" }
-            : { backgroundColor: "gray" }
-        }
         onClick={(e) => handleUploadButtonClick(e)}
       >
         {activeSkill?.icon ? (

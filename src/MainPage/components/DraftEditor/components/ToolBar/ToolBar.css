@@ -1,8 +1,8 @@
 .draft_editor .tool_bar {
   position: absolute;
   border-radius: 3px;
-  background-color: #2d2d2d;
-  box-shadow: 0 0 5px 1px #212121;
+  background-color: white;
+  box-shadow: 0 0 5px 1px #d4d4d4;
 }
 
 .draft_editor .tool_bar div {
@@ -15,7 +15,7 @@
   justify-content: center;
   border: none;
   height: 30px;
-  color: white;
+  color: black;
   background-color: transparent;
   cursor: pointer;
 }
@@ -26,7 +26,18 @@
 
 .draft_editor .tool_bar .link_button {
   gap: 4px;
-  border-right: 1px solid gray;
+  border-right: 1.5px solid rgba(128, 128, 128, 0.5);
   padding-right: 10px;
   border-radius: 3px 0 0 3px;
+}
+
+/* Dark Mode */
+
+.dark .draft_editor .tool_bar {
+  background-color: #2d2d2d;
+  box-shadow: 0 0 5px 1px #212121;
+}
+
+.dark .draft_editor .tool_bar button {
+  color: white;
 }

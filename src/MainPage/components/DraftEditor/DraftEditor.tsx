@@ -56,7 +56,7 @@ export const DraftEditor = ({ value, style, readOnly, onChange }: Props) => {
   const ref: React.RefObject<HTMLDivElement> = createRef();
   const editorRef: React.RefObject<Editor> = createRef();
   const [openToolBar, setToolBarOpen]: [boolean, Function] = useState(false);
-  const [{activeSkill}, ] = useStateValue();
+  const [{activeSkill, theme}, ] = useStateValue();
 
   // decorator strategy for text link
   const findLinkEntities = (
@@ -123,7 +123,7 @@ export const DraftEditor = ({ value, style, readOnly, onChange }: Props) => {
     // Set selecting text background color to sustain selection when inputting link
     // because selection is removed when focusing on input component
     SELECT: {
-      backgroundColor: "#355269",
+      backgroundColor: theme === "light" ? "#bad0e9" : "#355269",
     },
   };
 

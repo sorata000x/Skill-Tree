@@ -23,6 +23,10 @@ export const SkillLink = ({ skill, buttons, isDragOverlay }: Props) => {
   const [time, setTime] = useState(new Date()); // to keep updating link
 
   useEffect(() => {
+    setUpdating(true);
+  }, [])
+
+  useEffect(() => {
     // Note: Time needed to render might differ
     setTimeout(() => setUpdating(false), 100); // Give link some time to finish render
     document.addEventListener("mousedown", () => setUpdating(true));
