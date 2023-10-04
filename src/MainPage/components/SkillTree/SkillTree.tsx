@@ -299,6 +299,7 @@ export const SkillTree = ({skills, buttons, viewOnly}: Props) => {
           >
             <div 
               className="scale_container" 
+              style={{transform: `scale(${activeGroup?.zoom})`}}   // adjust tree size according to group zoom only for root so to not repeat scaling
               >
               {
                 rootSkill ? 

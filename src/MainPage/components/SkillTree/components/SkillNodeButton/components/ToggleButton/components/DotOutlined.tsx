@@ -25,7 +25,7 @@ export const DotOutlined = ({hover, style}: Props) => {
           id="path1"
           cx="100"
           cy="100"
-          r="98" />
+          r="100" />
         <circle
           style={{fill: "currentColor", strokeWidth: "0.264583"}}
           id="path2"

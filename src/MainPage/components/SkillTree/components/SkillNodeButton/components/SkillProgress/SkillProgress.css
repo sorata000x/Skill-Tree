@@ -1,15 +1,19 @@
 .skill_progress {
-  height: 116px;
-  width: 116px;
+  height: 106px;
+  width: 106px;
   grid-column: 1;
   grid-row: 1;
   border-radius: 50%;
   z-index: 2;
-  border: 3px solid #212121;
   box-sizing: border-box;
 }
 
 .skill_progress.active {
-  border: none;
-  box-shadow: 0 0 5px 3px #446682;
+
+}
+
+/* Dark Mode */
+
+.dark .skill_progress {
+  border: 3px solid #212121;
 }

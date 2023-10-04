@@ -34,6 +34,7 @@ Basic Feature
 
 Advanced Feature
 
+- Embedding javascript
 - Preview tree when hovering on group tabs
 - Backup skills (edit history)
 - Choose to have levels for a group or a skill

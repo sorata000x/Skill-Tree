@@ -55,17 +55,17 @@ export const SkillNodeButton = ({
       onMouseOver={(e) => handleMouseOver(e)}
       onMouseOut={(e) => setMouseOver(false)}
     >
+        <SkillProgress
+          id={skill.id}
+          level={skill.level}
+          maxLevel={skill.maxLevel}
+        />
         <NodeButton
           buttons={buttons}
           skill={skill}
           buttonRef={buttonRef}
           listeners={listeners}
           isDragOverlay={isDragOverlay}
-        />
-        <SkillProgress
-          id={skill.id}
-          level={skill.level}
-          maxLevel={skill.maxLevel}
         />
         {isMouseOver ? (
           <LevelChangeButtons

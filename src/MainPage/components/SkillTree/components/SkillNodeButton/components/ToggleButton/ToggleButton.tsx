@@ -58,9 +58,10 @@ export const ToggleButton = ({ skill }: Props) => {
     );
   };
 
-  return childrenCount ? (
+  return (
     <button
       className="toggle_button"
+      style={!childrenCount ? {display: "trasparent"} : {}}
       onClick={(e) => {toggleTree(); e.stopPropagation()}}
       onDoubleClick={(e) => e.stopPropagation()}
       onMouseOver={() => setMouseOver(true)}
@@ -70,5 +71,5 @@ export const ToggleButton = ({ skill }: Props) => {
     >
       {DotIcons()}
     </button>
-  ) : null;
+  )
 };

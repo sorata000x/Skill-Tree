@@ -56,7 +56,6 @@ export const NodeButton = ({
         isDragOverlay={isDragOverlay}
       />
       <button
-        className={isActive && !skill.maxLevel ? " active" : ""}
         ref={buttonRef}
         {...listeners}
       />
@@ -73,6 +72,7 @@ export const NodeButton = ({
         scale={skill.icon?.scale}
       />
       <div className="button_listener"
+        style={isActive ? {border: "3px solid rgb(83, 151, 227)"} : {}}
         onClick={(e) => handleClick(e)}
         onMouseOver={() => setMouseOver(true)}
         onMouseOut={() => setMouseOver(false)}

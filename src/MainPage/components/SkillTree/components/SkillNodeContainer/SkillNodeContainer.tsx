@@ -49,7 +49,7 @@ export const SkillNodeContainer = ({
     <div ref={setNodeRef} style={style}>
       <div 
         className="skill_node_container" 
-        style={skill.parent === "root" ? {transform: `scale(${activeGroup?.zoom})`} : {}}   // adjust tree size according to group zoom only for root so to not repeat scaling
+        
         >
         <SkillNodeButton
           buttons={buttons}

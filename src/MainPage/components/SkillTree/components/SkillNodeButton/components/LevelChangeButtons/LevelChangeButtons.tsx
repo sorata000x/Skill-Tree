@@ -49,7 +49,7 @@ export const LevelChangeButtons = ({
         onClick={(e) => increaseLevel(e)}
         onDoubleClick={(e) => e.stopPropagation()}
       >
-        <HiOutlinePlus className="icon" size={28} />
+        <HiOutlinePlus className="icon plus" size={28} />
       </button>
       <div className="divider" />
       <button
@@ -58,7 +58,7 @@ export const LevelChangeButtons = ({
         onClick={(e) => decreaseLevel(e)}
         onDoubleClick={(e) => e.stopPropagation()}
       >
-        <HiOutlineMinus className="icon" size={28} />
+        <HiOutlineMinus className="icon minus" size={28} />
       </button>
     </div>
   ) : null;

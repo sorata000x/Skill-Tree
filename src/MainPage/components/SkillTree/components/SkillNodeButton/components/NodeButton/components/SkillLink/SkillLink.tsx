@@ -65,8 +65,8 @@ export const SkillLink = ({ skill, buttons, isDragOverlay }: Props) => {
         className="skill_link"
         style={{
           width: length / (activeGroup?.zoom ? activeGroup?.zoom : 1),
-          left: "56px",
-          top: "60px",
+          left: "52px",
+          top: "54px",
           transform: `rotate(${angle}deg)`,
           transformOrigin: "top left",
         }}

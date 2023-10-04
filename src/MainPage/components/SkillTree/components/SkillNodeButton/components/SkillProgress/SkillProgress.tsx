@@ -18,7 +18,7 @@ export interface Props {
  * Show only if maxLevel > 0
  */
 export const SkillProgress = ({ id, level, maxLevel }: Props) => {
-  const [{ activeSkill }] = useStateValue();
+  const [{ activeSkill, theme }] = useStateValue();
 
   return maxLevel ? (
     <div
@@ -31,8 +31,8 @@ export const SkillProgress = ({ id, level, maxLevel }: Props) => {
         className="circular-progressbar"
         styles={buildStyles({
           strokeLinecap: "butt",
-          trailColor: maxLevel ? "#404040" : "transparent",
-          pathColor: "#446682",
+          trailColor: maxLevel ? (theme === 'light' ? "rgb(240, 240, 240)" : "#404040") : "transparent",
+          pathColor: theme === 'light' ? "#669ac4" : "#446682",
         })}
       >
         <RadialSeparators count={maxLevel <= 50 ? maxLevel : 50} />

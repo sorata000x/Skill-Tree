@@ -16,8 +16,8 @@ export const Separator = ({ turns }: Props) => {
     >
       <div
         style={{
-          background: "#212121",
-          width: "2.5px",
+          background: "#c6c6c6",
+          width: "2px",
           // This needs to be equal to props.strokeWidth
           height: `${10}%`,
         }}
