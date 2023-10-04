@@ -34,7 +34,7 @@ export const NodeIcon = ({
     }
   }, [scale, ref.current]);
 
-  return true ? (
+  return open ? (
     <div className="node_icon">
       <img
         ref={ref}
