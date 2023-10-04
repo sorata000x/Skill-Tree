@@ -52,17 +52,34 @@
   border: 3px solid rgb(130, 130, 130);
 }
 
-.node_button > button.active {
-  /* box-shadow: 0 0 5px 4px #669ac4; */
+.node_button > .button_listener.active {
   border: 3px solid rgb(83, 151, 227);
+}
+
+.node_button > .button_listener.active:hover {
+  border: 3px solid rgb(83, 151, 227);
+  animation: none;
 }
 
 /* Dark Mode */
 
 .dark .node_button > button {
-  background-color: #c6c6c6;
+  background-color: #212121;
+  border: 3px solid rgb(160, 160, 160);
 }
 
-.dark .node_button > button.active {
-  box-shadow: 0 0 5px 4px #446682;
+.dark .node_button > .button_listener:hover {
+  border: 3px solid rgb(200, 200, 200);
+  animation-name: node-btn-hover-in;
+  animation-duration: 0.2s;
+}
+
+.dark .node_button > .button_listener.active:hover {
+  border: 3px solid rgb(83, 151, 227);
+  animation: none;
+}
+
+@keyframes node-btn-hover-in {
+  from {border: 3px solid rgb(160, 160, 160);}
+  to {border: 3px solid rgb(200, 200, 200);}
 }

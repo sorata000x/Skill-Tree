@@ -16,3 +16,9 @@
   cursor: pointer;
   white-space: normal;
 }
+
+/* Dark Mode */
+
+.dark .node_title {
+  color: #c6c6c6;
+}

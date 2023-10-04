@@ -67,14 +67,12 @@ export const SkillNodeButton = ({
           listeners={listeners}
           isDragOverlay={isDragOverlay}
         />
-        {isMouseOver ? (
-          <LevelChangeButtons
-            level={skill.level}
-            maxLevel={skill.maxLevel}
-            increaseBy={skill.increaseBy}
-            setLevel={setLevel}
-          />
-        ) : null}
+        <LevelChangeButtons
+          level={skill.level}
+          maxLevel={skill.maxLevel}
+          increaseBy={skill.increaseBy}
+          setLevel={setLevel}
+        />
         <ToggleButton skill={skill} />
     </div>
   );

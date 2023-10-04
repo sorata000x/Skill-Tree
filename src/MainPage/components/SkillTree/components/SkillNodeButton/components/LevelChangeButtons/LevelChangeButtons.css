@@ -7,6 +7,11 @@
   grid-column: 2;
   transform: translateX(-55px);
   margin-top: 4px;
+  opacity: 0;
+}
+
+.level_change_buttons:hover {
+  opacity: 1;
 }
 
 .level_change_buttons > button {
@@ -28,10 +33,6 @@
 
 .level_change_buttons > button.bottom {
   border-radius: 0px 0px 30px 0px;
-}
-
-.level_change_buttons > button:hover {
-  /*background-color: rgba(128, 128, 128, 0.2);*/
 }
 
 .level_change_buttons > .divider {
@@ -64,6 +65,6 @@
   color: rgb(130, 130, 130);
 }
 
-.dark .level_change_buttons > button:hover {
-  background-color: #353535;
+.dark .level_change_buttons > button > .icon:hover {
+  color: rgb(190, 190, 190);
 }

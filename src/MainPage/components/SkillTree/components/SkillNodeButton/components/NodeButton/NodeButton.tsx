@@ -71,8 +71,8 @@ export const NodeButton = ({
         src={skill.icon?.url}
         scale={skill.icon?.scale}
       />
-      <div className="button_listener"
-        style={isActive ? {border: "3px solid rgb(83, 151, 227)"} : {}}
+      <div 
+        className={isActive ? "button_listener active" : "button_listener"}
         onClick={(e) => handleClick(e)}
         onMouseOver={() => setMouseOver(true)}
         onMouseOut={() => setMouseOver(false)}

@@ -34,11 +34,11 @@
 
 .hover-in {
   color: rgb(130, 130, 130);
-  animation-name: hover-in;
+  animation-name: hover-in-light;
   animation-duration: 0.1s;
 }
 
-@keyframes hover-in {
+@keyframes hover-in-light {
   from {color: rgb(80, 80, 80);}
   to {color: rgb(130, 130, 130);}
 }
@@ -46,5 +46,16 @@
 /* Dark Mode */
 
 .dark .toggle_button > .dot_icons > svg.default {
-  color: rgb(80, 80, 80);
+  color: rgb(100, 100, 100);
+}
+
+.dark .hover-in {
+  color: rgb(160, 160, 160);
+  animation-name: hover-in-dark;
+  animation-duration: 0.1s;
+}
+
+@keyframes hover-in-dark {
+  from {color: rgb(100, 100, 100);}
+  to {color: rgb(160, 160, 160);}
 }
