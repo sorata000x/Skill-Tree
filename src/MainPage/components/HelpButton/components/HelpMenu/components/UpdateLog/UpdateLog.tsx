@@ -18,6 +18,13 @@ export const UpdateLog = () => {
     <div className="overlay" onClick={(e) => close()}>
       <div className="update_log">
         <h1>Updates</h1> <br />
+        --- Oct 04 2023 --- <br />
+        <br />
+        <h2>Improvement</h2>
+        <strong>UI Improvement</strong>
+        - Improved UI for skill buttons <br />
+        <br />
+        <br />
         --- Sep 23 2023 --- <br />
         <br />
         <h2>Feature</h2>
