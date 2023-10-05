@@ -1,0 +1,1 @@
+export { TrashCan } from "./TrashCan";

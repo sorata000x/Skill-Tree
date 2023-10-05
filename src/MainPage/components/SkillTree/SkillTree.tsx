@@ -7,6 +7,7 @@ import {
   DndContext,
   DragOverlay,
   closestCorners,
+  rectIntersection,
   defaultDropAnimation,
   DragStartEvent,
   DragEndEvent,
@@ -15,7 +16,11 @@ import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import "./SkillTree.css";
 import { v4 as uuid } from "uuid";
 import { useStateValue } from "StateProvider";
-import { Instruction, SkillNodeLayer, SkillNodeContainer, SkillDragOverlay } from "./components";
+import { 
+  Instruction, 
+  SkillNodeContainer, 
+  SkillDragOverlay, 
+  TrashCan } from "./components";
 import { Skill, Buttons } from "types";
 
 export interface Props {
@@ -37,15 +42,10 @@ export const SkillTree = ({skills, buttons, viewOnly}: Props) => {
   const [rootSkill, setRootSkill]: [Skill | null, Function] = useState(null);
   
   useEffect(() => {
-    
-
-    console.log(`skills: ${JSON.stringify(skills)}`)
-    
     // Find root skill and set it
     for(const s of skills) {
       if(s.parent === "root") {
         setRootSkill(s);
-        console.log(`set root skill to: ${JSON.stringify(s)}`)
         return;
       }
     }
@@ -293,7 +293,7 @@ export const SkillTree = ({skills, buttons, viewOnly}: Props) => {
         >
           <DndContext
             sensors={sensors}
-            collisionDetection={closestCorners}
+            collisionDetection={rectIntersection}
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
           >
@@ -314,6 +314,7 @@ export const SkillTree = ({skills, buttons, viewOnly}: Props) => {
           </DndContext>
         </div>
       )}
+      <TrashCan />
     </div>
   );
 };

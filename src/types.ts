@@ -89,4 +89,5 @@ export interface Action {
   dragOverlay?: DragOverlay;
   theme?: string;
   treeOpen?: boolean;
+  isDraggingOver?: boolean;
 }

@@ -43,18 +43,11 @@ const getInitialState = (): Data => {
     : [];
   const theme: string = localStorage.getItem("theme") || "light";
   return {
+    ...emptyState,
     skills: skills,
-    activeSkill: null,
     buttons: buttons,
     groups: groups,
     activeGroup: groups.length ? groups[0] : null,
-    popUp: null,
-    user: null,
-    dragOverlay: {
-      skills: [],
-      buttons: {},
-      parentId: "root",
-    },
     theme: theme,
   };
 };

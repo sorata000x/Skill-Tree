@@ -18,13 +18,13 @@ export const SkillDragOverlay = () => {
 
   return (
     <DragOverlay
-      adjustScale={true}
       dropAnimation={dropAnimation}
       >
         <div
           style={{
             transformOrigin: 'top left',
-            transform: `scale(${activeGroup?.zoom})`}}   // adjust tree size according to group zoom only for root so to not repeat scaling
+            transform: `scale(${activeGroup?.zoom})`
+          }}   // adjust tree size according to group zoom only for root so to not repeat scaling
         >
         {dragOverlay.skills.length ? (
           <SkillNodeContainer
