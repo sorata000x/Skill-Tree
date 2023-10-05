@@ -57,7 +57,6 @@ export const NodeButton = ({
       />
       <button
         ref={buttonRef}
-        {...listeners}
       />
       <SkillPreview 
         open={isMouseOver} 

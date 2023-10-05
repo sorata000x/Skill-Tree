@@ -41,7 +41,6 @@ export interface PopUp {
     };
     editGroupName: Function;
   };
-
   group?: Group;
   editGroupName?: Function;
   top?: number;
