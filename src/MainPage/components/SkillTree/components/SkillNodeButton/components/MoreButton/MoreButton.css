@@ -1,0 +1,17 @@
+.skill_node_button > .more_button {
+  position: absolute;
+  width: 34px;
+  height: 32px;
+  border-radius: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(100px, 6px);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+.skill_node_button > .more_button:hover {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.06);
+}

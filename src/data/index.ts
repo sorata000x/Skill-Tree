@@ -15,6 +15,7 @@ export const emptyState: Data = {
     parentId: "root",
   },
   theme: "light",
+  sideBarOpen: true,
 };
 
 export const emptyGroup: Group = {

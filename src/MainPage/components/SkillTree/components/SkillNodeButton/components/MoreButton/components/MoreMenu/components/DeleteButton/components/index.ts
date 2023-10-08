@@ -1,0 +1,1 @@
+export { DeleteMenu } from "./DeleteMenu";

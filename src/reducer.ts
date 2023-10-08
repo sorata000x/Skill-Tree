@@ -56,6 +56,18 @@ export const initialState: Data = getInitialState();
 
 const reducer = (state: Data, action: Action): Data => {
   switch (action.type) {
+    // SIDE BAR
+    case "SET_SIDE_BAR_OPEN": {
+      console.debug("SET_SIDE_BAR_OPEN");
+      if (action.sideBarOpen === undefined) {
+        console.error("Operation SET_SIDE_BAR_OPEN requires {open} attribute");
+        return state;
+      }
+      return {
+        ...state,
+        sideBarOpen: action.sideBarOpen,
+      };
+    }
     // SKILLS
     case "SET_SKILLS": {
       console.debug("SET_SKILLS");
@@ -73,7 +85,6 @@ const reducer = (state: Data, action: Action): Data => {
         };
         state.buttons[newSkills[i].id] = createRef();
       }
-
       setUserData({
         ...state,
         skills: [...newSkills],
@@ -170,6 +181,28 @@ const reducer = (state: Data, action: Action): Data => {
         state.skills[activeIndex].parent = state.skills[overIndex].parent;
       }
       let newSkills = arrayMove(state.skills, activeIndex, overIndex);
+      setUserData({
+        ...state,
+        skills: newSkills,
+      });
+      return {
+        ...state,
+        skills: newSkills,
+      };
+    }
+    case "DELETE_TREE": {
+      console.debug("DELETE_TREE");
+      if (action.id === undefined) {
+        console.error("Operation DELETE_TREE requires {id} attribute");
+        return state;
+      }
+      let deletingIDs: (string | undefined)[] = [action.id];
+      let newSkills = state.skills;
+      while(deletingIDs.length) {
+        newSkills = newSkills.filter(skill => skill.id !== deletingIDs[0]);
+        let children = state.skills.filter(skill => skill.parent === deletingIDs[0]).map(skill => skill.id);
+        deletingIDs = [...deletingIDs.slice(1), ...children];
+      }
       setUserData({
         ...state,
         skills: newSkills,

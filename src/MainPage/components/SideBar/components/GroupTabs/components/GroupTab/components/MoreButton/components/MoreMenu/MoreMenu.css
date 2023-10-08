@@ -1,4 +1,4 @@
-.menu_overlay {
+.group_tab .menu_overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -7,7 +7,7 @@
   cursor: default;
 }
 
-.menu_overlay .more_menu {
+.group_tab .menu_overlay .more_menu {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@
   z-index: 11;
 }
 
-.menu_overlay .more_menu > button {
+.group_tab .menu_overlay .more_menu > button {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -34,21 +34,21 @@
   border-radius: 3px;
 }
 
-.menu_overlay .more_menu > button:hover {
+.group_tab .menu_overlay .more_menu > button:hover {
   background-color: rgb(240, 240, 240);
 }
 
 /* Dark Mode */
 
-.dark .menu_overlay .more_menu {
+.dark .group_tab .menu_overlay .more_menu {
   background-color: #393939;
   box-shadow: none;
 }
 
-.dark .menu_overlay .more_menu > button {
+.dark .group_tab .menu_overlay .more_menu > button {
   color: rgba(255, 255, 255, 0.87);
 }
 
-.dark .more_menu > button:hover {
+.dark .group_tab .more_menu > button:hover {
   background-color: #4c4c4c;
 }

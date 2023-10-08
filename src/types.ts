@@ -65,6 +65,7 @@ export interface Data {
   user: User | null;
   dragOverlay: DragOverlay | null;
   theme: string;
+  sideBarOpen: boolean,
 }
 
 export interface Links {
@@ -89,4 +90,5 @@ export interface Action {
   theme?: string;
   treeOpen?: boolean;
   isDraggingOver?: boolean;
+  sideBarOpen?: boolean;
 }

@@ -52,8 +52,6 @@ export const MainPage = () => {
     });
   };
 
-  
-
   return (
     <div className="main_page">
       <div className="container" onMouseDown={handleMouseDown}>

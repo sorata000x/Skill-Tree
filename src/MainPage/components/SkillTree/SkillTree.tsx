@@ -246,6 +246,15 @@ export const SkillTree = ({skills, buttons, viewOnly}: Props) => {
   const handleDragEnd = ({ active, over }: DragEndEvent) => {
     // Handle where to drop dragging node
     if (!active || !over || active.id === over.id || !dragOverlay) return;
+
+    if(over.id === "trash_can") {
+      dispatch({
+        type: "DELETE_SKILL",
+        id: active.id,
+      })
+      return;
+    }
+
     const draggingSkill = dragOverlay.skills[0];
     let draggingRef = dragOverlay.buttons[draggingSkill.id];
     let overRef = buttons[over.id.toString()];
@@ -295,6 +304,7 @@ export const SkillTree = ({skills, buttons, viewOnly}: Props) => {
             sensors={sensors}
             collisionDetection={rectIntersection}
             onDragStart={handleDragStart}
+            onDragOver={({ active, over }: DragEndEvent)=>{console.log(`over.id=${over?.id}`)}}
             onDragEnd={handleDragEnd}
           >
             <div 
@@ -310,11 +320,11 @@ export const SkillTree = ({skills, buttons, viewOnly}: Props) => {
                 /> : null
               }
             </div>
-              <SkillDragOverlay />
+            <SkillDragOverlay />
+            <TrashCan />
           </DndContext>
         </div>
       )}
-      <TrashCan />
     </div>
   );
 };

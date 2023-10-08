@@ -1,4 +1,4 @@
-.skill_tree > .trash_can {
+.skill_tree .trash_can {
   position: fixed;
   bottom: 0px;
   transform: translate(50px, -40px);

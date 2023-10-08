@@ -6,6 +6,7 @@ import {
   SkillProgress,
   LevelChangeButtons,
   ToggleButton,
+  MoreButton
 } from "./components";
 import { Buttons, Skill } from "types";
 import { useStateValue } from "StateProvider";
@@ -67,11 +68,9 @@ export const SkillNodeButton = ({
           listeners={listeners}
           isDragOverlay={isDragOverlay}
         />
-        <LevelChangeButtons
-          level={skill.level}
-          maxLevel={skill.maxLevel}
-          increaseBy={skill.increaseBy}
-          setLevel={setLevel}
+        <MoreButton 
+          open={isMouseOver}
+          skill={skill}
         />
         <ToggleButton skill={skill} />
     </div>
