@@ -19,8 +19,8 @@ import { useStateValue } from "StateProvider";
 import { 
   Instruction, 
   SkillNodeContainer, 
-  SkillDragOverlay, 
-  TrashCan } from "./components";
+  SkillDragOverlay
+} from "./components";
 import { Skill, Buttons } from "types";
 
 export interface Props {
@@ -321,7 +321,6 @@ export const SkillTree = ({skills, buttons, viewOnly}: Props) => {
               }
             </div>
             <SkillDragOverlay />
-            <TrashCan />
           </DndContext>
         </div>
       )}
