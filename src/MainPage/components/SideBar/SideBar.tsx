@@ -7,6 +7,7 @@ import {
   OpenSideBarButton,
   UserMenu,
   NewGroupButton,
+  CommunityTabs,
 } from "./components";
 import { useStateValue } from "StateProvider";
 
@@ -31,6 +32,7 @@ export const SideBar = () => {
         <CloseSideBarButton handleClick={() => setOpen(false)} />
       </div>
       <UserMenu open={userMenuOpen} close={() => setUserMenuOpen(false)} />
+      <CommunityTabs />
       <GroupTabs />
       <NewGroupButton groups={groups} />
     </div>
