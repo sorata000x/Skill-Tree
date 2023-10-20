@@ -28,7 +28,7 @@ import React, { createRef, useEffect, useState } from "react";
 import "./DraftEditor.css";
 import { TYPE, getToken } from "./tokenizer";
 import { ToolBar } from "./components";
-import { useStateValue } from "StateProvider";
+import { useUser, useMain } from "StateProvider";
 
 export interface Props {
   value: string | undefined;
@@ -56,7 +56,8 @@ export const DraftEditor = ({ value, style, readOnly, onChange }: Props) => {
   const ref: React.RefObject<HTMLDivElement> = createRef();
   const editorRef: React.RefObject<Editor> = createRef();
   const [openToolBar, setToolBarOpen]: [boolean, Function] = useState(false);
-  const [{activeSkill, theme}, ] = useStateValue();
+  const [{theme}, ] = useUser();
+  const [{activeSkill}, ] = useMain();
 
   // decorator strategy for text link
   const findLinkEntities = (
@@ -355,7 +356,10 @@ export const DraftEditor = ({ value, style, readOnly, onChange }: Props) => {
     // 1. Check if last block is empty
     const contentState = editorState.getCurrentContent();
     const lastBlock = contentState.getLastBlock();
-    if (lastBlock.getText().length === 0) return;
+    if (lastBlock.getText().length === 0) {
+      editorRef.current?.focus();
+      return;
+    };
     // 2. Create an empty block
     const newBlock = new ContentBlock({
       key: genKey(),

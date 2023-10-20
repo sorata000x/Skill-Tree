@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GroupTab } from "./components";
-import { useStateValue } from "StateProvider";
+import { useUser } from "StateProvider";
 import { Group } from "types";
 import "./GroupTabs.css";
 import {
@@ -25,7 +25,7 @@ import {
  * - GroupTab
  */
 export const GroupTabs = () => {
-  const [{ groups }, dispatch] = useStateValue();
+  const [{ groups }, dispatch] = useUser();
 
   /* Dnd-kit Sortable & DragOverlay */
 
@@ -46,7 +46,7 @@ export const GroupTabs = () => {
 
   const handleDragStart = ({ active }: DragStartEvent) => {
     // Set active group for drag overlay
-    let target = groups.find((group) => group.id === active.id.toString());
+    let target = groups.find((group: Group) => group.id === active.id.toString());
     if (target) setDraggingGroup(target);
   };
 

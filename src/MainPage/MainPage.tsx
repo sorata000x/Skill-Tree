@@ -1,9 +1,12 @@
 import "./MainPage.css";
-import React, { useEffect } from "react";
-import { useStateValue } from "StateProvider";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { SideBar, TopBar, SkillTree, SkillEdit, HelpButton } from "./components";
-import { Skill } from "types";
+import React from "react";
+import { useParams } from "react-router-dom";
+import { SideBar, Contents } from "./components";
+import { MainProvider, useMain } from "StateProvider";
+
+export interface Props {
+  page?: string,
+}
 
 /**
  * Main page of the skill trees including:
@@ -13,36 +16,9 @@ import { Skill } from "types";
  * - SkillEdit  | side window to edit skill                 (right, open by clicking skill node)
  * - popUp      | pop up window (UserAuthDialog, SupportPage, UpdateLog)
  */
-export const MainPage = () => {
-  const [{ skills, activeSkill, groups, activeGroup, popUp, user, buttons }, dispatch] =
-    useStateValue();
+export const MainPage = ({page}: Props) => {
+  const [{ popUp }, dispatch] = useMain();
   const pathParam = useParams().pathParam; // get current group from url parameter
-  const navigate = useNavigate();
-
-  // Get the search parameters
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  // Get a specific query parameter
-  const share = searchParams.get('share');
-
-  useEffect(() => {
-    // Set active group based on current URL or set to the first group if no path param
-    if (pathParam) {
-      dispatch({
-        type: "SET_ACTIVE_GROUP",
-        id: pathParam,
-      });
-    } else if (groups.length) {
-      dispatch({
-        type: "SET_ACTIVE_GROUP",
-        id: groups[0].id,
-      });
-      navigate(`/${groups[0].id}`);
-    } else {
-      navigate(`/`);
-    }
-    // need groups as dependency because it updates after page load
-  }, [groups]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     // Cancel active skill
@@ -52,23 +28,11 @@ export const MainPage = () => {
     });
   };
 
-  
-
   return (
     <div className="main_page">
       <div className="container" onMouseDown={handleMouseDown}>
         <SideBar />
-        <div className="layout_column">
-          <TopBar style={{width: activeSkill ? "calc(100% - 556px)" : "100%"}} />
-          <SkillTree 
-            skills={skills.filter(
-              (skill: Skill) => skill.group.id === activeGroup?.id
-            )}
-            buttons={buttons}
-          />
-        </div>
-        <HelpButton />
-        <SkillEdit open={!!activeSkill} />
+        <Contents type={pathParam} />
       </div>
       {popUp}
     </div>

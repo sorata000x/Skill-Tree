@@ -7,7 +7,7 @@ export interface Offset {
 
 // Get offsets of given element (for updateChildEdge).
 // Reference: How to Draw a Line Between Two divs with JavaScript? | https://thewebdev.info/2021/09/12/how-to-draw-a-line-between-two-divs-with-javascript/
-export const getOffset = (el: React.RefObject<any>, label?: string) => {
+export const getOffset = (el: React.RefObject<any>) => {
   const rect = el?.current?.getBoundingClientRect();
   if (!rect) return;
   return {

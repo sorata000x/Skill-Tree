@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import type { Group } from "types";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useStateValue } from "StateProvider";
+import { useMain } from "StateProvider";
 import { GroupNameInput, MoreButton } from "./components";
 import "./GroupTab.css";
 import { useSortable } from "@dnd-kit/sortable";
@@ -18,7 +18,7 @@ export interface Props {
  * - MoreButton | button to open MoreMenu
  */
 export const GroupTab = ({ group }: Props) => {
-  const [, dispatch] = useStateValue();
+  const [, dispatch] = useMain();
   const navigate = useNavigate();
   const urlParam = useParams().pathParam;
   const [editing, setEditing] = useState(false);
@@ -50,22 +50,20 @@ export const GroupTab = ({ group }: Props) => {
   };
 
   return (
-    <>
-      <button
-        className={"group_tab" + (urlParam === group.id ? " active" : "")}
-        onClick={(e) => handleClick(e)}
-        // Dnd-kit DragOverlay
-        ref={setNodeRef}
-        style={style}
-        {...listeners}
-      >
-        {!editing ? (
-          <div style={{width: "232px", overflow: "hidden"}}>{group.name}</div>
-        ) : (
-          <GroupNameInput group={group} setEditing={setEditing} />
-        )}
-        <MoreButton group={group} editGroupName={() => setEditing(true)} />
-      </button>
-    </>
+    <button
+      className={"group_tab" + (urlParam === group.id ? " active" : "")}
+      onClick={(e) => handleClick(e)}
+      // Dnd-kit DragOverlay
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
+    >
+      {!editing ? (
+        <div style={{width: "232px", overflow: "hidden"}}>{group.name}</div>
+      ) : (
+        <GroupNameInput group={group} setEditing={setEditing} />
+      )}
+      <MoreButton group={group} editGroupName={() => setEditing(true)} />
+    </button>
   );
 };

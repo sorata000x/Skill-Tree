@@ -1,7 +1,7 @@
 import React, { createRef } from "react";
 import { FiEdit } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { useStateValue } from "StateProvider";
+import { useUser } from "StateProvider";
 import "./MoreMenu.css";
 import { useNavigate } from "react-router-dom";
 import { Group } from "types";
@@ -27,7 +27,7 @@ export const MoreMenu = ({
   style,
   editGroupName,
 }: Props) => {
-  const [{ groups }, dispatch] = useStateValue();
+  const [{ groups }, dispatch] = useUser();
   const ref: React.RefObject<HTMLDivElement> = createRef();
   const navigate = useNavigate();
 

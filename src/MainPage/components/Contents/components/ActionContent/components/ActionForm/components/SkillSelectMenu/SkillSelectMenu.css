@@ -1,0 +1,8 @@
+.skill_select_menu {
+  position: absolute;
+  width: 400px;
+  height: 200px;
+  border-radius: 5px;
+  background-color: rgba(45, 45, 45);
+  box-shadow: 0 0 5px black;
+}

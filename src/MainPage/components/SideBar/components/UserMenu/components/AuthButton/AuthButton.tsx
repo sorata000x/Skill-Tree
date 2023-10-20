@@ -1,9 +1,9 @@
-import { useStateValue } from "StateProvider";
+import { useUser } from "StateProvider";
 import "./AuthButton.css";
 import React from "react";
 import { BiLogIn, BiLogOut } from "react-icons/bi";
 import { UserAuthDialog } from "./components";
-import { auth } from "firebase.ts";
+import { auth } from "_firebase";
 import { useNavigate } from "react-router-dom";
 
 export interface Props {
@@ -14,7 +14,7 @@ export interface Props {
  * Authentication button (login / logout)
  */
 export const AuthButton = ({ onClick }: Props) => {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useUser();
   const navigate = useNavigate();
 
   const handleClick = (e: React.MouseEvent) => {

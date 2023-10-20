@@ -8,8 +8,9 @@ import {
   UserMenu,
   NewGroupButton,
   CommunityTabs,
+  ActionButton,
 } from "./components";
-import { useStateValue } from "StateProvider";
+import { useUser } from "StateProvider";
 
 /**
  * Side bar on the left side of the page contains utilities including:
@@ -21,7 +22,7 @@ import { useStateValue } from "StateProvider";
  * - NewGroupButton     | add a new group tab        (bottom)
  */
 export const SideBar = () => {
-  const [{ groups }] = useStateValue();
+  const [{ groups }] = useUser();
   const [open, setOpen] = useState(true); // control itself to open or close
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
@@ -33,6 +34,7 @@ export const SideBar = () => {
       </div>
       <UserMenu open={userMenuOpen} close={() => setUserMenuOpen(false)} />
       <CommunityTabs />
+      <ActionButton />
       <GroupTabs />
       <NewGroupButton groups={groups} />
     </div>

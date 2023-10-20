@@ -1,4 +1,4 @@
-import { useStateValue } from "StateProvider";
+import { useUser } from "StateProvider";
 import "./ThemeButton.css";
 import React from "react";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
@@ -11,7 +11,7 @@ export interface Props {
  * Theme control button (light / dark)
  */
 export const ThemeButton = ({ onClick }: Props) => {
-  const [{ theme }, dispatch] = useStateValue();
+  const [{ theme }, dispatch] = useUser();
 
   // Switch theme to light (default) or dark mode
   const handleClick = (e: React.MouseEvent) => {

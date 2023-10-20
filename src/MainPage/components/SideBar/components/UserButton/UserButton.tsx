@@ -1,6 +1,6 @@
 import React from "react";
 import "./UserButton.css";
-import { useStateValue } from "StateProvider";
+import { useUser } from "StateProvider";
 
 export interface Props {
   handleClick: (e: React.MouseEvent) => void;
@@ -11,7 +11,7 @@ export interface Props {
  * Note: Consider changing displaying user name instead of email address
  */
 export const UserButton = ({ handleClick }: Props) => {
-  const [{ user }] = useStateValue();
+  const [{ user }] = useUser();
 
   return (
     <button className="user_button" onClick={handleClick}>
