@@ -1,10 +1,11 @@
 import "./ActionContent.css";
 import React from 'react';
 import { HiOutlinePlus } from "react-icons/hi";
-import { ActionButton, ActionForm } from "./components";
-import { useMain } from "StateProvider";
+import { ActionTab, ActionForm, AddActionButton } from "./components";
+import { useMain, useUser } from "StateProvider";
 
 export const ActionContent = () => {
+  const [{actions}, ] = useUser();
   const [{activeAction}, ] = useMain();
 
   return (
@@ -14,11 +15,12 @@ export const ActionContent = () => {
       </div>
       <div className="action_group">
         Actions
-        <ActionButton title="Action 1" />
-        <button className="action_button">
-          <HiOutlinePlus className="icon" size={14} />
-          New Group
-        </button>
+        {actions.map(action => <ActionTab 
+                                id={action.id} 
+                                title={action.title}
+                                active={activeAction?.id === action.id}
+                                />)}
+        <AddActionButton />
       </div>
       <div className="action_group">
         Log

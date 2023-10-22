@@ -420,6 +420,23 @@ const reducer = (state: StateData, action: StateAction): StateData => {
       };
     }
     // ACTIONS
+    case "ADD_ACTION": {
+      console.debug("ADD_ACTION");
+      let newAction: Action = {
+        id: action.id ? action.id : uuid(),
+        title: action.name ? action.name : "Untitled",
+        description: "",
+        actionSkills: [],
+      }
+      setUserData({
+        ...state,
+        actions: [...state.actions, newAction],
+      });
+      return {
+        ...state,
+        actions: [...state.actions, newAction],
+      };
+    }
     case "ADD_ACTION_SKILL": {
       console.debug("ADD_ACTION_SKILL");
       if (action.id === undefined || action.skill === undefined) {
@@ -449,8 +466,10 @@ const reducer = (state: StateData, action: StateAction): StateData => {
         actions: state.actions,
       };
     }
-    default:
+    default: {
+      console.debug(`Unknown action type: ${action.type}`);
       return state;
+    }
   }
 };
 

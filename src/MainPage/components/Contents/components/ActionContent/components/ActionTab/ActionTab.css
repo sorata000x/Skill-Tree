@@ -1,0 +1,42 @@
+.action_tab {
+  width: 100%;
+  height: 45px;
+  padding-left: 9px;
+  flex-shrink: 0;
+  text-align: left;
+  border: none;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  background-color: rgb(230, 230, 230);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.action_tab:hover {
+  background-color: rgb(220, 220, 220);
+}
+
+.action_tab.active {
+  background-color: rgb(220, 220, 220);
+}
+
+/* Dark Mode */
+
+.dark .action_tab {
+  background-color: rgba(45, 45, 45);
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.dark .action_tab:hover {
+  background-color: rgb(55, 55, 55);
+}
+
+.dark .action_tab.active {
+  background-color: #252525;
+}
+
+.dark .action_tab.active:hover {
+  background-color: #252525;
+}

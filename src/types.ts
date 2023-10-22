@@ -42,6 +42,7 @@ export interface ActionSkill {
 
 export interface Action {
   id: string;
+  title: string;
   description: string;
   actionSkills: Array<ActionSkill>;
 }
