@@ -48,7 +48,7 @@ const reducer = (state: StateData, action: StateAction): StateData => {
     case "SET_ACTIVE_GROUP": {
       console.debug("SET_ACTIVE_GROUP");
       if (action.id === undefined || action.groups === undefined) {
-        console.error("Operation SET_ACTIVE_GROUP requires {id, group} attribute");
+        console.error("Operation SET_ACTIVE_GROUP requires {id, groups} attribute");
         return state;
       }
       const index = action.groups.findIndex((group) => group.id === action.id);
@@ -90,6 +90,7 @@ const reducer = (state: StateData, action: StateAction): StateData => {
       };
     }
     default:
+      console.log(`Unknown action type: ${action.type}`)
       return state;
   }
 };

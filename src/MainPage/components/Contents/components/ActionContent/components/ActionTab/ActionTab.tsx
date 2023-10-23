@@ -26,6 +26,7 @@ export const ActionTab = ({id, title, active}: Props) => {
       onClick={(e) => handleClick(e)}
     >
         <div style={{width: "232px", overflow: "hidden"}}>{title}</div>
+        <button> Complete </button>
     </button>
   )
 }

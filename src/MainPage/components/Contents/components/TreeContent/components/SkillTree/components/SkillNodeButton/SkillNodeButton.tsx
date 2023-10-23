@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createRef, useEffect, useState } from "react";
 import "./SkillNodeButton.css";
 import "react-circular-progressbar/dist/styles.css";
 import {
@@ -34,6 +34,10 @@ export const SkillNodeButton = ({
 }: Props) => {
   const [isMouseOver, setMouseOver] = useState(false);
   const [, dispatch] = useUser();
+
+  useEffect(() => {
+    if(!(skill.id in buttons)) buttons[skill.id] = createRef();
+  }, [skill])
 
   // Set the level of the skill for this button.
   const setLevel = (level: number) => {

@@ -57,7 +57,6 @@ export const DraftEditor = ({ value, style, readOnly, onChange }: Props) => {
   const editorRef: React.RefObject<Editor> = createRef();
   const [openToolBar, setToolBarOpen]: [boolean, Function] = useState(false);
   const [{theme}, ] = useUser();
-  const [{activeSkill}, ] = useMain();
 
   // decorator strategy for text link
   const findLinkEntities = (
@@ -106,19 +105,6 @@ export const DraftEditor = ({ value, style, readOnly, onChange }: Props) => {
 
   // Read data as raw value, convert from text if not JSON string, create empty if no value
   const [editorState, setEditorState] = useState(EditorState.createEmpty(decorator));
-
-  useEffect(() => {
-    setEditorState(
-      value
-      ? EditorState.createWithContent(
-          isJson(value)
-            ? convertFromRaw(JSON.parse(value))
-            : ContentState.createFromText(value),
-          decorator
-        )
-      : EditorState.createEmpty(decorator)
-    )
-  }, [activeSkill])
 
   const styleMap = {
     // Set selecting text background color to sustain selection when inputting link

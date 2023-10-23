@@ -1,6 +1,6 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
-import { MainProvider, useUser } from "StateProvider";
+import React, { createRef, useEffect, useState } from "react";
+import { MainProvider, useMain, useTree, useUser } from "StateProvider";
 import {
   BrowserRouter as Router,
   Route,
@@ -56,11 +56,10 @@ function App() {
       // @ts-ignore
       let userDoc = await getDoc(doc(db, "users", user?.uid));
       if (userDoc.data()) {
+        const skills = JSON.parse(userDoc.data()?.skills ? userDoc.data()?.skills : "[]")
         dispatch({
           type: "SET_SKILLS",
-          skills: JSON.parse(
-            userDoc.data()?.skills ? userDoc.data()?.skills : "[]"
-          ),
+          skills: skills,
         });
         dispatch({
           type: "SET_GROUPS",

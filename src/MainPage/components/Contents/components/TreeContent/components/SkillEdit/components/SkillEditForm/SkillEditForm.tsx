@@ -141,6 +141,7 @@ export const SkillEditForm = () => {
       {user && <IconInputGroup setIcon={(v) => handleChange("icon", v)} />}
       <hr className="solid" />
       <DraftEditor
+        key={activeSkill?.description}
         style={{ width: "90%", height: "400px" }}
         value={activeSkill?.description}
         onChange={(v) => handleChange("description", v)}

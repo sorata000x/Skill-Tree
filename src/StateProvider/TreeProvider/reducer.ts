@@ -9,6 +9,7 @@ export interface StateData {
 
 export interface StateAction {
   type: string;
+  buttons: Buttons;
   dragOverlay: DragOverlay | null;
 }
 
@@ -24,7 +25,7 @@ export const initialState: StateData = getInitialState();
 
 const reducer = (state: StateData, action: StateAction): StateData => {
   switch (action.type) {
-    //  DRAG_OVERLAY
+    // DRAG_OVERLAY
     case "SET_DRAG_OVERLAY": {
       console.debug("SET_DRAG_OVERLAY");
       if (action.dragOverlay === undefined) {

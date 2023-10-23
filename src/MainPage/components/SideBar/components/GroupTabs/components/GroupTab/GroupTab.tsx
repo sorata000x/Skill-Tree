@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import type { Group } from "types";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useMain } from "StateProvider";
+import { useMain, useUser } from "StateProvider";
 import { GroupNameInput, MoreButton } from "./components";
 import "./GroupTab.css";
 import { useSortable } from "@dnd-kit/sortable";
@@ -19,6 +19,7 @@ export interface Props {
  */
 export const GroupTab = ({ group }: Props) => {
   const [, dispatch] = useMain();
+  const [{groups}, ] = useUser();
   const navigate = useNavigate();
   const urlParam = useParams().pathParam;
   const [editing, setEditing] = useState(false);
@@ -28,6 +29,7 @@ export const GroupTab = ({ group }: Props) => {
     dispatch({
       type: "SET_ACTIVE_GROUP",
       id: group.id,
+      groups: groups,
     });
     navigate(`/${group.id}`);
   };

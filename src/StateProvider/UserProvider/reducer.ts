@@ -30,6 +30,7 @@ export interface StateAction {
   over?: Skill;
   treeOpen?: boolean;
   groups?: Array<Group>;
+  action: Action;
 }
 
 // Send current data to local storage / firebase
@@ -420,6 +421,29 @@ const reducer = (state: StateData, action: StateAction): StateData => {
       };
     }
     // ACTIONS
+    case "SET_ACTION": {
+      console.debug("SET_ACTION");
+      if (action.action === undefined) {
+        console.error("Operation SET_ACTION requires {action} attributes");
+        return state;
+      }
+      // Set an existing skill
+      let newActions = [...state.actions];
+      let index = newActions.findIndex((target) => target.id === action.action.id);
+      if(index < 0) {
+        console.error("Can't find action")
+        return state;
+      }
+      newActions[index] = action.action;
+      setUserData({
+        ...state,
+        actions: [...newActions],
+      });
+      return {
+        ...state,
+        actions: [...newActions],
+      };
+    }
     case "ADD_ACTION": {
       console.debug("ADD_ACTION");
       let newAction: Action = {
@@ -445,7 +469,8 @@ const reducer = (state: StateData, action: StateAction): StateData => {
         );
         return state;
       }
-      const target = state.actions.find(a => a.id === action.id);
+      const index = state.actions.findIndex(a => a.id === action.id)
+      const target = JSON.parse(JSON.stringify(state.actions[index]));
       if (!target) {
         console.error(
           "Skill action id not found"
@@ -456,14 +481,16 @@ const reducer = (state: StateData, action: StateAction): StateData => {
         skill: action.skill,
         levelChange: '0',
       }
-      target.actionSkills = [...target?.actionSkills, newActionSkill]
+      target.actionSkills = [...target?.actionSkills, newActionSkill];
+      let newActions = [...state.actions];
+      newActions[index] = target;
       setUserData({
         ...state,
-        actions: state.actions,
+        actions: newActions,
       });
       return {
         ...state,
-        actions: state.actions,
+        actions: newActions,
       };
     }
     default: {

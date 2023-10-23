@@ -163,11 +163,14 @@ export const SkillTree = ({skills, buttons, viewOnly}: Props) => {
   // Add skill to a parent
   const addSkill = (parentID: string) => {
     if (!group) return;
+    const sid = uuid();
     dispatchUser({
       type: "ADD_SKILL",
+      id: sid,
       parentID: parentID,
       group: group,
     });
+    buttons[sid] = createRef();
   };
 
   // Find the nearest (positioned) parent id of a skill
