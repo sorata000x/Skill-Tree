@@ -16,8 +16,7 @@ export const ActionContent = () => {
       <div className="action_group">
         Actions
         {actions.map(action => <ActionTab 
-                                id={action.id} 
-                                title={action.title}
+                                action={action}
                                 active={activeAction?.id === action.id}
                                 />)}
         <AddActionButton />
