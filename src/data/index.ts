@@ -35,3 +35,4 @@ export const emptySkill: Skill = {
   group: emptyGroup,
   treeOpen: true,
 };
+

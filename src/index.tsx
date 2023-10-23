@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { StateProvider } from "./StateProvider";
+import { UserProvider } from "StateProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 root.render(
   <React.StrictMode>
-    <StateProvider>
+    <UserProvider>
       <App />
-    </StateProvider>
+    </UserProvider>
   </React.StrictMode>
 );
 

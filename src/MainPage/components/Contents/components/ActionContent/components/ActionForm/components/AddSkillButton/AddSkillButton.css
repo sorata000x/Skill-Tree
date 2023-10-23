@@ -1,0 +1,17 @@
+
+.level {
+  background-color: gray; 
+  border-radius: 3px 3px 5px 5px;
+  display: flex;
+  justify-content: center;
+  height: 20px;
+  align-items: center;
+  border-top: 2px solid #2d2d2d;
+  width: 70px;
+}
+
+.level > input {
+  width: 70px;
+  height: 20px;
+  background-color: transparent;
+}

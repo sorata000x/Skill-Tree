@@ -1,16 +1,14 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
-import { useStateValue } from "./StateProvider";
+import React, { createRef, useEffect, useState } from "react";
+import { MainProvider, useMain, useTree, useUser } from "StateProvider";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
-  useParams,
 } from "react-router-dom";
-import { db, auth } from "./firebase.ts";
+import { db, auth } from "_firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { MainPage } from "MainPage";
-import { ViewOnlyTreePage } from "ViewOnlyTreePage/ViewOnlyTreePage.tsx";
 
 /**
  * Main functionalities
@@ -19,7 +17,7 @@ import { ViewOnlyTreePage } from "ViewOnlyTreePage/ViewOnlyTreePage.tsx";
  * - Set user data
  */
 function App() {
-  const [{ user, theme }, dispatch] = useStateValue();
+  const [{ user, theme }, dispatch] = useUser();
   // Render after data loaded
   // Reference: https://stackoverflow.com/questions/51556988/react-render-component-asynchronously-after-data-is-fetched
   const [isLoading, setLoading] = useState(true);
@@ -58,11 +56,10 @@ function App() {
       // @ts-ignore
       let userDoc = await getDoc(doc(db, "users", user?.uid));
       if (userDoc.data()) {
+        const skills = JSON.parse(userDoc.data()?.skills ? userDoc.data()?.skills : "[]")
         dispatch({
           type: "SET_SKILLS",
-          skills: JSON.parse(
-            userDoc.data()?.skills ? userDoc.data()?.skills : "[]"
-          ),
+          skills: skills,
         });
         dispatch({
           type: "SET_GROUPS",
@@ -94,9 +91,15 @@ function App() {
     <div className={`App ${theme}`}>
       <Router>
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/share" element={<ViewOnlyTreePage />} />
-          <Route path={`/:pathParam?`} element={<MainPage />} />
+          <Route path="/" element={ 
+            <MainProvider>
+              <MainPage />
+            </MainProvider>
+            } />
+          <Route path={`/:pathParam?`} element={
+            <MainProvider>
+              <MainPage />
+            </MainProvider>} />
         </Routes>
       </Router>
     </div>

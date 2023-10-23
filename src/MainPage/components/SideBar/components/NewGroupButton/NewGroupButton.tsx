@@ -1,6 +1,6 @@
 import React from "react";
 import type { Group } from "types";
-import { useStateValue } from "StateProvider";
+import { useUser, useMain } from "StateProvider";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { HiOutlinePlus } from "react-icons/hi";
@@ -14,7 +14,8 @@ export interface Props {
  * Button to create a new group tab
  */
 export const NewGroupButton = ({ groups }: Props) => {
-  const [, dispatch] = useStateValue();
+  const [, dispatchUser] = useUser();
+  const [, dispatchMain] = useMain();
   const navigate = useNavigate();
 
   const addNewGroup = () => {
@@ -23,11 +24,11 @@ export const NewGroupButton = ({ groups }: Props) => {
       name: `Group ${groups.length + 1}`,
       zoom: 1,
     };
-    dispatch({
+    dispatchUser({
       type: "ADD_NEW_GROUP",
       group: newGroup,
     });
-    dispatch({
+    dispatchMain({
       type: "SET_ACTIVE_GROUP",
       id: newGroup.id,
     });

@@ -25,6 +25,49 @@
   width: 100%;
 }
 
+.layout_row {
+  display: flex;
+  min-width: 0;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+}
+
+.action_group {
+  min-width: 320px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+  gap: 3px;
+}
+
+.action_group > .action_button {
+  width: 100%;
+  height: 50px;
+  border: none;
+  background-color: rgba(45, 45, 45);
+  color: white;
+  text-align: start;
+  padding-left: 20px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.action_group > .action_button:hover {
+  background-color: rgba(55, 55, 55);
+}
+
+.action_preview {
+  background-color: rgba(45, 45, 45);
+  border: none;
+  width: 100%;
+  height: calc(100% - 22px);
+  box-sizing: border-box;
+  margin: 22px 8px 0 0;
+}
+
 /* Dark Mode */
 
 .dark .main_page {

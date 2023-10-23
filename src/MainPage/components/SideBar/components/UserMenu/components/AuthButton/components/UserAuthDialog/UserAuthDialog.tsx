@@ -4,17 +4,17 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "firebase.ts";
+import { auth } from "_firebase";
 import { useNavigate } from "react-router-dom";
 import { AuthFormContext } from "./components";
-import { useStateValue } from "StateProvider";
+import { useMain } from "StateProvider";
 
 /**
  * User authentication (login / sign up) dialog window
  * - AuthFormContext | inputs and subtext components
  */
 export const UserAuthDialog = () => {
-  const [{}, dispatch] = useStateValue();
+  const [{}, dispatch] = useMain();
   const [type, setType] = useState("login");
   const navigate = useNavigate();
 

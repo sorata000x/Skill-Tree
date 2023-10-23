@@ -1,5 +1,5 @@
 import React from "react";
-import { useStateValue } from "StateProvider";
+import { useUser } from "StateProvider";
 import { Group } from "types";
 import "./GroupNameInput.css";
 
@@ -12,7 +12,7 @@ export interface Props {
  * Group name input field for editing group name
  */
 export const GroupNameInput = ({ group, setEditing }: Props) => {
-  const [, dispatch] = useStateValue();
+  const [, dispatch] = useUser();
 
   // Set group name of given id
   const setGroupName = (id: string, name: string) => {
