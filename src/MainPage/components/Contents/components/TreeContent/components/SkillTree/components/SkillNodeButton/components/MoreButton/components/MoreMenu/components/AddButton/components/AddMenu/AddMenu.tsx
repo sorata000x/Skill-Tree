@@ -1,14 +1,14 @@
 import React from "react";
 import "./AddMenu.css";
 import { Skill } from "types";
-import { useStateValue } from "StateProvider";
+import { useUser } from "StateProvider";
 
 export interface Props {
   skill: Skill,
 }
 
 export const AddMenu = ({skill}: Props) => {
-  const [{skills}, dispatch] = useStateValue();
+  const [{skills}, dispatch] = useUser();
 
   const addSkill = (pos: string) => {
     let parentID;

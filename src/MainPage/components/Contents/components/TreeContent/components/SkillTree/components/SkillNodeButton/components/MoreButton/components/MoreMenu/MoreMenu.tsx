@@ -1,7 +1,7 @@
 import React, { createRef, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { BsTrash3 } from "react-icons/bs";
-import { useStateValue } from "StateProvider";
+import { useMain } from "StateProvider";
 import "./MoreMenu.css";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { AddButton, DeleteButton } from "./components";
@@ -22,7 +22,7 @@ export const MoreMenu = ({
   style,
   skill,
 }: Props) => {
-  const [{}, dispatch] = useStateValue();
+  const [{}, dispatch] = useMain();
 
   const close = () => {
     dispatch({

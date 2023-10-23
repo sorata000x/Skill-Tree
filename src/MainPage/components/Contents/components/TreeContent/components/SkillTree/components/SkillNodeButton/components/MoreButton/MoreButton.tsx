@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./MoreButton.css";
 import { FiMoreVertical, FiMoreHorizontal } from "react-icons/fi";
 import { MoreMenu } from "./components";
-import { useStateValue } from "StateProvider";
+import { useMain } from "StateProvider";
 import { Skill } from "types";
 
 export interface Props {
@@ -12,7 +12,7 @@ export interface Props {
 
 export const MoreButton = ({open, skill}: Props) => {
   const [moreMenuOpen, setMoreMenuOpen] = useState(false);
-  const [{popUp, activeSkill}, dispatch] = useStateValue();
+  const [{popUp, activeSkill}, dispatch] = useMain();
 
   useEffect(() => {
     if(!popUp) {

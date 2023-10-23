@@ -10,7 +10,7 @@ import {
   CommunityTabs,
   ActionButton,
 } from "./components";
-import { useUser } from "StateProvider";
+import { useMain, useUser } from "StateProvider";
 
 /**
  * Side bar on the left side of the page contains utilities including:
@@ -23,12 +23,13 @@ import { useUser } from "StateProvider";
  */
 export const SideBar = () => {
   const [{ groups }] = useUser();
+  const [{}, dispatchMain] = useMain();
   const [open, setOpen] = useState(true); // control itself to open or close
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   const toggleOpen = (open: boolean) => {
     setOpen(open);
-    dispatch({
+    dispatchMain({
       type: "SET_SIDE_BAR_OPEN",
       sideBarOpen: open,
     })

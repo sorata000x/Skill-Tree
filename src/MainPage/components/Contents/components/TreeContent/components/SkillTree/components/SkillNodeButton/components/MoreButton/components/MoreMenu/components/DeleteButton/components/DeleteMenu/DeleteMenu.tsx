@@ -1,14 +1,14 @@
 import React from "react";
 import "./DeleteMenu.css";
 import { Skill } from "types";
-import { useStateValue } from "StateProvider";
+import { useUser } from "StateProvider";
 
 export interface Props {
   skill: Skill,
 }
 
 export const DeleteMenu = ({skill}: Props) => {
-  const [{}, dispatch] = useStateValue();
+  const [{}, dispatch] = useUser();
 
   return (
     <div
