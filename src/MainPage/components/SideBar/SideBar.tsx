@@ -26,11 +26,19 @@ export const SideBar = () => {
   const [open, setOpen] = useState(true); // control itself to open or close
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
+  const toggleOpen = (open: boolean) => {
+    setOpen(open);
+    dispatch({
+      type: "SET_SIDE_BAR_OPEN",
+      sideBarOpen: open,
+    })
+  }
+
   return open ? (
     <div className="side_bar">
       <div className="button_group_top">
         <UserButton handleClick={() => setUserMenuOpen(true)} />
-        <CloseSideBarButton handleClick={() => setOpen(false)} />
+        <CloseSideBarButton handleClick={() => toggleOpen(false)} />
       </div>
       <UserMenu open={userMenuOpen} close={() => setUserMenuOpen(false)} />
       <CommunityTabs />
@@ -39,6 +47,6 @@ export const SideBar = () => {
       <NewGroupButton groups={groups} />
     </div>
   ) : (
-    <OpenSideBarButton handleClick={() => setOpen(true)} />
+    <OpenSideBarButton handleClick={() => toggleOpen(true)} />
   );
 };

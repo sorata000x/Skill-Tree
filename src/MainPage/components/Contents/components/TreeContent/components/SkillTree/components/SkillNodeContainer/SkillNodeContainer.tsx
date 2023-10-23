@@ -46,13 +46,12 @@ export const SkillNodeContainer = ({
     <div ref={setNodeRef} style={style}>
       <div 
         className="skill_node_container" 
-        
         >
         <SkillNodeButton
           buttons={buttons}
           skill={skill}
           buttonRef={buttons[skill.id]}
-          listeners={listeners}
+          listeners={skill.parent !== "root" ? listeners : null}
           isDragOverlay={isDragOverlay}
         />
         {skill.treeOpen ? (

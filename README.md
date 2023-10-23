@@ -4,6 +4,13 @@ This project is inspired by skill tree of various video game, as well as tree da
 My aim is to combine these concepts to help visualizing data in a concise manner and organizing them easily.
 Excellent tool to track the progress towards your goal.
 
+Help people figure out what they want to do in the future through other's experiences.
+Finding out an unique path to solve a problem that no one has ever solved before.
+Help you decide what to learn / do next.
+
+My mission is to decrease the friction of people towards accomplish their goals.
+Whether it is solving a problem or become the best version of yourself.
+
 ## What Do I Use Skill Tree For?
 
 - Very nice way to document what I have learned and plan out what I need to learn

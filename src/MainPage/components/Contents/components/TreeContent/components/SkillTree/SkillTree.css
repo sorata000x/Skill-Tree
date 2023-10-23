@@ -4,6 +4,7 @@
   overflow: scroll;
   grid-row: 1;
   grid-column: 1;
+  display: flex;
 }
 
 .skill_tree > .container {
