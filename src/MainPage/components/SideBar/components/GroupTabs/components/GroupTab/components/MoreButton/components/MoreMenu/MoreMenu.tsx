@@ -1,14 +1,12 @@
 import React, { createRef } from "react";
 import { FiEdit } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { useUser } from "StateProvider";
+import { useMain, useUser } from "StateProvider";
 import "./MoreMenu.css";
 import { useNavigate } from "react-router-dom";
 import { Group } from "types";
 
 export interface Props {
-  open: boolean;
-  close: Function;
   group: Group;
   style: {
     top: number;
@@ -21,20 +19,25 @@ export interface Props {
  * Menu that contains buttons to operate on group tab
  */
 export const MoreMenu = ({
-  open,
-  close,
   group,
   style,
   editGroupName,
 }: Props) => {
-  const [{ groups }, dispatch] = useUser();
+  const [{ groups }, dispatchUser] = useUser();
+  const [{}, dispatchMain] = useMain();
   const ref: React.RefObject<HTMLDivElement> = createRef();
   const navigate = useNavigate();
+
+  const close = () => {
+    dispatchMain({
+      type: "CLOSE_POP_UP"
+    }) 
+  }
 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
     // delete group
-    dispatch({
+    dispatchUser({
       type: "DELETE_GROUP",
       id: group.id,
     });
@@ -51,8 +54,8 @@ export const MoreMenu = ({
     close();
   };
 
-  return open ? (
-    <div className="menu_overlay" onClick={(e) => close()}>
+  return (
+    <div className="overlay" onClick={(e) => close()}>
       <div
         ref={ref}
         style={style}
@@ -69,5 +72,5 @@ export const MoreMenu = ({
         </button>
       </div>
     </div>
-  ) : null;
+  )
 };

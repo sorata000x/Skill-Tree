@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { GroupTab } from "./components";
 import { useUser } from "StateProvider";
 import { Group } from "types";
-import "./GroupTabs.css";
 import {
   DndContext,
   closestCenter,
@@ -62,7 +61,7 @@ export const GroupTabs = () => {
   };
 
   return (
-    <div className="group_tabs">
+    <div className="d-flex flex-column h-100 overflow-scroll">
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}

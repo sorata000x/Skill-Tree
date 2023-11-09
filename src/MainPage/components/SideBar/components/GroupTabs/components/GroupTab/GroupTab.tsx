@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useMain, useUser } from "StateProvider";
 import { GroupNameInput, MoreButton } from "./components";
-import "./GroupTab.css";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
@@ -53,7 +52,7 @@ export const GroupTab = ({ group }: Props) => {
 
   return (
     <button
-      className={"group_tab" + (urlParam === group.id ? " active" : "")}
+      className={"tab" + (urlParam === group.id ? " active" : "")}
       onClick={(e) => handleClick(e)}
       // Dnd-kit DragOverlay
       ref={setNodeRef}

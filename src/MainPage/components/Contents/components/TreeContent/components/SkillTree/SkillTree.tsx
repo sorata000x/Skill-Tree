@@ -10,7 +10,6 @@ import {
   DragEndEvent,
 } from "@dnd-kit/core";
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
-import "./SkillTree.css";
 import { v4 as uuid } from "uuid";
 import { Instruction, SkillNodeContainer, SkillDragOverlay } from "./components";
 import { Skill, Buttons } from "types";
@@ -36,15 +35,10 @@ export const SkillTree = ({skills, buttons, viewOnly}: Props) => {
   const [rootSkill, setRootSkill]: [Skill | null, Function] = useState(null);
   
   useEffect(() => {
-    
-
-    console.log(`skills: ${JSON.stringify(skills)}`)
-    
     // Find root skill and set it
     for(const s of skills) {
       if(s.parent === "root") {
         setRootSkill(s);
-        console.log(`set root skill to: ${JSON.stringify(s)}`)
         return;
       }
     }
@@ -284,25 +278,27 @@ export const SkillTree = ({skills, buttons, viewOnly}: Props) => {
   };
 
   return (
-    <div className="skill_tree" onDoubleClick={handleDoubleClick}>
+    <div 
+      className="overflow-scroll" 
+      style={{width: "100%", height: "100%", overflow: "scroll"}}
+      onDoubleClick={handleDoubleClick}
+      >
       {!groups.length ? (
         <Instruction
           group={group}
         />
       ) : (
         <div
-          className={"container" + (activeSkill ? " expand" : "")}  // if a skill is active, expand the container so it can be scroll into center
-        >
+          className={"d-flex justify-content-center"}  // if a skill is active, expand the container so it can be scroll into center
+          style={{margin: activeSkill ? "100px 50vw 200px 50vw" : "0 400px 0 100px", minWidth: "fit-content"}}
+          >
           <DndContext
             sensors={sensors}
             collisionDetection={closestCorners}
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
           >
-            <div 
-              className="scale_container" 
-              style={{transform: `scale(${activeGroup?.zoom})`}}   // adjust tree size according to group zoom only for root so to not repeat scaling
-              >
+            <div style={{transform: `scale(${activeGroup?.zoom})`, transformOrigin: "top left"}}>
               {
                 rootSkill ? 
                 <SkillNodeContainer

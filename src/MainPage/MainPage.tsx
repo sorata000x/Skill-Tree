@@ -1,4 +1,3 @@
-import "./MainPage.css";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { SideBar, Contents } from "./components";
@@ -29,8 +28,13 @@ export const MainPage = ({page}: Props) => {
   };
 
   return (
-    <div className="main_page">
-      <div className="container" onMouseDown={handleMouseDown}>
+    <div 
+      className="bg-primary text-primary"
+      style={{width: "100vw", height: "100vh"}}>
+      <div 
+        className="d-flexa" 
+        onMouseDown={handleMouseDown}
+        style={{width: "100vw", height: "100vh", overflow: "hidden", display: "flex"}}>
         <SideBar />
         <Contents type={pathParam} />
       </div>

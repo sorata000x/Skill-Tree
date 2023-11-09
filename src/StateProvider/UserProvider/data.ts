@@ -6,6 +6,7 @@ export const emptyData: StateData = {
   skills: [],
   groups: [],
   actions: [],
+  actionLogs: [],
 };
 
 export const emptyGroup = {

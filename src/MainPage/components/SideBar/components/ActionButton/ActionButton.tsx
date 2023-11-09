@@ -1,5 +1,4 @@
 import { useMain } from "StateProvider";
-import "./ActionButton.css";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -17,8 +16,8 @@ export const ActionButton = () => {
   };
 
   return (
-    <div className="tab" onClick={(e)=>handleClick(e)}>
-      <div style={{width: "232px", overflow: "hidden"}}>Action</div>
-    </div>
+    <button className="tab" onClick={(e)=>handleClick(e)}>
+      Action
+    </button>
   )
 }

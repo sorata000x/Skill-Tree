@@ -1,4 +1,3 @@
-import "./TreeContent.css";
 import React, { createRef, useEffect } from "react";
 import { TopBar, SkillTree, HelpButton, SkillEdit } from "./components";
 import { Buttons, Skill } from "types";
@@ -21,8 +20,9 @@ export const TreeContent = () => {
   }, [skills])
 
   return (
-    <>
-      <div className="layout_column">
+    <div style={{width: "100%", height: "100%", overflow: "scroll"}}>
+      <div className="d-flex flex-column full-size"
+        >
         <TopBar style={{width: activeSkill ? "calc(100% - 556px)" : "100%"}} />
         <SkillTree 
           skills={skills.filter(
@@ -33,6 +33,6 @@ export const TreeContent = () => {
       </div>
       <HelpButton />
       <SkillEdit open={!!activeSkill} />
-    </>
+    </div>
   )
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import "./UserButton.css";
 import { useUser } from "StateProvider";
 
 export interface Props {
@@ -14,7 +13,7 @@ export const UserButton = ({ handleClick }: Props) => {
   const [{ user }] = useUser();
 
   return (
-    <button className="user_button" onClick={handleClick}>
+    <button className="btn w-100 btn-primary" onClick={handleClick}>
       {user ? user.email : "Guest"}
     </button>
   );

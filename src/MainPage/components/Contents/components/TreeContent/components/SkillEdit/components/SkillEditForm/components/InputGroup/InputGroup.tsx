@@ -1,8 +1,8 @@
-import "./InputGroup.css";
 import React from "react";
 
 export interface Props {
   className: string;
+  style?: Object;
   id: string;
   type: string;
   label: string;
@@ -20,6 +20,7 @@ export interface Props {
 export const InputGroup = ({
   id,
   className,
+  style,
   type,
   label,
   value,
@@ -30,7 +31,7 @@ export const InputGroup = ({
   placeHolder = "",
 }: Props) => {
   return (
-    <div className={className}>
+    <div className={className} style={style}>
       <label htmlFor={id}>{label}</label>
       <input
         id={id}

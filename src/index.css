@@ -1,5 +1,3 @@
-@import "../node_modules/bootstrap/scss/bootstrap";
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -17,7 +15,8 @@ code {
 /* Reference: CSS 100% height not working in React app | https://stackoverflow.com/questions/46769706/css-100-height-not-working-in-react-app */
 html,
 body,
-#root,
-.App {
+#root
+{
   height: 100%;
+  overflow: hidden;
 }

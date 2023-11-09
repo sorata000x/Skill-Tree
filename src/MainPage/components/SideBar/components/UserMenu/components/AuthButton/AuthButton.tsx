@@ -1,5 +1,4 @@
-import { useUser } from "StateProvider";
-import "./AuthButton.css";
+import { useMain, useUser } from "StateProvider";
 import React from "react";
 import { BiLogIn, BiLogOut } from "react-icons/bi";
 import { UserAuthDialog } from "./components";
@@ -14,7 +13,8 @@ export interface Props {
  * Authentication button (login / logout)
  */
 export const AuthButton = ({ onClick }: Props) => {
-  const [{ user }, dispatch] = useUser();
+  const [{ user }, dispatchUser] = useUser();
+  const [, dispatchMain] = useMain();
   const navigate = useNavigate();
 
   const handleClick = (e: React.MouseEvent) => {
@@ -22,12 +22,12 @@ export const AuthButton = ({ onClick }: Props) => {
     // Logout or login / sing up
     if (user) {
       auth.signOut();
-      dispatch({
+      dispatchUser({
         type: "SIGN_OUT",
       });
       navigate("/");
     } else {
-      dispatch({
+      dispatchMain({
         type: "SET_POP_UP",
         popUp: <UserAuthDialog />,
       });

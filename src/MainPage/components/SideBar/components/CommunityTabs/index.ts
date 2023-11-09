@@ -1,1 +1,0 @@
-export { CommunityTabs } from "./CommunityTabs";

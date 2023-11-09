@@ -1,4 +1,3 @@
-import "./SideBar.css";
 import React, { useState } from "react";
 import {
   UserButton,
@@ -7,7 +6,6 @@ import {
   OpenSideBarButton,
   UserMenu,
   NewGroupButton,
-  CommunityTabs,
   ActionButton,
 } from "./components";
 import { useMain, useUser } from "StateProvider";
@@ -36,13 +34,13 @@ export const SideBar = () => {
   }
 
   return open ? (
-    <div className="side_bar">
-      <div className="button_group_top">
-        <UserButton handleClick={() => setUserMenuOpen(true)} />
-        <CloseSideBarButton handleClick={() => toggleOpen(false)} />
+    <div className="d-flex flex-column bg-secondary flex-shrink-0" 
+      style={{width: "308px", flexShrink: "0"}}>
+      <div className="d-flex gap-1 m-2">
+        <UserButton handleClick={()=>setUserMenuOpen(true)} />
+        <CloseSideBarButton handleClick={()=>toggleOpen(false)} />
       </div>
-      <UserMenu open={userMenuOpen} close={() => setUserMenuOpen(false)} />
-      <CommunityTabs />
+      <UserMenu open={userMenuOpen} close={()=>setUserMenuOpen(false)} />
       <ActionButton />
       <GroupTabs />
       <NewGroupButton groups={groups} />

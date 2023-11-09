@@ -30,15 +30,22 @@ export const ActionTab = ({action, active}: Props) => {
         skill: actionSkill.skill,
       });
     }
+    dispatchUser({
+      type: "COMPLETE_ACTION",
+      id: action.id,
+    })
   }
 
   return (
     <button
-      className={"action_tab" + (active ? " active" : "")}
-      onClick={(e) => handleClick(e)}
-    >
-        <div style={{width: "232px", overflow: "hidden"}}>{action.title}</div>
-        <button onClick={e=>handleCompleteClick(e)}> Complete </button>
+      className={"tab" + (active ? " active" : "")}
+      onClick={(e) => handleClick(e)}>
+      <div className="w-100">{action.title ? action.title : "Untitled"}</div>
+      <button
+        className="btn passive-text-btn"
+        onClick={e=>handleCompleteClick(e)}> 
+        Complete 
+      </button>
     </button>
   )
 }

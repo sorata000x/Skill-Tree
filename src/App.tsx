@@ -88,7 +88,8 @@ function App() {
   if (isLoading) return;
 
   return (
-    <div className={`App ${theme}`}>
+    <div className={`w-100 h-100 ${theme}`}
+    style={{width: "100vw", overflow: "hidden"}}>
       <Router>
         <Routes>
           <Route path="/" element={ 

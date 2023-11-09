@@ -47,6 +47,11 @@ export interface Action {
   actionSkills: Array<ActionSkill>;
 }
 
+export interface ActionLog {
+  id: string;
+  action: Action;
+}
+
 export interface Links {
   [key: string]: React.ReactElement<any, any>;
 }

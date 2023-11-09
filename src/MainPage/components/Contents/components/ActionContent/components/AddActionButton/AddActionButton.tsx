@@ -1,5 +1,4 @@
 import { useUser } from "StateProvider";
-import "./AddActionButton.css";
 import React from "react";
 import { HiOutlinePlus } from "react-icons/hi";
 
@@ -13,8 +12,8 @@ export const AddActionButton = () => {
   }
 
   return (
-    <button className="action_button" onClick={e=>handleClick(e)}>
-      <HiOutlinePlus className="icon" size={14} />
+    <button className="btn btn-primary" onClick={e=>handleClick(e)}>
+      <HiOutlinePlus className="m-1" size={14} />
       New Group
     </button>
   )

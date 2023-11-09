@@ -45,7 +45,7 @@ export const SkillNodeContainer = ({
   return (
     <div ref={setNodeRef} style={style}>
       <div 
-        className="skill_node_container" 
+        className="skill_node_container"
         >
         <SkillNodeButton
           buttons={buttons}

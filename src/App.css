@@ -2,18 +2,12 @@
   box-sizing: border-box;
 }
 
-.App.dark {
-  background-color: #212121;
-  color: rgba(255, 255, 255, 0.87);
+.dark * {
+  color: rgba(255, 255, 255, 0.87) !important;
 }
 
 body {
-  font-size: 12pt;
   overflow: hidden;
-}
-
-button {
-  font-size: 12pt;
 }
 
 hr.solid {
@@ -63,6 +57,11 @@ input[type="number"]::-webkit-outer-spin-button {
 }
  */
 
+label {
+  color: black;
+  font-weight: 500;
+}
+
 textarea {
   resize: none;
 }
@@ -88,12 +87,18 @@ textarea:focus {
   outline: none;
 }
 
+.dark label {
+  color: rgba(255, 255, 255, 0.55) !important;
+  font-weight: 500;
+}
+
 .dark input,
 .dark textarea {
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border: none;
   color: rgba(255, 255, 255, 0.87);
+  font-size: 13pt;
 }
 
 .dark input:active,
@@ -114,6 +119,11 @@ textarea:focus {
   border-radius: 5px;
 }
 
+.dark ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
 ::-webkit-scrollbar-thumb {
   background: rgb(200, 200, 200);
   border-radius: 5px;
@@ -121,8 +131,10 @@ textarea:focus {
 
 /* Menu */
 
-.menu_overlay {
+._menu_overlay {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   cursor: default;
@@ -138,7 +150,7 @@ textarea:focus {
   border-radius: 5px;
   border: none;
   padding: 5px;
-  z-index: 11;
+  z-index: 110;
 }
 
 .dark .menu {

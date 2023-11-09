@@ -1,4 +1,4 @@
-import React, { createRef, useState } from "react";
+import React, { createRef, useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
 import { BsTrash3 } from "react-icons/bs";
 import { useMain } from "StateProvider";
@@ -23,6 +23,22 @@ export const MoreMenu = ({
   skill,
 }: Props) => {
   const [{}, dispatch] = useMain();
+  const ref: React.RefObject<HTMLDivElement> = createRef();
+
+  useEffect(() => {
+    // Close self if clicked outside
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        close();
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
 
   const close = () => {
     dispatch({
@@ -31,7 +47,7 @@ export const MoreMenu = ({
   }
 
   return (
-    <div className="menu_overlay" onClick={(e) => close()}>
+    <div className="menu_overlay" onClick={(e) => close()} ref={ref}>
       <div
         style={style}
         className="menu"

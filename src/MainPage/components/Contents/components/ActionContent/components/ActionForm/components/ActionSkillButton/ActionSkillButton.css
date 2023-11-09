@@ -1,0 +1,28 @@
+.action_skill_button {
+  width: 70px;
+  height: 70px;
+  border: none;
+  border-radius: 5px 5px 5px 5px;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.level_edit {
+  background-color: rgb(70, 70, 70); 
+  border-radius: 0px 0px 5px 5px;
+  display: flex;
+  justify-content: center;
+  height: 20px;
+  align-items: center;
+  width: 70px;
+  grid-row: 1;
+  grid-column: 1;
+  margin-top: 50px;
+}
+
+.level_edit > input {
+  width: 70px;
+  height: 20px;
+  background-color: transparent;
+  text-align: center;
+}

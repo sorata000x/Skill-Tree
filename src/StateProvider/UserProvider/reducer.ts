@@ -2,7 +2,7 @@ import { db, auth } from "_firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { arrayMove } from "@dnd-kit/sortable";
 import { v4 as uuid } from "uuid";
-import type { Skill, ActionSkill, Group, Action } from "types";
+import type { Skill, ActionSkill, Group, Action, ActionLog } from "types";
 import { User } from "firebase/auth";
 import { emptyData, emptySkill, emptyGroup } from "./data";
 
@@ -14,6 +14,7 @@ export interface StateData {
   skills: Array<Skill>;
   groups: Array<Group>;
   actions: Array<Action>;
+  actionLogs: Array<ActionLog>;
 }
 
 export interface StateAction {
@@ -40,12 +41,14 @@ const setUserData = async (data: StateData) => {
     localStorage.setItem("skills", JSON.stringify(data.skills));
     localStorage.setItem("groups", JSON.stringify(data.groups));
     localStorage.setItem("actions", JSON.stringify(data.actions));
+    localStorage.setItem("actionLogs", JSON.stringify(data.actionLogs))
   } else {
     await setDoc(doc(db, "users", auth.currentUser.uid), {
       theme: data.theme,
       skills: JSON.stringify(data.skills),
       groups: JSON.stringify(data.groups),
       actions: JSON.stringify(data.actions),
+      actionLogs: JSON.stringify(data.actionLogs),
     });
   }
 };
@@ -58,12 +61,14 @@ const getInitialState = (): StateData => {
   const skills: Array<Skill> = JSON.parse(localStorage.getItem("skills") || "[]");
   const groups = JSON.parse(localStorage.getItem("groups") || "[]");
   const actions: Array<Action> = JSON.parse(localStorage.getItem("actions") || "[]");
+  const actionLogs: Array<ActionLog> = JSON.parse(localStorage.getItem("actionLogs") || "[]");
   return {
     user: null,
     theme: theme,
     skills: skills,
     groups: groups,
     actions: actions,
+    actionLogs: actionLogs,
   }
 };
 
@@ -460,6 +465,44 @@ const reducer = (state: StateData, action: StateAction): StateData => {
         ...state,
         actions: [...state.actions, newAction],
       };
+    }
+    case "COMPLETE_ACTION": {
+      console.debug("COMPLETE_ACTION");
+      if (action.id === undefined) {
+        console.error("Operation COMPLETE_ACTION requires {id} attributes");
+        return state;
+      }
+      const index = state.actions.findIndex(a => a.id === action.id);
+      const newActionLog = {
+        id: uuid(),
+        action: state.actions[index]
+      }
+      setUserData({
+        ...state,
+        actionLogs: [newActionLog, ...state.actionLogs]
+      });
+      return {
+        ...state,
+        actionLogs: [newActionLog, ...state.actionLogs]
+      }
+    }
+    case "REVERT_ACTION": {
+      console.debug("REVERT_ACTION");
+      if (action.id === undefined) {
+        console.error("Operation REVERT_ACTION requires {id} attributes");
+        return state;
+      }
+      const index = state.actionLogs.findIndex(a => a.id === action.id);
+      const newActionLogs = [...state.actionLogs]
+      newActionLogs.splice(index, 1);
+      setUserData({
+        ...state,
+        actionLogs: [...newActionLogs],
+      });
+      return {
+        ...state,
+        actionLogs: [...newActionLogs],
+      }
     }
     case "ADD_ACTION_SKILL": {
       console.debug("ADD_ACTION_SKILL");

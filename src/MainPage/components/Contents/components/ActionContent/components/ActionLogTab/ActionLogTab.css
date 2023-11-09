@@ -1,5 +1,5 @@
-.group_tab {
-  width: 245px;
+.action_tab {
+  width: 100%;
   height: 45px;
   padding-left: 9px;
   flex-shrink: 0;
@@ -14,25 +14,29 @@
   justify-content: space-between;
 }
 
-.group_tab.active {
+.action_tab:hover {
   background-color: rgb(220, 220, 220);
 }
 
-.group_tab:hover {
+.action_tab.active {
   background-color: rgb(220, 220, 220);
 }
 
 /* Dark Mode */
 
-.dark .group_tab {
-  background-color: transparent;
+.dark .action_tab {
+  background-color: rgba(45, 45, 45);
   color: rgba(255, 255, 255, 0.87);
 }
 
-.dark .group_tab.active {
+.dark .action_tab:hover {
+  background-color: rgb(55, 55, 55);
+}
+
+.dark .action_tab.active {
   background-color: #252525;
 }
 
-.dark .group_tab:hover {
-  background-color: #3b3b3b;
+.dark .action_tab.active:hover {
+  background-color: #252525;
 }

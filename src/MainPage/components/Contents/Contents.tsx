@@ -1,4 +1,3 @@
-import "./Contents.css";
 import React from "react";
 import { TreeContent, ActionContent } from "./components";
 import { TreeProvider } from "StateProvider";

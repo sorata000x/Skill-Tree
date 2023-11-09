@@ -1,5 +1,4 @@
 import React from "react";
-import "./SkillEdit.css";
 import { ActionButtons, SkillEditForm } from "./components";
 
 export interface Props {
@@ -12,13 +11,14 @@ export interface Props {
  * - SkillEditForm | inputs to edit skill infos
  */
 export const SkillEdit = ({ open }: Props) => {
-  return open ? (
+  return (
     <div
-      className="skill_edit"
+      className="bg-secondary position-absolute"
+      style={{width: "calc(50% - 154px)", height: "100%", top: "0", right: "0", visibility: open ? "visible" : "hidden"}}
       onMouseDown={(e) => e.stopPropagation()} // prevent close on mouse down on parent
     >
       <ActionButtons />
       <SkillEditForm />
     </div>
-  ) : null;
+  )
 };

@@ -29,6 +29,9 @@ export const ActionForm = ({action}: Props) => {
       id: action.id,
       skill: skill,
     })
+    dispatchMain({
+      type: "CLOSE_POP_UP",
+    })
   }
 
   const handleChange = async (id: string, value: any) => {
@@ -58,8 +61,9 @@ export const ActionForm = ({action}: Props) => {
   if(!activeAction) return;
 
   return (
-    <div className="action_form">
+    <div className="d-flex flex-column" style={{width: "453px"}}>
       <input 
+        style={{fontSize: "22pt", margin: "10px 10px 10px 20px"}}
         name="title"
         type="text"
         placeholder="Untitled"
@@ -72,9 +76,11 @@ export const ActionForm = ({action}: Props) => {
         value={activeAction?.description}
         onChange={(v)=>handleChange('description', v)}
       />
-      <label>Skills</label>
+      <label style={{fontSize: "12pt", margin: "0 0 0 8px"}}>
+        Skills
+      </label>
       <hr className="solid" />
-      <div className="d-inline-flex gap-3 pt-2 flex-wrap overflow-scroll" style={{height: "220px"}}>
+      <div className="d-flex gap-3 p-3 flex-wrap align-content-start justify-content-start" style={{height: "220px", overflowX: "hidden", overflowY: "scroll"}}>
         {action?.actionSkills.map(actionSkill => <ActionSkillButton actionSkill={actionSkill}/>)}
         <AddSkillButton addActionSkill={addActionSkill}/>
       </div>

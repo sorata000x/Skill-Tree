@@ -1,14 +1,4 @@
-.icon_input_group {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.icon_input_group > input {
-  display: none;
-}
-
-.icon_input_group > .icon_button {
+.icon_button {
   width: 70px;
   height: 70px;
   border-radius: 50%;
@@ -17,7 +7,7 @@
   cursor: pointer;
 }
 
-.icon_input_group > .upload_icon_button {
+.upload_icon_button {
   width: 70px;
   height: 70px;
   border-radius: 50%;
@@ -33,30 +23,30 @@
   overflow: hidden;
 }
 
-.icon_input_group > .upload_icon_button:hover {
+.upload_icon_button:hover {
   background-color: #c0c0c0;
 }
 
-.icon_input_group > .upload_icon_button:active {
+.upload_icon_button:active {
   cursor: default;
 }
 
-.icon_input_group > .upload_icon_button > .icon {
+.upload_icon_button > .icon {
   margin: 2px 0 0 3px;
 }
 
 /* Dark Mode */
 
-.dark .icon_input_group > .icon_button {
+.dark .icon_button {
   background-color: gray;
   border: 5px solid #212121;
 }
 
-.dark .icon_input_group > .upload_icon_button {
+.dark .upload_icon_button {
   background-color: gray;
   border: 5px solid #212121;
 }
 
-.dark .icon_input_group > .upload_icon_button:hover {
+.dark .upload_icon_button:hover {
   background-color: rgb(90, 90, 90);
 }

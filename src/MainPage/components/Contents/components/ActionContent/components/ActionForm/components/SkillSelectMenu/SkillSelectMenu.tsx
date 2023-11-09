@@ -21,7 +21,7 @@ export const SkillSelectMenu = ({style, addActionSkill}: Props) => {
   }
 
   return (
-    <div className="menu_overlay" onClick={(e)=>close()}>
+    <div className="_menu_overlay" onClick={(e)=>close()}>
       <div className="skill_select_menu" style={style} onClick={(e)=>e.stopPropagation()}>
         <div
           className="d-flex flex-column m-2"
@@ -39,7 +39,11 @@ export const SkillSelectMenu = ({style, addActionSkill}: Props) => {
             {
               skills
               .filter(skill => skill.title.includes(searchName))
-              .map(skill => <SkillButton skill={skill} addActionSkill={addActionSkill}/>) 
+              .map(skill => 
+              <SkillButton 
+                key={skill.id} 
+                skill={skill} 
+                addActionSkill={addActionSkill}/>) 
             }
           </div>
         </div>

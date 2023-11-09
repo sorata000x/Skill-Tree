@@ -43,10 +43,11 @@ export const IconInputGroup = ({ setIcon }: Props) => {
   };
 
   return (
-    <div className="icon_input_group">
+    <div className="d-flex flex-column gap-1">
       <label htmlFor="icon">Icon</label>
       <input
         id="icon"
+        style={{display: "none"}}
         type="file"
         accept="/images/*"
         ref={iconInputRef}

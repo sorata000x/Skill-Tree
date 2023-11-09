@@ -4,6 +4,7 @@ import React, { createRef, useEffect, useState } from "react";
 import { useMain } from "StateProvider";
 import { SkillSelectMenu } from "../SkillSelectMenu";
 import { Skill } from "types";
+import { HiOutlinePlus } from "react-icons/hi";
 
 export interface Props {
   addActionSkill: (skill: Skill)=>void
@@ -31,7 +32,7 @@ export const AddSkillButton = ({addActionSkill}: Props) => {
         ref={buttonRef}
         onClick={(e)=>handleButtonClick(e)}
         >
-        +
+        <HiOutlinePlus size={24} />
       </button>
     </div>
   )

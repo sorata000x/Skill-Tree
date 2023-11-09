@@ -18,19 +18,18 @@ export const ActionSkillButton = ({actionSkill}: Props) => {
   }, [levelChange])
 
   return (
-    <div className="d-flex flex-column">
+    <div className="d-grid" style={{height: "70px", width: "70px"}}>
       <button 
-        className="add_skill_button" 
-        >
+        className="action_skill_button bg-primary text-primary">
         {skill?.icon ? 
           <img
             alt="skill icon"
             src={skill?.icon?.url}
-            style={{ width: 100, height: 100 }}
+            style={{ width: 70, height: 70 }}
           /> : null }
         {skill.title}
       </button>
-      <div className="level">
+      <div className="level_edit">
         <input
           id="level"
           type="text"

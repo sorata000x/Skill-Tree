@@ -31,13 +31,12 @@ export const ActionButtons = () => {
   };
 
   return (
-    <div className="action_buttons">
-      <button title="close">
-        <CgClose className="button" size={20} onClick={() => close()} />
+    <div className="d-flex align-items-center justify-content-between">
+      <button title="close" className="btn icon-btn" >
+        <CgClose size={20} onClick={() => close()} />
       </button>
-      <button title="delete skill">
+      <button title="delete skill" className="btn icon-btn">
         <FaRegTrashAlt
-          className="button"
           size={18}
           onClick={() => deleteSkill()}
         />
