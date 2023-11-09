@@ -4,6 +4,7 @@ import { storage } from "_firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { InputGroup, IconInputGroup, ImageEdit } from "./components";
 import { DraftEditor } from "MainPage/components/DraftEditor";
+import { v4 as uuid } from "uuid";
 
 /**
  * Inputs to edit the current (active) skill including:
@@ -146,7 +147,7 @@ export const SkillEditForm = () => {
       </div>
       <hr className="solid" />
       <DraftEditor
-        key={activeSkill?.description}
+        key={`skill_edit_${activeSkill?.id}`}
         style={{ height: "460px" }}
         value={activeSkill?.description}
         onChange={(v) => handleChange("description", v)}

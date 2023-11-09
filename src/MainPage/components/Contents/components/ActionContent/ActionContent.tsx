@@ -8,7 +8,7 @@ export const ActionContent = () => {
 
   return (
     <div className="d-flex w-100 h-100 p-3 gap-5 justify-content-end">
-      <div className="bg-secondary">
+      <div className="bg-secondary" style={{borderRadius: "5px"}}>
         <ActionForm action={activeAction} />
       </div>
       <div className="d-flex flex-column overflow-scroll w-25">

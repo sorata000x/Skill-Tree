@@ -3,6 +3,7 @@ import React, { useState, createRef, useEffect } from "react";
 import type { Skill } from "types";
 import { getOffset } from "utilities";
 import { DraftEditor } from "MainPage/components/DraftEditor";
+import {v4 as uuid} from 'uuid';
 
 export interface Props {
   open: boolean;
@@ -74,6 +75,7 @@ export const SkillPreview = ({ open, skill }: Props) => {
         <div className="info_group">
           <div className="label">Description</div>
           <DraftEditor
+            key={uuid()}
             style={{
               minWidth: "150px",
               maxWidth: "274px",

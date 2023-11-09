@@ -104,7 +104,10 @@ export const DraftEditor = ({ value, style, readOnly, onChange }: Props) => {
   };
 
   // Read data as raw value, convert from text if not JSON string, create empty if no value
-  const [editorState, setEditorState] = useState(EditorState.createEmpty(decorator));
+  const [editorState, setEditorState] = 
+    useState( value ? EditorState.createWithContent( 
+      isJson(value) ? convertFromRaw(JSON.parse(value)) : ContentState.createFromText(value)
+      , decorator) : EditorState.createEmpty(decorator));
 
   const styleMap = {
     // Set selecting text background color to sustain selection when inputting link
@@ -388,7 +391,7 @@ export const DraftEditor = ({ value, style, readOnly, onChange }: Props) => {
         keyBindingFn={keyBindingFn}
         spellCheck={true}
         readOnly={readOnly}
-        onFocus={(e) => e.preventDefault()}
+        onFocus={(e) => {e.preventDefault(); console.log('focus');}}
         onChange={(es) => handleChange(es)}
         handleBeforeInput={(c, es, ets) => handleBeforeInput(c, es, ets)}
         handleKeyCommand={(cm, es, ets) => handleKeyCommand(cm, es, ets)}
