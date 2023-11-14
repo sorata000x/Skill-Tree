@@ -27,6 +27,7 @@ export const NodeButton = ({
   isDragOverlay,
 }: Props) => {
   const [{ activeSkill }, dispatchMain] = useMain();
+  const [, dispatchTree] = useTree();
   const [{ dragOverlay }, ] = useTree();
   const [isActive, setActive] = useState(false);
   const [isMouseOver, setMouseOver] = useState(false);
@@ -43,6 +44,12 @@ export const NodeButton = ({
       activeSkill: skill,
     });
   };
+
+  useEffect(() => {
+    dispatchTree({
+      type: "UPDATE_LINKS"
+    })
+  }, [buttonRef])
 
   return (
     <div

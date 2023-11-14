@@ -46,6 +46,17 @@ const reducer = (state: StateData, action: StateAction): StateData => {
         dragOverlay: null,
       }
     }
+    // LINKS
+    case "UPDATE_LINKS": {
+      const newButton: Buttons = {}
+      for(const [key, value] of Object.entries(state.buttons)) {
+        newButton[key] = value
+      }
+      return {
+        ...state,
+        buttons: newButton
+      }
+    }
     default:
       return state;
   }
