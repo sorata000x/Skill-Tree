@@ -21,7 +21,7 @@ export const SkillSelectMenu = ({style, addActionSkill}: Props) => {
   }
 
   return (
-    <div className="_menu_overlay" onClick={(e)=>close()}>
+    <div className="overlay" onClick={(e)=>close()}>
       <div className="skill_select_menu" style={style} onClick={(e)=>e.stopPropagation()}>
         <div
           className="d-flex flex-column m-2"

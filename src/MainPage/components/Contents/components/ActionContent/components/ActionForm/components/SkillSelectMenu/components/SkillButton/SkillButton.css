@@ -2,4 +2,15 @@
   border: none;
   display: flex;
   align-items: start;
+  background-color: transparent;
+}
+
+.skill_button:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+/* Dark Mode */
+
+.dark .skill_button:hover {
+  background-color: rgb(80, 80, 80);
 }

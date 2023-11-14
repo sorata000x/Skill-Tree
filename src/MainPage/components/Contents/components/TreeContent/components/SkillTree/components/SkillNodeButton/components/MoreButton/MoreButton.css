@@ -7,11 +7,21 @@
   align-items: center;
   justify-content: center;
   transform: translate(100px, 6px);
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(70, 70, 70);
   cursor: pointer;
 }
 
 .skill_node_button > .more_button:hover {
-  color: rgba(255, 255, 255, 0.8);
+  color: black;
   background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Dark Mode */
+
+.dark .skill_node_button > .more_button {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .skill_node_button > .more_button:hover {
+  color: rgba(255, 255, 255, 0.8);
 }

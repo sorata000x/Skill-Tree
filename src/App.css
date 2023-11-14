@@ -68,7 +68,8 @@ textarea {
 
 input,
 textarea {
-  border: 1px solid rgb(180, 180, 180);
+  background-color: transparent;
+  border: none;
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 13pt;

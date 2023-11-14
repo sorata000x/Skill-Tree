@@ -73,7 +73,7 @@ export const ActionForm = ({action}: Props) => {
       />
       <DraftEditor 
         key={`action_${activeAction?.id}`} 
-        style={{ width: "90%", height: "300px", margin: "0px 10px 10px 18px" }}
+        style={{ width: "90%", height: "300px", margin: "0px 10px 10px 18px", backgroundColor: "transparent" }}
         value={activeAction?.description}
         onChange={(v)=>handleChange('description', v)}
       />
