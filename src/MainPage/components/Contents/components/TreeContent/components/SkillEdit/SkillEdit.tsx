@@ -14,7 +14,7 @@ export const SkillEdit = ({ open }: Props) => {
   return (
     <div
       className="bg-secondary position-absolute"
-      style={{width: "calc(50% - 154px)", height: "100%", top: "0", right: "0", visibility: open ? "visible" : "hidden"}}
+      style={{width: "calc(50% - 154px)", height: "100%", top: "0", right: "0", visibility: open ? "visible" : "hidden", zIndex: 10}}
       onMouseDown={(e) => e.stopPropagation()} // prevent close on mouse down on parent
     >
       <ActionButtons />

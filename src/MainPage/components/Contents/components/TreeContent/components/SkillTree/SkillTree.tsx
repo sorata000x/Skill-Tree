@@ -59,7 +59,7 @@ export const SkillTree = ({skills, buttons, viewOnly}: Props) => {
     // Reference: Coding Beauty: How to Scroll to an Element in React | https://codingbeautydev.com/blog/react-scroll-to-element/#:~:text=Key%20takeaways,scroll%20to%20the%20desired%20element.
     if (activeSkill) {
       buttons[activeSkill.id].current?.scrollIntoView({
-        block: "start",
+        block: "nearest",
         inline: "start",
         behavior: "smooth",
       });
@@ -289,7 +289,7 @@ export const SkillTree = ({skills, buttons, viewOnly}: Props) => {
       ) : (
         <div
           className={"d-flex justify-content-center"}  // if a skill is active, expand the container so it can be scroll into center
-          style={{margin: activeSkill ? "100px 50vw 200px 50vw" : "0", minWidth: "fit-content"}}
+          style={{margin: activeSkill ? "0px 50vw 200px 50vw" : "0", minWidth: "fit-content"}}
           >
           <DndContext
             sensors={sensors}
