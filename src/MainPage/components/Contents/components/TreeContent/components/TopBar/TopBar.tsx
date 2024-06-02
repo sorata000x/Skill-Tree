@@ -20,8 +20,6 @@ export const TopBar = ({style}: Props) => {
   return (
     <div className="d-flex w-100 justify-content-between p-2" style={style}>
       <p>{activeGroup?.name}</p>
-      <ZoomButton />
-      <button className="btn" onClick={(e)=>handleShareClick(e)}> Share </button>
     </div>
   )
 }

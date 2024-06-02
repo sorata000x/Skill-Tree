@@ -27,11 +27,6 @@ export const NewGroupButton = ({ groups }: Props) => {
       type: "ADD_NEW_GROUP",
       group: newGroup,
     });
-    dispatchMain({
-      type: "SET_ACTIVE_GROUP",
-      id: newGroup.id,
-    });
-    navigate(`/${newGroup.id}`);
   };
 
   return (

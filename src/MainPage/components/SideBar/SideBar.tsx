@@ -41,7 +41,6 @@ export const SideBar = () => {
         <CloseSideBarButton handleClick={()=>toggleOpen(false)} />
       </div>
       <UserMenu open={userMenuOpen} close={()=>setUserMenuOpen(false)} />
-      <ActionButton />
       <GroupTabs />
       <NewGroupButton groups={groups} />
     </div>
