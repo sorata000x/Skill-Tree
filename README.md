@@ -11,13 +11,6 @@ Help you decide what to learn / do next.
 My mission is to decrease the friction of people towards accomplish their goals.
 Whether it is solving a problem or become the best version of yourself.
 
-## What Do I Use Skill Tree For?
-
-- Very nice way to document what I have learned and plan out what I need to learn
-
-## Doing
-
-
 ## To Do
 
 Bug Fix
